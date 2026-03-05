@@ -1,0 +1,23 @@
+# Tools binaries moved to parent folder (../.tools/) - shared across workspaces
+# Kept as safety net in case .tools/ is accidentally created in workspace
+.tools/
+
+# Private sessions folder (contents ignored, folder tracked)
+# Pattern: ignore all contents (*) but negate (!) the .gitkeep file
+# Result: folder visible in git/Cascade, but session files stay private
+_PrivateSessions/*
+!_PrivateSessions/.gitkeep
+
+# Temporary files
+.tmp_*
+*.tmp
+
+# IDE (keep .vscode/ - shared config)
+.vs/
+
+# Python
+__pycache__/
+*.pyc
+
+# API keys
+.api-keys.txt

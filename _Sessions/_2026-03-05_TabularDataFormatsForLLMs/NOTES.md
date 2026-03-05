@@ -11,9 +11,9 @@
 
 ## Current Phase
 
-**Phase**: EXPLORE
-**Workflow**: /deep-research (pending)
-**Assessment**: RESEARCH - need empirical data on LLM tabular data comprehension
+**Phase**: IMPLEMENT
+**Next**: Continue testing
+**Assessment**: Pipeline working, logging compliant
 
 ## Research Questions
 
@@ -32,8 +32,8 @@ Tests are collections of configurable scripts that produce and process data.
 ├── _Sessions/                    # Session tracking
 ├── 01_TestA/                     # Test folder (NN_ prefix)
 │   ├── _Scripts/                  # Shared test scripts
-│   ├── _SromptsAndTemplates/                  # Shared test scripts
-│   ├── test-config.json          # Common test configuration
+│   ├── _PromptsAndTemplates/                 # Prompt templates
+│   ├── test-config-template.json          # Common test configuration template
 │   ├── 001_gpt-5-mini_configA/             # Test instance
 │   │   ├── test-config.json      # Instance-specific config
 │   │   ├── 01_InputData/         # Workflow step (NN_ prefix)
@@ -55,7 +55,14 @@ Tests are collections of configurable scripts that produce and process data.
 
 ## Key Decisions
 
+- Use `max_completion_tokens` for gpt-5 models (not `max_tokens`)
+- 20 rows / 2 runs is sufficient for quick validation tests
+
 ## Important Findings
+
+- [TESTED] gpt-5-mini achieves 100% accuracy (P=1.00, R=1.00, F1=1.00) on 20 rows with AND filter logic
+- [TESTED] Logging must follow Full Disclosure principle - each line self-contained
+- [TESTED] Parallel execution requires `[ x / y ]` prefix on Report lines (results arrive out of order)
 
 ## Related Research
 
@@ -66,4 +73,6 @@ See `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/TASKS_FORMAT_TEST
 
 ## Workflows to Run on Resume
 
-1. Continue research on tabular format effectiveness
+1. Run larger scale tests (100, 300, 600 rows)
+2. Compare different models (gpt-5-mini vs others)
+3. Test different tabular formats (CSV baseline established)

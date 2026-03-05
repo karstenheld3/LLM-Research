@@ -1,0 +1,16 @@
+{
+  "test_name": "TabularExtraction_20rows_20cols",
+  "description": "Quick test: 20 rows, 2 runs",
+  
+  "data_generation": {
+    "number_of_rows": 20,
+    "number_of_columns": 20,
+    "seed": 42
+  },
+  
+  "execution": {
+    "model": "gpt-5-mini",
+    "number_of_runs": 2,
+    "number_of_workers": 2
+  }
+}
