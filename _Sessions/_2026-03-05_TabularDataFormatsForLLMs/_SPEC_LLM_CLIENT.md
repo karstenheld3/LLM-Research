@@ -340,11 +340,52 @@ A **Cost** object tracks monetary cost of an API call.
 - Configs loaded from same directory as `llm_client.py`
 - Use `Path(__file__).parent` for reliable resolution
 - Works when imported from any location
+- Required files: `model-registry.json`, `model-parameter-mapping.json`
 
 **LLMC-FR-33: Parallel Worker Compatibility**
 - Safe to use with `ThreadPoolExecutor` or `concurrent.futures`
 - Safe to use with `asyncio` via `run_in_executor`
 - No global state that could cause race conditions
+
+**LLMC-FR-34: Dynamic Output Token Scaling**
+- `calculate_output_tokens(num_expected_records, tokens_per_record, buffer) -> int`
+- Calculates required max_tokens based on expected output size
+- Default: 50 tokens per record, 1.5x buffer
+- Capped at model's max_output limit
+
+**LLMC-FR-35: Context Window Pre-flight Check**
+- `check_context_fit(model, prompt, expected_output_tokens) -> dict`
+- Estimates input tokens (~4 chars per token)
+- Returns: fits (bool), input_tokens, output_tokens, total_tokens, max_context, remaining, warning
+- Warning if near limit (< 10% remaining) or exceeds context
+
+**LLMC-FR-36: LLMClient Dynamic max_tokens Override**
+- `client.call(prompt, max_tokens=None)` accepts optional max_tokens override
+- If provided, uses min(max_tokens, model_max_output)
+- Enables per-call token scaling based on expected output
+
+**LLMC-FR-37: LLMClient Context Check Method**
+- `client.check_context(prompt, expected_output_tokens) -> dict`
+- Instance method wrapping check_context_fit
+- Uses client's model config
+
+**LLMC-FR-38: JSON Config Loading**
+- Load `model-registry.json` and `model-parameter-mapping.json` at module import
+- `_load_json_config(filename)` helper function
+- FileNotFoundError if config file missing
+- Normalize field names: `max_input` -> `max_context`
+
+**LLMC-FR-39: Pricing Lookup**
+- `get_model_pricing(model, provider) -> dict`
+- Load from `model-pricing.json` at module import
+- Exact match first, then prefix matching (longest prefix wins)
+- Returns `{"input_per_1m", "output_per_1m", "currency"}` or None
+
+**LLMC-FR-40: Cost Calculation**
+- `calculate_cost(usage, model, provider) -> dict`
+- Calculate USD cost from token usage and model pricing
+- Returns `{"input_cost", "output_cost", "total_cost", "currency", "pricing_found"}`
+- Graceful handling if pricing not found (returns zeros with `pricing_found: false`)
 
 ## 5. Design Decisions
 
@@ -352,13 +393,13 @@ A **Cost** object tracks monetary cost of an API call.
 
 **LLMC-DD-02:** Unified effort levels across providers. Rationale: "medium" effort means the same thing regardless of whether the model uses temperature (0.7) or reasoning_effort ("medium") or thinking budget (10000 tokens).
 
-**LLMC-DD-03:** Configs may be embedded or loaded from external JSON. Rationale: Embedded configs provide single-file portability for research scripts. External JSON is preferable for production systems requiring frequent model updates.
+**LLMC-DD-03:** Load configs from external JSON files at module import time. Rationale: External JSON files provide single source of truth, easy updates without code changes, and consistency with llm-evaluation skill.
 
 **LLMC-DD-04:** More specific prefixes listed first in registry. Rationale: "gpt-5-pro" must match before "gpt-5" for correct config lookup.
 
 **LLMC-DD-05:** Importable module, not CLI script. Rationale: Must be usable with ThreadPoolExecutor for parallel API calls. CLI wrappers can be built on top if needed.
 
-**LLMC-DD-06:** Config format matches existing skill JSON files. Rationale: Whether embedded or loaded externally, config structure must match `model-registry.json` and `model-parameter-mapping.json` schemas for consistency.
+**LLMC-DD-06:** Load JSON configs from same directory as `llm_client.py`. Rationale: Allows copying llm_client.py + JSON files together to any location. Uses `Path(__file__).parent` for reliable path resolution.
 
 ## 6. Implementation Guarantees
 
@@ -712,6 +753,16 @@ def calculate_cost(usage: dict, pricing: dict) -> dict
 - Standard library: `os`, `sys`, `json`, `time`, `pathlib`
 
 ## 12. Document History
+
+**[2026-03-05 22:27]**
+- Added: FR-39, FR-40 - Pricing lookup and cost calculation
+- Added: model-pricing.json to required JSON files
+- Verified: All 40 FRs against implementation
+
+**[2026-03-05 22:21]**
+- Changed: DD-03, DD-06 - External JSON config loading (reverting embedded approach)
+- Added: FR-34 to FR-38 - Dynamic token scaling, context check, JSON loading
+- Added: Required JSON files to FR-32
 
 **[2026-03-05 21:49]**
 - Fixed: DD-03, DD-06 - Allow embedded configs for portability (LLMC-RV-002)
