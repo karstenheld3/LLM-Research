@@ -1,0 +1,568 @@
+---
+description: Transcribe PDFs and web pages to complete markdown with 100% content preservation
+auto_execution_mode: 1
+---
+
+# Transcribe Workflow
+
+Convert Portable Document Format (PDF) files and web pages to complete markdown files. **Nothing may be omitted.**
+
+## Required Skills
+
+- @pdf-tools for PDF to image conversion
+- @ms-playwright-mcp for web page screenshots
+- @llm-transcription (optional) for advanced LLM-based transcription
+
+## MUST-NOT-FORGET
+
+- Ensure complete file is stitched together and file path is noted
+- Run `/verify` after transcription complete
+- Keep source images for verification
+
+## Step 1: Detect Transcription Mode
+
+Check if advanced LLM transcription is available:
+
+```powershell
+# Check for llm-transcription skill
+$skillPath = ".windsurf/skills/llm-transcription/transcribe-image-to-markdown.py"
+$keysFile = "[WORKSPACE_FOLDER]\..\.tools\.api-keys.txt"
+$hasSkill = Test-Path $skillPath
+$hasKeys = Test-Path $keysFile
+
+if ($hasSkill -and $hasKeys) {
+    Write-Host "MODE: Advanced LLM Transcription (llm-transcription skill)"
+} else {
+    Write-Host "MODE: Built-in Transcription (workflow prompt)"
+    if (-not $hasSkill) { Write-Host "  - Missing: $skillPath" }
+    if (-not $hasKeys) { Write-Host "  - Missing: $keysFile" }
+}
+```
+
+**Mode A: Advanced LLM Transcription** (if skill + keys available)
+- Use `transcribe-image-to-markdown.py` with ensemble + judge + refinement
+
+**Mode B: Built-in Transcription** (fallback)
+- Use the built-in prompt in Step 5b below
+
+## Core Principle
+
+**Maximum 4 pages per transcription call.** Write output to file immediately after each chunk.
+
+## Source Types
+
+| Source | Detection | Processing |
+|--------|-----------|------------|
+| Local PDF | File path ends in `.pdf` | Convert to JPG, transcribe |
+| URL to PDF | URL ends in `.pdf` | Download first, then process |
+| Web page | URL to HTML | Screenshot, transcribe |
+
+## Step 2: Prepare Source
+
+### For Local PDF
+```powershell
+python .windsurf/skills/pdf-tools/convert-pdf-to-jpg.py "path/to/document.pdf" --dpi 150  # 150 DPI - optimal for transcription
+```
+
+### For URL to PDF
+```powershell
+$url = "https://example.com/document.pdf"
+$filename = [System.IO.Path]::GetFileName($url)
+# Download to: [SESSION_FOLDER] > [WORKSPACE_FOLDER]
+Invoke-WebRequest -Uri $url -OutFile "[SESSION_FOLDER]/$filename"
+# Then convert to JPG
+python .windsurf/skills/pdf-tools/convert-pdf-to-jpg.py "[SESSION_FOLDER]/$filename" --dpi 150
+```
+
+### For Web Page
+```
+mcp0_browser_navigate(url: "https://example.com/page")
+mcp0_browser_evaluate(function: "window.scrollTo(0, document.body.scrollHeight)")
+mcp0_browser_wait_for(time: 2)
+mcp0_browser_evaluate(function: "window.scrollTo(0, 0)")
+mcp0_browser_take_screenshot(fullPage: true, filename: "../.tools/_web_screenshots/[domain]/page-001.png")
+```
+
+## Step 3: Count and Plan
+
+```powershell
+$images = Get-ChildItem "../.tools/_pdf_to_jpg_converted/[NAME]/" -Filter "*.jpg"
+$totalPages = $images.Count
+$chunks = [math]::Ceiling($totalPages / 2)
+Write-Host "Total pages: $totalPages, Chunks needed: $chunks"
+```
+
+## Step 4: Determine Output Strategy
+
+| Total Pages | Output Strategy |
+|-------------|-----------------|
+| 1-20 | Single markdown file |
+| 21-50 | Single file, write after each 4-page chunk |
+| 51-100 | Multiple section files + index, merge optional |
+| 100+ | Multiple chapter files + index |
+
+## Step 5: Create Output File with Header
+
+```markdown
+# [Document Title]
+
+<!-- TRANSCRIPTION PROGRESS
+Chunk: 1 of [total_chunks]
+Pages completed: 0 of [total]
+-->
+
+## Table of Contents
+[Generate after first pass or from PDF Table of Contents (TOC)]
+```
+
+## Step 6: Transcribe in 4-Page Chunks
+
+For each chunk (pages 1-4, 5-8, 9-12, etc.):
+
+### 6a. Choose Transcription Method
+
+**Mode A: Advanced LLM Transcription** (if skill + keys detected in Step 1)
+
+```powershell
+$venv = "../.tools/llm-venv/Scripts/python.exe"
+$skill = ".windsurf/skills/llm-transcription"
+
+# Single file transcription
+& $venv "$skill/transcribe-image-to-markdown.py" `
+    --input-file "../.tools/_pdf_to_jpg_converted/[NAME]/page_001.jpg" `
+    --output-file "[SESSION_FOLDER]/[DocName]_page001.md" `
+    --keys-file "[WORKSPACE_FOLDER]\..\.tools\.api-keys.txt" `
+    --model gpt-5-mini `
+    --workers 4
+
+# Batch mode (entire folder)
+& $venv "$skill/transcribe-image-to-markdown.py" `
+    --input-folder "../.tools/_pdf_to_jpg_converted/[NAME]/" `
+    --output-folder "[SESSION_FOLDER]/transcribed/" `
+    --keys-file "[WORKSPACE_FOLDER]\..\.tools\.api-keys.txt" `
+    --model gpt-5-mini `
+    --workers 12
+```
+
+**Mode B: Built-in Transcription** (fallback - no skill or keys)
+
+Read images and use the built-in prompt below:
+
+```
+read_file(file_path: "[path]_page001.jpg")
+read_file(file_path: "[path]_page002.jpg")
+read_file(file_path: "[path]_page003.jpg")
+read_file(file_path: "[path]_page004.jpg")
+```
+
+### 6b. Extract ALL content from these pages (Mode B)
+- Every heading, paragraph, list, footnote
+- Every figure → See **Figure Transcription Protocol** below
+- Every table → Markdown table
+- Every caption, label, reference
+
+### Special Characters for Accurate Transcription
+
+- **Superscripts/subscripts**: Use Unicode (¹ ² ³, ₁ ₂ ₃) not ASCII (^1 ^2 ^3)
+- **Greek letters**: Use actual Unicode characters (α β γ)
+- **Math formulas**: Use LaTeX syntax (`$E = mc^2$`) not Unicode operators
+- **Symbols**: Use proper Unicode (© ® ™ § † ‡ °)
+
+### Page Boundary Markers
+
+Preserve exact page structure with headers and footers from original document.
+
+**Page Footer** - Place BEFORE `---` page separator:
+```markdown
+<transcription_page_footer> Page 5 | Company Name | Confidential </transcription_page_footer>
+
+---
+```
+
+**Page Header** - Place IMMEDIATELY AFTER `---` page separator:
+```markdown
+---
+
+<transcription_page_header> Annual Report 2024 | Section 3: Financials </transcription_page_header>
+```
+
+**Formatting Rules:**
+- **Single-line**: Tags and content on one line
+  ```markdown
+  <transcription_page_footer> 12 | FY 2023 | Vestas. </transcription_page_footer>
+  ```
+- **Multi-line**: Tags on separate lines, content indented
+  ```markdown
+  <transcription_page_header>
+  Annual Report 2024
+  Section 3: Financial Statements
+  Classification: Public
+  </transcription_page_header>
+  ```
+
+**Content to capture:**
+- Page numbers (any format: "5", "Page 5", "5 of 20", "v")
+- Document title / section name
+- Company name / logo text
+- Classification labels (Public, Confidential, etc.)
+- Version / date stamps
+- Navigation text (e.g., "Introduction | Get ready | Onboard and engage")
+
+**Omit if absent:** If a page has no header or footer, omit the corresponding tag entirely.
+
+## Figure Transcription Protocol
+
+**MANDATORY**: Every figure MUST have BOTH ASCII art AND XML description.
+
+### Step F0: Analyze Before Drawing (Required)
+
+Before creating ASCII art, describe the image:
+1. **Subject**: What is this? (diagram type, subject matter)
+2. **Elements**: What are the key parts? (list 3-7 main components)
+3. **Relationships**: How do elements connect? (spatial, logical, flow)
+4. **Priority**: What matters most for understanding?
+
+### Step F1: Create ASCII Art (Required)
+
+**CHOOSE MODE** based on figure type:
+
+**Mode A: Structural** (flowcharts, diagrams, architecture, UI)
+```
+Box/lines:  + - | / \ _ [ ] ( ) { } < >
+Arrows:     -> <- v ^ >> <<
+Labels:     A-Z a-z 0-9
+Connectors: --- ||| === ...
+```
+
+**Mode B: Shading** (photographs, complex graphics, gradients)
+```
+Density ramp (dark to light): @#%&8BWM*oahkbd=+-:. 
+Or simplified:                 @%#*+=-:.
+```
+
+**MAXIMIZE SEMANTICS** - Pack as much meaning into ASCII art as possible:
+- **Title header**: Start with `[DIAGRAM TITLE - WHAT IT SHOWS]`
+- **Inline legends**: Embed symbol meanings directly (`[S] = Server`, `[C] = Client`)
+- **Semantic labels**: Label every node, region, and outcome (`[DATABASE]`, `(pending)`, `RETRY LOOP`)
+- **State annotations**: Mark states explicitly (`(inactive)` vs `(ACTIVE)`)
+- **Result summaries**: Include outcome text where applicable (`Result: Request completed`)
+
+LLMs understand explicit labels better than visual patterns. Inline semantics beat cross-referencing metadata.
+
+**LAYOUT RULES**:
+- **Width**: 80-120 characters (max 180 for very complex diagrams)
+- **Aspect ratio**: Characters are ~2:1 (taller than wide) - compensate by doubling horizontal spacing
+- **Whitespace**: Use blank lines to separate logical sections
+
+**PURE ASCII ONLY** - No Unicode box-drawing, arrows, or shading blocks. Unicode adds no LLM value and risks alignment issues.
+
+````
+<transcription_image>
+**Figure [N]: [Caption from original]**
+
+```ascii
+[ASCII art representation here]
+```
+
+<transcription_notes>
+- Mode: Structural | Shading
+- Dimensions: [width]x[height] characters
+- ASCII captures: What the ASCII diagram successfully represents
+- ASCII misses: Visual elements that cannot be shown in ASCII
+- Colors:
+  - [color name] - what it represents (e.g., "Blue - input nodes")
+  - [color name] - what it represents
+- Layout: Spatial arrangement, panels, relative positions
+- Details: Fine details, textures, gradients, 3D effects, icons
+- Data: Specific values, measurements, labels, or quantities visible
+- Reconstruction hint: Key detail needed to imagine original
+</transcription_notes>
+</transcription_image>
+````
+
+### Step F2: Compare and Describe (Required)
+
+After creating ASCII, compare with original image and add `<transcription_notes>` inside the same `<transcription_image>` wrapper:
+
+### Step F2b: Self-Verify (Required)
+
+Before proceeding, verify ASCII art quality:
+- [ ] All labeled elements from original present?
+- [ ] Spatial relationships preserved (left/right, above/below)?
+- [ ] Flow or hierarchy clear (if applicable)?
+- [ ] Readable without seeing original?
+
+If any check fails, revise ASCII art before continuing.
+
+### Step F3: Example
+
+Original: A flowchart with colored boxes showing data flow
+
+**Step F0 Analysis**:
+- Subject: Data processing pipeline flowchart
+- Elements: Input box, Process box, Output box, 3 log boxes, arrows
+- Relationships: Linear flow left-to-right, each stage logs downward
+- Priority: Flow direction and logging hierarchy
+
+```markdown
+<transcription_image>
+**Figure 3: Data Processing Pipeline**
+
+```ascii
+DATA PROCESSING PIPELINE - 3 STAGE FLOW WITH LOGGING
+
+STAGE 1: INPUT        STAGE 2: PROCESS       STAGE 3: OUTPUT
++===========+         +===========+          +===========+
+|   INPUT   |-------->|  PROCESS  |--------->|  OUTPUT   |
+|   (data)  |         |   [gear]  |          |  (result) |
++===========+         +===========+          +===========+
+      |                     |                      |
+      v                     v                      v
++-----------+         +-----------+          +-----------+
+|   Log A   |         |   Log B   |          |   Log C   |
+| (received)|         |(processed)|          |  (sent)   |
++-----------+         +-----------+          +-----------+
+
+Legend: === main flow  --- log output  [gear] = processing icon
+```
+
+<transcription_notes>
+- Mode: Structural
+- Dimensions: 70x14 characters
+- ASCII captures: Box structure, flow direction (arrows), hierarchical logging, all labels, stage numbers, inline annotations
+- ASCII misses: Rounded corners, shadow effects, actual gear icon graphic
+- Colors:
+  - Blue - input/output stages (INPUT, OUTPUT boxes)
+  - Green - processing stage (PROCESS box)
+  - Gray - logging components (Log A, B, C)
+- Layout: Horizontal flow left-to-right, vertical drops to log boxes below each stage
+- Details: Process box contains gear icon; arrows have gradient fill; boxes have subtle shadows
+- Data: None
+- Reconstruction hint: Main boxes are larger with double borders; log boxes are smaller with single borders
+</transcription_notes>
+</transcription_image>
+```
+
+### Figure Protocol Rules
+
+1. **WRAPPER TAG**: Every figure MUST be wrapped in `<transcription_image>...</transcription_image>`
+2. **NO EXCEPTIONS**: Every figure gets ASCII + notes, even photographs
+3. **Photographs**: ASCII shows composition/layout; notes describe subject matter
+4. **Graphs/Charts**: ASCII shows axes and trend; notes provide data points
+5. **Network Diagrams**: ASCII shows topology; notes describe node colors and link types
+6. **3D Visualizations**: ASCII shows 2D projection; notes describe depth and perspective
+
+**Why wrapper tag?** Enables hybrid comparison: Levenshtein for text, LLM-as-a-judge for graphics.
+
+### 6c. Append to output file IMMEDIATELY
+Do not wait until end. Write after each chunk.
+
+### 6d. Update progress marker
+```markdown
+<!-- TRANSCRIPTION PROGRESS
+Chunk: 2 of 5
+Pages completed: 4 of 20
+-->
+```
+
+### 6e. Continue with next chunk
+Repeat until all pages processed.
+
+## Step 7: Stitch Transcribed Pages
+
+After batch transcription completes, merge individual page files into single output:
+
+```powershell
+$folder = "[OUTPUT_FOLDER]/02_transcribed_pages"
+$output = "[OUTPUT_FOLDER]/[DocName].md"  # No suffix like _COMPLETE
+$files = Get-ChildItem $folder -Filter "*.md" | Where-Object { $_.Name -notlike "_*" } | Sort-Object Name
+$content = @()
+$pageNum = 1
+foreach ($file in $files) {
+    # Page marker BEFORE content (first page gets marker too)
+    if ($pageNum -eq 1) {
+        $content += "<!-- Page {0:D3} -->`n`n" -f $pageNum
+    } else {
+        $content += "`n---`n<!-- Page {0:D3} -->`n`n" -f $pageNum
+    }
+    $content += (Get-Content $file.FullName -Raw).TrimEnd()
+    $pageNum++
+}
+$finalContent = ($content -join "").TrimEnd()
+$finalContent | Out-File $output -Encoding UTF8
+Write-Output "Merged $($files.Count) files to $output"
+```
+
+**Page marker format:**
+```markdown
+<!-- Page 001 -->
+
+[Page 1 content...]
+
+---
+<!-- Page 002 -->
+
+[Page 2 content...]
+```
+
+**Filename convention:** Use original document name without suffixes:
+- Correct: `Enel-Integrated-Annual-Report-2023.md`
+- Wrong: `Enel-Integrated-Annual-Report-2023_COMPLETE.md`
+
+## Step 8: Finalize
+
+1. Remove progress markers
+2. Generate/verify Table of Contents
+3. Log metadata to session NOTES.md (source, pages, figures, date) per core-conventions.md
+
+## Output Locations
+
+- Converted images: `[OUTPUT_FOLDER]/01_source_images/`
+- Transcribed pages: `[OUTPUT_FOLDER]/02_transcribed_pages/`
+- Final merged output: `[OUTPUT_FOLDER]/[DocName].md`
+- Web screenshots: `../.tools/_web_screenshots/[DOMAIN]/`
+
+## Long Document Strategy (50+ pages)
+
+For documents over 50 pages, create multiple files:
+
+```
+[SESSION_FOLDER]/
+├── [DocName]_INDEX.md      # TOC and metadata
+├── [DocName]_Part01.md     # Pages 1-20
+├── [DocName]_Part02.md     # Pages 21-40
+├── [DocName]_Part03.md     # Pages 41-60
+└── ...
+```
+
+Index file format:
+```markdown
+# [Document Title] - Index
+
+## Parts
+
+1. [Part01](./[DocName]_Part01.md) - Pages 1-20: [Chapter names]
+2. [Part02](./[DocName]_Part02.md) - Pages 21-40: [Chapter names]
+...
+```
+
+## Verification
+
+After transcription, run `/verify` to:
+1. Compare page count
+2. Check all sections present
+3. Verify all figures have BOTH:
+   - ASCII art block (` ```ascii `)
+   - XML description block (`<transcription_notes>`)
+4. Verify page boundary markers:
+   - `<transcription_page_header>` after each `---` (if header exists in source)
+   - `<transcription_page_footer>` before each `---` (if footer exists in source)
+5. Cross-check text accuracy
+6. Validate XML tags are well-formed
+
+## Best Practices
+
+1. **4 pages max per call** - Prevents context overflow and ensures quality
+2. **Write immediately** - Append to file after each chunk
+3. **Track progress** - Use progress markers for resumability
+4. **150 DPI for PDFs** - Optimal balance of quality and processing speed for transcription
+5. **Keep source images** - Required for `/verify`
+6. **No omissions** - Every piece of content must be transcribed
+7. **ASCII + XML for figures** - Every figure requires both ASCII art and `<transcription_notes>` XML block
+8. **Page boundaries** - Preserve headers/footers with `<transcription_page_header>` and `<transcription_page_footer>` tags
+
+## Appendix: Built-in Transcription Prompt (Mode B)
+
+Use this prompt when llm-transcription skill is not available:
+
+---
+
+**Transcription Prompt v1B**
+
+Transcribe this document page image to Markdown. **Accuracy over speed.**
+
+**Key Areas:**
+1. Graphics - Essential graphics with labeled ASCII art and data extraction
+2. Structure - Semantic hierarchy matching visual document outline
+3. Text - Character-level accuracy
+
+**CRITICAL RULES:**
+
+DO:
+- Label every node in diagrams: `[DATABASE]`, `[PROCESS]`, `(pending)`
+- Extract ALL data values from charts (numbers > visual fidelity)
+- Match header levels to visual hierarchy (H1=title, H2=sections, H3=subsections)
+- Use `[unclear]` for text you cannot read with confidence
+
+DON'T:
+- Don't transcribe UI chrome (toolbars, ribbons, browser elements)
+- Don't count decorative logos/separators as missed graphics
+- Don't use headers for formatting convenience - only for real sections
+- Don't guess numbers - mark as `[unclear: ~value?]` if uncertain
+
+**Graphics:**
+
+TRANSCRIBE (essential): Charts, diagrams, flowcharts, infographics, data visualizations, maps, technical illustrations
+
+SKIP (decorative): UI chrome, toolbars, logos, watermarks, separators, backgrounds - add only: `<!-- Decorative: [list] -->`
+
+Every essential graphic MUST have:
+
+```markdown
+<transcription_image>
+**Figure N: [Caption]**
+
+```ascii
+[TITLE - WHAT THIS SHOWS]
+[Visual with INLINE labels - every node named]
+Legend: [A]=Item1 [B]=Item2
+```
+
+<transcription_notes>
+- Data: [all numbers, percentages, values]
+- Colors: [color] = [meaning]
+- ASCII misses: [what couldn't be shown]
+</transcription_notes>
+</transcription_image>
+```
+
+**Structure:**
+
+Headers must match the VISUAL document structure:
+- H1 = Document title (one per page max)
+- H2 = Major sections visible in document
+- H3 = Subsections within sections
+
+Multi-column: Read top-to-bottom within each column, mark with `<!-- Column N -->`.
+
+**Text Accuracy:**
+
+- Every word exactly as shown
+- Numbers must match exactly
+- Mark unclear text: `[unclear]` or `[unclear: best guess?]`
+
+Special Characters:
+- Superscripts: use actual Unicode (not ^1 ^2 ^3)
+- Greek: use actual Unicode characters
+- Math: use LaTeX syntax
+- Symbols: use proper Unicode
+
+**Output Structure:**
+
+```markdown
+# [Document Title]
+
+<transcription_page_header> [if present] </transcription_page_header>
+
+## [Section]
+
+[Content...]
+
+<transcription_image>
+**Figure 1: [Caption]**
+[ASCII with inline labels]
+<transcription_notes>[Data, colors, misses]</transcription_notes>
+</transcription_image>
+
+<transcription_page_footer> [if present] </transcription_page_footer>
+```
