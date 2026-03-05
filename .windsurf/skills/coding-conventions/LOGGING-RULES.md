@@ -48,6 +48,11 @@ Every log line should convey maximum information with minimum words. Avoid verbo
 - BAD: `P=1`, `F1=1` - unclear type, unclear meaning
 - GOOD: `Precision=1.00`, `F1-Score=1.00` - full name, 2 decimals indicate float
 
+**Anti-pattern:** Inventing synonyms for established terms.
+- If a term is defined in these rules (e.g., "Duration"), use that exact term
+- Do not substitute with synonyms like "Timing", "Time", "Execution time"
+- Consistency across codebases requires using the same vocabulary
+
 ### Principle of Least Surprise
 
 **Logging should be predictable across all solutions.**
@@ -122,6 +127,11 @@ and can log additional
 **Parallel execution rule:** When items run in parallel, Report lines MUST carry the same identifier as their Announce line (results arrive in arbitrary order).
 - BAD: `OK. Extracted 5 correct...` - which run?
 - GOOD: `[ 1 / 2 ] OK. Extracted 5 correct...` - run 1 result
+
+**Worker/process prefix rule:** Scripts with multiple workers or apps with multiple processes MUST prefix all log lines with their identity.
+- Workers: `[ worker 1 ] [ 1 / 5 ] Processing 'file.pdf'...`
+- Processes: `[timestamp,process 12345,request 1] START: function_name...`
+- This enables log filtering and correlation when output is interleaved
 
 **Not used for status:** `DONE`, `FINISHED`, `INFO`, `DEBUG`, etc.
 

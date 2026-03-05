@@ -15,7 +15,7 @@
 #### [HIGH] `TBLF-FL-003` Not Following Full Disclosure Principle
 
 - **When**: 2026-03-05 19:01
-- **Where**: `01_TabularExtraction/_Scripts/02_execute_and_evaluate.py` - entire logging approach
+- **Where**: `01_FindTabularDataScaleLimits_V1/_Scripts/02_execute_and_evaluate.py` - entire logging approach
 - **What**: Agent repeatedly failed to understand logging principles despite having LOGGING-RULES.md available. Changed "TC-01" to "run 1" - equally meaningless. Logs lack context needed to understand without looking elsewhere.
 - **Why it went wrong**: 
   1. Copied syntax patterns without understanding underlying principles
@@ -31,7 +31,7 @@
 #### [MEDIUM] `TBLF-FL-002` Meaningless Test Case IDs
 
 - **When**: 2026-03-05 18:57
-- **Where**: `01_TabularExtraction/_Scripts/02_execute_and_evaluate.py` line 117, 223
+- **Where**: `01_FindTabularDataScaleLimits_V1/_Scripts/02_execute_and_evaluate.py` line 117, 223
 - **What**: Used `TC-01`, `TC-02` test case IDs that mean nothing to a QA engineer reading the log
 - **Why it went wrong**: Blindly copied LOG-SC-03 format without understanding the principle. LOG-SC rules state "log output alone must be sufficient to diagnose the problem" - meaningless IDs violate this.
 - **Evidence**: Output: `[ 1 / 2 ] TC-01: Executing...` - what is TC-01?
@@ -49,7 +49,7 @@ print(f"[ {run_id} / {total_runs} ] LLM extraction run {run_id}...")
 #### [MEDIUM] `TBLF-FL-001` Cryptic Abbreviations in Script Output
 
 - **When**: 2026-03-05 18:56
-- **Where**: `01_TabularExtraction/_Scripts/02_execute_and_evaluate.py` line 165
+- **Where**: `01_FindTabularDataScaleLimits_V1/_Scripts/02_execute_and_evaluate.py` line 165
 - **What**: Used cryptic abbreviations `P=1.00 R=1.00 F1=1.00` in logging output without any rule justification
 - **Why it went wrong**: Agent invented abbreviations for "Precision", "Recall", "F1" without checking if this was allowed by DevSystem rules. No rule permits shortening these terms.
 - **Evidence**: Output line: `OK. P=1.00 R=1.00 F1=1.00`

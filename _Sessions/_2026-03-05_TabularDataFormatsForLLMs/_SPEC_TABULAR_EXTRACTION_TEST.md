@@ -4,7 +4,7 @@
 **Feature**: tabular-extraction-test
 **Goal**: Define end-to-end test framework for measuring LLM tabular data extraction limits
 **Timeline**: Created 2026-03-05
-**Target files**: `01_TabularExtraction/_Scripts/*.py`, `01_TabularExtraction/test-config-template.json`
+**Target files**: `01_FindTabularDataScaleLimits_V1/_Scripts/*.py`, `01_FindTabularDataScaleLimits_V1/test-config-template.json`
 
 **Depends on:**
 - `PROBLEMS.md [TBLF-PR-001]` for scale limits research goal
@@ -66,7 +66,7 @@ A **Test** is a reusable test definition with shared scripts and configuration t
 
 **Folder structure:**
 ```
-01_TabularExtraction/
+01_FindTabularDataScaleLimits_V1/
 ├── _Scripts/
 │   ├── 01_generate_data.py
 │   ├── 02_execute_llm.py
@@ -429,7 +429,82 @@ Start outputting the numbered list NOW. Include ALL matching employees. Do NOT t
 
 **Note:** Data includes colons (`:`), pipes (`|`), commas (`,`), and ampersands (`&`) within quoted field values to test LLM parsing robustness.
 
-## 9. Implementation Verification Checklist
+## 9. Scale Limit Finder
+
+**TBLF-FR-06: Binary Search for Maximum Reliable Scale**
+
+Automated tool to find the maximum number of rows where a model achieves 100% accuracy (Precision=1.00 AND Recall=1.00).
+
+### Algorithm
+
+```
+1. Start with initial_rows (default: 500)
+2. Run test at current row count
+3. IF Precision=1.00 AND Recall=1.00:
+   - Record as last_working_lower_bound
+   - Multiply rows by 1.5 (go higher)
+4. ELSE:
+   - Record as last_failed_upper_bound
+   - Halve rows (go lower)
+5. Once both bounds established, use binary search:
+   - new_test_rows = last_working_lower_bound + (last_failed_upper_bound - last_working_lower_bound) / 2
+6. STOP when: last_failed_upper_bound - last_working_lower_bound <= 10
+7. Report: Maximum reliable scale = last_working_lower_bound
+```
+
+### CLI Interface
+
+```bash
+python 05_find_scale_limit.py --test-path 01_FindTabularDataScaleLimits_V1 --initial-rows 500 --tolerance 10
+```
+
+**Arguments:**
+- `--test-path` - Path to test folder containing `_Scripts/` and `test-config-template.json`
+- `--initial-rows` - Starting row count (default: 500)
+- `--tolerance` - Stop when bounds are within this many rows (default: 10)
+- `--model` - Model to test (default: from template config)
+
+### Output
+
+Creates `scale_limit_result.json` in test folder:
+
+```json
+{
+  "model": "gpt-5-mini",
+  "max_reliable_rows": 340,
+  "last_working_lower_bound": 340,
+  "last_failed_upper_bound": 350,
+  "search_history": [
+    {"rows": 500, "precision": 0.85, "recall": 0.90, "passed": false},
+    {"rows": 250, "precision": 1.00, "recall": 1.00, "passed": true},
+    {"rows": 375, "precision": 0.95, "recall": 0.98, "passed": false},
+    {"rows": 312, "precision": 1.00, "recall": 1.00, "passed": true},
+    {"rows": 343, "precision": 1.00, "recall": 1.00, "passed": true},
+    {"rows": 350, "precision": 0.98, "recall": 1.00, "passed": false}
+  ],
+  "total_api_calls": 12,
+  "elapsed_time_seconds": 245.3
+}
+```
+
+### Workflow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    05_find_scale_limit.py                       │
+├─────────────────────────────────────────────────────────────────┤
+│ For each iteration:                                             │
+│  1. Create temp instance folder: _temp_scale_test_NNNrows/      │
+│  2. Update test-config.json with current row count              │
+│  3. Run 01_generate_data.py                                     │
+│  4. Run 02_execute_and_evaluate.py (single run sufficient)      │
+│  5. Check if Precision=1.00 AND Recall=1.00                     │
+│  6. Update bounds and calculate next row count                  │
+│  7. Delete temp folder (keep only final result)                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 10. Implementation Verification Checklist
 
 - [ ] `01_generate_data.py` generates valid quoted CSV with adversarial characters
 - [ ] `01_generate_data.py` produces deterministic output with same seed
@@ -448,13 +523,16 @@ Start outputting the numbered list NOW. Include ALL matching employees. Do NOT t
 - [ ] Configuration inheritance works (template + instance override)
 - [ ] All scripts accept `--instance-path` CLI argument
 
-## 10. Document History
+## 11. Document History
+
+**[2026-03-05 19:35]**
+- Added: Scale Limit Finder (TBLF-FR-06) - binary search for max reliable rows
 
 **[2026-03-05 18:00]**
 - Changed: LLM judge replaced with deterministic ID matching (TBLF-RV-001)
 - Changed: Random filters replaced with fixed filters in config (TBLF-RV-002)
 - Added: Adversarial data patterns requirement (TBLF-RV-003)
-- Added: Token counting and context window tracking (TBLF-RV-004)
+- Changed: Token counting and context window tracking (TBLF-RV-004)
 - Changed: 5 scripts reduced to 4, removed 02_render_prompts.py (TBLF-RV-006)
 - Changed: Task prompt strengthened with MANDATORY language (TBLF-RV-007)
 - Changed: Explicit column list instead of count (TBLF-RV-008)
