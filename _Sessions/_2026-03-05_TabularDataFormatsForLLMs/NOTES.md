@@ -71,6 +71,66 @@ See `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/TASKS_FORMAT_TEST
 - Finding: `::` separator optimal, XML/Markdown tables highest variance
 - Key-value and CSV most reliable
 
+## API Keys and Rate Limits
+
+**.env file location**: `01_CSVScaleLimits/.env`
+
+### OpenAI Rate Limits by Tier [VERIFIED]
+
+Source: https://community.openai.com/t/increased-gpt-5-and-gpt-5-mini-rate-limits/1357840
+
+**gpt-5**:
+- Tier 1: 500K TPM (1.5M batch)
+- Tier 2: 1M TPM (3M batch)
+- Tier 3: 2M TPM
+- Tier 4: 4M TPM
+
+**gpt-5-mini**:
+- Tier 1: 500K TPM (5M batch)
+
+**gpt-4o / gpt-4o-mini**: ~500 RPM, 200K-2M TPM (tier dependent)
+
+### Anthropic Rate Limits [VERIFIED]
+
+Source: https://northflank.com/blog/claude-rate-limits-claude-code-pricing-cost
+
+Anthropic uses tier-based restrictions:
+- RPM (Requests Per Minute)
+- TPM (Tokens Per Minute) 
+- Daily token quota
+
+Higher tiers after meeting spending thresholds.
+
+### Tested Worker Limits (2026-01-26) [TESTED]
+
+Source: `.windsurf/skills/llm-evaluation/LLM_EVALUATION_TESTED_MODELS.md`
+
+Burst capacity tested via `find-workers-limit.py`:
+- **gpt-5-nano**: 120+ workers, ~402K TPM
+- **gpt-5-mini**: 120+ workers, ~164K TPM
+- **claude-haiku-4-5**: 60+ workers, ~450K TPM
+- **claude-sonnet-4-5**: 60+ workers, ~467K TPM
+- **claude-opus-4-5**: 60+ workers, ~473K TPM
+
+### Parallel Execution Strategy
+
+With 120+ workers tested for OpenAI and 60+ for Anthropic, **all 12 tests can run simultaneously**:
+
+```
+Terminal 1:  gpt-4o-mini (T01)      Terminal 7:  gpt-5 high (T07)
+Terminal 2:  gpt-5-mini medium (T02) Terminal 8:  gpt-4o (T08)
+Terminal 3:  gpt-5-mini low (T03)   Terminal 9:  gpt-5.2 (T09)
+Terminal 4:  gpt-5-mini high (T04)  Terminal 10: claude-haiku (T10)
+Terminal 5:  gpt-5 medium (T05)     Terminal 11: claude-sonnet (T11)
+Terminal 6:  gpt-5 low (T06)        Terminal 12: claude-opus (T12)
+```
+
+**Total time: ~15-20 minutes** (single test duration) vs 3 hours sequential
+
+**Check your tier**: 
+- OpenAI: https://platform.openai.com/settings/organization/limits
+- Anthropic: https://console.anthropic.com/settings/limits
+
 ## Workflows to Run on Resume
 
 1. Run larger scale tests (100, 300, 600 rows)

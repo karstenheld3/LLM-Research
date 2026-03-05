@@ -20,7 +20,7 @@
 
 ## Done
 
-- [x] Created _SPEC_TABULAR_EXTRACTION_TEST.md [TBLF-SP01]
+- [x] Created _SPEC_CSVScaleLimits.md [TBLF-SP01]
 - [x] Critique via /critique - compared against working POC
 - [x] Reconcile via /reconcile - prioritized findings
 - [x] Implemented approved findings (RV-001 through RV-008)
