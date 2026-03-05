@@ -1,0 +1,19 @@
+{
+  "initial_rows": 300,
+  "tolerance": 10,
+  "verify_runs": 3,
+  "configurations": [
+    {"model": "gpt-4o-mini", "reasoning_effort": "medium", "comment": "T01: Setup validation"},
+    {"model": "gpt-5-mini", "reasoning_effort": "medium", "comment": "T02: Baseline (H1,H2,H3)"},
+    {"model": "gpt-5-mini", "reasoning_effort": "low", "comment": "T03: H4 effort test"},
+    {"model": "gpt-5-mini", "reasoning_effort": "high", "comment": "T04: H4 effort test"},
+    {"model": "gpt-5", "reasoning_effort": "medium", "comment": "T05: H2,H3,H5"},
+    {"model": "gpt-5", "reasoning_effort": "low", "comment": "T06: H4 effort test"},
+    {"model": "gpt-5", "reasoning_effort": "high", "comment": "T07: H4 effort test"},
+    {"model": "gpt-4o", "reasoning_effort": "medium", "comment": "T08: H5 temperature baseline"},
+    {"model": "gpt-5.2", "reasoning_effort": "medium", "comment": "T09: Latest OpenAI"},
+    {"model": "claude-haiku-4-5-20251001", "reasoning_effort": "medium", "comment": "T10: Cheapest Anthropic"},
+    {"model": "claude-sonnet-4-5-20250929", "reasoning_effort": "medium", "comment": "T11: Mid Anthropic"},
+    {"model": "claude-opus-4-5-20251101", "reasoning_effort": "medium", "comment": "T12: Top Anthropic"}
+  ]
+}

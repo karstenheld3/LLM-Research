@@ -1,0 +1,41 @@
+{
+  "extraction_task": {
+    "filters": [
+      {
+        "value": [
+          "Level 3",
+          "Level 4",
+          "Level 5"
+        ],
+        "column": "clearance",
+        "operator": "in"
+      },
+      {
+        "value": 150000,
+        "column": "salary",
+        "operator": "gte"
+      }
+    ],
+    "columns_to_extract": [
+      "id",
+      "name",
+      "department",
+      "salary",
+      "clearance",
+      "rating",
+      "projects"
+    ]
+  },
+  "execution": {
+    "number_of_runs": 1,
+    "model": "gpt-5-mini",
+    "max_output_tokens": 16384,
+    "number_of_workers": 1,
+    "reasoning_effort": "medium"
+  },
+  "data_generation": {
+    "include_adversarial_chars": true,
+    "seed": 42,
+    "number_of_rows": 20
+  }
+}
