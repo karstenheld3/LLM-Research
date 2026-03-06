@@ -65,7 +65,7 @@
 
 **Still Running**: T04 (gpt-5-mini high), T05 (gpt-5 medium), T07 (gpt-5 high)
 
-**Data Verification**: All values verified against `scale_limit_result.json` files [VERIFIED 2026-03-06]
+**Data Verification**: All values verified against `scale_limit_result.json` files [TESTED 2026-03-06]
 
 ## Detailed Analysis
 
@@ -80,7 +80,7 @@
 - Failed at 395 rows (Precision=0.00, Recall=0.00 - complete extraction failure)
 - Binary search converged with bounds [389, 395]
 
-**Verdict**: SUPPORTED. Scale limit falls within predicted 300-600 range. [VERIFIED]
+**Verdict**: SUPPORTED. Scale limit falls within predicted 300-600 range. [TESTED]
 
 ### H2 Analysis: Bimodal Failure Pattern
 
@@ -98,7 +98,7 @@
 - gpt-4o at 37 rows: Precision=0.89, Recall=0.62
 - Gradual degradation across scale range
 
-**Verdict**: PARTIALLY SUPPORTED. Reasoning models exhibit cliff behavior; temperature models degrade gradually. [VERIFIED]
+**Verdict**: PARTIALLY SUPPORTED. Reasoning models exhibit cliff behavior; temperature models degrade gradually. [TESTED]
 
 ### H3 Analysis: Truncation vs Comprehension
 
@@ -123,7 +123,7 @@
 
 **Key Insight**: Context windows are NOT the bottleneck. Models fail at <5% context utilization on average. The limitation is attention/comprehension capacity, not token limits. [VERIFIED]
 
-**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode. [VERIFIED]
+**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode. [TESTED]
 
 ### H4 Analysis: Effort Level Impact
 
@@ -149,7 +149,7 @@
 
 **Insight**: The difference between low and medium effort is not marginal - it is transformative. Low effort gpt-5-mini (65 rows) performs worse than high-effort smaller models.
 
-**Verdict**: SUPPORTED. Higher effort dramatically increases scale limit. [VERIFIED - partial data]
+**Verdict**: SUPPORTED. Higher effort dramatically increases scale limit. [TESTED - partial data]
 
 ### H5 Analysis: Reasoning vs Temperature Models
 
@@ -175,7 +175,7 @@
 
 **Caveat**: These are different model architectures, not isolated mechanism comparisons. However, the 65-89x difference is too large to attribute to architecture alone.
 
-**Verdict**: STRONGLY SUPPORTED. Reasoning models dramatically outperform temperature models for tabular extraction. [VERIFIED]
+**Verdict**: STRONGLY SUPPORTED. Reasoning models dramatically outperform temperature models for tabular extraction. [TESTED]
 
 ### Unexpected Findings [VERIFIED]
 
@@ -636,6 +636,12 @@ python 05_analyze_results.py --test-path .. --output ../analysis_report.md
 - [ ] Cost tracking matches estimates (within 2x)
 
 ## 10. Document History
+
+**[2026-03-06 01:25]**
+- Verified: Document structure (Timeline, MUST-NOT-FORGET, Document History) via `/verify`
+- Fixed: Changed verdict labels from [VERIFIED] to [TESTED] per verification label progression rules
+- Confirmed: Test count consistency (9 complete + 3 running = 12 total)
+- Confirmed: All calculations verified against source JSON
 
 **[2026-03-06 01:20]**
 - Verified: All findings against `scale_limit_result.json` source files via `/verify`
