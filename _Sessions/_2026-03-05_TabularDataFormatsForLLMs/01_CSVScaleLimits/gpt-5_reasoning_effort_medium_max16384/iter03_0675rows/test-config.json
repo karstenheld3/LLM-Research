@@ -2,7 +2,7 @@
   "test_name": "TabularExtraction",
   "description": "Extract filtered records from CSV data",
   "data_generation": {
-    "number_of_rows": 150,
+    "number_of_rows": 675,
     "number_of_columns": 7,
     "seed": 42,
     "include_adversarial_chars": true
@@ -39,7 +39,7 @@
     "model": "gpt-5",
     "number_of_runs": 3,
     "number_of_workers": 3,
-    "reasoning_effort": "high",
+    "reasoning_effort": "medium",
     "max_output_tokens": 16384,
     "max_context_tokens": 128000
   }

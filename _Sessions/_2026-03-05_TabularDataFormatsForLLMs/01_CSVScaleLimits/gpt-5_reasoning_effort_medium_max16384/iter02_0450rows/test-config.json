@@ -2,7 +2,7 @@
   "test_name": "TabularExtraction",
   "description": "Extract filtered records from CSV data",
   "data_generation": {
-    "number_of_rows": 187,
+    "number_of_rows": 450,
     "number_of_columns": 7,
     "seed": 42,
     "include_adversarial_chars": true

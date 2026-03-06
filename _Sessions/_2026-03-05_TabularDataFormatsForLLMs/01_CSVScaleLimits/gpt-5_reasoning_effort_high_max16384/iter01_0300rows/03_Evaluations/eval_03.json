@@ -109,6 +109,6 @@
   "truncated": false,
   "finish_reason": "stop",
   "input_tokens": 14424,
-  "output_tokens": 23914,
+  "output_tokens": 19818,
   "errors": []
 }
