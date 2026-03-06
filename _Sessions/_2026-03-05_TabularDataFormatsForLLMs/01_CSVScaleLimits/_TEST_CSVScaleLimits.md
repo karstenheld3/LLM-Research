@@ -74,6 +74,7 @@
 
 | Model | Effort | Scale Limit | Failure Mode | Context % | Cost | Time (min) |
 |-------|--------|-------------|--------------|-----------|------|------------|
+| gpt-5-mini | high | **675+*** | (errors) | - | - | - |
 | gpt-5 | high | **492** | truncation | 8.0% | $5.47 | 162.5 |
 | gpt-5 | medium | **450** | comprehension | 6.4% | $5.95 | 81.0 |
 | gpt-5-mini | medium | **389** | comprehension | ~2%* | $0.00* | 48.3 |
@@ -82,7 +83,6 @@
 | claude-opus | medium | **177** | truncation | 25.1% | $0.00* | 9.6 |
 | claude-sonnet | medium | **168** | comprehension | 8.4% | $0.89 | 8.6 |
 | gpt-5-mini | low | **65** | comprehension | 4.3% | $0.13 | 6.5 |
-| gpt-5-mini | high | **675+*** | (errors) | - | - | - |
 | claude-haiku | medium | **9** | comprehension | 8.3% | $0.09 | 1.2 |
 | gpt-4o-mini | medium | **6** | comprehension | 2.1% | $0.00 | 0.6 |
 | gpt-4o | medium | **4** | comprehension | 11.3% | $0.19 | 2.2 |
@@ -670,6 +670,12 @@ python 05_analyze_results.py --test-path .. --output ../analysis_report.md
 - [ ] Cost tracking matches estimates (within 2x)
 
 ## 10. Document History
+
+**[2026-03-06 05:40]**
+- Verified: Document structure and data accuracy via `/verify`
+- Fixed: Results table ordering (sorted by scale limit descending)
+- Confirmed: All new values match scale_limit_result.json files
+- Confirmed: Label progression correct ([VERIFIED] → [TESTED])
 
 **[2026-03-06 05:35]**
 - Updated: Status to 11/12 tests complete (T04 had evaluation errors)
