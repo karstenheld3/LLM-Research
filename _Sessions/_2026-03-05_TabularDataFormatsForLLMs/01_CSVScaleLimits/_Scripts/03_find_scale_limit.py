@@ -41,8 +41,8 @@ def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, m
   
   config["data_generation"]["number_of_rows"] = num_rows
   config["execution"]["model"] = model
-  config["execution"]["number_of_runs"] = 1  # Single run sufficient for scale finding
-  config["execution"]["number_of_workers"] = 1
+  config["execution"]["number_of_runs"] = 3  # Run 3 times per iteration to rule out infrastructure issues
+  config["execution"]["number_of_workers"] = 3  # Parallel execution
   if reasoning_effort:
     config["execution"]["reasoning_effort"] = reasoning_effort
   
@@ -62,48 +62,78 @@ def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, m
   if not success:
     return {"error": f"Execution failed: {output[:200]}", "passed": False}
   
-  # Read evaluation result
-  eval_file = instance_path / "03_Evaluations" / "eval_01.json"
-  if not eval_file.exists():
-    return {"error": "Evaluation file not found", "passed": False}
+  # Read all evaluation results (3 runs)
+  eval_dir = instance_path / "03_Evaluations"
+  eval_files = sorted(eval_dir.glob("eval_*.json"))
+  if not eval_files:
+    return {"error": "No evaluation files found", "passed": False}
   
-  with open(eval_file, "r", encoding="utf-8") as f:
-    evaluation = json.load(f)
+  # Aggregate metrics across all runs
+  all_passed = True
+  total_precision = 0
+  total_recall = 0
+  total_f1 = 0
+  total_tp = 0
+  total_fp = 0
+  total_fn = 0
+  total_input_tokens = 0
+  total_output_tokens = 0
+  any_truncated = False
+  finish_reasons = []
+  run_results = []
   
-  metrics = evaluation["metrics"]
-  precision = metrics["precision"]
-  recall = metrics["recall"]
-  f1 = metrics["f1"]
-  passed = (precision == 1.0 and recall == 1.0)
+  for eval_file in eval_files:
+    with open(eval_file, "r", encoding="utf-8") as f:
+      evaluation = json.load(f)
+    
+    metrics = evaluation["metrics"]
+    run_passed = (metrics["precision"] == 1.0 and metrics["recall"] == 1.0)
+    if not run_passed:
+      all_passed = False
+    
+    total_precision += metrics["precision"]
+    total_recall += metrics["recall"]
+    total_f1 += metrics["f1"]
+    total_tp += metrics["true_positives"]
+    total_fp += metrics["false_positives"]
+    total_fn += metrics["false_negatives"]
+    total_input_tokens += evaluation.get("input_tokens", 0)
+    total_output_tokens += evaluation.get("output_tokens", 0)
+    if evaluation.get("truncated", False):
+      any_truncated = True
+    finish_reasons.append(evaluation.get("finish_reason", ""))
+    run_results.append({"file": eval_file.name, "passed": run_passed, "precision": metrics["precision"], "recall": metrics["recall"]})
   
-  # Extract token and finish_reason data for hypothesis testing
-  input_tokens = evaluation.get("input_tokens", 0)
-  output_tokens = evaluation.get("output_tokens", 0)
-  finish_reason = evaluation.get("finish_reason", "")
-  truncated = evaluation.get("truncated", False)
+  num_runs = len(eval_files)
+  avg_precision = total_precision / num_runs
+  avg_recall = total_recall / num_runs
+  avg_f1 = total_f1 / num_runs
   
   # Calculate cost
-  usage = {"input_tokens": input_tokens, "output_tokens": output_tokens}
+  usage = {"input_tokens": total_input_tokens, "output_tokens": total_output_tokens}
   cost_data = calculate_cost(usage, model)
   
-  # Determine failure mode
+  # Determine failure mode (only if not all passed)
   failure_mode = None
-  if not passed:
-    failure_mode = "truncation" if truncated else "comprehension"
+  if not all_passed:
+    failure_mode = "truncation" if any_truncated else "comprehension"
   
   return {
     "rows": num_rows,
-    "precision": precision,
-    "recall": recall,
-    "f1": f1,
-    "passed": passed,
-    "true_positives": metrics["true_positives"],
-    "false_positives": metrics["false_positives"],
-    "false_negatives": metrics["false_negatives"],
-    "input_tokens": input_tokens,
-    "output_tokens": output_tokens,
-    "finish_reason": finish_reason,
-    "truncated": truncated,
+    "precision": avg_precision,
+    "recall": avg_recall,
+    "f1": avg_f1,
+    "passed": all_passed,
+    "runs_passed": sum(1 for r in run_results if r["passed"]),
+    "runs_total": num_runs,
+    "run_results": run_results,
+    "true_positives": total_tp,
+    "false_positives": total_fp,
+    "false_negatives": total_fn,
+    "input_tokens": total_input_tokens,
+    "output_tokens": total_output_tokens,
+    "finish_reason": finish_reasons[0] if finish_reasons else "",
+    "truncated": any_truncated,
     "failure_mode": failure_mode,
     "cost_usd": cost_data.get("total_cost", 0)
   }
@@ -111,7 +141,7 @@ def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, m
 
 def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: str,
                      verify_runs: int = 1, skip_baseline: bool = False,
-                     reasoning_effort: str = None):
+                     reasoning_effort: str = None, force: bool = False):
   """Binary search to find maximum reliable scale.
   
   Args:
@@ -142,6 +172,20 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
   model_safe_name = model.replace("/", "_").replace(":", "_")
   folder_name = f"{model_safe_name}_{method}_{reasoning}_max{max_tokens}"
   model_output_path = test_path / folder_name
+  
+  # Check for existing result file - skip if exists and has content (unless --force)
+  result_file = model_output_path / "scale_limit_result.json"
+  if not force and result_file.exists() and result_file.stat().st_size > 0:
+    print(f"SKIP: Result already exists for '{model}' ({reasoning})")
+    print(f"  File: {result_file}")
+    print(f"  Size: {result_file.stat().st_size} bytes")
+    print(f"  To re-run, delete the file or folder: {model_output_path}")
+    with open(result_file, "r", encoding="utf-8") as f:
+      existing_result = json.load(f)
+    print(f"  Existing result: max_reliable_rows = {existing_result.get('max_reliable_rows')}")
+    return existing_result
+  
+  # Clean up folder if exists (empty or incomplete)
   if model_output_path.exists():
     shutil.rmtree(model_output_path)
   model_output_path.mkdir(parents=True)
@@ -150,6 +194,7 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
   print(f"Goal: Find the maximum number of CSV rows where '{model}' achieves 100% accuracy.")
   print(f"Method: Binary search starting at {initial_rows} rows, stopping when bounds are within {tolerance} rows.")
   print(f"Model: '{model}' ({provider} / {method})")
+  print(f"Reasoning effort: {reasoning} | Max output tokens: {max_tokens}")
   print(f"Output folder: '{model_output_path}'")
   print()
   
@@ -199,10 +244,13 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     fp = result['false_positives']
     fn = result['false_negatives']
     
+    runs_passed = result.get('runs_passed', 1)
+    runs_total = result.get('runs_total', 1)
+    
     if passed:
-      print(f"  OK. {tp} correct, {fp} extra, {fn} missing. Precision={precision:.2f} Recall={recall:.2f} ({iter_duration:.1f} secs)")
+      print(f"  OK. {runs_passed}/{runs_total} runs passed. {tp} correct, {fp} extra, {fn} missing. Precision={precision:.2f} Recall={recall:.2f} ({iter_duration:.1f} secs)")
     else:
-      print(f"  FAIL: {tp} correct, {fp} extra, {fn} missing. Precision={precision:.2f} Recall={recall:.2f} ({iter_duration:.1f} secs)")
+      print(f"  FAIL: {runs_passed}/{runs_total} runs passed. {tp} correct, {fp} extra, {fn} missing. Precision={precision:.2f} Recall={recall:.2f} ({iter_duration:.1f} secs)")
     
     if passed:
       last_working_lower_bound = current_rows
@@ -293,6 +341,8 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     "model": model,
     "provider": provider,
     "method": method,
+    "reasoning_effort": reasoning,
+    "max_output_tokens": max_tokens,
     "max_reliable_rows": last_working_lower_bound,
     "last_working_lower_bound": last_working_lower_bound,
     "last_failed_upper_bound": last_failed_upper_bound,
@@ -347,6 +397,7 @@ def main():
   parser.add_argument("--verify-runs", type=int, default=1, help="Number of runs to verify final boundary (default: 1)")
   parser.add_argument("--skip-baseline", action="store_true", help="Skip baseline validation at small scale")
   parser.add_argument("--reasoning-effort", type=str, default=None, choices=["low", "medium", "high"], help="Reasoning effort level (default: from config)")
+  parser.add_argument("--force", action="store_true", help="Force re-run even if result already exists")
   args = parser.parse_args()
   
   test_path = args.test_path.resolve()
@@ -370,7 +421,7 @@ def main():
   find_scale_limit(
     test_path, args.initial_rows, args.tolerance, model,
     verify_runs=args.verify_runs, skip_baseline=args.skip_baseline,
-    reasoning_effort=args.reasoning_effort
+    reasoning_effort=args.reasoning_effort, force=args.force
   )
 
 
