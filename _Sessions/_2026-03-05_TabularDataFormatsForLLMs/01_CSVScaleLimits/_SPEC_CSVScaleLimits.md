@@ -18,6 +18,7 @@
 - Support parallel execution with configurable workers
 - Include adversarial data patterns (colons, pipes, commas in values)
 - Track token counts to detect context window limits
+- Scale limit finder must run 3 tests per iteration (not 1) to rule out infrastructure issues
 
 ## Table of Contents
 
@@ -466,6 +467,13 @@ python 05_find_scale_limit.py --test-path 01_CSVScaleLimits --initial-rows 500 -
 - `--initial-rows` - Starting row count (default: 500)
 - `--tolerance` - Stop when bounds are within this many rows (default: 10)
 - `--model` - Model to test (default: from template config)
+- `--reasoning-effort` - Override reasoning effort level (low/medium/high)
+- `--force` - Force re-run even if `scale_limit_result.json` already exists
+
+**Resume Support:**
+- If `scale_limit_result.json` exists with size > 0, the test is skipped (prints existing result)
+- Use `--force` to override and re-run
+- Empty or zero-byte result files are treated as incomplete and overwritten
 
 ### Output
 
@@ -506,8 +514,8 @@ Creates `scale_limit_result.json` in model output folder:
 │  1. Create temp instance folder: _temp_scale_test_NNNrows/      │
 │  2. Update test-config.json with current row count              │
 │  3. Run 01_generate_data.py                                     │
-│  4. Run 02_execute_and_evaluate.py (single run sufficient)      │
-│  5. Check if Precision=1.00 AND Recall=1.00                     │
+│  4. Run 02_execute_and_evaluate.py (3 runs to rule out infra)   │
+│  5. Check if ALL 3 runs have Precision=1.00 AND Recall=1.00     │
 │  6. Update bounds and calculate next row count                  │
 │  7. Keep iteration folders for inspection                       │
 └─────────────────────────────────────────────────────────────────┘
@@ -695,7 +703,17 @@ Generated: 2026-03-05 23:15
 - H1: Scale limit 300-600 rows, H2: Bimodal failure, H3: Truncation, H4: Effort, H5: Reasoning vs temp
 - Updated: Verification checklist to reference H1-H5
 
-**[2026-03-05 23:00]**
+**[2026-03-06 00:39]**
+- Added: Resume support - skip if scale_limit_result.json exists with size > 0
+- Added: --force flag to override skip behavior
+- Added: --reasoning-effort CLI argument
+
+**[2026-03-06 00:24]**
+- Fixed: Scale limit finder now runs 3 tests per iteration (not 1) to rule out infrastructure issues
+- Added: MUST-NOT-FORGET item for 3-runs requirement
+- Changed: Workflow diagram step 4 and 5 updated to reflect 3-run aggregation
+
+**[2026-03-05 23:59]**
 - Added: Section 10 - Batch Scale Test (TBLF-FR-07) for H1, H6, H7 testing
 - Added: Section 11 - Results Analysis (TBLF-FR-08) for H2, H3, H4 testing
 - Added: New scripts 04_batch_scale_test.py, 05_analyze_results.py

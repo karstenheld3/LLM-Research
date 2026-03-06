@@ -1,3 +1,5 @@
+<DevSystem MarkdownTablesAllowed=true />
+
 # INFO: CSV Scale Limits
 
 **Doc ID**: TBLF-IN01
@@ -8,10 +10,39 @@
 
 **Research Question:** At what scale do LLMs fail to reliably extract filtered data from CSV tables?
 
-**Key Findings:** (To be populated after experiments)
-- Scale limits vary by model family and context window
-- Failure modes: truncation, missed records, hallucinated records
-- Binary search efficiently finds the reliability boundary
+**Key Findings:** (Preliminary - 9/12 tests complete as of 2026-03-06)
+
+- **Scale limits vary dramatically by model**: gpt-5-mini (389 rows) vs gpt-4o (4 rows) - 97x difference
+- **Reasoning models outperform temperature models**: gpt-5-mini (389) >> gpt-4o-mini (6)
+- **Primary failure mode is comprehension**, not truncation (context utilization typically <30% at failure)
+- **Higher effort does NOT always help**: gpt-5-mini low (65) < medium (389) suggests sweet spot exists
+- **Claude models mid-range**: sonnet (168), opus (177) - similar despite cost difference
+
+### Preliminary Results Table
+
+| Model          | Effort | Scale Limit | Failure Mode  | Time (min) | Cost ($) | Iterations |
+|----------------|--------|-------------|---------------|------------|----------|------------|
+| gpt-5-mini     | medium | 389         | -             | 48.3       | 0.00     | 12         |
+| gpt-5          | low    | 356         | comprehension | 14.2       | 0.87     | 6          |
+| gpt-5.2        | medium | 215         | comprehension | 5.9        | 0.57     | 6          |
+| claude-opus    | medium | 177         | truncation    | 9.6        | 0.00     | 6          |
+| claude-sonnet  | medium | 168         | comprehension | 8.6        | 0.89     | 6          |
+| gpt-5-mini     | low    | 65          | comprehension | 6.5        | 0.13     | 6          |
+| claude-haiku   | medium | 9           | comprehension | 1.2        | 0.09     | 6          |
+| gpt-4o-mini    | medium | 6           | comprehension | 0.6        | 0.00     | 4          |
+| gpt-4o         | medium | 4           | comprehension | 0.6        | 0.00     | 7          |
+
+**Cost observations:**
+- Total spent so far: ~$2.55 across 9 tests
+- Most expensive: claude-sonnet ($0.89), gpt-5 low ($0.87)
+- Some costs showing $0.00 may be tracking errors
+
+**Time observations:**
+- Fastest: gpt-4o-mini (0.6 min) - but only 6 rows scale limit
+- Slowest: gpt-5-mini medium (48.3 min) - 12 iterations, highest scale limit
+- Average ~10 min per test with 3 runs/iteration
+
+**Still running:** gpt-5-mini high, gpt-5 medium, gpt-5 high
 
 ## Table of Contents
 
@@ -76,13 +107,13 @@ Prior benchmarking (TK-001, March 2026) tested 10 format variants on gpt-5-mini 
 
 **v4 Results (300 records, 107 matching, n=15 runs)**:
 
-| Rank | Format | Precision | Std Dev | Recall |
-|------|--------|-----------|---------|--------|
-| 1 | `::` (double colon) | 1.000 | 0.000 | 0.997 |
-| 2 | `: ` (colon space) | 1.000 | 0.000 | 0.989 |
-| 3 | **CSV quoted** | **1.000** | **0.000** | **0.991** |
-| 9 | Markdown table | 0.978 | 0.038 | 0.950 |
-| 10 | XML | 0.956 | 0.161 | 0.965 |
+| Rank | Format              | Precision | Std Dev | Recall |
+|------|---------------------|-----------|---------|--------|
+| 1    | `::` (double colon) | 1.000     | 0.000   | 0.997  |
+| 2    | `: ` (colon space)  | 1.000     | 0.000   | 0.989  |
+| 3    | CSV quoted          | 1.000     | 0.000   | 0.991  |
+| 9    | Markdown table      | 0.978     | 0.038   | 0.950  |
+| 10   | XML                 | 0.956     | 0.161   | 0.965  |
 
 **Why CSV over key-value formats**: CSV is a standard tabular format that generalizes to real-world datasets. Key-value with `::` separator performed slightly better but is less common in practice.
 
@@ -100,12 +131,12 @@ Test 02 will compare formats directly at scale.
 
 ### 3.1 Independent Variables
 
-| Variable | Values | Description |
-|----------|--------|-------------|
-| **Model** | gpt-4o-mini, gpt-5-mini, claude-sonnet-4 | LLM to test |
-| **Row count** | 50 - 2000 | Number of CSV rows |
-| **Reasoning effort** | low, medium, high | Model thinking budget |
-| **Output length** | low, medium, high | Max output tokens scaling |
+| Variable         | Values                                   | Description               |
+|------------------|------------------------------------------|---------------------------|
+| Model            | gpt-4o-mini, gpt-5-mini, claude-sonnet-4 | LLM to test               |
+| Row count        | 50 - 2000                                | Number of CSV rows        |
+| Reasoning effort | low, medium, high                        | Model thinking budget     |
+| Output length    | low, medium, high                        | Max output tokens scaling |
 
 ### 3.2 Controlled Variables
 
@@ -241,14 +272,14 @@ python test_llm_client.py
 
 ### 6.2 Hypothesis Summary Table
 
-| ID | Hypothesis | Script | Metric |
-|----|------------|--------|--------|
-| H1 | Scale limit 300-600 rows | `03_find_scale_limit.py` | `max_reliable_rows` |
-| H2 | Bimodal failure (cliff) | `03_find_scale_limit.py` | Variance at boundary |
-| H3 | Truncation > comprehension | `03_find_scale_limit.py` | `failure_mode` distribution |
-| H4 | Higher effort = higher limit | `04_batch_scale_test.py` | Scale limit by effort |
-| H5 | Reasoning > temperature | `04_batch_scale_test.py` | Scale limit by model family |
-| H6 | CSV best format | Test 02 | Scale limit by format |
+| ID | Hypothesis                   | Script                   | Metric                      |
+|----|------------------------------|--------------------------|-----------------------------|
+| H1 | Scale limit 300-600 rows     | `03_find_scale_limit.py` | `max_reliable_rows`         |
+| H2 | Bimodal failure (cliff)      | `03_find_scale_limit.py` | Variance at boundary        |
+| H3 | Truncation > comprehension   | `03_find_scale_limit.py` | `failure_mode` distribution |
+| H4 | Higher effort = higher limit | `04_batch_scale_test.py` | Scale limit by effort       |
+| H5 | Reasoning > temperature      | `04_batch_scale_test.py` | Scale limit by model family |
+| H6 | CSV best format              | Test 02                  | Scale limit by format       |
 
 ### 6.3 Script Pipeline
 
@@ -280,45 +311,45 @@ python test_llm_client.py
 
 #### Scale Limit Results (All 8 Models)
 
-| Model | Provider | Method | Effort | Scale Limit | Context % | Primary Failure | Cost |
-|-------|----------|--------|--------|-------------|-----------|-----------------|------|
-| gpt-4o-mini | OpenAI | temperature | medium | TBD | TBD | TBD | TBD |
-| gpt-4o | OpenAI | temperature | medium | TBD | TBD | TBD | TBD |
-| gpt-5-mini | OpenAI | reasoning | low | TBD | TBD | TBD | TBD |
-| gpt-5-mini | OpenAI | reasoning | medium | TBD | TBD | TBD | TBD |
-| gpt-5-mini | OpenAI | reasoning | high | TBD | TBD | TBD | TBD |
-| gpt-5 | OpenAI | reasoning | low | TBD | TBD | TBD | TBD |
-| gpt-5 | OpenAI | reasoning | medium | TBD | TBD | TBD | TBD |
-| gpt-5 | OpenAI | reasoning | high | TBD | TBD | TBD | TBD |
-| gpt-5.2 | OpenAI | reasoning | medium | TBD | TBD | TBD | TBD |
-| claude-haiku-4-5 | Anthropic | temperature | medium | TBD | TBD | TBD | TBD |
-| claude-sonnet-4-5 | Anthropic | thinking | medium | TBD | TBD | TBD | TBD |
-| claude-opus-4-5 | Anthropic | effort | medium | TBD | TBD | TBD | TBD |
+| Model             | Provider  | Method      | Effort | Scale Limit | Context % | Primary Failure | Cost  |
+|-------------------|-----------|-------------|--------|-------------|-----------|-----------------|-------|
+| gpt-4o-mini       | OpenAI    | temperature | medium | TBD         | TBD       | TBD             | TBD   |
+| gpt-4o            | OpenAI    | temperature | medium | TBD         | TBD       | TBD             | TBD   |
+| gpt-5-mini        | OpenAI    | reasoning   | low    | TBD         | TBD       | TBD             | TBD   |
+| gpt-5-mini        | OpenAI    | reasoning   | medium | TBD         | TBD       | TBD             | TBD   |
+| gpt-5-mini        | OpenAI    | reasoning   | high   | TBD         | TBD       | TBD             | TBD   |
+| gpt-5             | OpenAI    | reasoning   | low    | TBD         | TBD       | TBD             | TBD   |
+| gpt-5             | OpenAI    | reasoning   | medium | TBD         | TBD       | TBD             | TBD   |
+| gpt-5             | OpenAI    | reasoning   | high   | TBD         | TBD       | TBD             | TBD   |
+| gpt-5.2           | OpenAI    | reasoning   | medium | TBD         | TBD       | TBD             | TBD   |
+| claude-haiku-4-5  | Anthropic | temperature | medium | TBD         | TBD       | TBD             | TBD   |
+| claude-sonnet-4-5 | Anthropic | thinking    | medium | TBD         | TBD       | TBD             | TBD   |
+| claude-opus-4-5   | Anthropic | effort      | medium | TBD         | TBD       | TBD             | TBD   |
 
 #### Hypothesis Verdicts
 
-| ID | Hypothesis | Verdict | Evidence | Confidence |
-|----|------------|---------|----------|------------|
-| H1 | Scale limit 300-600 rows (gpt-5-mini) | TBD | TBD | TBD |
-| H2 | Bimodal failure (cliff, not slope) | TBD | TBD | TBD |
-| H3 | Truncation > comprehension errors | TBD | TBD | TBD |
-| H4 | Higher effort = higher limit | TBD | TBD | TBD |
-| H5 | Reasoning > temperature models | TBD | TBD | TBD |
-| H6 | CSV best format | Future (Test 02) | - | - |
+| ID | Hypothesis                            | Verdict          | Evidence | Confidence |
+|----|---------------------------------------|------------------|----------|------------|
+| H1 | Scale limit 300-600 rows (gpt-5-mini) | TBD              | TBD      | TBD        |
+| H2 | Bimodal failure (cliff, not slope)    | TBD              | TBD      | TBD        |
+| H3 | Truncation > comprehension errors     | TBD              | TBD      | TBD        |
+| H4 | Higher effort = higher limit          | TBD              | TBD      | TBD        |
+| H5 | Reasoning > temperature models        | TBD              | TBD      | TBD        |
+| H6 | CSV best format                       | Future (Test 02) | -        | -          |
 
 #### Effort Level Comparison (H4)
 
-| Model | Low | Medium | High | Delta (High-Low) |
-|-------|-----|--------|------|------------------|
-| gpt-5-mini | TBD rows | TBD rows | TBD rows | TBD |
-| gpt-5 | TBD rows | TBD rows | TBD rows | TBD |
+| Model      | Low      | Medium   | High     | Delta (High-Low) |
+|------------|----------|----------|----------|------------------|
+| gpt-5-mini | TBD rows | TBD rows | TBD rows | TBD              |
+| gpt-5      | TBD rows | TBD rows | TBD rows | TBD              |
 
 #### Model Family Comparison (H5)
 
-| Comparison | Temperature Model | Reasoning Model | Winner | Delta |
-|------------|-------------------|-----------------|--------|-------|
-| Mini tier | gpt-4o-mini: TBD | gpt-5-mini: TBD | TBD | TBD |
-| Full tier | gpt-4o: TBD | gpt-5: TBD | TBD | TBD |
+| Comparison | Temperature Model  | Reasoning Model  | Winner | Delta |
+|------------|--------------------|--------------------|--------|-------|
+| Mini tier  | gpt-4o-mini: TBD   | gpt-5-mini: TBD    | TBD    | TBD   |
+| Full tier  | gpt-4o: TBD        | gpt-5: TBD         | TBD    | TBD   |
 
 ## 7. Sources
 
@@ -328,6 +359,12 @@ python test_llm_client.py
 - `.windsurf/skills/llm-evaluation/` - Original LLM evaluation scripts
 
 ## 8. Document History
+
+**[2026-03-06 00:56]**
+- Added: Preliminary findings with 9/12 tests complete
+- Added: Results table with scale limits, time, cost, iterations
+- Added: Cost and time observations
+- Key finding: comprehension (not truncation) is primary failure mode
 
 **[2026-03-05 23:55]**
 - Expanded: Results template now includes all 8 models (12 configurations)

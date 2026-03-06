@@ -10,6 +10,33 @@
 
 ## Active Issues
 
+### 2026-03-06 - Terminal Management
+
+#### [MEDIUM] `TBLF-FL-004` Launching Terminals Without Checking Existing Ones
+
+- **When**: 2026-03-06 01:06
+- **Where**: Agent workflow - `run_command` tool usage
+- **What**: Agent repeatedly launched new background terminals for tests without first checking if existing terminals were still running. This led to 3+ orphaned terminals and attempted duplicate test runs (gpt-5 medium/high were already running as IDs 237/238 when agent tried to launch again as IDs 343/344).
+- **Why it went wrong**:
+  1. Did not use `command_status` to check if previous background commands were still running
+  2. Assumed previous terminals had completed or been cancelled
+  3. Did not maintain awareness of active command IDs across conversation
+- **Evidence**: User reported "you are already running 3 terminals!"
+- **Suggested fix**: Before launching new background commands, always:
+  1. Check status of any known background command IDs
+  2. Wait for completion or confirm cancellation
+  3. Only then launch new commands
+
+**Code pattern to follow**:
+```python
+# Before launching new tests:
+# 1. Check existing command status
+command_status(CommandId=last_command_id)
+
+# 2. If still RUNNING, either wait or ask user
+# 3. Only launch new if previous is DONE or CANCELED
+```
+
 ### 2026-03-05 - Logging Output
 
 #### [HIGH] `TBLF-FL-003` Not Following Full Disclosure Principle
