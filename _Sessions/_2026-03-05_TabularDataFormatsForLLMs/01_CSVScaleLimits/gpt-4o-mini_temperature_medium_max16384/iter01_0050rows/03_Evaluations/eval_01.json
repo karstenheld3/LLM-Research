@@ -1,0 +1,50 @@
+{
+  "extracted_ids": [
+    "EMP-0002",
+    "EMP-0003",
+    "EMP-0011",
+    "EMP-0012",
+    "EMP-0014",
+    "EMP-0015",
+    "EMP-0016",
+    "EMP-0025",
+    "EMP-0030",
+    "EMP-0033",
+    "EMP-0034",
+    "EMP-0036",
+    "EMP-0038",
+    "EMP-0042",
+    "EMP-0043",
+    "EMP-0045",
+    "EMP-0046",
+    "EMP-0050"
+  ],
+  "metrics": {
+    "true_positives": 13,
+    "false_positives": 5,
+    "false_negatives": 4,
+    "precision": 0.7222,
+    "recall": 0.7647,
+    "f1": 0.7429
+  },
+  "missing_ids": [
+    "EMP-0022",
+    "EMP-0024",
+    "EMP-0037",
+    "EMP-0040"
+  ],
+  "extra_ids": [
+    "EMP-0011",
+    "EMP-0012",
+    "EMP-0038",
+    "EMP-0042",
+    "EMP-0043"
+  ],
+  "run_id": 1,
+  "response_file": "run_01.md",
+  "truncated": false,
+  "finish_reason": "stop",
+  "input_tokens": 2679,
+  "output_tokens": 853,
+  "errors": []
+}

@@ -1,0 +1,23 @@
+{
+  "extracted_ids": [
+    "EMP-0002",
+    "EMP-0003"
+  ],
+  "metrics": {
+    "true_positives": 2,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "missing_ids": [],
+  "extra_ids": [],
+  "run_id": 1,
+  "response_file": "run_01.md",
+  "truncated": false,
+  "finish_reason": "stop",
+  "input_tokens": 548,
+  "output_tokens": 90,
+  "errors": []
+}

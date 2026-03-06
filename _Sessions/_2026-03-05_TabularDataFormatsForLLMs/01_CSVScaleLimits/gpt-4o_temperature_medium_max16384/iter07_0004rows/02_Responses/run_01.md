@@ -1,0 +1,2 @@
+1. EMP-0002 | Alexander Garcia | Research & Development | $325,000.00/year | Level 4: Top Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead
+2. EMP-0003 | Isabella Park | IT, Infrastructure | $385,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Q4 Push: Owner, Enterprise | SMB Expansion
