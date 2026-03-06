@@ -21,10 +21,10 @@
       "o1-pro": {"input_per_1m": 150.00, "output_per_1m": 600.00, "currency": "USD"}
     },
     "anthropic": {
-      "claude-opus-4-6-20260204": {"input_per_1m": 5.00, "output_per_1m": 25.00, "currency": "USD"},
-      "claude-opus-4-5-20250918": {"input_per_1m": 5.00, "output_per_1m": 25.00, "currency": "USD"},
-      "claude-sonnet-4-5-20250929": {"input_per_1m": 3.00, "output_per_1m": 15.00, "currency": "USD"},
-      "claude-haiku-4-5-20251001": {"input_per_1m": 1.00, "output_per_1m": 5.00, "currency": "USD"},
+      "claude-opus-4-6": {"input_per_1m": 5.00, "output_per_1m": 25.00, "currency": "USD"},
+      "claude-opus-4-5": {"input_per_1m": 5.00, "output_per_1m": 25.00, "currency": "USD"},
+      "claude-sonnet-4-5": {"input_per_1m": 3.00, "output_per_1m": 15.00, "currency": "USD"},
+      "claude-haiku-4-5": {"input_per_1m": 1.00, "output_per_1m": 5.00, "currency": "USD"},
       "claude-opus-4-1-20250805": {"input_per_1m": 15.00, "output_per_1m": 75.00, "currency": "USD"},
       "claude-opus-4-20250514": {"input_per_1m": 15.00, "output_per_1m": 75.00, "currency": "USD"},
       "claude-sonnet-4-20250514": {"input_per_1m": 3.00, "output_per_1m": 15.00, "currency": "USD"},
