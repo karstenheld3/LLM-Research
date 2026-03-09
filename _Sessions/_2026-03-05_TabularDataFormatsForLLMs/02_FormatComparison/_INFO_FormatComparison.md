@@ -103,20 +103,49 @@ Clearance: Level 4: Top Secret
 
 ## Academic Research Context
 
-**Sclar et al. ICLR 2024** (arXiv:2310.11324):
-- Up to 76 accuracy points variance from minor format changes
-- Separators claimed highest impact (43% weak, 22% strong difference)
-- [CONTRADICTED by TK-001]: Modern frontier models show no separator sensitivity
+### Primary Papers (Format Impact)
 
-**Microsoft/MIT 2024** (arXiv:2411.10541):
-- 200-300% improvement possible by switching formats
-- Format preferences don't transfer between model families
-- GPT-4 more robust than GPT-3.5 to format changes
+**1. Sclar et al. ICLR 2024** - "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design"
+- arXiv: https://arxiv.org/abs/2310.11324
+- Local: `Papers/2024-04-16_QuantifyingLanguageModelsSensitivityToSpuriousFeaturesInPromptDesign_2310.11324v2.md`
+- **Finding:** Up to 76 accuracy points variance from minor format changes
+- **Finding:** Separators claimed highest impact (43% weak, 22% strong difference)
+- **Note:** [CONTRADICTED by TK-001] - Modern frontier models show no separator sensitivity
 
-**OpenAI GPT-4.1 Guide**:
-- JSON performs poorly for document contexts
-- XML works well for long context
-- Markdown recommended as starting point
+**2. Microsoft/MIT 2024** - "Does Prompt Formatting Have Any Impact on LLM Performance?"
+- arXiv: https://arxiv.org/abs/2411.10541
+- Local: `Papers/2024-11-15_DoesPromptFormattingHaveAnyImpactOnLLMPerformance_2411.10541v1.md`
+- **Finding:** 200-300% improvement possible by switching formats
+- **Finding:** Format preferences don't transfer between model families (IoU < 0.2)
+- **Finding:** GPT-4 more robust than GPT-3.5 to format changes
+
+**3. Microsoft CFPO 2025** - "Beyond Prompt Content: Enhancing LLM Performance Via Content-Format Integration"
+- arXiv: https://arxiv.org/abs/2502.04295
+- Local: `Papers/2025-02-06_BeyondPromptContent-EnhancingLLMPerformanceViaContent-FormatIntegration_2502.04295v3.md`
+- **Finding:** 20-65% accuracy variance from format alone on GSM8K
+- **Finding:** Joint content-format optimization outperforms content-only
+
+### Supporting Papers (Long Context, Instruction Following)
+
+**4. ECNU/iQIYI LIFBench 2024** - "Evaluating Instruction Following Performance in Long Context"
+- arXiv: https://arxiv.org/abs/2411.07037
+- Local: `Papers/2024-11-11_LIFBench-EvaluatingTheInstructionFollowingPerformanceOfLLMsInLongContext_2411.07037v1.md`
+- **Finding:** Format capability most stable across context lengths
+- **Finding:** Recognition degrades most with increasing context
+
+**5. Google IFEval 2023** - "Instruction-Following Evaluation for Large Language Models"
+- arXiv: https://arxiv.org/abs/2311.07911
+- Local: `Papers/2023-11-14_Instruction-FollowingEvaluationForLargeLanguageModels_2311.07911v1.md`
+- **Finding:** 25 verifiable instruction types
+- **Finding:** GPT-4 achieves 77-85% compliance
+
+### Vendor Documentation
+
+**OpenAI GPT-4.1 Prompting Guide:**
+- URL: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+- **Finding:** JSON performs poorly for document contexts
+- **Finding:** XML works well for long context
+- **Finding:** Markdown recommended as starting point
 
 ## Expected Outcomes
 
