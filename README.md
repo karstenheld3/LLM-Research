@@ -51,13 +51,13 @@ Balancing accuracy, cost, and speed for real-world use (times are per single LLM
 
 ### Per-Request Execution Times
 
-Average time per single LLM API call (from `timing_stats.avg_secs`):
+Average time per single LLM API call across binary search iterations (varying row counts):
 
 - **Fastest**: gpt-5.2 medium (~1 min), gpt-5-mini low (~1 min), claude-sonnet (~1.4 min)
 - **Moderate**: gpt-5 low (~2.4 min), gpt-5-mini medium (~4 min)
 - **Slowest**: gpt-5 medium (~10 min), gpt-5 high (~20 min)
 
-Higher reasoning effort increases both scale limit AND execution time. gpt-5 high takes 8x longer than gpt-5 low but only improves scale by 38%.
+Note: Times vary by row count. At scale limit, expect times near the upper range. Higher reasoning effort increases both scale limit AND execution time.
 
 ## Hypothesis Sources
 
