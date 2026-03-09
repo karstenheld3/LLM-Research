@@ -8,7 +8,7 @@
 
 ## Summary
 
-**Research Question:** At what scale do LLMs fail to reliably extract filtered data from CSV tables?
+**Research Question:** What are the maximum reliable row counts for LLM filtered extraction from CSV tables?
 
 **Key Findings:** (11/12 tests complete as of 2026-03-06)
 
