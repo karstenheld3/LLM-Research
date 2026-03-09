@@ -304,15 +304,17 @@ def main():
     sys.exit(1)
   template = template_path.read_text(encoding="utf-8")
     
-  # Load data (CSV or kv_colon format)
-  csv_path = instance_path / "01_InputData" / "data.csv"
-  txt_path = instance_path / "01_InputData" / "data.txt"
-  if csv_path.exists():
-    data = csv_path.read_text(encoding="utf-8")
-  elif txt_path.exists():
-    data = txt_path.read_text(encoding="utf-8")
-  else:
-    print("ERROR: Run 01_generate_data.py first (no data.csv or data.txt found)")
+  # Load data (supports all 8 formats)
+  input_dir = instance_path / "01_InputData"
+  data_files = ["data.csv", "data.txt", "data.json", "data.xml", "data.yaml", "data.toml", "data.md"]
+  data = None
+  for fname in data_files:
+    fpath = input_dir / fname
+    if fpath.exists():
+      data = fpath.read_text(encoding="utf-8")
+      break
+  if data is None:
+    print(f"ERROR: Run 01_generate_data.py first (no data file found in {input_dir})")
     sys.exit(1)
     
   # Load ground truth
