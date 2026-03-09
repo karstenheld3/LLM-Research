@@ -112,6 +112,15 @@ Burst capacity tested via `find-workers-limit.py`:
 - **claude-sonnet-4-5**: 60+ workers, ~467K TPM
 - **claude-opus-4-5**: 60+ workers, ~473K TPM
 
+### Cascade Limitation [TESTED 2026-03-09]
+
+**Windsurf Cascade can only run 3-4 background commands simultaneously.**
+
+For Test 02 (35 parallel tests), use one of:
+1. **PowerShell script** - `run_all_tests.ps1` runs all 35 in separate PowerShell jobs
+2. **Manual terminals** - Open 35 terminal windows manually
+3. **Batch execution** - Run 3-4 tests at a time through Cascade
+
 ### Parallel Execution Strategy
 
 With 120+ workers tested for OpenAI and 60+ for Anthropic, **all 12 tests can run simultaneously**:

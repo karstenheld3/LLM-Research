@@ -170,9 +170,12 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
   # Use CLI reasoning_effort if provided, otherwise from config
   reasoning = reasoning_effort if reasoning_effort else exec_config.get("reasoning_effort", "medium")
   
-  # Create model output folder with key params
+  # Create model output folder with key params (include format for Test 02)
   model_safe_name = model.replace("/", "_").replace(":", "_")
-  folder_name = f"{model_safe_name}_{method}_{reasoning}_max{max_tokens}"
+  if output_format and output_format != "csv_quoted":
+    folder_name = f"{model_safe_name}_{output_format}_{method}_{reasoning}_max{max_tokens}"
+  else:
+    folder_name = f"{model_safe_name}_{method}_{reasoning}_max{max_tokens}"
   model_output_path = test_path / folder_name
   
   # Check for existing result file - skip if exists and has content (unless --force)

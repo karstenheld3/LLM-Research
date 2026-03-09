@@ -310,6 +310,9 @@ done
 
 ### 4.6 Parallel Execution Strategy
 
+**Cascade Limitation:** Windsurf can only run 3-4 background commands simultaneously.
+Use PowerShell script `run_all_tests.ps1` for full parallelization outside Cascade.
+
 **Time estimates per test (from Test 01 data):**
 
 | Model | Time/req | Requests (~10 iter × 3 runs) | Total/test |
@@ -477,6 +480,12 @@ python 03_find_scale_limit.py \
 - [ ] Hypothesis verdicts updated after analysis
 
 ## 8. Document History
+
+**[2026-03-09 20:49]**
+- Added: Cascade limitation note (3-4 background commands max)
+- Added: `run_all_tests.ps1` PowerShell script for full parallelization
+- Fixed: Folder naming now includes format to prevent conflicts
+- Started: gpt-5.2 tests (3 running)
 
 **[2026-03-09 20:36]**
 - Added: Section 4.6 Parallel Execution Strategy with realistic time estimates from Test 01
