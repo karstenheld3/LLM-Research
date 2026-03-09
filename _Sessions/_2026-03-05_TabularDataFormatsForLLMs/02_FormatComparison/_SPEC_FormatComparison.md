@@ -36,7 +36,22 @@
 
 ## 1. Scenario
 
-**Problem:** Test 01 established CSV scale limits, but does input format affect scale limits? Different formats use varying token counts (1.0x to 2.1x of CSV baseline) - does token efficiency correlate with scale limits, or do structured formats aid comprehension?
+**Problem:** Test 01 established CSV scale limits, but does input format affect scale limits? Academic research shows 20-76% accuracy variance from format changes (Sclar 2024, Microsoft CFPO 2025), but no study tests tabular data formats at scale for extraction tasks.
+
+**Research Questions:**
+1. Does token efficiency correlate with scale limits? (csv_raw 1.0x vs xml 2.1x)
+2. Do structured formats (JSON, XML) aid or hinder comprehension?
+3. Do format preferences differ between model families (GPT vs Claude)?
+
+**Testable Hypotheses:**
+
+| ID | Hypothesis | How to Test | Expected Result |
+|----|------------|-------------|-----------------|
+| H2 | JSON not optimal despite structure | Compare JSON vs CSV limits | CSV >= JSON |
+| H3 | Format preferences differ by model family | Compare GPT-5 vs Claude rankings | Different optimal formats |
+| H4 | Optimal format depends on complexity | Compare rankings at different scales | Rankings may shift |
+| H5 | Token-efficient formats enable higher scale | Compare csv_raw vs xml limits | csv_raw > xml by ~2x |
+| H6 | Key-value outperforms structured formats | Compare kv_colon_space vs JSON/XML | kv >= JSON/XML |
 
 **Solution:**
 - Extend Test 01 framework with format parameter in data generation
