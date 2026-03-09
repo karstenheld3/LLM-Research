@@ -308,7 +308,90 @@ for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
 done
 ```
 
-### 4.6 Phase 6: Analysis
+### 4.6 Parallel Execution Strategy
+
+**Time estimates per test (from Test 01 data):**
+
+| Model | Time/req | Requests (~10 iter × 3 runs) | Total/test |
+|-------|----------|------------------------------|------------|
+| gpt-5-mini | ~3.5 min | ~30 | **~105 min** |
+| gpt-5 | ~2.4 min | ~30 | **~72 min** |
+| gpt-5.2 | ~1 min | ~30 | **~30 min** |
+| claude-opus | ~1.6 min | ~30 | **~48 min** |
+| claude-sonnet | ~1.4 min | ~30 | **~42 min** |
+
+**API rate limits (tested in Test 01):**
+- OpenAI: 120+ concurrent workers
+- Anthropic: 60+ concurrent workers
+
+**Parallel execution: Run all 35 tests simultaneously**
+
+Each test uses ~3 internal workers, so total concurrent:
+- OpenAI (3 models × 7 formats × 3 workers): 63 workers ✓
+- Anthropic (2 models × 7 formats × 3 workers): 42 workers ✓
+
+**Total time = slowest test = gpt-5-mini = ~2 hours**
+
+### 4.7 35 Terminal Commands (Full Parallel)
+
+```bash
+cd E:\Dev\LLM-Research\_Sessions\_2026-03-05_TabularDataFormatsForLLMs\02_FormatComparison\_Scripts
+
+# gpt-5-mini (7 terminals) - baseline 500, ~105 min each
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format csv_raw --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format kv_colon_space --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format markdown_table --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format json --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format xml --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format yaml --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format toml --initial-rows 500 --reasoning-effort medium
+
+# gpt-5 (7 terminals) - baseline 356, ~72 min each
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format csv_raw --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format kv_colon_space --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format markdown_table --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format json --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format xml --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format yaml --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format toml --initial-rows 356 --reasoning-effort low
+
+# gpt-5.2 (7 terminals) - baseline 215, ~30 min each
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format csv_raw --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format kv_colon_space --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format markdown_table --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format json --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format xml --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format yaml --initial-rows 215 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format toml --initial-rows 215 --reasoning-effort medium
+
+# claude-opus (7 terminals) - baseline 177, ~48 min each
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format csv_raw --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format kv_colon_space --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format markdown_table --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format json --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format xml --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format yaml --initial-rows 177
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format toml --initial-rows 177
+
+# claude-sonnet (7 terminals) - baseline 168, ~42 min each
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format csv_raw --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format kv_colon_space --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format markdown_table --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format json --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format xml --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format yaml --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format toml --initial-rows 168
+```
+
+### 4.8 Time Comparison
+
+| Strategy | Terminals | Total Time |
+|----------|-----------|------------|
+| Sequential | 1 | ~12 hours |
+| Per model (5 groups) | 5 | ~2.5 hours |
+| **All parallel** | **35** | **~2 hours** |
+
+### 4.9 Phase 6: Analysis
 
 ```bash
 python 05_analyze_results.py --test-path .. --output format_comparison_report.md
@@ -394,6 +477,12 @@ python 03_find_scale_limit.py \
 - [ ] Hypothesis verdicts updated after analysis
 
 ## 8. Document History
+
+**[2026-03-09 20:36]**
+- Added: Section 4.6 Parallel Execution Strategy with realistic time estimates from Test 01
+- Added: Section 4.7 with all 35 terminal commands for full parallel execution
+- Added: Section 4.8 Time Comparison (sequential vs parallel)
+- Time estimate: ~2 hours with full parallelization (slowest = gpt-5-mini ~105 min)
 
 **[2026-03-09 20:19]**
 - Initial test plan created
