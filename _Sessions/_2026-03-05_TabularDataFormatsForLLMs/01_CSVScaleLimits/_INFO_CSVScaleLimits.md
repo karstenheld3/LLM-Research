@@ -10,6 +10,8 @@
 
 **Research Question:** What are the maximum reliable row counts for LLM filtered extraction from CSV tables?
 
+*Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
+
 **Key Findings:** (11/12 tests complete as of 2026-03-06)
 
 - **Scale limits vary dramatically by model**: gpt-5-mini high (675+) vs gpt-4o (4 rows) - **168x+ difference**

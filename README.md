@@ -6,6 +6,8 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 **Question:** What are the maximum reliable row counts for LLM filtered extraction from CSV tables?
 
+*Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
+
 **Status:** 11/12 tests complete (March 2026)
 
 ## Key Findings
