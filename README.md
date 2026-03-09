@@ -8,14 +8,6 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 **Status:** 11/12 tests complete (March 2026)
 
-### Test Data Structure
-
-- **20 columns** per record: id, name, department, title, salary, clearance, rating, projects, location, start_date, email, phone, manager_id, team, level, bonus_pct, reviews, certifications, equipment, pto
-- **7 columns extracted**: id, name, department, salary, clearance, rating, projects
-- **Compound filter**: `clearance IN [Level 3, 4, 5] AND salary >= $150,000`
-- **Adversarial content**: ~20% of values contain delimiter characters (colons, pipes, commas) to test parsing robustness
-- **Format**: Quoted CSV with realistic employee-style data
-
 ## Key Findings
 
 - **Reasoning models massively outperform temperature models** (65-89x better scale limits)
@@ -44,6 +36,14 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 | Budget | gpt-5-mini | medium | 300 rows | ~$0.05 |
 
 **DO NOT USE:** gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits)
+
+### Test Data Structure
+
+- **20 columns** per record: id, name, department, title, salary, clearance, rating, projects, location, start_date, email, phone, manager_id, team, level, bonus_pct, reviews, certifications, equipment, pto
+- **7 columns extracted**: id, name, department, salary, clearance, rating, projects
+- **Compound filter**: `clearance IN [Level 3, 4, 5] AND salary >= $150,000`
+- **Adversarial content**: ~20% of values contain delimiter characters (colons, pipes, commas) to test parsing robustness
+- **Format**: Quoted CSV with realistic employee-style data
 
 ## Hypothesis Sources
 
