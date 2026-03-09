@@ -125,9 +125,21 @@ Clearance: Level 4: Top Secret
 **2. Microsoft/MIT 2024** - "Does Prompt Formatting Have Any Impact on LLM Performance?"
 - arXiv: https://arxiv.org/abs/2411.10541
 - Local: `Papers/2024-11-15_DoesPromptFormattingHaveAnyImpactOnLLMPerformance_2411.10541v1.md`
-- **Finding:** 200-300% improvement possible by switching formats
-- **Finding:** Format preferences don't transfer between model families (IoU < 0.2)
-- **Finding:** GPT-4 more robust than GPT-3.5 to format changes
+- **Scope:** Prompt FORMAT (Plain text, Markdown, YAML, JSON) on GPT-3.5/GPT-4
+- **Models tested:** GPT-3.5-turbo, GPT-3.5-turbo-16k, GPT-4-32k, GPT-4-1106-preview
+- **Tasks:** MMLU, HumanEval, NER Finance, CODEXGLUE, HumanEval-X, FIND
+- **Key findings:**
+  - Up to 40% variance for GPT-3.5-turbo depending on format
+  - 200-300% improvement possible (FIND: Markdown→Plain text)
+  - GPT-3.5 prefers JSON, GPT-4 prefers Markdown
+  - Format preferences don't transfer between families (IoU < 0.2)
+  - Same sub-series share preferences (IoU > 0.7)
+  - GPT-4 more robust and consistent than GPT-3.5
+  - Only 16% identical responses between Markdown/JSON for GPT-3.5
+- **Testable hypotheses for our research:**
+  - H2: JSON may not be optimal despite structure (GPT-4 preferred Markdown)
+  - H3: Format preferences differ by model family (test GPT-5 vs Claude)
+- **Directly relevant:** Tests actual data formats (JSON, YAML, Markdown) not just separators
 
 **3. Microsoft CFPO 2025** - "Beyond Prompt Content: Enhancing LLM Performance Via Content-Format Integration"
 - arXiv: https://arxiv.org/abs/2502.04295
@@ -140,8 +152,19 @@ Clearance: Level 4: Top Secret
 **4. ECNU/iQIYI LIFBench 2024** - "Evaluating Instruction Following Performance in Long Context"
 - arXiv: https://arxiv.org/abs/2411.07037
 - Local: `Papers/2024-11-11_LIFBench-EvaluatingTheInstructionFollowingPerformanceOfLLMsInLongContext_2411.07037v1.md`
-- **Finding:** Format capability most stable across context lengths
-- **Finding:** Recognition degrades most with increasing context
+- **Scope:** Instruction-following STABILITY in long context (4k-128k tokens), NOT data format comparison
+- **Models tested:** 20 LLMs including GPT-4o, GPT-4, Qwen, Llama, C4AI
+- **Six capabilities measured:** Format, Number, Original content, Logic, Recognition, Spatial
+- **Key findings:**
+  - Format (Fmt) capability **most stable** across models - tightest clustering
+  - Recognition (Recog) **degrades most** with increasing context
+  - Performance drops as context length increases (all models)
+  - GPT-4o best overall (0.758), still significant room for improvement
+  - Instruction-tuned models outperform base models significantly
+- **Relevance to our research:**
+  - Context length degradation supports testing scale limits
+  - "Format stable" refers to OUTPUT format instructions, NOT input data format
+- **Limitation:** Does not test CSV vs JSON vs XML for data representation
 
 ## Expected Outcomes
 
