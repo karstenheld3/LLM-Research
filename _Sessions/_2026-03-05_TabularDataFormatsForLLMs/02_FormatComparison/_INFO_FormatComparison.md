@@ -141,11 +141,41 @@ Clearance: Level 4: Top Secret
 
 ### Vendor Documentation
 
-**OpenAI GPT-4.1 Prompting Guide:**
-- URL: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
-- **Finding:** JSON performs poorly for document contexts
-- **Finding:** XML works well for long context
-- **Finding:** Markdown recommended as starting point
+**OpenAI Prompt Engineering Guide:**
+- URL: https://developers.openai.com/api/docs/guides/prompt-engineering
+- **Finding:** Markdown headers/lists mark distinct sections, communicate hierarchy
+- **Finding:** XML tags delineate content boundaries (documents, examples)
+- **Finding:** XML attributes define metadata about content
+- **Finding:** Recommended order: Identity → Instructions → Examples → Context
+
+**OpenAI Structured Outputs Guide:**
+- URL: https://developers.openai.com/api/docs/guides/structured-outputs
+- URL: https://openai.com/index/introducing-structured-outputs-in-the-api/
+- **Finding:** 100% schema compliance vs <40% prompt-only
+- **Finding:** JSON validity ≠ schema adherence; Structured Outputs enforce both
+
+**OpenAI Structured Outputs Cookbook:**
+- URL: https://developers.openai.com/cookbook/examples/structured_outputs_intro
+- **Finding:** `strict: true` parameter for guaranteed schema compliance
+
+**Anthropic Claude Prompting Best Practices:**
+- URL: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices
+- **Finding:** XML tags help parse complex prompts unambiguously
+- **Finding:** Use `<instructions>`, `<context>`, `<input>` to reduce misinterpretation
+- **Finding:** Nest tags for hierarchy: `<documents><document index="n">...</document></documents>`
+- **Finding:** Match prompt style to desired output style
+
+**Anthropic XML Tags Guide:**
+- URL: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags
+- URL: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags
+- **Finding:** XML tags are "game-changer" for multi-component prompts
+- **Finding:** Use `<example>`, `<examples>`, `<formatting>` tags
+- **Finding:** Claude trained with XML in training data
+
+**Anthropic Long Context Tips:**
+- URL: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips
+- **Finding:** Structure documents with `<document>`, `<document_content>`, `<source>` subtags
+- **Finding:** 200K token context window for Claude 3 models
 
 ## Expected Outcomes
 
