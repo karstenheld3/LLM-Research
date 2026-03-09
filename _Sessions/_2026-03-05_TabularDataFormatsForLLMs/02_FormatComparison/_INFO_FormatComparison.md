@@ -108,9 +108,19 @@ Clearance: Level 4: Top Secret
 **1. Sclar et al. ICLR 2024** - "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design"
 - arXiv: https://arxiv.org/abs/2310.11324
 - Local: `Papers/2024-04-16_QuantifyingLanguageModelsSensitivityToSpuriousFeaturesInPromptDesign_2310.11324v2.md`
-- **Finding:** Up to 76 accuracy points variance from minor format changes
-- **Finding:** Separators claimed highest impact (43% weak, 22% strong difference)
-- **Note:** [CONTRADICTED by TK-001] - Modern frontier models show no separator sensitivity
+- **Scope:** Prompt TEMPLATE formatting (separators, spacing, casing), NOT data representation formats
+- **Models tested:** LLaMA-2-{7B,13B,70B}, Falcon-7B, GPT-3.5-Turbo
+- **Key findings:**
+  - Up to 76 accuracy points variance from template format changes (LLaMA-2-13B)
+  - Median spread 7.5 accuracy points across 53 tasks
+  - Separators (S₁) highest impact: 43% weak diff, 22% strong diff
+  - Casing lowest impact: 3% weak diff, 0% strong diff
+  - Sensitivity NOT eliminated by: model size, instruction tuning, more few-shot examples
+  - Model comparison trends can be REVERSED by choosing different formats
+- **Testable hypothesis for our research:**
+  - H1: Separator style (`:` vs `: `) affects scale limits (test via kv_colon_space)
+  - [CONTRADICTED by TK-001]: gpt-5-mini showed NO separator sensitivity at 300 rows
+- **Limitation:** Paper tested older models (LLaMA-2, 2023); may not apply to frontier models (GPT-5, Claude-4)
 
 **2. Microsoft/MIT 2024** - "Does Prompt Formatting Have Any Impact on LLM Performance?"
 - arXiv: https://arxiv.org/abs/2411.10541
