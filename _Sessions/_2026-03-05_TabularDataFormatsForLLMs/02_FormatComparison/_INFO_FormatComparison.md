@@ -29,6 +29,23 @@
 - Excluded: kv_colon, kv_double_colon
 - 5 models from Test 01 production recommendations
 
+### Testable Hypotheses
+
+| ID | Hypothesis | Source | How to Test | Status |
+|----|------------|--------|-------------|--------|
+| H1 | Separator style (`:` vs `: `) affects scale limits | Sclar et al. 2024 | Compare kv_colon vs kv_colon_space | [CONTRADICTED by TK-001] |
+| H2 | JSON may not be optimal despite structure | Microsoft/MIT 2024 | Compare JSON vs CSV vs Markdown scale limits | Pending |
+| H3 | Format preferences differ by model family | Microsoft/MIT 2024 | Compare GPT-5 vs Claude format rankings | Pending |
+| H4 | Optimal format depends on content complexity | Microsoft CFPO 2025 | Compare format rankings at different row counts | Pending |
+| H5 | Token-efficient formats enable higher scale | Token efficiency theory | Compare csv_raw (1.00x) vs xml (2.12x) limits | Pending |
+| H6 | Key-value formats outperform structured formats | TK-001 benchmark | Compare kv_colon_space vs JSON/XML/YAML | Pending |
+
+**Expected Outcomes:**
+- If H5 confirmed: csv_raw > xml by ~2x in scale limit
+- If H6 confirmed: kv_colon_space matches or exceeds JSON/XML/YAML
+- If H2 confirmed: Markdown or CSV may outperform JSON
+- If H3 confirmed: GPT-5 and Claude have different optimal formats
+
 ### Format Size Comparison (300 rows)
 
 | Format         | Size (KB) | Relative |
