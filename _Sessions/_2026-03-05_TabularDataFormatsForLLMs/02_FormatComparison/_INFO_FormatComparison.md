@@ -148,15 +148,6 @@ Clearance: Level 4: Top Secret
 - **Finding:** XML attributes define metadata about content
 - **Finding:** Recommended order: Identity → Instructions → Examples → Context
 
-**OpenAI Structured Outputs Guide:**
-- URL: https://developers.openai.com/api/docs/guides/structured-outputs
-- URL: https://openai.com/index/introducing-structured-outputs-in-the-api/
-- **Finding:** 100% schema compliance vs <40% prompt-only
-- **Finding:** JSON validity ≠ schema adherence; Structured Outputs enforce both
-
-**OpenAI Structured Outputs Cookbook:**
-- URL: https://developers.openai.com/cookbook/examples/structured_outputs_intro
-- **Finding:** `strict: true` parameter for guaranteed schema compliance
 
 **Anthropic Claude Prompting Best Practices:**
 - URL: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices
