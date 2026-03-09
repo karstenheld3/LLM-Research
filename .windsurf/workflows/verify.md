@@ -58,6 +58,7 @@ Apply to ALL document types and contexts:
   - Tables found? → Convert to unnumbered lists with bold labels
   - Exception: README.md may use tables without `<DevSystem>` tag
   - Only [ACTOR] may add `<DevSystem MarkdownTablesAllowed=true />` exception to other files
+  - If tables ARE allowed: verify formatting per `core-conventions.md` (aligned columns with spaces)
 - **Avoid emojis** - Remove or replace with text:
   - Emojis found? → Replace with text equivalents (Yes/No/Warning)
   - Exception: README.md may use emojis without `<DevSystem>` tag

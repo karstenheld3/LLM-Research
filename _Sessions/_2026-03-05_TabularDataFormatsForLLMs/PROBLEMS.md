@@ -36,3 +36,12 @@
 **Related**: TBLF-FL-001, TBLF-FL-002, TBLF-FL-003 in FAILS.md
 
 ## Deferred
+
+### TBLF-PR-006: H6 - CSV vs other formats at scale (Test 02)
+
+**Status**: Deferred
+**Hypothesis**: Quoted CSV maintains higher scale limits than XML/Markdown table
+**Prior Evidence**: TK-001 showed XML and Markdown table had highest variance/failure rates at 300 rows
+**Test Required**: Compare same extraction task with different formats (CSV, XML, JSON, Markdown table, key-value)
+**Impact**: Determines optimal format recommendation for production use
+**Blocked By**: Test 01 (scale limits) must complete first to establish baseline methodology

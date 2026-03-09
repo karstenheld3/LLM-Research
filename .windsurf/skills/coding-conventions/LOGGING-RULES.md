@@ -48,11 +48,6 @@ Every log line should convey maximum information with minimum words. Avoid verbo
 - BAD: `P=1`, `F1=1` - unclear type, unclear meaning
 - GOOD: `Precision=1.00`, `F1-Score=1.00` - full name, 2 decimals indicate float
 
-**Anti-pattern:** Inventing synonyms for established terms.
-- If a term is defined in these rules (e.g., "Duration"), use that exact term
-- Do not substitute with synonyms like "Timing", "Time", "Execution time"
-- Consistency across codebases requires using the same vocabulary
-
 ### Principle of Least Surprise
 
 **Logging should be predictable across all solutions.**
