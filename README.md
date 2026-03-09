@@ -45,6 +45,16 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 - **Adversarial content**: ~20% of values contain delimiter characters (colons, pipes, commas) to test parsing robustness
 - **Format**: Quoted CSV with realistic employee-style data
 
+### Execution Times
+
+Binary search test duration varies significantly by model and effort level:
+
+- **Fastest**: gpt-5.2 medium (5.9 min), gpt-5-mini low (6.5 min), claude-haiku (1.2 min)
+- **Slowest**: gpt-5 high (162.5 min), gpt-5 medium (81.0 min), gpt-5-mini medium (48.3 min)
+- **Best value**: gpt-5 low achieves 356 rows in only 14.2 min for $0.87
+
+Higher reasoning effort increases both scale limit AND execution time. gpt-5 high takes 11x longer than gpt-5 low but only improves scale by 38%.
+
 ## Hypothesis Sources
 
 Hypotheses derive from two sources:
