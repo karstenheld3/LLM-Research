@@ -15,6 +15,13 @@
 - xml is most verbose (2.12x baseline)
 - Structured formats (json, yaml) may aid parsing despite larger size
 
+**Prior Research Findings** (from TK-001 benchmark at 300 records, gpt-5-mini):
+- Key-value formats outperform structured formats (XML, markdown tables have highest variance)
+- Separator style (`:` vs `: ` vs `::`) shows no measurable difference on modern models
+- CSV (quoted and raw) achieves near-perfect precision (99.9-100%)
+- XML has highest variance (Std 0.161) and 1/15 failure rate
+- Scale threshold: model reliable at 300 records, unreliable at 600+
+
 **Test Design:**
 - Same extraction task as Test 01 (CSVScaleLimits)
 - Same data generation (7 columns, adversarial chars, compound filter)
@@ -75,19 +82,56 @@ Clearance: Level 4: Top Secret
 4. Same filter conditions and column selection
 5. Compare scale limits between formats for each model
 
+## Prior Research: TK-001 Format Ranking (300 records, n=15)
+
+**Source:** `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`
+
+| Rank | Format | Precision | Std Dev | Recall |
+|------|--------|-----------|---------|--------|
+| 1 | `::` (double colon) | 1.000 | 0.000 | 0.997 |
+| 2 | `: ` (colon space) | 1.000 | 0.000 | 0.989 |
+| 3 | CSV quoted | 1.000 | 0.000 | 0.991 |
+| 4 | TOML | 0.999 | 0.003 | 0.988 |
+| 5 | `:` (colon) | 0.999 | 0.003 | 0.998 |
+| 6 | CSV raw | 0.999 | 0.002 | 0.953 |
+| 7 | JSON | 0.998 | 0.004 | 0.979 |
+| 8 | YAML | 0.991 | 0.006 | 0.991 |
+| 9 | Markdown table | 0.978 | 0.038 | 0.950 |
+| 10 | XML | 0.956 | 0.161 | 0.965 |
+
+**Key insight:** Format TYPE matters more than token efficiency. Key-value formats outperform structured formats (XML, YAML) despite intuition.
+
+## Academic Research Context
+
+**Sclar et al. ICLR 2024** (arXiv:2310.11324):
+- Up to 76 accuracy points variance from minor format changes
+- Separators claimed highest impact (43% weak, 22% strong difference)
+- [CONTRADICTED by TK-001]: Modern frontier models show no separator sensitivity
+
+**Microsoft/MIT 2024** (arXiv:2411.10541):
+- 200-300% improvement possible by switching formats
+- Format preferences don't transfer between model families
+- GPT-4 more robust than GPT-3.5 to format changes
+
+**OpenAI GPT-4.1 Guide**:
+- JSON performs poorly for document contexts
+- XML works well for long context
+- Markdown recommended as starting point
+
 ## Expected Outcomes
 
-**If CSV outperforms kv_colon:**
+**If CSV outperforms other formats:**
 - Confirms token efficiency matters for scale
 - Supports CSV as optimal production format
 
-**If kv_colon matches or exceeds CSV:**
-- Suggests format structure (key:value) aids comprehension
-- Opens consideration for alternative formats
+**If key-value formats match or exceed CSV:**
+- Confirms TK-001 finding that format TYPE > token count
+- Key-value structure aids extraction comprehension
 
 ## Source Documents
 
 - Test 01: `_INFO_CSVScaleLimits.md [TBLF-IN01]` - CSV baseline results
+- Format Research: `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]` - TK-001 benchmark, academic papers
 - POC: `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/poc` - Format samples
 
 ## Document History
