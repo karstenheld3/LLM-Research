@@ -72,20 +72,20 @@
 
 ### Results Table (All Completed Tests)
 
-| Model | Effort | Scale Limit | Failure Mode | Context % | Cost | Time (min) |
-|-------|--------|-------------|--------------|-----------|------|------------|
+| Model | Effort | Scale Limit | Failure Mode | Context % | Cost | Time/req |
+|-------|--------|-------------|--------------|-----------|------|----------|
 | gpt-5-mini | high | **675+*** | (errors) | - | - | - |
-| gpt-5 | high | **492** | truncation | 8.0% | $5.47 | 162.5 |
-| gpt-5 | medium | **450** | comprehension | 6.4% | $5.95 | 81.0 |
-| gpt-5-mini | medium | **389** | comprehension | ~2%* | $0.00* | 48.3 |
-| gpt-5 | low | **356** | comprehension | 2.1% | $0.87 | 14.2 |
-| gpt-5.2 | medium | **215** | comprehension | 1.4% | $0.57 | 5.9 |
-| claude-opus | medium | **177** | truncation | 25.1% | $0.00* | 9.6 |
-| claude-sonnet | medium | **168** | comprehension | 8.4% | $0.89 | 8.6 |
-| gpt-5-mini | low | **65** | comprehension | 4.3% | $0.13 | 6.5 |
-| claude-haiku | medium | **9** | comprehension | 8.3% | $0.09 | 1.2 |
-| gpt-4o-mini | medium | **6** | comprehension | 2.1% | $0.00 | 0.6 |
-| gpt-4o | medium | **4** | comprehension | 11.3% | $0.19 | 2.2 |
+| gpt-5 | high | **492** | truncation | 8.0% | $5.47 | ~20 min |
+| gpt-5 | medium | **450** | comprehension | 6.4% | $5.95 | ~10 min |
+| gpt-5-mini | medium | **389** | comprehension | ~2%* | $0.00* | ~4 min |
+| gpt-5 | low | **356** | comprehension | 2.1% | $0.87 | ~2.4 min |
+| gpt-5.2 | medium | **215** | comprehension | 1.4% | $0.57 | ~1 min |
+| claude-opus | medium | **177** | truncation | 25.1% | $0.00* | ~1.6 min |
+| claude-sonnet | medium | **168** | comprehension | 8.4% | $0.89 | ~1.4 min |
+| gpt-5-mini | low | **65** | comprehension | 4.3% | $0.13 | ~1 min |
+| claude-haiku | medium | **9** | comprehension | 8.3% | $0.09 | ~12 sec |
+| gpt-4o-mini | medium | **6** | comprehension | 2.1% | $0.00 | ~9 sec |
+| gpt-4o | medium | **4** | comprehension | 11.3% | $0.19 | ~19 sec |
 
 *Cost tracking errors for some tests; Context % estimated for older JSON format
 **gpt-5-mini high passed at 675 rows but encountered errors at higher scales - conservative estimate

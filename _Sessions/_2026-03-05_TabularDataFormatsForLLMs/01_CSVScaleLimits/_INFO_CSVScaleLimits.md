@@ -21,20 +21,20 @@
 
 ### Final Results Table (11/12 tests complete)
 
-| Model          | Effort | Scale Limit | Failure Mode  | Context % | Time (min) | Cost ($) |
-|----------------|--------|-------------|---------------|-----------|------------|----------|
-| gpt-5-mini     | high   | **675+***   | (errors)      | -         | -          | -        |
-| gpt-5          | high   | **492**     | truncation    | 8.0%      | 162.5      | 5.47     |
-| gpt-5          | medium | **450**     | comprehension | 6.4%      | 81.0       | 5.95     |
-| gpt-5-mini     | medium | **389**     | comprehension | ~2%       | 48.3       | 0.00*    |
-| gpt-5          | low    | **356**     | comprehension | 2.1%      | 14.2       | 0.87     |
-| gpt-5.2        | medium | **215**     | comprehension | 1.4%      | 5.9        | 0.57     |
-| claude-opus    | medium | **177**     | truncation    | 25.1%     | 9.6        | 0.00*    |
-| claude-sonnet  | medium | **168**     | comprehension | 8.4%      | 8.6        | 0.89     |
-| gpt-5-mini     | low    | **65**      | comprehension | 4.3%      | 6.5        | 0.13     |
-| claude-haiku   | medium | **9**       | comprehension | 8.3%      | 1.2        | 0.09     |
-| gpt-4o-mini    | medium | **6**       | comprehension | 2.1%      | 0.6        | 0.00     |
-| gpt-4o         | medium | **4**       | comprehension | 11.3%     | 2.2        | 0.19     |
+| Model          | Effort | Scale Limit | Failure Mode  | Context % | Time/req | Cost ($) |
+|----------------|--------|-------------|---------------|-----------|----------|----------|
+| gpt-5-mini     | high   | **675+***   | (errors)      | -         | -        | -        |
+| gpt-5          | high   | **492**     | truncation    | 8.0%      | ~20 min  | 5.47     |
+| gpt-5          | medium | **450**     | comprehension | 6.4%      | ~10 min  | 5.95     |
+| gpt-5-mini     | medium | **389**     | comprehension | ~2%       | ~4 min   | 0.00*    |
+| gpt-5          | low    | **356**     | comprehension | 2.1%      | ~2.4 min | 0.87     |
+| gpt-5.2        | medium | **215**     | comprehension | 1.4%      | ~1 min   | 0.57     |
+| claude-opus    | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 0.00*    |
+| claude-sonnet  | medium | **168**     | comprehension | 8.4%      | ~1.4 min | 0.89     |
+| gpt-5-mini     | low    | **65**      | comprehension | 4.3%      | ~1 min   | 0.13     |
+| claude-haiku   | medium | **9**       | comprehension | 8.3%      | ~12 sec  | 0.09     |
+| gpt-4o-mini    | medium | **6**       | comprehension | 2.1%      | ~9 sec   | 0.00     |
+| gpt-4o         | medium | **4**       | comprehension | 11.3%     | ~19 sec  | 0.19     |
 
 *Cost tracking errors for some tests
 **T04 (gpt-5-mini high) passed at 675 rows but had evaluation errors at higher scales
