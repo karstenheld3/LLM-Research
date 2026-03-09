@@ -19,6 +19,7 @@
 - Per-request costs and times (not total test costs)
 - 5 models: gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
 - Compare against CSV baselines from Test 01 (do not re-run CSV tests)
+- Start binary search at CSV baseline scale limit (faster convergence)
 
 ## Table of Contents
 
@@ -128,8 +129,14 @@ Extends Test 01 TestConfig with `output_format` field.
 
 **TBLF-FR-12: Baseline Comparison**
 - Do NOT re-run CSV tests (use Test 01 results)
-- Run kv_colon tests for 5 models only
-- Compare scale limits: CSV vs kv_colon for same model
+- Run format tests for 5 models, 7 new formats
+- Compare scale limits against CSV baseline for same model
+
+**TBLF-FR-14: Baseline-Start Optimization**
+- Start binary search at known CSV baseline scale limit (not default 300)
+- CSV baselines: gpt-5-mini=500, gpt-5=356, gpt-5.2=215, claude-opus=177, claude-sonnet=168
+- Use `--initial-rows` parameter with baseline value
+- Faster convergence: skip iterations below known working scale
 
 **TBLF-FR-13: Test Matrix**
 Models to test (from Test 01 production recommendations):

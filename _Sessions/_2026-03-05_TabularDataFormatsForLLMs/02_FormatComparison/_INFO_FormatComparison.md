@@ -65,9 +65,15 @@ Clearance: Level 4: Top Secret
 ## Methodology
 
 1. Use same binary search algorithm as Test 01
-2. Same success criteria: Precision=1.00 AND Recall=1.00 across 3 runs
-3. Same filter conditions and column selection
-4. Compare scale limits between formats for each model
+2. **Start at CSV baseline** (faster convergence):
+   - gpt-5-mini medium: start at 500 rows
+   - gpt-5 low: start at 356 rows
+   - gpt-5.2 medium: start at 215 rows
+   - claude-opus medium: start at 177 rows
+   - claude-sonnet medium: start at 168 rows
+3. Same success criteria: Precision=1.00 AND Recall=1.00 across 3 runs
+4. Same filter conditions and column selection
+5. Compare scale limits between formats for each model
 
 ## Expected Outcomes
 
