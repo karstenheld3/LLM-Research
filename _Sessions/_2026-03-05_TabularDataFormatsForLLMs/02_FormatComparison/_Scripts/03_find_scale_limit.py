@@ -19,7 +19,7 @@ def run_script(script_path: Path, instance_path: Path) -> tuple:
   return result.returncode == 0, result.stderr + result.stdout
 
 
-def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, model: str, iteration: int, reasoning_effort: str = None) -> dict:
+def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, model: str, iteration: int, reasoning_effort: str = None, output_format: str = None) -> dict:
   """Run a single test at given row count and return metrics."""
   instance_name = f"iter{iteration:02d}_{num_rows:04d}rows"
   instance_path = model_output_path / instance_name
@@ -45,6 +45,8 @@ def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, m
   config["execution"]["number_of_workers"] = 3  # Parallel execution
   if reasoning_effort:
     config["execution"]["reasoning_effort"] = reasoning_effort
+  if output_format:
+    config["data_generation"]["output_format"] = output_format
   
   # Write instance config
   with open(instance_path / "test-config.json", "w", encoding="utf-8") as f:
@@ -141,7 +143,7 @@ def run_test_at_scale(test_path: Path, model_output_path: Path, num_rows: int, m
 
 def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: str,
                      verify_runs: int = 1, skip_baseline: bool = False,
-                     reasoning_effort: str = None, force: bool = False):
+                     reasoning_effort: str = None, output_format: str = None, force: bool = False):
   """Binary search to find maximum reliable scale.
   
   Args:
@@ -190,11 +192,14 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     shutil.rmtree(model_output_path)
   model_output_path.mkdir(parents=True)
   
+  # Determine format for display
+  format_display = output_format if output_format else template_config.get("data_generation", {}).get("output_format", "csv_quoted")
+  
   print("=" * 36 + " START: SCALE LIMIT FINDER " + "=" * 37)
-  print(f"Goal: Find the maximum number of CSV rows where '{model}' achieves 100% accuracy.")
+  print(f"Goal: Find the maximum number of rows where '{model}' achieves 100% accuracy.")
   print(f"Method: Binary search starting at {initial_rows} rows, stopping when bounds are within {tolerance} rows.")
   print(f"Model: '{model}' ({provider} / {method})")
-  print(f"Reasoning effort: {reasoning} | Max output tokens: {max_tokens}")
+  print(f"Format: {format_display} | Reasoning effort: {reasoning} | Max output tokens: {max_tokens}")
   print(f"Output folder: '{model_output_path}'")
   print()
   
@@ -212,7 +217,7 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     iter_start = time.time()
     print(f"[ {iteration} ] Testing with {current_rows} rows: Can '{model}' extract all matching records correctly?")
     
-    result = run_test_at_scale(test_path, model_output_path, current_rows, model, iteration, reasoning)
+    result = run_test_at_scale(test_path, model_output_path, current_rows, model, iteration, reasoning, output_format)
     iter_duration = time.time() - iter_start
     result["iteration"] = iteration
     result["duration_secs"] = iter_duration
@@ -309,7 +314,7 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     for v in range(verify_runs):
       iteration += 1
       print(f"  [ Verify {v+1}/{verify_runs} ] Testing {last_working_lower_bound} rows...")
-      result = run_test_at_scale(test_path, model_output_path, last_working_lower_bound, model, iteration, reasoning)
+      result = run_test_at_scale(test_path, model_output_path, last_working_lower_bound, model, iteration, reasoning, output_format)
       verify_results.append(result)
       if result.get("passed"):
         verify_passes += 1
@@ -341,6 +346,7 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     "model": model,
     "provider": provider,
     "method": method,
+    "output_format": format_display,
     "reasoning_effort": reasoning,
     "max_output_tokens": max_tokens,
     "max_reliable_rows": last_working_lower_bound,
@@ -397,6 +403,7 @@ def main():
   parser.add_argument("--verify-runs", type=int, default=1, help="Number of runs to verify final boundary (default: 1)")
   parser.add_argument("--skip-baseline", action="store_true", help="Skip baseline validation at small scale")
   parser.add_argument("--reasoning-effort", type=str, default=None, choices=["low", "medium", "high"], help="Reasoning effort level (default: from config)")
+  parser.add_argument("--format", type=str, default=None, choices=["csv_quoted", "csv_raw", "kv_colon_space", "markdown_table", "json", "xml", "yaml", "toml"], help="Output format (default: from config)")
   parser.add_argument("--force", action="store_true", help="Force re-run even if result already exists")
   args = parser.parse_args()
   
@@ -421,7 +428,7 @@ def main():
   find_scale_limit(
     test_path, args.initial_rows, args.tolerance, model,
     verify_runs=args.verify_runs, skip_baseline=args.skip_baseline,
-    reasoning_effort=args.reasoning_effort, force=args.force
+    reasoning_effort=args.reasoning_effort, output_format=args.format, force=args.force
   )
 
 
