@@ -17,8 +17,8 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Reasoning architecture enables systematic data processing that temperature sampling cannot achieve
 
 - **Higher reasoning effort dramatically increases scale limit** (up to 10x improvement)
-  - gpt-5-mini: low=65 → medium=389 → high=675+ rows
-  - Diminishing returns for larger models: gpt-5 shows only 38% improvement across effort levels
+  - gpt-5-mini: low=65 → medium=389 → high=675+ rows ($0.13 → ~$0.05 → N/A)
+  - Diminishing returns for larger models: gpt-5 low→medium→high gains only 38% more rows but costs 7x more ($0.87 → $5.95 → $5.47) and takes 8x longer
 
 - **Comprehension is the primary failure mode, not truncation**
   - 9/11 tests failed due to comprehension errors (attention degradation)
