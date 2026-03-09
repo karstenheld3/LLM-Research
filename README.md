@@ -29,16 +29,16 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 ## Production Recommendations
 
-Balancing accuracy, cost, and speed for real-world use:
+Balancing accuracy, cost, and speed for real-world use (times are per single LLM request):
 
-- **Best overall**: gpt-5 low (356 rows, 14 min, $0.87) - excellent balance of scale, speed, and cost
-- **Fast + cheap**: gpt-5.2 medium (215 rows, 6 min, $0.57) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (389 rows, 48 min, ~$0.05) - highest scale at lowest cost, but slow
-- **Enterprise**: claude-sonnet medium (168 rows, 9 min, $0.89) - when Anthropic API is required
+- **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.87) - excellent balance of scale, speed, and cost
+- **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.57) - when speed matters more than scale
+- **Maximum scale**: gpt-5-mini medium (389 rows, ~4 min/request, ~$0.05) - highest scale at lowest cost
+- **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.89) - when Anthropic API is required
 
 **NOT recommended for production:**
-- gpt-5 high (162 min per run - too slow)
-- gpt-5 medium (81 min per run - too slow)
+- gpt-5 high (~20 min/request - too slow)
+- gpt-5 medium (~10 min/request - too slow)
 - gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits - unusable)
 
 ### Test Data Structure
@@ -49,15 +49,15 @@ Balancing accuracy, cost, and speed for real-world use:
 - **Adversarial content**: ~20% of values contain delimiter characters (colons, pipes, commas) to test parsing robustness
 - **Format**: Quoted CSV with realistic employee-style data
 
-### Execution Times
+### Per-Request Execution Times
 
-Binary search test duration varies significantly by model and effort level:
+Average time per single LLM API call (from `timing_stats.avg_secs`):
 
-- **Fastest**: gpt-5.2 medium (5.9 min), gpt-5-mini low (6.5 min), claude-haiku (1.2 min)
-- **Slowest**: gpt-5 high (162.5 min), gpt-5 medium (81.0 min), gpt-5-mini medium (48.3 min)
-- **Best value**: gpt-5 low achieves 356 rows in only 14.2 min for $0.87
+- **Fastest**: gpt-5.2 medium (~1 min), gpt-5-mini low (~1 min), claude-sonnet (~1.4 min)
+- **Moderate**: gpt-5 low (~2.4 min), gpt-5-mini medium (~4 min)
+- **Slowest**: gpt-5 medium (~10 min), gpt-5 high (~20 min)
 
-Higher reasoning effort increases both scale limit AND execution time. gpt-5 high takes 11x longer than gpt-5 low but only improves scale by 38%.
+Higher reasoning effort increases both scale limit AND execution time. gpt-5 high takes 8x longer than gpt-5 low but only improves scale by 38%.
 
 ## Hypothesis Sources
 

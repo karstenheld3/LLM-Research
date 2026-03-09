@@ -45,16 +45,16 @@
 
 ### Production Recommendations
 
-Balancing accuracy, cost, and speed for real-world use:
+Balancing accuracy, cost, and speed for real-world use (times are per single LLM request):
 
-- **Best overall**: gpt-5 low (356 rows, 14 min, $0.87) - excellent balance of scale, speed, and cost
-- **Fast + cheap**: gpt-5.2 medium (215 rows, 6 min, $0.57) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (389 rows, 48 min, ~$0.05) - highest scale at lowest cost, but slow
-- **Enterprise**: claude-sonnet medium (168 rows, 9 min, $0.89) - when Anthropic API is required
+- **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.87) - excellent balance of scale, speed, and cost
+- **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.57) - when speed matters more than scale
+- **Maximum scale**: gpt-5-mini medium (389 rows, ~4 min/request, ~$0.05) - highest scale at lowest cost
+- **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.89) - when Anthropic API is required
 
 **NOT recommended for production:**
-- gpt-5 high (162 min per run - too slow)
-- gpt-5 medium (81 min per run - too slow)
+- gpt-5 high (~20 min/request - too slow)
+- gpt-5 medium (~10 min/request - too slow)
 - gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits - unusable)
 
 **Completed:** 11/12 tests. T04 (gpt-5-mini high) had evaluation errors at 1012+ rows.
