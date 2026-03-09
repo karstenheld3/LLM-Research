@@ -2,7 +2,7 @@
 
 **Doc ID**: TBLF-SP02
 **Feature**: format-comparison-test
-**Goal**: Define test framework for comparing LLM extraction scale limits across input formats (CSV vs kv_colon)
+**Goal**: Define test framework for comparing LLM extraction scale limits across 8 input formats
 **Timeline**: Created 2026-03-09
 **Target files**: `02_FormatComparison/_Scripts/*.py`, `02_FormatComparison/test-config-template-*.json`
 
@@ -13,7 +13,8 @@
 ## MUST-NOT-FORGET
 
 - Same data generation logic as Test 01 (same seed, columns, filters, adversarial chars)
-- Only output format changes (CSV vs kv_colon)
+- 8 formats: kv_colon_space, markdown_table, csv_quoted, csv_raw, json, xml, yaml, toml
+- Excluded: kv_colon, kv_double_colon (per user request)
 - Use exact same extraction task and evaluation criteria
 - Per-request costs and times (not total test costs)
 - 5 models: gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
@@ -34,11 +35,11 @@
 
 ## 1. Scenario
 
-**Problem:** Test 01 established CSV scale limits, but does input format affect scale limits? The kv_colon format uses 1.43x more tokens for same data - does this reduce scale limits proportionally, or does the structured key:value format aid comprehension?
+**Problem:** Test 01 established CSV scale limits, but does input format affect scale limits? Different formats use varying token counts (1.0x to 2.1x of CSV baseline) - does token efficiency correlate with scale limits, or do structured formats aid comprehension?
 
 **Solution:**
 - Extend Test 01 framework with format parameter in data generation
-- Generate identical data in kv_colon format
+- Generate identical data in 8 formats (excluding kv_colon, kv_double_colon)
 - Run scale limit finder for 5 production-recommended models
 - Compare scale limits against CSV baselines from Test 01
 
@@ -55,8 +56,14 @@
 A **DataFormat** specifies the output format for generated test data.
 
 **Supported formats:**
-- `csv` - Quoted CSV (Test 01 baseline)
-- `kv_colon` - Key:value pairs with record headers
+- `csv_quoted` - Quoted CSV (Test 01 baseline)
+- `csv_raw` - Unquoted CSV
+- `kv_colon_space` - Key: value pairs with space after colon
+- `markdown_table` - Markdown table format
+- `json` - JSON array of objects
+- `xml` - XML with record elements
+- `yaml` - YAML list of records
+- `toml` - TOML array of tables
 
 **Schema (in test-config.json):**
 ```json
@@ -134,7 +141,7 @@ Models to test (from Test 01 production recommendations):
 
 ## 4. Design Decisions
 
-**TBLF-DD-10:** kv_colon format only for initial comparison. Rationale: Most distinct from CSV while still human-readable. Other formats (JSON, XML, YAML) tested in future if kv_colon shows significant difference.
+**TBLF-DD-10:** 8 formats tested (excluding kv_colon, kv_double_colon). Rationale: Cover range from compact (csv_raw) to verbose (xml) to test token efficiency vs comprehension hypothesis.
 
 **TBLF-DD-11:** Same seed, columns, filters as Test 01. Rationale: Only format changes - enables direct comparison of scale limits.
 
@@ -195,57 +202,75 @@ def load_data(instance_path: Path) -> str:
 
 ## 7. Format Specifications
 
-### CSV Format (Baseline from Test 01)
+### Token/Size Comparison (300 rows, from POC analysis)
 
-```csv
-"id","name","department","salary","clearance","rating","projects"
-"EMP-0001","Sarah Mitchell-Reynolds","Research & Development","$185,000","Level 4: Top Secret","Exceeds Expectations: Top 20%","Project Aurora: Lead | Nexus: Contributor"
-"EMP-0002","James O'Connor","Sales: Enterprise","$165,000","Level 3: Secret","Exceptional: Top 5%","Q4 Push: Owner, Enterprise | SMB Expansion"
+- **csv_raw** - 148 KB - 1.00x (baseline)
+- **csv_quoted** - 156 KB - 1.06x
+- **markdown_table** - 197 KB - 1.33x
+- **kv_colon_space** - 217 KB - 1.47x
+- **toml** - 235 KB - 1.59x
+- **yaml** - 249 KB - 1.68x
+- **json** - 269 KB - 1.82x
+- **xml** - 314 KB - 2.12x
+
+### Format Examples
+
+**csv_quoted (Test 01 baseline):**
+```
+"id","name","department","salary",...
+"EMP-0001","Sarah Mitchell-Reynolds","Research & Development","$185,000",...
 ```
 
-**Characteristics:**
-- Header row with column names
-- One record per line
-- All fields quoted
-- Adversarial chars preserved within quotes
-- Size: ~156 KB for 300 rows
+**csv_raw:**
+```
+id,name,department,salary,...
+EMP-0001,Sarah Mitchell-Reynolds,Research & Development,$185,000,...
+```
 
-### kv_colon Format
-
+**kv_colon_space:**
 ```
 ### Record 1
-Id:EMP-0001
-Name:Sarah Mitchell-Reynolds
-Department:Research & Development
-Salary:$185,000
-Clearance:Level 4: Top Secret
-Rating:Exceeds Expectations: Top 20%
-Projects:Project Aurora: Lead | Nexus: Contributor
-
-### Record 2
-Id:EMP-0002
-Name:James O'Connor
-Department:Sales: Enterprise
-Salary:$165,000
-Clearance:Level 3: Secret
-Rating:Exceptional: Top 5%
-Projects:Q4 Push: Owner, Enterprise | SMB Expansion
+Id: EMP-0001
+Name: Sarah Mitchell-Reynolds
+Department: Research & Development
+Salary: $185,000
 ```
 
-**Characteristics:**
-- `### Record N` header per record
-- `Key:Value` format (no space after colon)
-- Column names as TitleCase labels
-- Blank line between records
-- Adversarial chars appear after first colon (delimiter ambiguity)
-- Size: ~211 KB for 300 rows (1.35x CSV)
+**markdown_table:**
+```
+| id | name | department | salary |
+|----|------|------------|--------|
+| EMP-0001 | Sarah Mitchell-Reynolds | Research & Development | $185,000 |
+```
 
-### Token Comparison (300 rows)
+**json:**
+```json
+[{"id": "EMP-0001", "name": "Sarah Mitchell-Reynolds", "department": "Research & Development", "salary": "$185,000"}]
+```
 
-| Format | Size | Est. Tokens | Relative |
-|--------|------|-------------|----------|
-| csv | 156 KB | ~39K | 1.00x |
-| kv_colon | 211 KB | ~53K | 1.35x |
+**xml:**
+```xml
+<records>
+  <record>
+    <id>EMP-0001</id>
+    <name>Sarah Mitchell-Reynolds</name>
+  </record>
+</records>
+```
+
+**yaml:**
+```yaml
+- id: EMP-0001
+  name: Sarah Mitchell-Reynolds
+  department: Research & Development
+```
+
+**toml:**
+```toml
+[[records]]
+id = "EMP-0001"
+name = "Sarah Mitchell-Reynolds"
+```
 
 ## 8. Pipeline Flow
 
@@ -275,18 +300,23 @@ Projects:Q4 Push: Owner, Enterprise | SMB Expansion
 ## 9. Implementation Verification Checklist
 
 - [ ] `01_generate_data.py` supports `output_format` config parameter
-- [ ] `01_generate_data.py` outputs `data.txt` for kv_colon format
-- [ ] `format_as_kv_colon()` uses `### Record N` headers
-- [ ] `format_as_kv_colon()` uses `Key:Value` format (TitleCase labels)
-- [ ] `format_as_kv_colon()` preserves adversarial characters
-- [ ] Same seed produces identical records for both formats
-- [ ] `02_execute_and_evaluate.py` loads data.csv OR data.txt
+- [ ] `01_generate_data.py` implements all 8 format functions
+- [ ] Format functions: csv_quoted, csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- [ ] All format functions preserve adversarial characters
+- [ ] Same seed produces identical records for all formats
+- [ ] `02_execute_and_evaluate.py` loads data.csv, data.txt, data.json, data.xml, data.yaml, data.toml, data.md
 - [ ] Prompt template uses `{data}` placeholder
-- [ ] `03_find_scale_limit.py` works unchanged with kv_colon data
-- [ ] Test configs exist for all 5 models
+- [ ] `03_find_scale_limit.py` works unchanged with all formats
+- [ ] Test configs exist for all 8 formats x 5 models = 40 tests (minus csv_quoted baseline = 35 new tests)
 - [ ] Results comparable to Test 01 CSV baselines
 
 ## 10. Document History
+
+**[2026-03-09 19:48]**
+- Changed: Scope expanded from kv_colon only to 8 formats
+- Added: csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- Removed: kv_colon, kv_double_colon (per user request)
+- Updated: Test matrix 8 formats x 5 models = 35 new tests
 
 **[2026-03-09 19:46]**
 - Initial specification created
