@@ -64,6 +64,17 @@ Apply to ALL document types and contexts:
   - Exception: README.md may use emojis without `<DevSystem>` tag
   - Only [ACTOR] may add `<DevSystem EmojisAllowed=true />` exception to other files
 
+## Conceptual verification
+
+When reviewing architechture, design and solution strategy, look for:
+- inconsistencies
+- new solutions for already solved problems
+- ambiguities
+- underspeced behavior
+- unverified assumptions
+- over-engineering and introduction of unwanted complexity
+- flawed thinking and underestimated complexity
+
 ## Verification Labels
 
 Apply these labels to findings, requirements, and decisions in all document types:
