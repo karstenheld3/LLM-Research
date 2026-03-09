@@ -183,16 +183,83 @@ def format_as_csv(records: list, columns: list) -> str:
   return output.getvalue()
 
 
-def format_as_kv_colon(records: list, columns: list) -> str:
-  """Format records as key:value pairs (kv_colon format)."""
+def format_as_csv_raw(records: list, columns: list) -> str:
+  """Format records as unquoted CSV (csv_raw format)."""
+  import io
+  output = io.StringIO()
+  writer = csv.DictWriter(output, fieldnames=columns, quoting=csv.QUOTE_MINIMAL)
+  writer.writeheader()
+  writer.writerows(records)
+  return output.getvalue()
+
+
+def format_as_kv_colon_space(records: list, columns: list) -> str:
+  """Format records as key: value pairs with space (kv_colon_space format)."""
   lines = []
   for i, record in enumerate(records, 1):
     lines.append(f"### Record {i}")
     for col in columns:
-      # Convert column name to readable label
       label = col.replace("_", " ").title().replace(" ", "")
-      lines.append(f"{label}:{record[col]}")
-    lines.append("")  # Empty line between records
+      lines.append(f"{label}: {record[col]}")
+    lines.append("")
+  return "\n".join(lines)
+
+
+def format_as_markdown_table(records: list, columns: list) -> str:
+  """Format records as Markdown table."""
+  lines = []
+  # Header row
+  lines.append("| " + " | ".join(columns) + " |")
+  # Separator row
+  lines.append("| " + " | ".join(["---"] * len(columns)) + " |")
+  # Data rows
+  for record in records:
+    row = "| " + " | ".join(str(record[col]) for col in columns) + " |"
+    lines.append(row)
+  return "\n".join(lines)
+
+
+def format_as_json(records: list, columns: list) -> str:
+  """Format records as JSON array."""
+  return json.dumps(records, indent=2, ensure_ascii=False)
+
+
+def format_as_xml(records: list, columns: list) -> str:
+  """Format records as XML."""
+  lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<records>']
+  for record in records:
+    lines.append('  <record>')
+    for col in columns:
+      # Escape XML special characters
+      value = str(record[col]).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+      lines.append(f'    <{col}>{value}</{col}>')
+    lines.append('  </record>')
+  lines.append('</records>')
+  return "\n".join(lines)
+
+
+def format_as_yaml(records: list, columns: list) -> str:
+  """Format records as YAML list."""
+  lines = []
+  for record in records:
+    first = True
+    for col in columns:
+      prefix = "- " if first else "  "
+      first = False
+      lines.append(f'{prefix}{col}: "{record[col]}"')
+  return "\n".join(lines)
+
+
+def format_as_toml(records: list, columns: list) -> str:
+  """Format records as TOML array of tables."""
+  lines = []
+  for record in records:
+    lines.append('[[records]]')
+    for col in columns:
+      # Escape TOML strings
+      value = str(record[col]).replace('\\', '\\\\').replace('"', '\\"')
+      lines.append(f'{col} = "{value}"')
+    lines.append('')
   return "\n".join(lines)
 
 
@@ -261,16 +328,28 @@ def main():
   output_dir = instance_path / "01_InputData"
   output_dir.mkdir(parents=True, exist_ok=True)
     
-  # Get output format from config (default: csv)
-  output_format = config["data_generation"].get("output_format", "csv")
+  # Get output format from config (default: csv_quoted)
+  output_format = config["data_generation"].get("output_format", "csv_quoted")
   
-  # Format data based on output_format
-  if output_format == "kv_colon":
-    data_content = format_as_kv_colon(records, columns)
-    data_path = output_dir / "data.txt"
-  else:  # csv (default)
-    data_content = format_as_csv(records, columns)
-    data_path = output_dir / "data.csv"
+  # Format mapping: format_name -> (formatter_function, file_extension)
+  FORMAT_MAP = {
+    "csv_quoted": (format_as_csv, "csv"),
+    "csv_raw": (format_as_csv_raw, "csv"),
+    "kv_colon_space": (format_as_kv_colon_space, "txt"),
+    "markdown_table": (format_as_markdown_table, "md"),
+    "json": (format_as_json, "json"),
+    "xml": (format_as_xml, "xml"),
+    "yaml": (format_as_yaml, "yaml"),
+    "toml": (format_as_toml, "toml"),
+  }
+  
+  if output_format not in FORMAT_MAP:
+    print(f"ERROR: Unknown output format '{output_format}'. Supported: {list(FORMAT_MAP.keys())}")
+    sys.exit(1)
+  
+  formatter, ext = FORMAT_MAP[output_format]
+  data_content = formatter(records, columns)
+  data_path = output_dir / f"data.{ext}"
   
   with open(data_path, "w", encoding="utf-8") as f:
     f.write(data_content)
