@@ -8,6 +8,35 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 **Status:** 11/12 tests complete (March 2026)
 
+## Key Findings
+
+- **Reasoning models massively outperform temperature models** (65-89x better scale limits)
+  - gpt-5-mini extracts 389 rows reliably vs gpt-4o-mini at only 6 rows
+  - Reasoning architecture enables systematic data processing that temperature sampling cannot achieve
+
+- **Higher reasoning effort dramatically increases scale limit** (up to 10x improvement)
+  - gpt-5-mini: low=65 → medium=389 → high=675+ rows
+  - Diminishing returns for larger models: gpt-5 shows only 38% improvement across effort levels
+
+- **Comprehension is the primary failure mode, not truncation**
+  - 9/11 tests failed due to comprehension errors (attention degradation)
+  - Average context utilization at failure: only 6.5% - context window is NOT the bottleneck
+
+- **Scale limits vary 168x across models**
+  - Best: gpt-5-mini high (675+ rows)
+  - Worst: gpt-4o (4 rows)
+  - This variance makes model selection critical for production use
+
+## Production Recommendations
+
+| Priority | Model | Effort | Safe Scale | Cost |
+|----------|-------|--------|------------|------|
+| Quality | gpt-5 | high | 400 rows | ~$5.50 |
+| Balanced | gpt-5 | low | 300 rows | ~$0.90 |
+| Budget | gpt-5-mini | medium | 300 rows | ~$0.05 |
+
+**DO NOT USE:** gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits)
+
 ## Hypothesis Sources
 
 Hypotheses derive from two sources:
@@ -81,25 +110,6 @@ Hypotheses derive from two sources:
 | **Source** | TK-001 format benchmarks ([LLMO-IN01] §6.2); [CFPO](https://arxiv.org/abs/2502.04295) format impact theory |
 | **Reasoning** | Test 02 will compare formats directly at scale limits |
 | **Data** | Pending future test |
-
-## Key Findings
-
-| Finding | Impact |
-|---------|--------|
-| Reasoning models massively outperform temperature | 65-89x better scale limits |
-| Higher effort dramatically increases limit | Up to 10x improvement |
-| Comprehension is primary failure mode | Context window is NOT the bottleneck |
-| Scale limits vary 168x across models | Best: 675+ rows, Worst: 4 rows |
-
-## Production Recommendations
-
-| Priority | Model | Effort | Safe Scale | Cost |
-|----------|-------|--------|------------|------|
-| Quality | gpt-5 | high | 400 rows | ~$5.50 |
-| Balanced | gpt-5 | low | 300 rows | ~$0.90 |
-| Budget | gpt-5-mini | medium | 300 rows | ~$0.05 |
-
-**DO NOT USE:** gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits)
 
 ## Source Documents
 
