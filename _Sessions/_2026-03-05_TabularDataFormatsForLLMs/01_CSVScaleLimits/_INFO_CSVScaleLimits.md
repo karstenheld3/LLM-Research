@@ -28,7 +28,7 @@
 | gpt-5-mini     | high   | **675+***   | (errors)      | -         | -        | -        |
 | gpt-5          | high   | **492**     | truncation    | 8.0%      | ~20 min  | 5.47     |
 | gpt-5          | medium | **450**     | comprehension | 6.4%      | ~10 min  | 5.95     |
-| gpt-5-mini     | medium | **500**     | comprehension | 7.1%      | ~19 min  | 0.80     |
+| gpt-5-mini     | medium | **500**     | comprehension | 7.1%      | ~3.5 min | 0.80     |
 | gpt-5          | low    | **356**     | comprehension | 2.1%      | ~2.4 min | 0.87     |
 | gpt-5.2        | medium | **215**     | comprehension | 1.4%      | ~1 min   | 0.57     |
 | claude-opus    | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 0.00*    |
@@ -51,7 +51,7 @@ Balancing accuracy, cost, and speed for real-world use (times are per single LLM
 
 - **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.87) - excellent balance of scale, speed, and cost
 - **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.57) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (500 rows, ~19 min/request, $0.80) - highest scale but slow
+- **Maximum scale**: gpt-5-mini medium (500 rows, ~3.5 min/request, $0.80) - highest scale at reasonable speed
 - **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.89) - when Anthropic API is required
 
 **NOT recommended for production:**
