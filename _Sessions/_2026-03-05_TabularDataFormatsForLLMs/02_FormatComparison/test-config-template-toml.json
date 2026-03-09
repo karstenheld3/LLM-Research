@@ -1,13 +1,13 @@
 {
-  "test_name": "FormatComparison_CSV",
-  "description": "Extract filtered records from CSV data - format comparison baseline",
+  "test_name": "FormatComparison_TOML",
+  "description": "Extract filtered records from TOML data",
   
   "data_generation": {
     "number_of_rows": 100,
     "number_of_columns": 7,
     "seed": 42,
     "include_adversarial_chars": true,
-    "output_format": "csv_quoted"
+    "output_format": "toml"
   },
   
   "extraction_task": {

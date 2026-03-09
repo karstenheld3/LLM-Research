@@ -1,17 +1,17 @@
 {
-  "test_name": "FormatComparison_KVColon",
-  "description": "Extract filtered records from kv_colon data - format comparison test",
+  "test_name": "FormatComparison_CSV_Raw",
+  "description": "Extract filtered records from unquoted CSV data",
   
   "data_generation": {
     "number_of_rows": 100,
     "number_of_columns": 7,
     "seed": 42,
     "include_adversarial_chars": true,
-    "output_format": "kv_colon"
+    "output_format": "csv_raw"
   },
   
   "extraction_task": {
-    "task_prompt": "task_prompt_template_kv.md",
+    "task_prompt": "task_prompt_template.md",
     "columns_to_extract": ["id", "name", "department", "salary", "clearance", "rating", "projects"],
     "filters": [
       {"column": "clearance", "operator": "in", "value": ["Level 3", "Level 4", "Level 5"]},
