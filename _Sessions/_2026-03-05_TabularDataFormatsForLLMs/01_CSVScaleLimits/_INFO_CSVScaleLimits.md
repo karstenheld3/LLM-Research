@@ -40,10 +40,22 @@
 **T04 (gpt-5-mini high) passed at 675 rows but had evaluation errors at higher scales
 
 **Key observations:**
-- **Best scale**: gpt-5-mini high (675+ rows) - but had errors, use gpt-5 high (492) for reliable max
-- **Best value**: gpt-5 low - 356 rows for only $0.87
-- **Worst performers**: gpt-4o family (4-6 rows) - fundamentally unsuited for tabular extraction
 - **Context utilization**: All models fail at <30% context usage - attention, not tokens, is the limit
+- **Worst performers**: gpt-4o family (4-6 rows) - fundamentally unsuited for tabular extraction
+
+### Production Recommendations
+
+Balancing accuracy, cost, and speed for real-world use:
+
+- **Best overall**: gpt-5 low (356 rows, 14 min, $0.87) - excellent balance of scale, speed, and cost
+- **Fast + cheap**: gpt-5.2 medium (215 rows, 6 min, $0.57) - when speed matters more than scale
+- **Maximum scale**: gpt-5-mini medium (389 rows, 48 min, ~$0.05) - highest scale at lowest cost, but slow
+- **Enterprise**: claude-sonnet medium (168 rows, 9 min, $0.89) - when Anthropic API is required
+
+**NOT recommended for production:**
+- gpt-5 high (162 min per run - too slow)
+- gpt-5 medium (81 min per run - too slow)
+- gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits - unusable)
 
 **Completed:** 11/12 tests. T04 (gpt-5-mini high) had evaluation errors at 1012+ rows.
 

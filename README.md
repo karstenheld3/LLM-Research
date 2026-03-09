@@ -29,13 +29,17 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 ## Production Recommendations
 
-| Priority | Model | Effort | Safe Scale | Cost |
-|----------|-------|--------|------------|------|
-| Quality | gpt-5 | high | 400 rows | ~$5.50 |
-| Balanced | gpt-5 | low | 300 rows | ~$0.90 |
-| Budget | gpt-5-mini | medium | 300 rows | ~$0.05 |
+Balancing accuracy, cost, and speed for real-world use:
 
-**DO NOT USE:** gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits)
+- **Best overall**: gpt-5 low (356 rows, 14 min, $0.87) - excellent balance of scale, speed, and cost
+- **Fast + cheap**: gpt-5.2 medium (215 rows, 6 min, $0.57) - when speed matters more than scale
+- **Maximum scale**: gpt-5-mini medium (389 rows, 48 min, ~$0.05) - highest scale at lowest cost, but slow
+- **Enterprise**: claude-sonnet medium (168 rows, 9 min, $0.89) - when Anthropic API is required
+
+**NOT recommended for production:**
+- gpt-5 high (162 min per run - too slow)
+- gpt-5 medium (81 min per run - too slow)
+- gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits - unusable)
 
 ### Test Data Structure
 
