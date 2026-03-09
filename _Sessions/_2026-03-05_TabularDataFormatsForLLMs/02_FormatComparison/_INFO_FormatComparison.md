@@ -133,12 +133,6 @@ Clearance: Level 4: Top Secret
 - **Finding:** Format capability most stable across context lengths
 - **Finding:** Recognition degrades most with increasing context
 
-**5. Google IFEval 2023** - "Instruction-Following Evaluation for Large Language Models"
-- arXiv: https://arxiv.org/abs/2311.07911
-- Local: `Papers/2023-11-14_Instruction-FollowingEvaluationForLargeLanguageModels_2311.07911v1.md`
-- **Finding:** 25 verifiable instruction types
-- **Finding:** GPT-4 achieves 77-85% compliance
-
 ### Vendor Documentation
 
 **OpenAI Prompt Engineering Guide:**
