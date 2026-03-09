@@ -122,7 +122,8 @@ def evaluate_response(response_text: str, expected_ids: set) -> dict:
 def execute_and_evaluate_single(
   llm_client: LLMClient, model: str, prompt: str,
   run_id: int, total_runs: int, num_rows: int, num_expected: int,
-  response_file: Path, eval_file: Path, expected_ids: set
+  response_file: Path, eval_file: Path, expected_ids: set,
+  data_format: str = "csv"
 ) -> dict:
   """Execute LLM call AND evaluate in single operation - zero wait."""
   result = {
@@ -135,7 +136,7 @@ def execute_and_evaluate_single(
   start_time = time.time()
       
   try:
-    print(f"[ {run_id} / {total_runs} ] Sending {num_rows} CSV rows to '{model}' ({llm_client.provider}), expecting {num_expected} matching records...")
+    print(f"[ {run_id} / {total_runs} ] Sending {num_rows} {data_format} rows to '{model}' ({llm_client.provider}), expecting {num_expected} matching records...")
     
     # Use configured max_tokens from LLMClient (output_length='high' = factor 1.0)
     response = llm_client.call(prompt)
@@ -195,6 +196,7 @@ def run_pipeline(config: dict, instance_path: Path, prompt: str, expected_ids: s
   num_runs = exec_config["number_of_runs"]
   num_workers = exec_config.get("number_of_workers", 5)
   num_rows = config["data_generation"]["number_of_rows"]
+  data_format = config["data_generation"].get("output_format", "csv_quoted")
   reasoning_effort = exec_config.get("reasoning_effort", "medium")
     
   # Create output directories
@@ -253,7 +255,7 @@ def run_pipeline(config: dict, instance_path: Path, prompt: str, expected_ids: s
         execute_and_evaluate_single,
         llm_client, model, prompt,
         run_id, num_runs, num_rows, num_expected,
-        response_file, eval_file, expected_ids
+        response_file, eval_file, expected_ids, data_format
       )
       futures.append(future)
     
@@ -332,6 +334,7 @@ def main():
   padding = (100 - len(title) - 2) // 2
   print("=" * padding + " " + title + " " + "=" * (100 - padding - len(title) - 2))
   print(f"Model: {config['execution']['model']}")
+  print(f"Format: {config['data_generation'].get('output_format', 'csv_quoted')}")
   print(f"Runs: {config['execution']['number_of_runs']}")
   print(f"Workers: {config['execution'].get('number_of_workers', 5)}")
   print(f"Expected records: {len(expected_ids)}")
