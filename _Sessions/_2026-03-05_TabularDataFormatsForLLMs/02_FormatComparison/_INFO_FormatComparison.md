@@ -144,8 +144,18 @@ Clearance: Level 4: Top Secret
 **3. Microsoft CFPO 2025** - "Beyond Prompt Content: Enhancing LLM Performance Via Content-Format Integration"
 - arXiv: https://arxiv.org/abs/2502.04295
 - Local: `Papers/2025-02-06_BeyondPromptContent-EnhancingLLMPerformanceViaContent-FormatIntegration_2502.04295v3.md`
-- **Finding:** 20-65% accuracy variance from format alone on GSM8K
-- **Finding:** Joint content-format optimization outperforms content-only
+- **Scope:** Joint optimization of prompt CONTENT + FORMAT
+- **Models tested:** Open-source LLMs (LLaMA-3-1.8B, etc.)
+- **Tasks:** GSM8K (math reasoning)
+- **Format renderers tested:** Plain Text, Markdown, HTML, LaTeX, XML, JSON
+- **Key findings:**
+  - 20-65% accuracy variance from format alone on GSM8K
+  - Different LLMs have distinct format preferences (model-specific biases)
+  - Optimal format varies by prompt content (content-format interdependence)
+  - Joint content-format optimization outperforms content-only
+- **Testable hypothesis for our research:**
+  - H4: Optimal format depends on content complexity (test with varying row counts)
+- **Directly relevant:** Tests actual data formats (JSON, XML, Markdown) for prompt rendering
 
 ### Supporting Papers (Long Context, Instruction Following)
 
