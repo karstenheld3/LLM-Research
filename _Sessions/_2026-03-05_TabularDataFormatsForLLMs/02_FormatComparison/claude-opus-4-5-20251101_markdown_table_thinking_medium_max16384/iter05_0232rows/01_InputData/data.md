@@ -1,0 +1,234 @@
+| id | name | department | salary | clearance | rating | projects |
+| --- | --- | --- | --- | --- | --- | --- |
+| EMP-0001 | Benjamin Wei-Lin | Security | Risk | $65,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0002 | Alexander Garcia | Research & Development | $325,000.00/year | Level 4: Top Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0003 | Isabella Park | IT, Infrastructure | $385,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0004 | Yuki Lewis | Security | Risk | $110,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0005 | Jennifer Gonzalez-Smith | Product: Core | $95,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0006 | William Moore | Research & Development | $72,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0007 | Chen Park | Human Resources | Talent | $145,000.00/year | Level 1: Basic | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0008 | Olivia Mitchell-Reynolds | Marketing, Brand | $72,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0009 | Ethan Park | IT, Infrastructure | $145,000.00/year | Level 3: Secret | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0010 | Evelyn Anderson | Operations, Logistics | $72,000.00/year | Level 3: Secret | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0011 | Daniel Wright-Scott | Research & Development | $275,000.00/year | Level 1: Basic | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0012 | James Clark-Davis | Research & Development | $185,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0013 | Alexandra Tanaka-Morrison | Engineering, Platform | $110,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0014 | David Wei-Lin | Engineering, Platform | $215,000.00/year | Level 5: Executive | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0015 | Daniel Anderson | Sales: Enterprise | $325,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0016 | Mia Allen | Operations, Logistics | $245,000.00/year | Level 5: Executive | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0017 | Maria Clark-Davis | Legal: Compliance | $145,000.00/year | Level 1: Basic | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0018 | Sophia Petrova-Williams | Legal: Compliance | $65,000.00/year | Level 1: Basic | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0019 | Harper Hill | IT, Infrastructure | $145,000.00/year | Level 2: Confidential | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0020 | Jennifer Wright-Scott | Legal: Compliance | $72,000.00/year | Level 5: Executive | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0021 | David Lopez | Engineering, Platform | $215,000.00/year | Level 1: Basic | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0022 | Ethan Park | Human Resources | Talent | $185,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0023 | Daniel Lewis | Operations, Logistics | $95,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0024 | Mason Clark-Davis | Engineering, Platform | $215,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0025 | Alexandra Allen | IT, Infrastructure | $165,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0026 | Benjamin Stevens | Customer Success | Support | $110,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0027 | Sophia O'Connor | Finance: Treasury | $95,000.00/year | Level 5: Executive | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0028 | David Anderson | IT, Infrastructure | $245,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0029 | Daniel Anderson | Finance: Treasury | $125,000.00/year | Level 4: Top Secret | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0030 | Robert Petrova-Williams | IT, Infrastructure | $165,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0031 | Maria Harris | IT, Infrastructure | $275,000.00/year | Level 1: Basic | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0032 | Benjamin Lopez | Customer Success | Support | $385,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0033 | Michael Mitchell-Reynolds | Marketing, Brand | $165,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0034 | Ethan Moore | Security | Risk | $245,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0035 | Jennifer Park | Engineering, Platform | $110,000.00/year | Level 2: Confidential | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0036 | Lisa Mitchell-Reynolds | Operations, Logistics | $275,000.00/year | Level 3: Secret | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0037 | Jennifer Wright-Scott | Sales: Enterprise | $165,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0038 | Evelyn Harris | Legal: Compliance | $145,000.00/year | Level 5: Executive | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0039 | Lisa O'Connor | Legal: Compliance | $95,000.00/year | Level 3: Secret | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0040 | Harper Park | Security | Risk | $215,000.00/year | Level 3: Secret | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0041 | Robert Lewis | Product: Core | $385,000.00/year | Level 1: Basic | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0042 | Michael Lewis | Human Resources | Talent | $72,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0043 | Yuki Jackson | Product: Core | $125,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0044 | Maria Stevens | Sales: Enterprise | $385,000.00/year | Level 1: Basic | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0045 | Jacob Allen | Finance: Treasury | $385,000.00/year | Level 5: Executive | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0046 | Evelyn Tanaka-Morrison | Engineering, Platform | $275,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0047 | Chen Jackson | Research & Development | $165,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0048 | Evelyn White-Peters | Product: Core | $65,000.00/year | Level 2: Confidential | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0049 | Emma Lee-Chang | Engineering, Platform | $85,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0050 | Mason Allen | Legal: Compliance | $165,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0051 | Alexander Taylor-Brown | Legal: Compliance | $215,000.00/year | Level 3: Secret | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0052 | Benjamin Wei-Lin | IT, Infrastructure | $245,000.00/year | Level 3: Secret | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0053 | Harper Wei-Lin | Sales: Enterprise | $165,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0054 | Olivia Mitchell-Reynolds | Operations, Logistics | $215,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0055 | David Wilson III | IT, Infrastructure | $125,000.00/year | Level 5: Executive | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0056 | Charlotte Taylor-Brown | IT, Infrastructure | $185,000.00/year | Level 1: Basic | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0057 | Alexander Tanaka-Morrison | Engineering, Platform | $385,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0058 | Jennifer O'Connor | Security | Risk | $85,000.00/year | Level 5: Executive | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0059 | James Moore | Finance: Treasury | $385,000.00/year | Level 1: Basic | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0060 | Chen Allen | Sales: Enterprise | $275,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0061 | Maria Gonzalez-Smith | Sales: Enterprise | $385,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0062 | Emma Wei-Lin | Operations, Logistics | $215,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0063 | Abigail Anderson | Research & Development | $125,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0064 | Amelia Anderson | Product: Core | $325,000.00/year | Level 1: Basic | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0065 | Chen Park | IT, Infrastructure | $245,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0066 | Olivia Walker | Human Resources | Talent | $145,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0067 | Alexander Martinez | IT, Infrastructure | $275,000.00/year | Level 3: Secret | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0068 | David Wright-Scott | Security | Risk | $110,000.00/year | Level 2: Confidential | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0069 | Mia Petrova-Williams | IT, Infrastructure | $325,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0070 | Emma Jackson | Legal: Compliance | $72,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0071 | William Petrova-Williams | Customer Success | Support | $65,000.00/year | Level 3: Secret | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0072 | Charlotte Thompson | IT, Infrastructure | $65,000.00/year | Level 3: Secret | Exceptional: Top 5% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0073 | Lisa White-Peters | IT, Infrastructure | $145,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0074 | Evelyn Allen | Operations, Logistics | $72,000.00/year | Level 5: Executive | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0075 | Daniel Thompson | Security | Risk | $110,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0076 | Harper Thompson | Legal: Compliance | $85,000.00/year | Level 4: Top Secret | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0077 | Sophia O'Connor | Operations, Logistics | $145,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0078 | Mason Gonzalez-Smith | Legal: Compliance | $65,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0079 | Ethan Petrova-Williams | Finance: Treasury | $110,000.00/year | Level 5: Executive | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0080 | Amelia Mitchell-Reynolds | Sales: Enterprise | $125,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0081 | James Park | Research & Development | $95,000.00/year | Level 1: Basic | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0082 | Amelia Wilson III | Marketing, Brand | $145,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0083 | Lisa Wilson III | Security | Risk | $215,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0084 | Sarah Petrova-Williams | Product: Core | $385,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0085 | William Taylor-Brown | Marketing, Brand | $145,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0086 | Yuki Wei-Lin | Sales: Enterprise | $85,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0087 | Robert Allen | Research & Development | $165,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0088 | Benjamin Gonzalez-Smith | Customer Success | Support | $165,000.00/year | Level 5: Executive | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0089 | Evelyn Gonzalez-Smith | Engineering, Platform | $110,000.00/year | Level 5: Executive | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0090 | Benjamin Tanaka-Morrison | Product: Core | $325,000.00/year | Level 5: Executive | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0091 | Michael Thompson | Marketing, Brand | $85,000.00/year | Level 3: Secret | Meets Expectations | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0092 | David Wright-Scott | Finance: Treasury | $215,000.00/year | Level 2: Confidential | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0093 | Alexander Taylor-Brown | Research & Development | $65,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0094 | Emma White-Peters | Sales: Enterprise | $110,000.00/year | Level 5: Executive | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0095 | James O'Connor | Security | Risk | $85,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0096 | Olivia King | Marketing, Brand | $65,000.00/year | Level 1: Basic | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0097 | James Harris | Sales: Enterprise | $275,000.00/year | Level 1: Basic | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0098 | William Martinez | Human Resources | Talent | $125,000.00/year | Level 5: Executive | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0099 | Emma White-Peters | Security | Risk | $325,000.00/year | Level 3: Secret | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0100 | Lucas White-Peters | Operations, Logistics | $110,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0101 | Sarah White-Peters | Finance: Treasury | $85,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0102 | Harper Moore | Security | Risk | $85,000.00/year | Level 1: Basic | Exceptional: Top 5% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0103 | Benjamin Garcia | Human Resources | Talent | $275,000.00/year | Level 3: Secret | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0104 | Michael Hill | Research & Development | $95,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0105 | David Lewis | Security | Risk | $185,000.00/year | Level 1: Basic | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0106 | William Robinson | Sales: Enterprise | $125,000.00/year | Level 1: Basic | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0107 | Harper O'Connor | Human Resources | Talent | $165,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0108 | Isabella O'Connor | Customer Success | Support | $72,000.00/year | Level 3: Secret | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0109 | Amelia Stevens | Research & Development | $385,000.00/year | Level 3: Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0110 | Mia Young-Kim | Engineering, Platform | $65,000.00/year | Level 1: Basic | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0111 | Robert King | Product: Core | $275,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0112 | Isabella Moore | Marketing, Brand | $65,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0113 | Sophia White-Peters | Human Resources | Talent | $185,000.00/year | Level 2: Confidential | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0114 | Harper Young-Kim | Security | Risk | $215,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0115 | Isabella Anderson | Legal: Compliance | $325,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0116 | Alexander Wright-Scott | Security | Risk | $95,000.00/year | Level 1: Basic | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0117 | Marcus Petrova-Williams | Operations, Logistics | $275,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0118 | Emma O'Connor | IT, Infrastructure | $215,000.00/year | Level 5: Executive | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0119 | Abigail Wei-Lin | Human Resources | Talent | $185,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0120 | David Martinez | Customer Success | Support | $185,000.00/year | Level 1: Basic | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0121 | Abigail Gonzalez-Smith | Legal: Compliance | $245,000.00/year | Level 5: Executive | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0122 | Harper Robinson | Sales: Enterprise | $275,000.00/year | Level 3: Secret | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0123 | Emma White-Peters | Finance: Treasury | $145,000.00/year | Level 5: Executive | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0124 | Lisa Wilson III | Legal: Compliance | $125,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0125 | Lisa Lee-Chang | Sales: Enterprise | $145,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Compliance 2025: Lead | Audit: Support |
+| EMP-0126 | Harper Gonzalez-Smith | Legal: Compliance | $125,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0127 | Lisa Anderson | Security | Risk | $215,000.00/year | Level 4: Top Secret | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0128 | Alexander White-Peters | IT, Infrastructure | $85,000.00/year | Level 1: Basic | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0129 | Ethan Lee-Chang | Finance: Treasury | $325,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0130 | Alexander Clark-Davis | IT, Infrastructure | $245,000.00/year | Level 3: Secret | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0131 | Olivia Wei-Lin | Finance: Treasury | $110,000.00/year | Level 1: Basic | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0132 | James Allen | Sales: Enterprise | $275,000.00/year | Level 3: Secret | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0133 | David Mitchell-Reynolds | Product: Core | $275,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0134 | Jennifer Lewis | Customer Success | Support | $385,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0135 | Lisa Wei-Lin | Marketing, Brand | $85,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0136 | Lucas Wilson III | Research & Development | $215,000.00/year | Level 1: Basic | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0137 | James Garcia | Operations, Logistics | $95,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0138 | Lisa Wright-Scott | Customer Success | Support | $65,000.00/year | Level 3: Secret | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0139 | Alexander Taylor-Brown | Legal: Compliance | $185,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0140 | Lucas Stevens | IT, Infrastructure | $325,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Compliance 2025: Lead | Audit: Support |
+| EMP-0141 | Evelyn Young-Kim | Security | Risk | $385,000.00/year | Level 4: Top Secret | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0142 | James Wei-Lin | Customer Success | Support | $245,000.00/year | Level 1: Basic | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0143 | Charlotte Lopez | Human Resources | Talent | $245,000.00/year | Level 4: Top Secret | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0144 | Ethan Anderson | Sales: Enterprise | $385,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0145 | Mia Clark-Davis | Customer Success | Support | $85,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0146 | Robert White-Peters | Product: Core | $215,000.00/year | Level 5: Executive | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0147 | Benjamin Thompson | Operations, Logistics | $72,000.00/year | Level 3: Secret | Meets Expectations | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0148 | James Hill | Finance: Treasury | $65,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0149 | David Harris | IT, Infrastructure | $245,000.00/year | Level 1: Basic | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0150 | Ethan Mitchell-Reynolds | Customer Success | Support | $85,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0151 | Olivia Wilson III | Marketing, Brand | $185,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0152 | David Hill | Human Resources | Talent | $85,000.00/year | Level 5: Executive | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0153 | David Gonzalez-Smith | Legal: Compliance | $165,000.00/year | Level 3: Secret | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0154 | Alexandra Mitchell-Reynolds | Research & Development | $145,000.00/year | Level 5: Executive | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0155 | Maria O'Connor | Operations, Logistics | $95,000.00/year | Level 3: Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0156 | Michael Wilson III | Engineering, Platform | $110,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Compliance 2025: Lead | Audit: Support |
+| EMP-0157 | Maria Johnson Jr. | IT, Infrastructure | $325,000.00/year | Level 5: Executive | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0158 | Chen Wilson III | Human Resources | Talent | $72,000.00/year | Level 1: Basic | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0159 | Chen O'Connor | Research & Development | $165,000.00/year | Level 5: Executive | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0160 | Benjamin Park | Finance: Treasury | $165,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0161 | David Garcia | Research & Development | $85,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0162 | Emma Hill | Human Resources | Talent | $385,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0163 | Maria O'Connor | Product: Core | $95,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0164 | Maria Taylor-Brown | IT, Infrastructure | $275,000.00/year | Level 5: Executive | Exceptional: Top 5% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0165 | David Park | Security | Risk | $275,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0166 | Robert Taylor-Brown | Human Resources | Talent | $125,000.00/year | Level 1: Basic | Meets Expectations | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0167 | Olivia Lopez | Marketing, Brand | $145,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0168 | Isabella Lopez | Marketing, Brand | $72,000.00/year | Level 5: Executive | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0169 | Lisa Stevens | Research & Development | $72,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0170 | Evelyn Wei-Lin | Finance: Treasury | $110,000.00/year | Level 4: Top Secret | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0171 | Alexandra Young-Kim | IT, Infrastructure | $275,000.00/year | Level 1: Basic | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0172 | William Harris | Product: Core | $185,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0173 | Maria Martinez | Finance: Treasury | $185,000.00/year | Level 3: Secret | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0174 | Harper Park | Operations, Logistics | $385,000.00/year | Level 4: Top Secret | Meets Expectations | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0175 | Abigail Garcia | Research & Development | $125,000.00/year | Level 3: Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0176 | Jacob Jackson | Marketing, Brand | $385,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0177 | Ethan Tanaka-Morrison | Marketing, Brand | $110,000.00/year | Level 5: Executive | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0178 | David O'Connor | Product: Core | $85,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0179 | Ethan Robinson | Legal: Compliance | $245,000.00/year | Level 4: Top Secret | Meets Expectations | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0180 | Olivia Gonzalez-Smith | Legal: Compliance | $125,000.00/year | Level 3: Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0181 | Abigail Lee-Chang | Finance: Treasury | $145,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0182 | Olivia Petrova-Williams | Legal: Compliance | $275,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0183 | Olivia Lopez | Operations, Logistics | $95,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0184 | Michael Clark-Davis | Research & Development | $65,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0185 | Amelia Taylor-Brown | Marketing, Brand | $65,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0186 | Amelia Jackson | Operations, Logistics | $215,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0187 | Ethan Clark-Davis | Research & Development | $325,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0188 | Yuki Robinson | IT, Infrastructure | $245,000.00/year | Level 3: Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0189 | Jacob Garcia | Operations, Logistics | $385,000.00/year | Level 3: Secret | Developing: Needs Improvement | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0190 | Jacob Jackson | Security | Risk | $72,000.00/year | Level 1: Basic | Meets Expectations | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0191 | Chen Wright-Scott | Research & Development | $325,000.00/year | Level 2: Confidential | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0192 | Harper Lee-Chang | Human Resources | Talent | $245,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0193 | Mason Lee-Chang | Research & Development | $165,000.00/year | Level 3: Secret | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0194 | Sarah Clark-Davis | Operations, Logistics | $85,000.00/year | Level 4: Top Secret | Exceeds Expectations: Top 20% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0195 | Maria Wright-Scott | Customer Success | Support | $165,000.00/year | Level 1: Basic | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0196 | Lucas Stevens | Customer Success | Support | $385,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0197 | James Lopez | Customer Success | Support | $85,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0198 | Charlotte Harris | Human Resources | Talent | $185,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0199 | Sophia Thompson | Engineering, Platform | $275,000.00/year | Level 4: Top Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0200 | Abigail Lewis | Security | Risk | $85,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0201 | Alexandra O'Connor | Research & Development | $245,000.00/year | Level 3: Secret | Exceeds Expectations: Top 20% | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0202 | Robert Jackson | Security | Risk | $325,000.00/year | Level 1: Basic | Developing: Needs Improvement | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0203 | Charlotte Gonzalez-Smith | Human Resources | Talent | $85,000.00/year | Level 5: Executive | Exceptional: Top 5% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0204 | Mia O'Connor | IT, Infrastructure | $325,000.00/year | Level 3: Secret | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0205 | Robert Lopez | IT, Infrastructure | $95,000.00/year | Level 3: Secret | Meets Expectations | Culture 2025: Sponsor | DEI: Executive Lead |
+| EMP-0206 | Jennifer White-Peters | Legal: Compliance | $275,000.00/year | Level 5: Executive | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0207 | Yuki Lewis | Engineering, Platform | $245,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0208 | Alexander King | Legal: Compliance | $95,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0209 | Lisa Allen | Legal: Compliance | $245,000.00/year | Level 1: Basic | Meets Expectations | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0210 | Sarah White-Peters | Operations, Logistics | $385,000.00/year | Level 1: Basic | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0211 | Yuki Wei-Lin | IT, Infrastructure | $85,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0212 | Mason Tanaka-Morrison | Customer Success | Support | $125,000.00/year | Level 3: Secret | Exceeds Expectations: Promotion Ready | Brand Refresh: Lead | Campaign: Q1, Q2 |
+| EMP-0213 | Jennifer King | Human Resources | Talent | $125,000.00/year | Level 3: Secret | Developing: Needs Improvement | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0214 | Lucas Harris | Finance: Treasury | $215,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0215 | William Mitchell-Reynolds | Engineering, Platform | $245,000.00/year | Level 2: Confidential | Exceeds Expectations: Promotion Ready | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0216 | Robert O'Connor | Engineering, Platform | $245,000.00/year | Level 3: Secret | Developing: Needs Improvement | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0217 | Emma Harris | Sales: Enterprise | $245,000.00/year | Level 3: Secret | Developing: Needs Improvement | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0218 | Marcus Johnson Jr. | Product: Core | $125,000.00/year | Level 1: Basic | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0219 | Alexandra Clark-Davis | Research & Development | $185,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0220 | Robert King | Product: Core | $145,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Compliance 2025: Lead | Audit: Support |
+| EMP-0221 | Lucas Petrova-Williams | Sales: Enterprise | $215,000.00/year | Level 4: Top Secret | Exceeds Expectations: Promotion Ready | Compliance 2025: Lead | Audit: Support |
+| EMP-0222 | Robert Allen | Finance: Treasury | $165,000.00/year | Level 5: Executive | Exceeds Expectations: Promotion Ready | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0223 | David Clark-Davis | Security | Risk | $95,000.00/year | Level 4: Top Secret | Meets Expectations | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0224 | Marcus Taylor-Brown | Operations, Logistics | $185,000.00/year | Level 3: Secret | Meets Expectations | Compliance 2025: Lead | Audit: Support |
+| EMP-0225 | Marcus Martinez | Research & Development | $245,000.00/year | Level 2: Confidential | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0226 | Jacob King | IT, Infrastructure | $85,000.00/year | Level 4: Top Secret | Exceptional: Top 5% | Q4 Push: Owner, Enterprise | SMB Expansion |
+| EMP-0227 | Jennifer Young-Kim | Marketing, Brand | $145,000.00/year | Level 4: Top Secret | Developing: Needs Improvement | Compliance 2025: Lead | Audit: Support |
+| EMP-0228 | Alexander Mitchell-Reynolds | Human Resources | Talent | $110,000.00/year | Level 5: Executive | Exceptional: Top 5% | Compliance 2025: Lead | Audit: Support |
+| EMP-0229 | Jacob Wilson III | Customer Success | Support | $245,000.00/year | Level 1: Basic | Developing: Needs Improvement | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0230 | David Lewis | Marketing, Brand | $275,000.00/year | Level 5: Executive | Exceeds Expectations: Top 20% | Platform v3: Tech Lead | Migration: Owner |
+| EMP-0231 | Yuki King | Product: Core | $95,000.00/year | Level 2: Confidential | Exceptional: Top 5% | Project Aurora: Lead | Nexus: Contributor |
+| EMP-0232 | David Stevens | Product: Core | $325,000.00/year | Level 1: Basic | Exceeds Expectations: Promotion Ready | Platform v3: Tech Lead | Migration: Owner |

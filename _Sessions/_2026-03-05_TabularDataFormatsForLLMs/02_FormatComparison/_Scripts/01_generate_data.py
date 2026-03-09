@@ -328,13 +328,13 @@ def main():
   output_dir = instance_path / "01_InputData"
   output_dir.mkdir(parents=True, exist_ok=True)
     
-  # Get output format from config (default: csv_quoted)
-  output_format = config["data_generation"].get("output_format", "csv_quoted")
+  # Get output format from config (default: csv)
+  output_format = config["data_generation"].get("output_format", "csv")
   
   # Format mapping: format_name -> (formatter_function, file_extension)
   FORMAT_MAP = {
-    "csv_quoted": (format_as_csv, "csv"),
-    "csv_raw": (format_as_csv_raw, "csv"),
+    "csv": (format_as_csv_raw, "csv"),     # Regular CSV (QUOTE_MINIMAL)
+    "csv_quoted": (format_as_csv, "csv"),  # Quoted CSV (Test 01 baseline, QUOTE_ALL)
     "kv_colon_space": (format_as_kv_colon_space, "txt"),
     "markdown_table": (format_as_markdown_table, "md"),
     "json": (format_as_json, "json"),

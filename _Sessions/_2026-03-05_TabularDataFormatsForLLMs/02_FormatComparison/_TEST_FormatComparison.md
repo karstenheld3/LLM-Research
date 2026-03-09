@@ -14,19 +14,27 @@
 
 ## Executive Summary
 
-**Status**: 0/35 tests complete. Ready for execution.
+**Status**: 18/40 tests complete. All csv_quoted baselines done.
 
-### CSV Baselines (from Test 01)
+**NOTE**: Test includes csv_quoted baseline runs to confirm consistency with Test 01.
 
-| Model | Effort | CSV Scale Limit | Time/req | Cost/req |
-|-------|--------|-----------------|----------|----------|
-| gpt-5-mini | medium | 500 | ~3.5 min | $0.034 |
-| gpt-5 | low | 356 | ~2.4 min | $0.05 |
-| gpt-5.2 | medium | 215 | ~1 min | $0.031 |
-| claude-opus | medium | 177 | ~1.6 min | $0.00* |
-| claude-sonnet | medium | 168 | ~1.4 min | $0.040 |
+### CSV Baselines (from Test 01 - VERIFIED)
 
-*Cost tracking error
+| Model | Effort | Scale Limit | Failure Mode | Context % | Time/req | Cost/run |
+|-------|--------|-------------|--------------|-----------|----------|----------|
+| gpt-5-mini | medium | **389** | comprehension | ~2% | ~4 min | $0.00* |
+| gpt-5 | low | **356** | comprehension | 2.1% | ~2.4 min | $0.87 |
+| gpt-5.2 | medium | **215** | comprehension | 1.4% | ~1 min | $0.57 |
+| claude-opus | medium | **177** | truncation | 25.1% | ~1.6 min | $0.00* |
+| claude-sonnet | medium | **168** | comprehension | 8.4% | ~1.4 min | $0.89 |
+
+*Cost tracking errors in Test 01
+
+**Test 01 Key Findings:**
+- Reasoning models outperform temperature models by 65x (gpt-5-mini vs gpt-4o-mini)
+- Higher effort = higher scale: gpt-5 low→high = +38%
+- Comprehension is primary failure mode (8/9 tests), not truncation
+- Context window NOT the bottleneck (failures at <5% utilization)
 
 ### Hypothesis Status
 
@@ -40,56 +48,61 @@
 
 ### Results Table (All Tests)
 
-| Model | Format | Scale Limit | vs CSV | Time/req | Cost/req | Status |
-|-------|--------|-------------|--------|----------|----------|--------|
-| gpt-5-mini | csv_quoted | 500 | baseline | ~3.5 min | $0.034 | Baseline |
-| gpt-5-mini | csv_raw | - | - | - | - | Pending |
-| gpt-5-mini | kv_colon_space | - | - | - | - | Pending |
-| gpt-5-mini | markdown_table | - | - | - | - | Pending |
-| gpt-5-mini | json | - | - | - | - | Pending |
-| gpt-5-mini | xml | - | - | - | - | Pending |
-| gpt-5-mini | yaml | - | - | - | - | Pending |
-| gpt-5-mini | toml | - | - | - | - | Pending |
-| gpt-5 | csv_quoted | 356 | baseline | ~2.4 min | $0.05 | Baseline |
-| gpt-5 | csv_raw | - | - | - | - | Pending |
-| gpt-5 | kv_colon_space | - | - | - | - | Pending |
-| gpt-5 | markdown_table | - | - | - | - | Pending |
-| gpt-5 | json | - | - | - | - | Pending |
-| gpt-5 | xml | - | - | - | - | Pending |
-| gpt-5 | yaml | - | - | - | - | Pending |
-| gpt-5 | toml | - | - | - | - | Pending |
-| gpt-5.2 | csv_quoted | 215 | baseline | ~1 min | $0.031 | Baseline |
-| gpt-5.2 | csv_raw | - | - | - | - | Pending |
-| gpt-5.2 | kv_colon_space | - | - | - | - | Pending |
-| gpt-5.2 | markdown_table | - | - | - | - | Pending |
-| gpt-5.2 | json | - | - | - | - | Pending |
-| gpt-5.2 | xml | - | - | - | - | Pending |
-| gpt-5.2 | yaml | - | - | - | - | Pending |
-| gpt-5.2 | toml | - | - | - | - | Pending |
-| claude-opus | csv_quoted | 177 | baseline | ~1.6 min | $0.00* | Baseline |
-| claude-opus | csv_raw | - | - | - | - | Pending |
-| claude-opus | kv_colon_space | - | - | - | - | Pending |
-| claude-opus | markdown_table | - | - | - | - | Pending |
-| claude-opus | json | - | - | - | - | Pending |
-| claude-opus | xml | - | - | - | - | Pending |
-| claude-opus | yaml | - | - | - | - | Pending |
-| claude-opus | toml | - | - | - | - | Pending |
-| claude-sonnet | csv_quoted | 168 | baseline | ~1.4 min | $0.040 | Baseline |
-| claude-sonnet | csv_raw | - | - | - | - | Pending |
-| claude-sonnet | kv_colon_space | - | - | - | - | Pending |
-| claude-sonnet | markdown_table | - | - | - | - | Pending |
-| claude-sonnet | json | - | - | - | - | Pending |
-| claude-sonnet | xml | - | - | - | - | Pending |
-| claude-sonnet | yaml | - | - | - | - | Pending |
-| claude-sonnet | toml | - | - | - | - | Pending |
+| Model | Effort | Format | Scale Limit | vs CSV | Time/req | Cost/req | Status |
+|-------|--------|--------|-------------|--------|----------|----------|--------|
+| gpt-5-mini | medium | csv_quoted | **437** | baseline | ~279 sec | $0.10 | Done |
+| gpt-5-mini | medium | **Test01-csv** | **389** | (Test 01) | ~4 min | $0.00* | Baseline |
+| gpt-5-mini | medium | csv | **194** | 44% | ~216 sec | $0.07 | Done |
+| gpt-5-mini | medium | kv_colon_space | - | - | - | - | Pending |
+| gpt-5-mini | medium | markdown_table | - | - | - | - | Pending |
+| gpt-5-mini | medium | json | - | - | - | - | Pending |
+| gpt-5-mini | medium | xml | - | - | - | - | Pending |
+| gpt-5-mini | medium | yaml | - | - | - | - | Pending |
+| gpt-5-mini | medium | toml | - | - | - | - | Pending |
+| gpt-5 | low | csv_quoted | **222** | baseline | ~160 sec | $0.32 | Done |
+| gpt-5 | low | **Test01-csv** | **356** | (Test 01) | ~2.4 min | $0.87 | Baseline |
+| gpt-5 | low | csv | **166** | 75% | ~137 sec | $0.25 | Done |
+| gpt-5 | low | kv_colon_space | - | - | - | - | Pending |
+| gpt-5 | low | markdown_table | - | - | - | - | Pending |
+| gpt-5 | low | json | - | - | - | - | Pending |
+| gpt-5 | low | xml | - | - | - | - | Pending |
+| gpt-5 | low | yaml | - | - | - | - | Pending |
+| gpt-5 | low | toml | - | - | - | - | Pending |
+| gpt-5.2 | medium | csv_quoted | **268** | baseline | ~82 sec | $0.37 | Done |
+| gpt-5.2 | medium | **Test01-csv** | **215** | (Test 01) | ~1 min | $0.57 | Baseline |
+| gpt-5.2 | medium | csv | **215** | 100% | ~75 sec | $0.34 | Done |
+| gpt-5.2 | medium | kv_colon_space | **100** | 47% | ~27 sec | $0.15 | Done |
+| gpt-5.2 | medium | markdown_table | **154** | 72% | ~67 sec | $0.29 | Done |
+| gpt-5.2 | medium | json | **241** | 112% | ~72 sec | $0.40 | Done |
+| gpt-5.2 | medium | xml | **261** | 121% | ~92 sec | $0.46 | Done |
+| gpt-5.2 | medium | yaml | **134** | 62% | ~38 sec | $0.22 | Done |
+| gpt-5.2 | medium | toml | **46** | 21% | ~22 sec | $0.12 | Done |
+| claude-opus | medium | csv_quoted | **171** | baseline | ~75 sec | $0.72 | Done |
+| claude-opus | medium | **Test01-csv** | **177** | (Test 01) | ~1.6 min | $0.00* | Baseline |
+| claude-opus | medium | csv | **232** | 136% | ~97 sec | $0.92 | Done |
+| claude-opus | medium | kv_colon_space | **221** | 129% | ~99 sec | $0.98 | Done |
+| claude-opus | medium | markdown_table | **221** | 129% | ~109 sec | $0.93 | Done |
+| claude-opus | medium | json | - | - | - | - | Pending |
+| claude-opus | medium | xml | - | - | - | - | Pending |
+| claude-opus | medium | yaml | - | - | - | - | Pending |
+| claude-opus | medium | toml | - | - | - | - | Pending |
+| claude-sonnet | medium | csv_quoted | **120** | baseline | ~57 sec | $0.29 | Done |
+| claude-sonnet | medium | **Test01-csv** | **168** | (Test 01) | ~1.4 min | $0.89 | Baseline |
+| claude-sonnet | medium | csv | **126** | 105% | ~64 sec | $0.30 | Done |
+| claude-sonnet | medium | kv_colon_space | **126** | 105% | ~72 sec | $0.37 | Done |
+| claude-sonnet | medium | markdown_table | **126** | 105% | ~70 sec | $0.32 | Done |
+| claude-sonnet | medium | json | - | - | - | - | Pending |
+| claude-sonnet | medium | xml | - | - | - | - | Pending |
+| claude-sonnet | medium | yaml | - | - | - | - | Pending |
+| claude-sonnet | medium | toml | - | - | - | - | Pending |
 
-**Total: 35 new tests** (5 models × 7 new formats, csv_quoted baseline from Test 01)
+**Total: 40 tests** (5 models × 8 formats, including csv_quoted baseline verification)
 
 ## MUST-NOT-FORGET
 
 - Use CSV baseline as starting point for binary search (faster convergence)
 - Same seed (42), columns, filters as Test 01 - only format changes
-- Do NOT re-run CSV tests - use Test 01 baselines
+- **RUN csv_quoted baseline tests to verify consistency with Test 01**
 - Capture per-request metrics: time/req, cost/req (NOT totals)
 - Run cheapest model (gpt-5.2) first to validate format functions
 
@@ -108,7 +121,7 @@
 
 ### 1.1 Research Questions
 
-1. Does token efficiency correlate with scale limits? (csv_raw 1.0x vs xml 2.1x)
+1. Does token efficiency correlate with scale limits? (csv 1.0x vs xml 2.1x)
 2. Do structured formats (JSON, XML) aid or hinder comprehension?
 3. Do format preferences differ between model families (GPT vs Claude)?
 
@@ -116,7 +129,7 @@
 
 | Format | Size (300 rows) | Relative | Hypothesis |
 |--------|-----------------|----------|------------|
-| csv_raw | 148 KB | 1.00x | Best scale (most compact) |
+| csv | 148 KB | 1.00x | Best scale (most compact) |
 | csv_quoted | 156 KB | 1.06x | Baseline |
 | markdown_table | 197 KB | 1.33x | - |
 | kv_colon_space | 217 KB | 1.47x | May match CSV (TK-001) |
@@ -128,7 +141,7 @@
 ### 1.3 Expected Outcomes
 
 **If H5 confirmed (token efficiency):**
-- csv_raw > xml by ~2x in scale limit
+- csv > xml by ~2x in scale limit
 - Scale limit inversely proportional to token size
 
 **If H6 confirmed (key-value outperforms):**
@@ -156,7 +169,7 @@
 | Format | File Ext | Notes |
 |--------|----------|-------|
 | csv_quoted | .csv | Baseline (Test 01) |
-| csv_raw | .csv | Unquoted CSV |
+| csv | .csv | Unquoted CSV |
 | kv_colon_space | .txt | Key: value pairs |
 | markdown_table | .md | Markdown table |
 | json | .json | JSON array |
@@ -168,35 +181,35 @@
 
 | Test ID | Model | Format | Hypotheses |
 |---------|-------|--------|------------|
-| F01 | gpt-5-mini | csv_raw | H5 |
+| F01 | gpt-5-mini | csv | H5 |
 | F02 | gpt-5-mini | kv_colon_space | H6 |
 | F03 | gpt-5-mini | markdown_table | H5 |
 | F04 | gpt-5-mini | json | H2, H5 |
 | F05 | gpt-5-mini | xml | H5 |
 | F06 | gpt-5-mini | yaml | H2 |
 | F07 | gpt-5-mini | toml | H5 |
-| F08 | gpt-5 | csv_raw | H3, H5 |
+| F08 | gpt-5 | csv | H3, H5 |
 | F09 | gpt-5 | kv_colon_space | H3, H6 |
 | F10 | gpt-5 | markdown_table | H3 |
 | F11 | gpt-5 | json | H2, H3 |
 | F12 | gpt-5 | xml | H3, H5 |
 | F13 | gpt-5 | yaml | H2, H3 |
 | F14 | gpt-5 | toml | H3 |
-| F15 | gpt-5.2 | csv_raw | H5 |
+| F15 | gpt-5.2 | csv | H5 |
 | F16 | gpt-5.2 | kv_colon_space | H6 |
 | F17 | gpt-5.2 | markdown_table | H5 |
 | F18 | gpt-5.2 | json | H2 |
 | F19 | gpt-5.2 | xml | H5 |
 | F20 | gpt-5.2 | yaml | H2 |
 | F21 | gpt-5.2 | toml | H5 |
-| F22 | claude-opus | csv_raw | H3, H5 |
+| F22 | claude-opus | csv | H3, H5 |
 | F23 | claude-opus | kv_colon_space | H3, H6 |
 | F24 | claude-opus | markdown_table | H3 |
 | F25 | claude-opus | json | H2, H3 |
 | F26 | claude-opus | xml | H3, H5 |
 | F27 | claude-opus | yaml | H2, H3 |
 | F28 | claude-opus | toml | H3 |
-| F29 | claude-sonnet | csv_raw | H3, H5 |
+| F29 | claude-sonnet | csv | H3, H5 |
 | F30 | claude-sonnet | kv_colon_space | H3, H6 |
 | F31 | claude-sonnet | markdown_table | H3 |
 | F32 | claude-sonnet | json | H2, H3 |
@@ -226,9 +239,9 @@
 
 ### 3.3 H5: Token Efficiency
 
-**Test**: Compare csv_raw (1.0x) vs xml (2.12x) scale limits.
+**Test**: Compare csv (1.0x) vs xml (2.12x) scale limits.
 
-**Expected**: csv_raw > xml by ~2x
+**Expected**: csv > xml by ~2x
 
 **Data needed**: F01, F05, F08, F12, F15, F19, F22, F26, F29, F33
 
@@ -269,7 +282,7 @@ python 03_find_scale_limit.py \
 
 ```bash
 # Run all 7 formats for gpt-5.2 (F15-F21)
-for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
+for format in csv kv_colon_space markdown_table json xml yaml toml; do
   python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format $format --initial-rows 215 --tolerance 10
 done
 ```
@@ -280,7 +293,7 @@ done
 
 ```bash
 # Run all 7 formats for gpt-5-mini (F01-F07)
-for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
+for format in csv kv_colon_space markdown_table json xml yaml toml; do
   python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format $format --initial-rows 500 --tolerance 10
 done
 ```
@@ -289,7 +302,7 @@ done
 
 ```bash
 # Run all 7 formats for gpt-5 (F08-F14)
-for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
+for format in csv kv_colon_space markdown_table json xml yaml toml; do
   python 03_find_scale_limit.py --test-path .. --model gpt-5 --format $format --initial-rows 356 --tolerance 10
 done
 ```
@@ -298,12 +311,12 @@ done
 
 ```bash
 # claude-opus (F22-F28)
-for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
+for format in csv kv_colon_space markdown_table json xml yaml toml; do
   python 03_find_scale_limit.py --test-path .. --model claude-opus --format $format --initial-rows 177 --tolerance 10
 done
 
 # claude-sonnet (F29-F35)
-for format in csv_raw kv_colon_space markdown_table json xml yaml toml; do
+for format in csv kv_colon_space markdown_table json xml yaml toml; do
   python 03_find_scale_limit.py --test-path .. --model claude-sonnet --format $format --initial-rows 168 --tolerance 10
 done
 ```
@@ -311,7 +324,11 @@ done
 ### 4.6 Parallel Execution Strategy
 
 **Cascade Limitation:** Windsurf can only run 3-4 background commands simultaneously.
-Use PowerShell script `run_all_tests.ps1` for full parallelization outside Cascade.
+Run tests in **batches of 4**: 2 slow + 2 fast models to maximize throughput while keeping logs visible.
+
+**Batch composition (2 slow + 2 fast):**
+- Slow: gpt-5-mini (~105 min), gpt-5 (~72 min)
+- Fast: gpt-5.2 (~30 min), claude-sonnet (~42 min), claude-opus (~48 min)
 
 **Time estimates per test (from Test 01 data):**
 
@@ -335,64 +352,49 @@ Each test uses ~3 internal workers, so total concurrent:
 
 **Total time = slowest test = gpt-5-mini = ~2 hours**
 
-### 4.7 35 Terminal Commands (Full Parallel)
+### 4.7 Batch Execution Plan (4 parallel, logs visible)
 
+**Strategy:** Run 4 tests at a time (2 slow + 2 fast) to balance throughput and log visibility.
+
+**Batch 1** (gpt-5.2 all formats - RUNNING):
 ```bash
-cd E:\Dev\LLM-Research\_Sessions\_2026-03-05_TabularDataFormatsForLLMs\02_FormatComparison\_Scripts
-
-# gpt-5-mini (7 terminals) - baseline 500, ~105 min each
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format csv_raw --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format kv_colon_space --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format markdown_table --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format json --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format xml --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format yaml --initial-rows 500 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format toml --initial-rows 500 --reasoning-effort medium
-
-# gpt-5 (7 terminals) - baseline 356, ~72 min each
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format csv_raw --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format kv_colon_space --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format markdown_table --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format json --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format xml --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format yaml --initial-rows 356 --reasoning-effort low
-python 03_find_scale_limit.py --test-path .. --model gpt-5 --format toml --initial-rows 356 --reasoning-effort low
-
-# gpt-5.2 (7 terminals) - baseline 215, ~30 min each
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format csv_raw --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format kv_colon_space --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format markdown_table --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format json --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format xml --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format yaml --initial-rows 215 --reasoning-effort medium
-python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format toml --initial-rows 215 --reasoning-effort medium
-
-# claude-opus (7 terminals) - baseline 177, ~48 min each
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format csv_raw --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format kv_colon_space --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format markdown_table --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format json --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format xml --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format yaml --initial-rows 177
-python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format toml --initial-rows 177
-
-# claude-sonnet (7 terminals) - baseline 168, ~42 min each
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format csv_raw --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format kv_colon_space --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format markdown_table --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format json --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format xml --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format yaml --initial-rows 168
-python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format toml --initial-rows 168
+# Already running - 3 done, 4 in progress
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format csv --initial-rows 215 --reasoning-effort medium      # DONE: 215
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format kv_colon_space --initial-rows 215 --reasoning-effort medium  # DONE: 100
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format markdown_table --initial-rows 215 --reasoning-effort medium  # DONE: 154
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format json --initial-rows 215 --reasoning-effort medium       # RUNNING
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format xml --initial-rows 215 --reasoning-effort medium        # RUNNING
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format yaml --initial-rows 215 --reasoning-effort medium       # RUNNING
+python 03_find_scale_limit.py --test-path .. --model gpt-5.2 --format toml --initial-rows 215 --reasoning-effort medium       # RUNNING
 ```
 
-### 4.8 Time Comparison
+**Batch 2** (csv_quoted baseline verification - 2 slow + 2 fast):
+```bash
+# Slow - verify consistency with Test 01
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format csv_quoted --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format csv_quoted --initial-rows 356 --reasoning-effort low
+# Fast
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format csv_quoted --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format csv_quoted --initial-rows 177
+```
 
-| Strategy | Terminals | Total Time |
-|----------|-----------|------------|
-| Sequential | 1 | ~12 hours |
-| Per model (5 groups) | 5 | ~2.5 hours |
-| **All parallel** | **35** | **~2 hours** |
+**Batch 3** (csv - 2 slow + 2 fast):
+```bash
+python 03_find_scale_limit.py --test-path .. --model gpt-5-mini --format csv --initial-rows 500 --reasoning-effort medium
+python 03_find_scale_limit.py --test-path .. --model gpt-5 --format csv --initial-rows 356 --reasoning-effort low
+python 03_find_scale_limit.py --test-path .. --model claude-sonnet-4-5-20250929 --format csv --initial-rows 168
+python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --format csv --initial-rows 177
+```
+
+**Batch 4-9:** Continue pattern for remaining formats (kv_colon_space, markdown_table, json, xml, yaml, toml)
+
+### 4.8 Time Estimate
+
+| Strategy | Batches | Total Time |
+|----------|---------|------------|
+| Sequential (1 test) | 40 | ~14 hours |
+| Batches of 4 | 10 | **~3.5 hours** |
+| Full parallel (40) | 1 | ~2 hours (requires external terminals) |
 
 ### 4.9 Phase 6: Analysis
 
@@ -481,11 +483,25 @@ python 03_find_scale_limit.py \
 
 ## 8. Document History
 
+**[2026-03-09 21:03]**
+- Changed: Format naming - csv_quoted (baseline, QUOTE_ALL) and csv (regular, QUOTE_MINIMAL)
+- Previously csv_raw renamed to csv for clarity
+- Both formats must be run
+
+**[2026-03-09 20:59]**
+- Changed: 35 -> 40 tests (include csv_quoted baseline verification)
+- Reason: Verify consistency with Test 01 before comparing formats
+- Results: gpt-5.2 json=241 (112%), yaml=134 (62%), toml=46 (21%)
+
+**[2026-03-09 20:54]**
+- Changed: Batch execution strategy (4 tests: 2 slow + 2 fast) instead of PowerShell
+- Reason: Keep logs visible, avoid hidden execution
+- Results: gpt-5.2 csv=215 (100%), kv_colon_space=100 (47%), markdown_table=154 (72%)
+
 **[2026-03-09 20:49]**
 - Added: Cascade limitation note (3-4 background commands max)
-- Added: `run_all_tests.ps1` PowerShell script for full parallelization
 - Fixed: Folder naming now includes format to prevent conflicts
-- Started: gpt-5.2 tests (3 running)
+- Started: gpt-5.2 tests (3 done, 4 running)
 
 **[2026-03-09 20:36]**
 - Added: Section 4.6 Parallel Execution Strategy with realistic time estimates from Test 01

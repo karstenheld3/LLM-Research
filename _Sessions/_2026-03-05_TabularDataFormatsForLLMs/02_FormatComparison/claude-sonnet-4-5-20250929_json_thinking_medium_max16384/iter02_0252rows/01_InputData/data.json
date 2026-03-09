@@ -1,0 +1,2270 @@
+[
+  {
+    "id": "EMP-0001",
+    "name": "Benjamin Wei-Lin",
+    "department": "Security | Risk",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0002",
+    "name": "Alexander Garcia",
+    "department": "Research & Development",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0003",
+    "name": "Isabella Park",
+    "department": "IT, Infrastructure",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0004",
+    "name": "Yuki Lewis",
+    "department": "Security | Risk",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0005",
+    "name": "Jennifer Gonzalez-Smith",
+    "department": "Product: Core",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0006",
+    "name": "William Moore",
+    "department": "Research & Development",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0007",
+    "name": "Chen Park",
+    "department": "Human Resources | Talent",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0008",
+    "name": "Olivia Mitchell-Reynolds",
+    "department": "Marketing, Brand",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0009",
+    "name": "Ethan Park",
+    "department": "IT, Infrastructure",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0010",
+    "name": "Evelyn Anderson",
+    "department": "Operations, Logistics",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0011",
+    "name": "Daniel Wright-Scott",
+    "department": "Research & Development",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0012",
+    "name": "James Clark-Davis",
+    "department": "Research & Development",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0013",
+    "name": "Alexandra Tanaka-Morrison",
+    "department": "Engineering, Platform",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0014",
+    "name": "David Wei-Lin",
+    "department": "Engineering, Platform",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0015",
+    "name": "Daniel Anderson",
+    "department": "Sales: Enterprise",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0016",
+    "name": "Mia Allen",
+    "department": "Operations, Logistics",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0017",
+    "name": "Maria Clark-Davis",
+    "department": "Legal: Compliance",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0018",
+    "name": "Sophia Petrova-Williams",
+    "department": "Legal: Compliance",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0019",
+    "name": "Harper Hill",
+    "department": "IT, Infrastructure",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0020",
+    "name": "Jennifer Wright-Scott",
+    "department": "Legal: Compliance",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0021",
+    "name": "David Lopez",
+    "department": "Engineering, Platform",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0022",
+    "name": "Ethan Park",
+    "department": "Human Resources | Talent",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0023",
+    "name": "Daniel Lewis",
+    "department": "Operations, Logistics",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0024",
+    "name": "Mason Clark-Davis",
+    "department": "Engineering, Platform",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0025",
+    "name": "Alexandra Allen",
+    "department": "IT, Infrastructure",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0026",
+    "name": "Benjamin Stevens",
+    "department": "Customer Success | Support",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0027",
+    "name": "Sophia O'Connor",
+    "department": "Finance: Treasury",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0028",
+    "name": "David Anderson",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0029",
+    "name": "Daniel Anderson",
+    "department": "Finance: Treasury",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0030",
+    "name": "Robert Petrova-Williams",
+    "department": "IT, Infrastructure",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0031",
+    "name": "Maria Harris",
+    "department": "IT, Infrastructure",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0032",
+    "name": "Benjamin Lopez",
+    "department": "Customer Success | Support",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0033",
+    "name": "Michael Mitchell-Reynolds",
+    "department": "Marketing, Brand",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0034",
+    "name": "Ethan Moore",
+    "department": "Security | Risk",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0035",
+    "name": "Jennifer Park",
+    "department": "Engineering, Platform",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0036",
+    "name": "Lisa Mitchell-Reynolds",
+    "department": "Operations, Logistics",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0037",
+    "name": "Jennifer Wright-Scott",
+    "department": "Sales: Enterprise",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0038",
+    "name": "Evelyn Harris",
+    "department": "Legal: Compliance",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0039",
+    "name": "Lisa O'Connor",
+    "department": "Legal: Compliance",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0040",
+    "name": "Harper Park",
+    "department": "Security | Risk",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0041",
+    "name": "Robert Lewis",
+    "department": "Product: Core",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0042",
+    "name": "Michael Lewis",
+    "department": "Human Resources | Talent",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0043",
+    "name": "Yuki Jackson",
+    "department": "Product: Core",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0044",
+    "name": "Maria Stevens",
+    "department": "Sales: Enterprise",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0045",
+    "name": "Jacob Allen",
+    "department": "Finance: Treasury",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0046",
+    "name": "Evelyn Tanaka-Morrison",
+    "department": "Engineering, Platform",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0047",
+    "name": "Chen Jackson",
+    "department": "Research & Development",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0048",
+    "name": "Evelyn White-Peters",
+    "department": "Product: Core",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0049",
+    "name": "Emma Lee-Chang",
+    "department": "Engineering, Platform",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0050",
+    "name": "Mason Allen",
+    "department": "Legal: Compliance",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0051",
+    "name": "Alexander Taylor-Brown",
+    "department": "Legal: Compliance",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0052",
+    "name": "Benjamin Wei-Lin",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0053",
+    "name": "Harper Wei-Lin",
+    "department": "Sales: Enterprise",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0054",
+    "name": "Olivia Mitchell-Reynolds",
+    "department": "Operations, Logistics",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0055",
+    "name": "David Wilson III",
+    "department": "IT, Infrastructure",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0056",
+    "name": "Charlotte Taylor-Brown",
+    "department": "IT, Infrastructure",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0057",
+    "name": "Alexander Tanaka-Morrison",
+    "department": "Engineering, Platform",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0058",
+    "name": "Jennifer O'Connor",
+    "department": "Security | Risk",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0059",
+    "name": "James Moore",
+    "department": "Finance: Treasury",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0060",
+    "name": "Chen Allen",
+    "department": "Sales: Enterprise",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0061",
+    "name": "Maria Gonzalez-Smith",
+    "department": "Sales: Enterprise",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0062",
+    "name": "Emma Wei-Lin",
+    "department": "Operations, Logistics",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0063",
+    "name": "Abigail Anderson",
+    "department": "Research & Development",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0064",
+    "name": "Amelia Anderson",
+    "department": "Product: Core",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0065",
+    "name": "Chen Park",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0066",
+    "name": "Olivia Walker",
+    "department": "Human Resources | Talent",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0067",
+    "name": "Alexander Martinez",
+    "department": "IT, Infrastructure",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0068",
+    "name": "David Wright-Scott",
+    "department": "Security | Risk",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0069",
+    "name": "Mia Petrova-Williams",
+    "department": "IT, Infrastructure",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0070",
+    "name": "Emma Jackson",
+    "department": "Legal: Compliance",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0071",
+    "name": "William Petrova-Williams",
+    "department": "Customer Success | Support",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0072",
+    "name": "Charlotte Thompson",
+    "department": "IT, Infrastructure",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0073",
+    "name": "Lisa White-Peters",
+    "department": "IT, Infrastructure",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0074",
+    "name": "Evelyn Allen",
+    "department": "Operations, Logistics",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0075",
+    "name": "Daniel Thompson",
+    "department": "Security | Risk",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0076",
+    "name": "Harper Thompson",
+    "department": "Legal: Compliance",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0077",
+    "name": "Sophia O'Connor",
+    "department": "Operations, Logistics",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0078",
+    "name": "Mason Gonzalez-Smith",
+    "department": "Legal: Compliance",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0079",
+    "name": "Ethan Petrova-Williams",
+    "department": "Finance: Treasury",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0080",
+    "name": "Amelia Mitchell-Reynolds",
+    "department": "Sales: Enterprise",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0081",
+    "name": "James Park",
+    "department": "Research & Development",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0082",
+    "name": "Amelia Wilson III",
+    "department": "Marketing, Brand",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0083",
+    "name": "Lisa Wilson III",
+    "department": "Security | Risk",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0084",
+    "name": "Sarah Petrova-Williams",
+    "department": "Product: Core",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0085",
+    "name": "William Taylor-Brown",
+    "department": "Marketing, Brand",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0086",
+    "name": "Yuki Wei-Lin",
+    "department": "Sales: Enterprise",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0087",
+    "name": "Robert Allen",
+    "department": "Research & Development",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0088",
+    "name": "Benjamin Gonzalez-Smith",
+    "department": "Customer Success | Support",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0089",
+    "name": "Evelyn Gonzalez-Smith",
+    "department": "Engineering, Platform",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0090",
+    "name": "Benjamin Tanaka-Morrison",
+    "department": "Product: Core",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0091",
+    "name": "Michael Thompson",
+    "department": "Marketing, Brand",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0092",
+    "name": "David Wright-Scott",
+    "department": "Finance: Treasury",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0093",
+    "name": "Alexander Taylor-Brown",
+    "department": "Research & Development",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0094",
+    "name": "Emma White-Peters",
+    "department": "Sales: Enterprise",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0095",
+    "name": "James O'Connor",
+    "department": "Security | Risk",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0096",
+    "name": "Olivia King",
+    "department": "Marketing, Brand",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0097",
+    "name": "James Harris",
+    "department": "Sales: Enterprise",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0098",
+    "name": "William Martinez",
+    "department": "Human Resources | Talent",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0099",
+    "name": "Emma White-Peters",
+    "department": "Security | Risk",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0100",
+    "name": "Lucas White-Peters",
+    "department": "Operations, Logistics",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0101",
+    "name": "Sarah White-Peters",
+    "department": "Finance: Treasury",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0102",
+    "name": "Harper Moore",
+    "department": "Security | Risk",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0103",
+    "name": "Benjamin Garcia",
+    "department": "Human Resources | Talent",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0104",
+    "name": "Michael Hill",
+    "department": "Research & Development",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0105",
+    "name": "David Lewis",
+    "department": "Security | Risk",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0106",
+    "name": "William Robinson",
+    "department": "Sales: Enterprise",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0107",
+    "name": "Harper O'Connor",
+    "department": "Human Resources | Talent",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0108",
+    "name": "Isabella O'Connor",
+    "department": "Customer Success | Support",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0109",
+    "name": "Amelia Stevens",
+    "department": "Research & Development",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0110",
+    "name": "Mia Young-Kim",
+    "department": "Engineering, Platform",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0111",
+    "name": "Robert King",
+    "department": "Product: Core",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0112",
+    "name": "Isabella Moore",
+    "department": "Marketing, Brand",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0113",
+    "name": "Sophia White-Peters",
+    "department": "Human Resources | Talent",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0114",
+    "name": "Harper Young-Kim",
+    "department": "Security | Risk",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0115",
+    "name": "Isabella Anderson",
+    "department": "Legal: Compliance",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0116",
+    "name": "Alexander Wright-Scott",
+    "department": "Security | Risk",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0117",
+    "name": "Marcus Petrova-Williams",
+    "department": "Operations, Logistics",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0118",
+    "name": "Emma O'Connor",
+    "department": "IT, Infrastructure",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0119",
+    "name": "Abigail Wei-Lin",
+    "department": "Human Resources | Talent",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0120",
+    "name": "David Martinez",
+    "department": "Customer Success | Support",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0121",
+    "name": "Abigail Gonzalez-Smith",
+    "department": "Legal: Compliance",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0122",
+    "name": "Harper Robinson",
+    "department": "Sales: Enterprise",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0123",
+    "name": "Emma White-Peters",
+    "department": "Finance: Treasury",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0124",
+    "name": "Lisa Wilson III",
+    "department": "Legal: Compliance",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0125",
+    "name": "Lisa Lee-Chang",
+    "department": "Sales: Enterprise",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0126",
+    "name": "Harper Gonzalez-Smith",
+    "department": "Legal: Compliance",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0127",
+    "name": "Lisa Anderson",
+    "department": "Security | Risk",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0128",
+    "name": "Alexander White-Peters",
+    "department": "IT, Infrastructure",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0129",
+    "name": "Ethan Lee-Chang",
+    "department": "Finance: Treasury",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0130",
+    "name": "Alexander Clark-Davis",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0131",
+    "name": "Olivia Wei-Lin",
+    "department": "Finance: Treasury",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0132",
+    "name": "James Allen",
+    "department": "Sales: Enterprise",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0133",
+    "name": "David Mitchell-Reynolds",
+    "department": "Product: Core",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0134",
+    "name": "Jennifer Lewis",
+    "department": "Customer Success | Support",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0135",
+    "name": "Lisa Wei-Lin",
+    "department": "Marketing, Brand",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0136",
+    "name": "Lucas Wilson III",
+    "department": "Research & Development",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0137",
+    "name": "James Garcia",
+    "department": "Operations, Logistics",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0138",
+    "name": "Lisa Wright-Scott",
+    "department": "Customer Success | Support",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0139",
+    "name": "Alexander Taylor-Brown",
+    "department": "Legal: Compliance",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0140",
+    "name": "Lucas Stevens",
+    "department": "IT, Infrastructure",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0141",
+    "name": "Evelyn Young-Kim",
+    "department": "Security | Risk",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0142",
+    "name": "James Wei-Lin",
+    "department": "Customer Success | Support",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0143",
+    "name": "Charlotte Lopez",
+    "department": "Human Resources | Talent",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0144",
+    "name": "Ethan Anderson",
+    "department": "Sales: Enterprise",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0145",
+    "name": "Mia Clark-Davis",
+    "department": "Customer Success | Support",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0146",
+    "name": "Robert White-Peters",
+    "department": "Product: Core",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0147",
+    "name": "Benjamin Thompson",
+    "department": "Operations, Logistics",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0148",
+    "name": "James Hill",
+    "department": "Finance: Treasury",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0149",
+    "name": "David Harris",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0150",
+    "name": "Ethan Mitchell-Reynolds",
+    "department": "Customer Success | Support",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0151",
+    "name": "Olivia Wilson III",
+    "department": "Marketing, Brand",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0152",
+    "name": "David Hill",
+    "department": "Human Resources | Talent",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0153",
+    "name": "David Gonzalez-Smith",
+    "department": "Legal: Compliance",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0154",
+    "name": "Alexandra Mitchell-Reynolds",
+    "department": "Research & Development",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0155",
+    "name": "Maria O'Connor",
+    "department": "Operations, Logistics",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0156",
+    "name": "Michael Wilson III",
+    "department": "Engineering, Platform",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0157",
+    "name": "Maria Johnson Jr.",
+    "department": "IT, Infrastructure",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0158",
+    "name": "Chen Wilson III",
+    "department": "Human Resources | Talent",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0159",
+    "name": "Chen O'Connor",
+    "department": "Research & Development",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0160",
+    "name": "Benjamin Park",
+    "department": "Finance: Treasury",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0161",
+    "name": "David Garcia",
+    "department": "Research & Development",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0162",
+    "name": "Emma Hill",
+    "department": "Human Resources | Talent",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0163",
+    "name": "Maria O'Connor",
+    "department": "Product: Core",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0164",
+    "name": "Maria Taylor-Brown",
+    "department": "IT, Infrastructure",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0165",
+    "name": "David Park",
+    "department": "Security | Risk",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0166",
+    "name": "Robert Taylor-Brown",
+    "department": "Human Resources | Talent",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0167",
+    "name": "Olivia Lopez",
+    "department": "Marketing, Brand",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0168",
+    "name": "Isabella Lopez",
+    "department": "Marketing, Brand",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0169",
+    "name": "Lisa Stevens",
+    "department": "Research & Development",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0170",
+    "name": "Evelyn Wei-Lin",
+    "department": "Finance: Treasury",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0171",
+    "name": "Alexandra Young-Kim",
+    "department": "IT, Infrastructure",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0172",
+    "name": "William Harris",
+    "department": "Product: Core",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0173",
+    "name": "Maria Martinez",
+    "department": "Finance: Treasury",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0174",
+    "name": "Harper Park",
+    "department": "Operations, Logistics",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0175",
+    "name": "Abigail Garcia",
+    "department": "Research & Development",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0176",
+    "name": "Jacob Jackson",
+    "department": "Marketing, Brand",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0177",
+    "name": "Ethan Tanaka-Morrison",
+    "department": "Marketing, Brand",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0178",
+    "name": "David O'Connor",
+    "department": "Product: Core",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0179",
+    "name": "Ethan Robinson",
+    "department": "Legal: Compliance",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0180",
+    "name": "Olivia Gonzalez-Smith",
+    "department": "Legal: Compliance",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0181",
+    "name": "Abigail Lee-Chang",
+    "department": "Finance: Treasury",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0182",
+    "name": "Olivia Petrova-Williams",
+    "department": "Legal: Compliance",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0183",
+    "name": "Olivia Lopez",
+    "department": "Operations, Logistics",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0184",
+    "name": "Michael Clark-Davis",
+    "department": "Research & Development",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0185",
+    "name": "Amelia Taylor-Brown",
+    "department": "Marketing, Brand",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0186",
+    "name": "Amelia Jackson",
+    "department": "Operations, Logistics",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0187",
+    "name": "Ethan Clark-Davis",
+    "department": "Research & Development",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0188",
+    "name": "Yuki Robinson",
+    "department": "IT, Infrastructure",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0189",
+    "name": "Jacob Garcia",
+    "department": "Operations, Logistics",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0190",
+    "name": "Jacob Jackson",
+    "department": "Security | Risk",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0191",
+    "name": "Chen Wright-Scott",
+    "department": "Research & Development",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0192",
+    "name": "Harper Lee-Chang",
+    "department": "Human Resources | Talent",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0193",
+    "name": "Mason Lee-Chang",
+    "department": "Research & Development",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0194",
+    "name": "Sarah Clark-Davis",
+    "department": "Operations, Logistics",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0195",
+    "name": "Maria Wright-Scott",
+    "department": "Customer Success | Support",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0196",
+    "name": "Lucas Stevens",
+    "department": "Customer Success | Support",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0197",
+    "name": "James Lopez",
+    "department": "Customer Success | Support",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0198",
+    "name": "Charlotte Harris",
+    "department": "Human Resources | Talent",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0199",
+    "name": "Sophia Thompson",
+    "department": "Engineering, Platform",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0200",
+    "name": "Abigail Lewis",
+    "department": "Security | Risk",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0201",
+    "name": "Alexandra O'Connor",
+    "department": "Research & Development",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0202",
+    "name": "Robert Jackson",
+    "department": "Security | Risk",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0203",
+    "name": "Charlotte Gonzalez-Smith",
+    "department": "Human Resources | Talent",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0204",
+    "name": "Mia O'Connor",
+    "department": "IT, Infrastructure",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0205",
+    "name": "Robert Lopez",
+    "department": "IT, Infrastructure",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0206",
+    "name": "Jennifer White-Peters",
+    "department": "Legal: Compliance",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0207",
+    "name": "Yuki Lewis",
+    "department": "Engineering, Platform",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0208",
+    "name": "Alexander King",
+    "department": "Legal: Compliance",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0209",
+    "name": "Lisa Allen",
+    "department": "Legal: Compliance",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0210",
+    "name": "Sarah White-Peters",
+    "department": "Operations, Logistics",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0211",
+    "name": "Yuki Wei-Lin",
+    "department": "IT, Infrastructure",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0212",
+    "name": "Mason Tanaka-Morrison",
+    "department": "Customer Success | Support",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0213",
+    "name": "Jennifer King",
+    "department": "Human Resources | Talent",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0214",
+    "name": "Lucas Harris",
+    "department": "Finance: Treasury",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0215",
+    "name": "William Mitchell-Reynolds",
+    "department": "Engineering, Platform",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0216",
+    "name": "Robert O'Connor",
+    "department": "Engineering, Platform",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0217",
+    "name": "Emma Harris",
+    "department": "Sales: Enterprise",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0218",
+    "name": "Marcus Johnson Jr.",
+    "department": "Product: Core",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0219",
+    "name": "Alexandra Clark-Davis",
+    "department": "Research & Development",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0220",
+    "name": "Robert King",
+    "department": "Product: Core",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0221",
+    "name": "Lucas Petrova-Williams",
+    "department": "Sales: Enterprise",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0222",
+    "name": "Robert Allen",
+    "department": "Finance: Treasury",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0223",
+    "name": "David Clark-Davis",
+    "department": "Security | Risk",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Meets Expectations",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0224",
+    "name": "Marcus Taylor-Brown",
+    "department": "Operations, Logistics",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0225",
+    "name": "Marcus Martinez",
+    "department": "Research & Development",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0226",
+    "name": "Jacob King",
+    "department": "IT, Infrastructure",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0227",
+    "name": "Jennifer Young-Kim",
+    "department": "Marketing, Brand",
+    "salary": "$145,000.00/year",
+    "clearance": "Level 4: Top Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0228",
+    "name": "Alexander Mitchell-Reynolds",
+    "department": "Human Resources | Talent",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0229",
+    "name": "Jacob Wilson III",
+    "department": "Customer Success | Support",
+    "salary": "$245,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0230",
+    "name": "David Lewis",
+    "department": "Marketing, Brand",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0231",
+    "name": "Yuki King",
+    "department": "Product: Core",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0232",
+    "name": "David Stevens",
+    "department": "Product: Core",
+    "salary": "$325,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0233",
+    "name": "David Harris",
+    "department": "Marketing, Brand",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Meets Expectations",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0234",
+    "name": "Daniel Johnson Jr.",
+    "department": "Human Resources | Talent",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0235",
+    "name": "Harper Moore",
+    "department": "Legal: Compliance",
+    "salary": "$110,000.00/year",
+    "clearance": "Level 5: Executive",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0236",
+    "name": "Sophia Wei-Lin",
+    "department": "IT, Infrastructure",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0237",
+    "name": "Sophia Clark-Davis",
+    "department": "Product: Core",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0238",
+    "name": "Marcus Wright-Scott",
+    "department": "Human Resources | Talent",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0239",
+    "name": "Mia Petrova-Williams",
+    "department": "IT, Infrastructure",
+    "salary": "$72,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+  },
+  {
+    "id": "EMP-0240",
+    "name": "Isabella Wilson III",
+    "department": "Security | Risk",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0241",
+    "name": "Alexandra Park",
+    "department": "Research & Development",
+    "salary": "$65,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+  },
+  {
+    "id": "EMP-0242",
+    "name": "Yuki Lee-Chang",
+    "department": "Finance: Treasury",
+    "salary": "$185,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0243",
+    "name": "Evelyn Gonzalez-Smith",
+    "department": "Human Resources | Talent",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0244",
+    "name": "Ethan Wilson III",
+    "department": "Research & Development",
+    "salary": "$275,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Top 20%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0245",
+    "name": "Maria White-Peters",
+    "department": "Human Resources | Talent",
+    "salary": "$165,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0246",
+    "name": "Abigail Anderson",
+    "department": "IT, Infrastructure",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0247",
+    "name": "Harper Garcia",
+    "department": "Sales: Enterprise",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Project Aurora: Lead | Nexus: Contributor"
+  },
+  {
+    "id": "EMP-0248",
+    "name": "Alexandra Moore",
+    "department": "Marketing, Brand",
+    "salary": "$95,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Developing: Needs Improvement",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0249",
+    "name": "Isabella Taylor-Brown",
+    "department": "Security | Risk",
+    "salary": "$125,000.00/year",
+    "clearance": "Level 3: Secret",
+    "rating": "Exceeds Expectations: Promotion Ready",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  },
+  {
+    "id": "EMP-0250",
+    "name": "Mason Mitchell-Reynolds",
+    "department": "Marketing, Brand",
+    "salary": "$215,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Meets Expectations",
+    "projects": "Brand Refresh: Lead | Campaign: Q1, Q2"
+  },
+  {
+    "id": "EMP-0251",
+    "name": "James King",
+    "department": "Human Resources | Talent",
+    "salary": "$85,000.00/year",
+    "clearance": "Level 2: Confidential",
+    "rating": "Exceptional: Top 5%",
+    "projects": "Platform v3: Tech Lead | Migration: Owner"
+  },
+  {
+    "id": "EMP-0252",
+    "name": "Benjamin Moore",
+    "department": "Sales: Enterprise",
+    "salary": "$385,000.00/year",
+    "clearance": "Level 1: Basic",
+    "rating": "Meets Expectations",
+    "projects": "Compliance 2025: Lead | Audit: Support"
+  }
+]

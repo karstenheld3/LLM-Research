@@ -170,9 +170,9 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
   # Use CLI reasoning_effort if provided, otherwise from config
   reasoning = reasoning_effort if reasoning_effort else exec_config.get("reasoning_effort", "medium")
   
-  # Create model output folder with key params (include format for Test 02)
+  # Create model output folder with key params (always include format for Test 02)
   model_safe_name = model.replace("/", "_").replace(":", "_")
-  if output_format and output_format != "csv_quoted":
+  if output_format:
     folder_name = f"{model_safe_name}_{output_format}_{method}_{reasoning}_max{max_tokens}"
   else:
     folder_name = f"{model_safe_name}_{method}_{reasoning}_max{max_tokens}"
@@ -406,7 +406,7 @@ def main():
   parser.add_argument("--verify-runs", type=int, default=1, help="Number of runs to verify final boundary (default: 1)")
   parser.add_argument("--skip-baseline", action="store_true", help="Skip baseline validation at small scale")
   parser.add_argument("--reasoning-effort", type=str, default=None, choices=["low", "medium", "high"], help="Reasoning effort level (default: from config)")
-  parser.add_argument("--format", type=str, default=None, choices=["csv_quoted", "csv_raw", "kv_colon_space", "markdown_table", "json", "xml", "yaml", "toml"], help="Output format (default: from config)")
+  parser.add_argument("--format", type=str, default=None, choices=["csv_quoted", "csv", "kv_colon_space", "markdown_table", "json", "xml", "yaml", "toml"], help="Output format (default: from config)")
   parser.add_argument("--force", action="store_true", help="Force re-run even if result already exists")
   args = parser.parse_args()
   

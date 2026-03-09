@@ -1,0 +1,1592 @@
+### Record 1
+Id: EMP-0001
+Name: Benjamin Wei-Lin
+Department: Security | Risk
+Salary: $65,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 2
+Id: EMP-0002
+Name: Alexander Garcia
+Department: Research & Development
+Salary: $325,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 3
+Id: EMP-0003
+Name: Isabella Park
+Department: IT, Infrastructure
+Salary: $385,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 4
+Id: EMP-0004
+Name: Yuki Lewis
+Department: Security | Risk
+Salary: $110,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 5
+Id: EMP-0005
+Name: Jennifer Gonzalez-Smith
+Department: Product: Core
+Salary: $95,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 6
+Id: EMP-0006
+Name: William Moore
+Department: Research & Development
+Salary: $72,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 7
+Id: EMP-0007
+Name: Chen Park
+Department: Human Resources | Talent
+Salary: $145,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 8
+Id: EMP-0008
+Name: Olivia Mitchell-Reynolds
+Department: Marketing, Brand
+Salary: $72,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 9
+Id: EMP-0009
+Name: Ethan Park
+Department: IT, Infrastructure
+Salary: $145,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 10
+Id: EMP-0010
+Name: Evelyn Anderson
+Department: Operations, Logistics
+Salary: $72,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 11
+Id: EMP-0011
+Name: Daniel Wright-Scott
+Department: Research & Development
+Salary: $275,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 12
+Id: EMP-0012
+Name: James Clark-Davis
+Department: Research & Development
+Salary: $185,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 13
+Id: EMP-0013
+Name: Alexandra Tanaka-Morrison
+Department: Engineering, Platform
+Salary: $110,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 14
+Id: EMP-0014
+Name: David Wei-Lin
+Department: Engineering, Platform
+Salary: $215,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 15
+Id: EMP-0015
+Name: Daniel Anderson
+Department: Sales: Enterprise
+Salary: $325,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 16
+Id: EMP-0016
+Name: Mia Allen
+Department: Operations, Logistics
+Salary: $245,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 17
+Id: EMP-0017
+Name: Maria Clark-Davis
+Department: Legal: Compliance
+Salary: $145,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 18
+Id: EMP-0018
+Name: Sophia Petrova-Williams
+Department: Legal: Compliance
+Salary: $65,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 19
+Id: EMP-0019
+Name: Harper Hill
+Department: IT, Infrastructure
+Salary: $145,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 20
+Id: EMP-0020
+Name: Jennifer Wright-Scott
+Department: Legal: Compliance
+Salary: $72,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 21
+Id: EMP-0021
+Name: David Lopez
+Department: Engineering, Platform
+Salary: $215,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 22
+Id: EMP-0022
+Name: Ethan Park
+Department: Human Resources | Talent
+Salary: $185,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 23
+Id: EMP-0023
+Name: Daniel Lewis
+Department: Operations, Logistics
+Salary: $95,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceptional: Top 5%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 24
+Id: EMP-0024
+Name: Mason Clark-Davis
+Department: Engineering, Platform
+Salary: $215,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 25
+Id: EMP-0025
+Name: Alexandra Allen
+Department: IT, Infrastructure
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 26
+Id: EMP-0026
+Name: Benjamin Stevens
+Department: Customer Success | Support
+Salary: $110,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 27
+Id: EMP-0027
+Name: Sophia O'Connor
+Department: Finance: Treasury
+Salary: $95,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 28
+Id: EMP-0028
+Name: David Anderson
+Department: IT, Infrastructure
+Salary: $245,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 29
+Id: EMP-0029
+Name: Daniel Anderson
+Department: Finance: Treasury
+Salary: $125,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 30
+Id: EMP-0030
+Name: Robert Petrova-Williams
+Department: IT, Infrastructure
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 31
+Id: EMP-0031
+Name: Maria Harris
+Department: IT, Infrastructure
+Salary: $275,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 32
+Id: EMP-0032
+Name: Benjamin Lopez
+Department: Customer Success | Support
+Salary: $385,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 33
+Id: EMP-0033
+Name: Michael Mitchell-Reynolds
+Department: Marketing, Brand
+Salary: $165,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 34
+Id: EMP-0034
+Name: Ethan Moore
+Department: Security | Risk
+Salary: $245,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 35
+Id: EMP-0035
+Name: Jennifer Park
+Department: Engineering, Platform
+Salary: $110,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 36
+Id: EMP-0036
+Name: Lisa Mitchell-Reynolds
+Department: Operations, Logistics
+Salary: $275,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 37
+Id: EMP-0037
+Name: Jennifer Wright-Scott
+Department: Sales: Enterprise
+Salary: $165,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 38
+Id: EMP-0038
+Name: Evelyn Harris
+Department: Legal: Compliance
+Salary: $145,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 39
+Id: EMP-0039
+Name: Lisa O'Connor
+Department: Legal: Compliance
+Salary: $95,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 40
+Id: EMP-0040
+Name: Harper Park
+Department: Security | Risk
+Salary: $215,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 41
+Id: EMP-0041
+Name: Robert Lewis
+Department: Product: Core
+Salary: $385,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 42
+Id: EMP-0042
+Name: Michael Lewis
+Department: Human Resources | Talent
+Salary: $72,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 43
+Id: EMP-0043
+Name: Yuki Jackson
+Department: Product: Core
+Salary: $125,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 44
+Id: EMP-0044
+Name: Maria Stevens
+Department: Sales: Enterprise
+Salary: $385,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 45
+Id: EMP-0045
+Name: Jacob Allen
+Department: Finance: Treasury
+Salary: $385,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 46
+Id: EMP-0046
+Name: Evelyn Tanaka-Morrison
+Department: Engineering, Platform
+Salary: $275,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 47
+Id: EMP-0047
+Name: Chen Jackson
+Department: Research & Development
+Salary: $165,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 48
+Id: EMP-0048
+Name: Evelyn White-Peters
+Department: Product: Core
+Salary: $65,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 49
+Id: EMP-0049
+Name: Emma Lee-Chang
+Department: Engineering, Platform
+Salary: $85,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 50
+Id: EMP-0050
+Name: Mason Allen
+Department: Legal: Compliance
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 51
+Id: EMP-0051
+Name: Alexander Taylor-Brown
+Department: Legal: Compliance
+Salary: $215,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 52
+Id: EMP-0052
+Name: Benjamin Wei-Lin
+Department: IT, Infrastructure
+Salary: $245,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 53
+Id: EMP-0053
+Name: Harper Wei-Lin
+Department: Sales: Enterprise
+Salary: $165,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 54
+Id: EMP-0054
+Name: Olivia Mitchell-Reynolds
+Department: Operations, Logistics
+Salary: $215,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 55
+Id: EMP-0055
+Name: David Wilson III
+Department: IT, Infrastructure
+Salary: $125,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 56
+Id: EMP-0056
+Name: Charlotte Taylor-Brown
+Department: IT, Infrastructure
+Salary: $185,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 57
+Id: EMP-0057
+Name: Alexander Tanaka-Morrison
+Department: Engineering, Platform
+Salary: $385,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 58
+Id: EMP-0058
+Name: Jennifer O'Connor
+Department: Security | Risk
+Salary: $85,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 59
+Id: EMP-0059
+Name: James Moore
+Department: Finance: Treasury
+Salary: $385,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 60
+Id: EMP-0060
+Name: Chen Allen
+Department: Sales: Enterprise
+Salary: $275,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 61
+Id: EMP-0061
+Name: Maria Gonzalez-Smith
+Department: Sales: Enterprise
+Salary: $385,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 62
+Id: EMP-0062
+Name: Emma Wei-Lin
+Department: Operations, Logistics
+Salary: $215,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 63
+Id: EMP-0063
+Name: Abigail Anderson
+Department: Research & Development
+Salary: $125,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 64
+Id: EMP-0064
+Name: Amelia Anderson
+Department: Product: Core
+Salary: $325,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 65
+Id: EMP-0065
+Name: Chen Park
+Department: IT, Infrastructure
+Salary: $245,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 66
+Id: EMP-0066
+Name: Olivia Walker
+Department: Human Resources | Talent
+Salary: $145,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 67
+Id: EMP-0067
+Name: Alexander Martinez
+Department: IT, Infrastructure
+Salary: $275,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 68
+Id: EMP-0068
+Name: David Wright-Scott
+Department: Security | Risk
+Salary: $110,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 69
+Id: EMP-0069
+Name: Mia Petrova-Williams
+Department: IT, Infrastructure
+Salary: $325,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 70
+Id: EMP-0070
+Name: Emma Jackson
+Department: Legal: Compliance
+Salary: $72,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 71
+Id: EMP-0071
+Name: William Petrova-Williams
+Department: Customer Success | Support
+Salary: $65,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 72
+Id: EMP-0072
+Name: Charlotte Thompson
+Department: IT, Infrastructure
+Salary: $65,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 73
+Id: EMP-0073
+Name: Lisa White-Peters
+Department: IT, Infrastructure
+Salary: $145,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 74
+Id: EMP-0074
+Name: Evelyn Allen
+Department: Operations, Logistics
+Salary: $72,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 75
+Id: EMP-0075
+Name: Daniel Thompson
+Department: Security | Risk
+Salary: $110,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 76
+Id: EMP-0076
+Name: Harper Thompson
+Department: Legal: Compliance
+Salary: $85,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 77
+Id: EMP-0077
+Name: Sophia O'Connor
+Department: Operations, Logistics
+Salary: $145,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 78
+Id: EMP-0078
+Name: Mason Gonzalez-Smith
+Department: Legal: Compliance
+Salary: $65,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 79
+Id: EMP-0079
+Name: Ethan Petrova-Williams
+Department: Finance: Treasury
+Salary: $110,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 80
+Id: EMP-0080
+Name: Amelia Mitchell-Reynolds
+Department: Sales: Enterprise
+Salary: $125,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 81
+Id: EMP-0081
+Name: James Park
+Department: Research & Development
+Salary: $95,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 82
+Id: EMP-0082
+Name: Amelia Wilson III
+Department: Marketing, Brand
+Salary: $145,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 83
+Id: EMP-0083
+Name: Lisa Wilson III
+Department: Security | Risk
+Salary: $215,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 84
+Id: EMP-0084
+Name: Sarah Petrova-Williams
+Department: Product: Core
+Salary: $385,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 85
+Id: EMP-0085
+Name: William Taylor-Brown
+Department: Marketing, Brand
+Salary: $145,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 86
+Id: EMP-0086
+Name: Yuki Wei-Lin
+Department: Sales: Enterprise
+Salary: $85,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 87
+Id: EMP-0087
+Name: Robert Allen
+Department: Research & Development
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 88
+Id: EMP-0088
+Name: Benjamin Gonzalez-Smith
+Department: Customer Success | Support
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 89
+Id: EMP-0089
+Name: Evelyn Gonzalez-Smith
+Department: Engineering, Platform
+Salary: $110,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 90
+Id: EMP-0090
+Name: Benjamin Tanaka-Morrison
+Department: Product: Core
+Salary: $325,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 91
+Id: EMP-0091
+Name: Michael Thompson
+Department: Marketing, Brand
+Salary: $85,000.00/year
+Clearance: Level 3: Secret
+Rating: Meets Expectations
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 92
+Id: EMP-0092
+Name: David Wright-Scott
+Department: Finance: Treasury
+Salary: $215,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 93
+Id: EMP-0093
+Name: Alexander Taylor-Brown
+Department: Research & Development
+Salary: $65,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 94
+Id: EMP-0094
+Name: Emma White-Peters
+Department: Sales: Enterprise
+Salary: $110,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 95
+Id: EMP-0095
+Name: James O'Connor
+Department: Security | Risk
+Salary: $85,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 96
+Id: EMP-0096
+Name: Olivia King
+Department: Marketing, Brand
+Salary: $65,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 97
+Id: EMP-0097
+Name: James Harris
+Department: Sales: Enterprise
+Salary: $275,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 98
+Id: EMP-0098
+Name: William Martinez
+Department: Human Resources | Talent
+Salary: $125,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 99
+Id: EMP-0099
+Name: Emma White-Peters
+Department: Security | Risk
+Salary: $325,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 100
+Id: EMP-0100
+Name: Lucas White-Peters
+Department: Operations, Logistics
+Salary: $110,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 101
+Id: EMP-0101
+Name: Sarah White-Peters
+Department: Finance: Treasury
+Salary: $85,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 102
+Id: EMP-0102
+Name: Harper Moore
+Department: Security | Risk
+Salary: $85,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 103
+Id: EMP-0103
+Name: Benjamin Garcia
+Department: Human Resources | Talent
+Salary: $275,000.00/year
+Clearance: Level 3: Secret
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 104
+Id: EMP-0104
+Name: Michael Hill
+Department: Research & Development
+Salary: $95,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 105
+Id: EMP-0105
+Name: David Lewis
+Department: Security | Risk
+Salary: $185,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 106
+Id: EMP-0106
+Name: William Robinson
+Department: Sales: Enterprise
+Salary: $125,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 107
+Id: EMP-0107
+Name: Harper O'Connor
+Department: Human Resources | Talent
+Salary: $165,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 108
+Id: EMP-0108
+Name: Isabella O'Connor
+Department: Customer Success | Support
+Salary: $72,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 109
+Id: EMP-0109
+Name: Amelia Stevens
+Department: Research & Development
+Salary: $385,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 110
+Id: EMP-0110
+Name: Mia Young-Kim
+Department: Engineering, Platform
+Salary: $65,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 111
+Id: EMP-0111
+Name: Robert King
+Department: Product: Core
+Salary: $275,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 112
+Id: EMP-0112
+Name: Isabella Moore
+Department: Marketing, Brand
+Salary: $65,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 113
+Id: EMP-0113
+Name: Sophia White-Peters
+Department: Human Resources | Talent
+Salary: $185,000.00/year
+Clearance: Level 2: Confidential
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 114
+Id: EMP-0114
+Name: Harper Young-Kim
+Department: Security | Risk
+Salary: $215,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 115
+Id: EMP-0115
+Name: Isabella Anderson
+Department: Legal: Compliance
+Salary: $325,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 116
+Id: EMP-0116
+Name: Alexander Wright-Scott
+Department: Security | Risk
+Salary: $95,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 117
+Id: EMP-0117
+Name: Marcus Petrova-Williams
+Department: Operations, Logistics
+Salary: $275,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 118
+Id: EMP-0118
+Name: Emma O'Connor
+Department: IT, Infrastructure
+Salary: $215,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 119
+Id: EMP-0119
+Name: Abigail Wei-Lin
+Department: Human Resources | Talent
+Salary: $185,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 120
+Id: EMP-0120
+Name: David Martinez
+Department: Customer Success | Support
+Salary: $185,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 121
+Id: EMP-0121
+Name: Abigail Gonzalez-Smith
+Department: Legal: Compliance
+Salary: $245,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 122
+Id: EMP-0122
+Name: Harper Robinson
+Department: Sales: Enterprise
+Salary: $275,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 123
+Id: EMP-0123
+Name: Emma White-Peters
+Department: Finance: Treasury
+Salary: $145,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 124
+Id: EMP-0124
+Name: Lisa Wilson III
+Department: Legal: Compliance
+Salary: $125,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 125
+Id: EMP-0125
+Name: Lisa Lee-Chang
+Department: Sales: Enterprise
+Salary: $145,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 126
+Id: EMP-0126
+Name: Harper Gonzalez-Smith
+Department: Legal: Compliance
+Salary: $125,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 127
+Id: EMP-0127
+Name: Lisa Anderson
+Department: Security | Risk
+Salary: $215,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 128
+Id: EMP-0128
+Name: Alexander White-Peters
+Department: IT, Infrastructure
+Salary: $85,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 129
+Id: EMP-0129
+Name: Ethan Lee-Chang
+Department: Finance: Treasury
+Salary: $325,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 130
+Id: EMP-0130
+Name: Alexander Clark-Davis
+Department: IT, Infrastructure
+Salary: $245,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 131
+Id: EMP-0131
+Name: Olivia Wei-Lin
+Department: Finance: Treasury
+Salary: $110,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Top 20%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 132
+Id: EMP-0132
+Name: James Allen
+Department: Sales: Enterprise
+Salary: $275,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 133
+Id: EMP-0133
+Name: David Mitchell-Reynolds
+Department: Product: Core
+Salary: $275,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 134
+Id: EMP-0134
+Name: Jennifer Lewis
+Department: Customer Success | Support
+Salary: $385,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 135
+Id: EMP-0135
+Name: Lisa Wei-Lin
+Department: Marketing, Brand
+Salary: $85,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 136
+Id: EMP-0136
+Name: Lucas Wilson III
+Department: Research & Development
+Salary: $215,000.00/year
+Clearance: Level 1: Basic
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 137
+Id: EMP-0137
+Name: James Garcia
+Department: Operations, Logistics
+Salary: $95,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 138
+Id: EMP-0138
+Name: Lisa Wright-Scott
+Department: Customer Success | Support
+Salary: $65,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 139
+Id: EMP-0139
+Name: Alexander Taylor-Brown
+Department: Legal: Compliance
+Salary: $185,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 140
+Id: EMP-0140
+Name: Lucas Stevens
+Department: IT, Infrastructure
+Salary: $325,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Top 20%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 141
+Id: EMP-0141
+Name: Evelyn Young-Kim
+Department: Security | Risk
+Salary: $385,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 142
+Id: EMP-0142
+Name: James Wei-Lin
+Department: Customer Success | Support
+Salary: $245,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 143
+Id: EMP-0143
+Name: Charlotte Lopez
+Department: Human Resources | Talent
+Salary: $245,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 144
+Id: EMP-0144
+Name: Ethan Anderson
+Department: Sales: Enterprise
+Salary: $385,000.00/year
+Clearance: Level 2: Confidential
+Rating: Developing: Needs Improvement
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 145
+Id: EMP-0145
+Name: Mia Clark-Davis
+Department: Customer Success | Support
+Salary: $85,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 146
+Id: EMP-0146
+Name: Robert White-Peters
+Department: Product: Core
+Salary: $215,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 147
+Id: EMP-0147
+Name: Benjamin Thompson
+Department: Operations, Logistics
+Salary: $72,000.00/year
+Clearance: Level 3: Secret
+Rating: Meets Expectations
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 148
+Id: EMP-0148
+Name: James Hill
+Department: Finance: Treasury
+Salary: $65,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 149
+Id: EMP-0149
+Name: David Harris
+Department: IT, Infrastructure
+Salary: $245,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 150
+Id: EMP-0150
+Name: Ethan Mitchell-Reynolds
+Department: Customer Success | Support
+Salary: $85,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 151
+Id: EMP-0151
+Name: Olivia Wilson III
+Department: Marketing, Brand
+Salary: $185,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 152
+Id: EMP-0152
+Name: David Hill
+Department: Human Resources | Talent
+Salary: $85,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 153
+Id: EMP-0153
+Name: David Gonzalez-Smith
+Department: Legal: Compliance
+Salary: $165,000.00/year
+Clearance: Level 3: Secret
+Rating: Exceptional: Top 5%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 154
+Id: EMP-0154
+Name: Alexandra Mitchell-Reynolds
+Department: Research & Development
+Salary: $145,000.00/year
+Clearance: Level 5: Executive
+Rating: Meets Expectations
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 155
+Id: EMP-0155
+Name: Maria O'Connor
+Department: Operations, Logistics
+Salary: $95,000.00/year
+Clearance: Level 3: Secret
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 156
+Id: EMP-0156
+Name: Michael Wilson III
+Department: Engineering, Platform
+Salary: $110,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 157
+Id: EMP-0157
+Name: Maria Johnson Jr.
+Department: IT, Infrastructure
+Salary: $325,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 158
+Id: EMP-0158
+Name: Chen Wilson III
+Department: Human Resources | Talent
+Salary: $72,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceptional: Top 5%
+Projects: Q4 Push: Owner, Enterprise | SMB Expansion
+
+### Record 159
+Id: EMP-0159
+Name: Chen O'Connor
+Department: Research & Development
+Salary: $165,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 160
+Id: EMP-0160
+Name: Benjamin Park
+Department: Finance: Treasury
+Salary: $165,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 161
+Id: EMP-0161
+Name: David Garcia
+Department: Research & Development
+Salary: $85,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 162
+Id: EMP-0162
+Name: Emma Hill
+Department: Human Resources | Talent
+Salary: $385,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 163
+Id: EMP-0163
+Name: Maria O'Connor
+Department: Product: Core
+Salary: $95,000.00/year
+Clearance: Level 1: Basic
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 164
+Id: EMP-0164
+Name: Maria Taylor-Brown
+Department: IT, Infrastructure
+Salary: $275,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceptional: Top 5%
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 165
+Id: EMP-0165
+Name: David Park
+Department: Security | Risk
+Salary: $275,000.00/year
+Clearance: Level 2: Confidential
+Rating: Exceeds Expectations: Top 20%
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 166
+Id: EMP-0166
+Name: Robert Taylor-Brown
+Department: Human Resources | Talent
+Salary: $125,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 167
+Id: EMP-0167
+Name: Olivia Lopez
+Department: Marketing, Brand
+Salary: $145,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Exceptional: Top 5%
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 168
+Id: EMP-0168
+Name: Isabella Lopez
+Department: Marketing, Brand
+Salary: $72,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2
+
+### Record 169
+Id: EMP-0169
+Name: Lisa Stevens
+Department: Research & Development
+Salary: $72,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Promotion Ready
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 170
+Id: EMP-0170
+Name: Evelyn Wei-Lin
+Department: Finance: Treasury
+Salary: $110,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 171
+Id: EMP-0171
+Name: Alexandra Young-Kim
+Department: IT, Infrastructure
+Salary: $275,000.00/year
+Clearance: Level 1: Basic
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 172
+Id: EMP-0172
+Name: William Harris
+Department: Product: Core
+Salary: $185,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 173
+Id: EMP-0173
+Name: Maria Martinez
+Department: Finance: Treasury
+Salary: $185,000.00/year
+Clearance: Level 3: Secret
+Rating: Meets Expectations
+Projects: Compliance 2025: Lead | Audit: Support
+
+### Record 174
+Id: EMP-0174
+Name: Harper Park
+Department: Operations, Logistics
+Salary: $385,000.00/year
+Clearance: Level 4: Top Secret
+Rating: Meets Expectations
+Projects: Platform v3: Tech Lead | Migration: Owner
+
+### Record 175
+Id: EMP-0175
+Name: Abigail Garcia
+Department: Research & Development
+Salary: $125,000.00/year
+Clearance: Level 3: Secret
+Rating: Meets Expectations
+Projects: Culture 2025: Sponsor | DEI: Executive Lead
+
+### Record 176
+Id: EMP-0176
+Name: Jacob Jackson
+Department: Marketing, Brand
+Salary: $385,000.00/year
+Clearance: Level 5: Executive
+Rating: Exceeds Expectations: Top 20%
+Projects: Project Aurora: Lead | Nexus: Contributor
+
+### Record 177
+Id: EMP-0177
+Name: Ethan Tanaka-Morrison
+Department: Marketing, Brand
+Salary: $110,000.00/year
+Clearance: Level 5: Executive
+Rating: Developing: Needs Improvement
+Projects: Brand Refresh: Lead | Campaign: Q1, Q2

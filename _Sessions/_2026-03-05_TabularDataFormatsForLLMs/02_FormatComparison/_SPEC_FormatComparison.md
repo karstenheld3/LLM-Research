@@ -15,7 +15,7 @@
 ## MUST-NOT-FORGET
 
 - Same data generation logic as Test 01 (same seed, columns, filters, adversarial chars)
-- 8 formats: kv_colon_space, markdown_table, csv_quoted, csv_raw, json, xml, yaml, toml
+- 8 formats: kv_colon_space, markdown_table, csv_quoted, csv, json, xml, yaml, toml
 - Excluded: kv_colon, kv_double_colon (per user request)
 - Use exact same extraction task and evaluation criteria
 - Per-request costs and times (not total test costs)
@@ -41,7 +41,7 @@
 **Problem:** Test 01 established CSV scale limits, but does input format affect scale limits? Academic research shows 20-76% accuracy variance from format changes (Sclar 2024, Microsoft CFPO 2025), but no study tests tabular data formats at scale for extraction tasks.
 
 **Research Questions:**
-1. Does token efficiency correlate with scale limits? (csv_raw 1.0x vs xml 2.1x)
+1. Does token efficiency correlate with scale limits? (csv 1.0x vs xml 2.1x)
 2. Do structured formats (JSON, XML) aid or hinder comprehension?
 3. Do format preferences differ between model families (GPT vs Claude)?
 
@@ -52,7 +52,7 @@
 | H2 | JSON not optimal despite structure | Compare JSON vs CSV limits | CSV >= JSON |
 | H3 | Format preferences differ by model family | Compare GPT-5 vs Claude rankings | Different optimal formats |
 | H4 | Optimal format depends on complexity | Compare rankings at different scales | Rankings may shift |
-| H5 | Token-efficient formats enable higher scale | Compare csv_raw vs xml limits | csv_raw > xml by ~2x |
+| H5 | Token-efficient formats enable higher scale | Compare csv vs xml limits | csv > xml by ~2x |
 | H6 | Key-value outperforms structured formats | Compare kv_colon_space vs JSON/XML | kv >= JSON/XML |
 
 **Solution:**
@@ -75,7 +75,7 @@ A **DataFormat** specifies the output format for generated test data.
 
 **Supported formats:**
 - `csv_quoted` - Quoted CSV (Test 01 baseline)
-- `csv_raw` - Unquoted CSV
+- `csv` - Unquoted CSV
 - `kv_colon_space` - Key: value pairs with space after colon
 - `markdown_table` - Markdown table format
 - `json` - JSON array of objects
@@ -133,7 +133,7 @@ Extends Test 01 TestConfig with `output_format` field.
 ## 3. Functional Requirements
 
 **TBLF-FR-10: Multi-Format Data Generation**
-- Support `output_format` parameter in config: csv_quoted, csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- Support `output_format` parameter in config: csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
 - Same data generation logic (same seed produces same records regardless of format)
 - Output files: `data.csv`, `data.txt`, `data.json`, `data.xml`, `data.yaml`, `data.toml`, `data.md`
 
@@ -163,7 +163,7 @@ Models to test (from Test 01 production recommendations):
 
 ## 4. Design Decisions
 
-**TBLF-DD-10:** 8 formats tested (excluding kv_colon, kv_double_colon). Rationale: Cover range from compact (csv_raw) to verbose (xml) to test token efficiency vs comprehension hypothesis.
+**TBLF-DD-10:** 8 formats tested (excluding kv_colon, kv_double_colon). Rationale: Cover range from compact (csv) to verbose (xml) to test token efficiency vs comprehension hypothesis.
 
 **TBLF-DD-11:** Same seed, columns, filters as Test 01. Rationale: Only format changes - enables direct comparison of scale limits.
 
@@ -226,7 +226,7 @@ def load_data(instance_path: Path) -> str:
 
 ### Token/Size Comparison (300 rows, from POC analysis)
 
-- **csv_raw** - 148 KB - 1.00x (baseline)
+- **csv** - 148 KB - 1.00x (baseline)
 - **csv_quoted** - 156 KB - 1.06x
 - **markdown_table** - 197 KB - 1.33x
 - **kv_colon_space** - 217 KB - 1.47x
@@ -243,7 +243,7 @@ def load_data(instance_path: Path) -> str:
 "EMP-0001","Sarah Mitchell-Reynolds","Research & Development","$185,000",...
 ```
 
-**csv_raw:**
+**csv:**
 ```
 id,name,department,salary,...
 EMP-0001,Sarah Mitchell-Reynolds,Research & Development,$185,000,...
@@ -323,7 +323,7 @@ name = "Sarah Mitchell-Reynolds"
 
 - [ ] `01_generate_data.py` supports `output_format` config parameter
 - [ ] `01_generate_data.py` implements all 8 format functions
-- [ ] Format functions: csv_quoted, csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- [ ] Format functions: csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
 - [ ] All format functions preserve adversarial characters
 - [ ] Same seed produces identical records for all formats
 - [ ] `02_execute_and_evaluate.py` loads data.csv, data.txt, data.json, data.xml, data.yaml, data.toml, data.md
@@ -342,7 +342,7 @@ name = "Sarah Mitchell-Reynolds"
 
 **[2026-03-09 19:48]**
 - Changed: Scope expanded from kv_colon only to 8 formats
-- Added: csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- Added: csv, kv_colon_space, markdown_table, json, xml, yaml, toml
 - Removed: kv_colon, kv_double_colon (per user request)
 - Updated: Test matrix 8 formats x 5 models = 35 new tests
 
