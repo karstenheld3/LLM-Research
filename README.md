@@ -17,7 +17,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Reasoning architecture enables systematic data processing that temperature sampling cannot achieve
 
 - **Higher reasoning effort dramatically increases scale limit** (up to 10x improvement)
-  - gpt-5-mini: low→medium = 6x rows (65→389), 4x time (~1→~4 min), cheaper ($0.13→~$0.05)
+  - gpt-5-mini: low → medium = 6x rows (65 → 389), 4x time (~1 → ~4 min), cost ~$0.13 → N/A*
   - Diminishing returns for gpt-5: low→high = 38% more rows (356→492), 8x time (~2.4→~20 min), 7x cost ($0.87→$5.47)
 
 - **Comprehension is the primary failure mode, not truncation**
@@ -35,7 +35,7 @@ Balancing accuracy, cost, and speed for real-world use (times are per single LLM
 
 - **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.87) - excellent balance of scale, speed, and cost
 - **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.57) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (389 rows, ~4 min/request, ~$0.05) - highest scale at lowest cost
+- **Maximum scale**: gpt-5-mini medium (389 rows, ~4 min/request, cost N/A*) - highest scale, cost tracking error
 - **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.89) - when Anthropic API is required
 
 **NOT recommended for production:**
