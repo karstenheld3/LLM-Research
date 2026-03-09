@@ -133,35 +133,6 @@ Clearance: Level 4: Top Secret
 - **Finding:** Format capability most stable across context lengths
 - **Finding:** Recognition degrades most with increasing context
 
-### Vendor Documentation
-
-**OpenAI Prompt Engineering Guide:**
-- URL: https://developers.openai.com/api/docs/guides/prompt-engineering
-- **Finding:** Markdown headers/lists mark distinct sections, communicate hierarchy
-- **Finding:** XML tags delineate content boundaries (documents, examples)
-- **Finding:** XML attributes define metadata about content
-- **Finding:** Recommended order: Identity → Instructions → Examples → Context
-
-
-**Anthropic Claude Prompting Best Practices:**
-- URL: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices
-- **Finding:** XML tags help parse complex prompts unambiguously
-- **Finding:** Use `<instructions>`, `<context>`, `<input>` to reduce misinterpretation
-- **Finding:** Nest tags for hierarchy: `<documents><document index="n">...</document></documents>`
-- **Finding:** Match prompt style to desired output style
-
-**Anthropic XML Tags Guide:**
-- URL: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags
-- URL: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags
-- **Finding:** XML tags are "game-changer" for multi-component prompts
-- **Finding:** Use `<example>`, `<examples>`, `<formatting>` tags
-- **Finding:** Claude trained with XML in training data
-
-**Anthropic Long Context Tips:**
-- URL: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips
-- **Finding:** Structure documents with `<document>`, `<document_content>`, `<source>` subtags
-- **Finding:** 200K token context window for Claude 3 models
-
 ## Expected Outcomes
 
 **If CSV outperforms other formats:**
