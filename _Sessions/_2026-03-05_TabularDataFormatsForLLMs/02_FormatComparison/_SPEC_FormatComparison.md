@@ -1,3 +1,5 @@
+<DevSystem MarkdownTablesAllowed=true />
+
 # SPEC: Format Comparison Test Framework
 
 **Doc ID**: TBLF-SP02
@@ -85,7 +87,7 @@ A **DataFormat** specifies the output format for generated test data.
 ```json
 {
   "data_generation": {
-    "output_format": "kv_colon"
+    "output_format": "json"
   }
 }
 ```
@@ -97,15 +99,15 @@ Extends Test 01 TestConfig with `output_format` field.
 **Schema:**
 ```json
 {
-  "test_name": "FormatComparison_KVColon",
-  "description": "Extract filtered records from kv_colon data",
+  "test_name": "FormatComparison_JSON",
+  "description": "Extract filtered records from JSON data",
   
   "data_generation": {
     "number_of_rows": 100,
     "number_of_columns": 7,
     "seed": 42,
     "include_adversarial_chars": true,
-    "output_format": "kv_colon"
+    "output_format": "json"
   },
   
   "extraction_task": {
@@ -131,11 +133,9 @@ Extends Test 01 TestConfig with `output_format` field.
 ## 3. Functional Requirements
 
 **TBLF-FR-10: Multi-Format Data Generation**
-- Support `output_format` parameter in config: `csv`, `kv_colon`
-- CSV format: quoted, one record per line (existing behavior)
-- kv_colon format: `### Record N` header, `Key:Value` pairs, blank line separator
-- Same data generation logic (same seed produces same records)
-- Output file: `data.csv` for CSV, `data.txt` for kv_colon
+- Support `output_format` parameter in config: csv_quoted, csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
+- Same data generation logic (same seed produces same records regardless of format)
+- Output files: `data.csv`, `data.txt`, `data.json`, `data.xml`, `data.yaml`, `data.toml`, `data.md`
 
 **TBLF-FR-11: Format-Agnostic Execution**
 - Load data from `data.csv` OR `data.txt` (whichever exists)
@@ -333,6 +333,12 @@ name = "Sarah Mitchell-Reynolds"
 - [ ] Results comparable to Test 01 CSV baselines
 
 ## 10. Document History
+
+**[2026-03-09 20:15]**
+- Added: DevSystem tag for Markdown tables
+- Added: Research questions and testable hypotheses (H2-H6) to Scenario
+- Fixed: FR-10 updated to list all 8 formats
+- Fixed: Code examples updated from kv_colon to json
 
 **[2026-03-09 19:48]**
 - Changed: Scope expanded from kv_colon only to 8 formats
