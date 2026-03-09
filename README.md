@@ -13,7 +13,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 ## Key Findings
 
 - **Reasoning models massively outperform temperature models** (65-89x better scale limits)
-  - gpt-5-mini extracts 389 rows reliably vs gpt-4o-mini at only 6 rows
+  - gpt-5-mini reliably extracts ~117 matching records from 389 rows vs gpt-4o-mini failing at 6 rows (~2 matches)
   - Reasoning architecture enables systematic data processing that temperature sampling cannot achieve
 
 - **Higher reasoning effort dramatically increases scale limit** (up to 10x improvement)
