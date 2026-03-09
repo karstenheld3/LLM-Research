@@ -8,6 +8,18 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 **Status:** 11/12 tests complete (March 2026)
 
+## Hypothesis Sources
+
+Hypotheses derive from two sources:
+
+1. **TK-001 Internal Benchmark** (March 2026) - Prior format comparison testing 10 variants on gpt-5-mini extraction tasks. Documented in `_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`.
+
+2. **Academic Literature** - Theoretical foundations from peer-reviewed research:
+   - [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) (Wei et al., NeurIPS 2022) - Reasoning improves complex tasks
+   - [LIFBench](https://arxiv.org/abs/2411.07037) (Wu et al., 2024) - Long-context instruction following degrades at scale
+   - [Does Prompt Formatting Impact LLM?](https://arxiv.org/abs/2411.10541) (He et al., Microsoft/MIT 2024) - Format affects performance up to 40%
+   - [CFPO](https://arxiv.org/abs/2502.04295) (Liu et al., Microsoft Research 2025) - Content-format integration
+
 ## Hypothesis Results
 
 ### H1: Scale Limit 300-600 Rows
@@ -16,7 +28,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ✅ SUPPORTED |
 | **Hypothesis** | gpt-5-mini can reliably process 300-600 CSV rows for extraction tasks |
-| **Source** | TK-001 benchmark showing 100% reliability at 300 rows, 43% failure at 600 rows |
+| **Source** | TK-001 v4/v5: 100% reliability at 300 rows, 43% failure at 600 rows ([LLMO-IN01] §6.2) |
 | **Reasoning** | Binary search found exact boundary at 389 rows - within predicted range |
 | **Data** | gpt-5-mini medium: 389 rows (Precision=1.00, Recall=1.00 at 378 rows, failed at 395) |
 
@@ -26,7 +38,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ⚠️ PARTIALLY SUPPORTED |
 | **Hypothesis** | At scale limit, models either succeed completely or fail significantly (cliff behavior) |
-| **Source** | TK-001 v5 observation of sudden accuracy drops |
+| **Source** | TK-001 v5: bimodal behavior at 600 rows ([LLMO-IN01] §6.2) |
 | **Reasoning** | Behavior differs by model type - reasoning models show cliff, temperature models show slope |
 | **Data** | gpt-5-mini: 100%→0% within 17 rows. gpt-4o: gradual degradation (P=0.89→0.47 over range) |
 
@@ -36,7 +48,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ❌ NOT SUPPORTED |
 | **Hypothesis** | Output truncation is the primary failure mode at scale |
-| **Source** | TK-001 attribution to output length limits |
+| **Source** | TK-001 attribution (later disproved); [LIFBench](https://arxiv.org/abs/2411.07037) context degradation theory |
 | **Reasoning** | Comprehension failures dominate; context utilization <10% at failure proves attention is the bottleneck |
 | **Data** | 9/11 tests failed due to comprehension, 2/11 truncation. Average context usage at failure: 6.5% |
 
@@ -46,7 +58,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ✅ SUPPORTED |
 | **Hypothesis** | Higher reasoning effort extends the scale limit |
-| **Source** | Hypothesis based on reasoning model architecture |
+| **Source** | [Chain-of-Thought](https://arxiv.org/abs/2201.11903) reasoning theory; model architecture hypothesis |
 | **Reasoning** | Dramatic improvement for gpt-5-mini (10x), diminishing returns for gpt-5 (38%) |
 | **Data** | gpt-5-mini: low=65, medium=389, high=675+ (+938%). gpt-5: low=356, medium=450, high=492 (+38%) |
 
@@ -56,7 +68,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ✅ STRONGLY SUPPORTED |
 | **Hypothesis** | Reasoning models (gpt-5) outperform temperature models (gpt-4o) for tabular extraction |
-| **Source** | Architectural differences between model families |
+| **Source** | [CoT Prompting](https://arxiv.org/abs/2201.11903) + [Zero-shot CoT](https://arxiv.org/abs/2205.11916) reasoning emergence |
 | **Reasoning** | Massive performance gap makes temperature models unsuitable for tabular extraction |
 | **Data** | Mini tier: gpt-5-mini (389) vs gpt-4o-mini (6) = **65x better**. Full tier: gpt-5 (356) vs gpt-4o (4) = **89x better** |
 
@@ -66,7 +78,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 |---|---|
 | **Status** | ⏳ DEFERRED |
 | **Hypothesis** | Quoted CSV is optimal format for LLM tabular extraction at scale |
-| **Source** | TK-001 format benchmarks (CSV ranked #3 of 10 formats) |
+| **Source** | TK-001 format benchmarks ([LLMO-IN01] §6.2); [CFPO](https://arxiv.org/abs/2502.04295) format impact theory |
 | **Reasoning** | Test 02 will compare formats directly at scale limits |
 | **Data** | Pending future test |
 
