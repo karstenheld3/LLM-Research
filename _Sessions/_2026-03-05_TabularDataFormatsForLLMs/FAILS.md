@@ -10,6 +10,33 @@
 
 ## Active Issues
 
+### 2026-03-10 - Test Configuration
+
+#### [HIGH] `TBLF-FL-005` Test 02 Column Configuration Mismatch
+
+- **When**: 2026-03-10 07:47
+- **Where**: `02_FormatComparison/_Scripts/01_generate_data.py` - data generation setup
+- **What**: Test 02 used 7 out of 7 columns instead of replicating Test 01's 7 out of 20 columns configuration. This invalidates all baseline comparisons between Test 01 and Test 02 results.
+- **Why it went wrong**:
+  1. Did not verify Test 01's exact column configuration before implementing Test 02
+  2. Assumed "7 columns" meant using all available columns, not selecting 7 from a larger set
+  3. Failed to read Test 01 config files to understand the exact setup
+  4. No cross-verification step between Test 01 and Test 02 configurations
+- **Evidence**: Test 01 baseline data shows different scale limits than Test 02 csv_quoted results for same models, indicating different test conditions
+- **Suggested fix**: 
+  1. Review Test 01 configuration to identify exact 20 columns and which 7 were selected
+  2. Update Test 02 data generation to match
+  3. Re-run all 40 tests with correct configuration
+  4. Add configuration verification step to test setup procedures
+
+**Configuration comparison**:
+```
+Test 01: 7 columns selected FROM 20 available columns
+Test 02: 7 columns selected FROM 7 available columns (WRONG)
+
+Result: Baseline comparisons invalid - different data complexity
+```
+
 ### 2026-03-06 - Terminal Management
 
 #### [MEDIUM] `TBLF-FL-004` Launching Terminals Without Checking Existing Ones
@@ -96,6 +123,9 @@ print(f"  {status} Precision={metrics['precision']:.2f} Recall={metrics['recall'
 (none yet)
 
 ## Document History
+
+**[2026-03-10 07:47]**
+- Added: TBLF-FL-005 - Test 02 column configuration mismatch (7/7 vs 7/20)
 
 **[2026-03-05 19:01]**
 - Added: TBLF-FL-003 - Not following Full Disclosure principle
