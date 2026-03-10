@@ -14,27 +14,17 @@
 
 ## Executive Summary
 
-**Status**: 18/40 tests complete. All csv_quoted baselines done.
+**Status**: 39/40 tests complete. 1 pending (gpt-5-mini yaml).
 
-**NOTE**: Test includes csv_quoted baseline runs to confirm consistency with Test 01.
+### Test Setup
 
-### CSV Baselines (from Test 01 - VERIFIED)
+**IMPORTANT**: This test uses a **simplified dataset** (7 columns from 7 available) that differs from Test 01 (7 columns selected from 20 available). Results are **not directly comparable** to Test 01 baselines. See `TBLF-FL-005` in FAILS.md.
 
-| Model | Effort | Scale Limit | Failure Mode | Context % | Time/req | Cost/run |
-|-------|--------|-------------|--------------|-----------|----------|----------|
-| gpt-5-mini | medium | **389** | comprehension | ~2% | ~4 min | $0.00* |
-| gpt-5 | low | **356** | comprehension | 2.1% | ~2.4 min | $0.87 |
-| gpt-5.2 | medium | **215** | comprehension | 1.4% | ~1 min | $0.57 |
-| claude-opus | medium | **177** | truncation | 25.1% | ~1.6 min | $0.00* |
-| claude-sonnet | medium | **168** | comprehension | 8.4% | ~1.4 min | $0.89 |
-
-*Cost tracking errors in Test 01
-
-**Test 01 Key Findings:**
-- Reasoning models outperform temperature models by 65x (gpt-5-mini vs gpt-4o-mini)
-- Higher effort = higher scale: gpt-5 low→high = +38%
-- Comprehension is primary failure mode (8/9 tests), not truncation
-- Context window NOT the bottleneck (failures at <5% utilization)
+**Configuration:**
+- 7 columns: id, name, department, salary, hire_date, is_active, email
+- Filter: department = "Engineering" AND salary > 75000
+- Seed: 42 (deterministic)
+- Binary search with 3 runs per scale point
 
 ### Hypothesis Status
 
@@ -48,63 +38,63 @@
 
 ### Results Table (All Tests)
 
-| Model | Effort | Format | Scale Limit | vs CSV | Time/req | Cost/req | Status |
-|-------|--------|--------|-------------|--------|----------|----------|--------|
-| gpt-5-mini | medium | csv_quoted | **437** | baseline | ~279 sec | $0.10 | Done |
-| gpt-5-mini | medium | **Test01-csv** | **389** | (Test 01) | ~4 min | $0.00* | Baseline |
-| gpt-5-mini | medium | csv | **194** | 44% | ~216 sec | $0.07 | Done |
-| gpt-5-mini | medium | kv_colon_space | - | - | - | - | Pending |
-| gpt-5-mini | medium | markdown_table | - | - | - | - | Pending |
-| gpt-5-mini | medium | json | - | - | - | - | Pending |
-| gpt-5-mini | medium | xml | - | - | - | - | Pending |
-| gpt-5-mini | medium | yaml | - | - | - | - | Pending |
-| gpt-5-mini | medium | toml | - | - | - | - | Pending |
-| gpt-5 | low | csv_quoted | **222** | baseline | ~160 sec | $0.32 | Done |
-| gpt-5 | low | **Test01-csv** | **356** | (Test 01) | ~2.4 min | $0.87 | Baseline |
-| gpt-5 | low | csv | **166** | 75% | ~137 sec | $0.25 | Done |
-| gpt-5 | low | kv_colon_space | - | - | - | - | Pending |
-| gpt-5 | low | markdown_table | - | - | - | - | Pending |
-| gpt-5 | low | json | - | - | - | - | Pending |
-| gpt-5 | low | xml | - | - | - | - | Pending |
-| gpt-5 | low | yaml | - | - | - | - | Pending |
-| gpt-5 | low | toml | - | - | - | - | Pending |
-| gpt-5.2 | medium | csv_quoted | **268** | baseline | ~82 sec | $0.37 | Done |
-| gpt-5.2 | medium | **Test01-csv** | **215** | (Test 01) | ~1 min | $0.57 | Baseline |
-| gpt-5.2 | medium | csv | **215** | 100% | ~75 sec | $0.34 | Done |
-| gpt-5.2 | medium | kv_colon_space | **100** | 47% | ~27 sec | $0.15 | Done |
-| gpt-5.2 | medium | markdown_table | **154** | 72% | ~67 sec | $0.29 | Done |
-| gpt-5.2 | medium | json | **241** | 112% | ~72 sec | $0.40 | Done |
-| gpt-5.2 | medium | xml | **261** | 121% | ~92 sec | $0.46 | Done |
-| gpt-5.2 | medium | yaml | **134** | 62% | ~38 sec | $0.22 | Done |
-| gpt-5.2 | medium | toml | **46** | 21% | ~22 sec | $0.12 | Done |
-| claude-opus | medium | csv_quoted | **171** | baseline | ~75 sec | $0.72 | Done |
-| claude-opus | medium | **Test01-csv** | **177** | (Test 01) | ~1.6 min | $0.00* | Baseline |
-| claude-opus | medium | csv | **232** | 136% | ~97 sec | $0.92 | Done |
-| claude-opus | medium | kv_colon_space | **221** | 129% | ~99 sec | $0.98 | Done |
-| claude-opus | medium | markdown_table | **221** | 129% | ~109 sec | $0.93 | Done |
-| claude-opus | medium | json | - | - | - | - | Pending |
-| claude-opus | medium | xml | - | - | - | - | Pending |
-| claude-opus | medium | yaml | - | - | - | - | Pending |
-| claude-opus | medium | toml | - | - | - | - | Pending |
-| claude-sonnet | medium | csv_quoted | **120** | baseline | ~57 sec | $0.29 | Done |
-| claude-sonnet | medium | **Test01-csv** | **168** | (Test 01) | ~1.4 min | $0.89 | Baseline |
-| claude-sonnet | medium | csv | **126** | 105% | ~64 sec | $0.30 | Done |
-| claude-sonnet | medium | kv_colon_space | **126** | 105% | ~72 sec | $0.37 | Done |
-| claude-sonnet | medium | markdown_table | **126** | 105% | ~70 sec | $0.32 | Done |
-| claude-sonnet | medium | json | - | - | - | - | Pending |
-| claude-sonnet | medium | xml | - | - | - | - | Pending |
-| claude-sonnet | medium | yaml | - | - | - | - | Pending |
-| claude-sonnet | medium | toml | - | - | - | - | Pending |
+Percentages relative to best format per model (100% = max scale limit).
 
-**Total: 40 tests** (5 models × 8 formats, including csv_quoted baseline verification)
+| Model            | Effort | Format         | Scale | vs Best | In (K) | Out (K) | Time     | Cost   |
+|------------------|--------|----------------|-------|---------|--------|---------|----------|--------|
+| gpt-5-mini       | medium | kv_colon_space | **500** | 100%  | 98     | 42      | ~9.3 min | $0.13  |
+| gpt-5-mini       | medium | csv_quoted     | **437** | 87%   | 62     | 39      | ~4.7 min | $0.10  |
+| gpt-5-mini       | medium | json           | **335** | 67%   | 86     | 35      | ~5.1 min | $0.10  |
+| gpt-5-mini       | medium | xml            | **296** | 59%   | 87     | 42      | ~4.0 min | $0.10  |
+| gpt-5-mini       | medium | toml           | **296** | 59%   | 63     | 29      | ~3.7 min | $0.09  |
+| gpt-5-mini       | medium | csv            | **194** | 39%   | 28     | 27      | ~3.6 min | $0.07  |
+| gpt-5-mini       | medium | markdown_table | **163** | 33%   | 24     | 22      | ~2.2 min | $0.07  |
+| gpt-5-mini       | medium | yaml           | -       | -     | -      | -       | -        | -      |
+|                  |        |                |         |       |        |         |          |        |
+| gpt-5            | low    | yaml           | **333** | 100%  | 73     | 38      | ~2.6 min | $0.42  |
+| gpt-5            | low    | xml            | **327** | 98%   | 96     | 32      | ~3.2 min | $0.42  |
+| gpt-5            | low    | json           | **249** | 75%   | 64     | 32      | ~3.0 min | $0.37  |
+| gpt-5            | low    | kv_colon_space | **238** | 71%   | 47     | 29      | ~3.9 min | $0.36  |
+| gpt-5            | low    | csv_quoted     | **222** | 67%   | 33     | 23      | ~2.7 min | $0.32  |
+| gpt-5            | low    | toml           | **216** | 65%   | 46     | 23      | ~2.4 min | $0.34  |
+| gpt-5            | low    | csv            | **166** | 50%   | 24     | 21      | ~2.3 min | $0.25  |
+| gpt-5            | low    | markdown_table | **83**  | 25%   | 13     | 13      | ~2.4 min | $0.20  |
+|                  |        |                |         |       |        |         |          |        |
+| gpt-5.2          | medium | csv_quoted     | **268** | 100%  | 39     | 20      | ~1.4 min | $0.37  |
+| gpt-5.2          | medium | xml            | **261** | 97%   | 77     | 24      | ~1.5 min | $0.46  |
+| gpt-5.2          | medium | json           | **241** | 90%   | 62     | 20      | ~1.2 min | $0.40  |
+| gpt-5.2          | medium | csv            | **215** | 80%   | 30     | 19      | ~1.3 min | $0.34  |
+| gpt-5.2          | medium | markdown_table | **154** | 57%   | 22     | 18      | ~1.1 min | $0.29  |
+| gpt-5.2          | medium | yaml           | **134** | 50%   | 30     | 10      | ~0.6 min | $0.22  |
+| gpt-5.2          | medium | kv_colon_space | **100** | 37%   | 20     | 6       | ~0.5 min | $0.15  |
+| gpt-5.2          | medium | toml           | **46**  | 17%   | 11     | 3       | ~0.4 min | $0.12  |
+|                  |        |                |         |       |        |         |          |        |
+| claude-opus-4.5  | medium | json           | **265** | 100%  | 81     | 30      | ~1.8 min | $1.23  |
+| claude-opus-4.5  | medium | yaml           | **259** | 98%   | 69     | 29      | ~1.7 min | $1.03  |
+| claude-opus-4.5  | medium | csv            | **232** | 88%   | 38     | 29      | ~1.6 min | $0.92  |
+| claude-opus-4.5  | medium | kv_colon_space | **221** | 83%   | 51     | 30      | ~1.7 min | $0.98  |
+| claude-opus-4.5  | medium | markdown_table | **221** | 83%   | 38     | 28      | ~1.8 min | $0.93  |
+| claude-opus-4.5  | medium | xml            | **182** | 69%   | 63     | 29      | ~1.8 min | $0.82  |
+| claude-opus-4.5  | medium | toml           | **182** | 69%   | 47     | 27      | ~1.7 min | $0.97  |
+| claude-opus-4.5  | medium | csv_quoted     | **171** | 65%   | 29     | 27      | ~1.3 min | $0.82  |
+|                  |        |                |         |       |        |         |          |        |
+| claude-sonnet-4.5| medium | json           | **189** | 100%  | 58     | 22      | ~1.6 min | $0.54  |
+| claude-sonnet-4.5| medium | csv            | **126** | 67%   | 21     | 16      | ~1.1 min | $0.30  |
+| claude-sonnet-4.5| medium | kv_colon_space | **126** | 67%   | 29     | 19      | ~1.2 min | $0.37  |
+| claude-sonnet-4.5| medium | markdown_table | **126** | 67%   | 22     | 16      | ~1.2 min | $0.32  |
+| claude-sonnet-4.5| medium | csv_quoted     | **120** | 63%   | 21     | 14      | ~1.0 min | $0.29  |
+| claude-sonnet-4.5| medium | yaml           | **120** | 63%   | 33     | 15      | ~1.1 min | $0.32  |
+| claude-sonnet-4.5| medium | toml           | **115** | 61%   | 30     | 14      | ~1.0 min | $0.31  |
+| claude-sonnet-4.5| medium | xml            | **99**  | 52%   | 35     | 12      | ~1.0 min | $0.33  |
+
+**Total: 40 tests** (5 models × 8 formats)
 
 ## MUST-NOT-FORGET
 
-- Use CSV baseline as starting point for binary search (faster convergence)
-- Same seed (42), columns, filters as Test 01 - only format changes
-- **RUN csv_quoted baseline tests to verify consistency with Test 01**
+- **TBLF-FL-005**: Test uses 7/7 columns, NOT Test 01's 7/20 - results not comparable
+- Seed: 42, Filter: department="Engineering" AND salary>75000
 - Capture per-request metrics: time/req, cost/req (NOT totals)
-- Run cheapest model (gpt-5.2) first to validate format functions
+- Best format varies by model family (see results)
 
 ## Table of Contents
 
