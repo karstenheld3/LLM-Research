@@ -47,7 +47,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 ### By Response Time (Primary Selection Criterion)
 
-| Tier     | Time      | Model + Format                    | Scale    | Cost/KC  | Use Case                    |
+| Tier     | Time      | Model + Format                    | Scale    | CPKC     | Use Case                    |
 |----------|-----------|-----------------------------------|----------|----------|-----------------------------|
 | Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.197   | Interactive, user-facing    |
 | Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.252   | Alternative format          |
