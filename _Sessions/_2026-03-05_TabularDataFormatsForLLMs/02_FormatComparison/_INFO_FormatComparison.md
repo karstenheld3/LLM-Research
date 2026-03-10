@@ -10,41 +10,89 @@
 
 **Research Question:** Does input format affect LLM extraction scale limits?
 
-**Hypothesis:** Token-efficient formats may enable higher scale limits, but structured formats may aid comprehension:
-- csv_raw is most compact (1.00x baseline)
-- xml is most verbose (2.12x baseline)
-- Structured formats (json, yaml) may aid parsing despite larger size
+**Status:** 40/40 tests complete (2026-03-10)
 
-**Prior Research Findings** (from TK-001 benchmark at 300 records, gpt-5-mini):
-- Key-value formats outperform structured formats (XML, markdown tables have highest variance)
-- Separator style (`:` vs `: ` vs `::`) shows no measurable difference on modern models
-- CSV (quoted and raw) achieves near-perfect precision (99.9-100%)
-- XML has highest variance (Std 0.161) and 1/15 failure rate
-- Scale threshold: model reliable at 300 records, unreliable at 600+
+### Key Findings
 
-**Test Design:**
-- Same extraction task as Test 01 (CSVScaleLimits)
-- Same data generation (7 columns, adversarial chars, compound filter)
-- 8 formats: csv_quoted, csv_raw, kv_colon_space, markdown_table, json, xml, yaml, toml
-- Excluded: kv_colon, kv_double_colon
-- 5 models from Test 01 production recommendations
+1. **Format preferences differ dramatically by model family** (H3 CONFIRMED)
+   - GPT models prefer: yaml, xml, kv_colon_space
+   - Claude models prefer: json (both opus and sonnet)
+   - Best format for one family can be worst for another
 
-### Testable Hypotheses
+2. **Token efficiency does NOT predict scale limits** (H5 CONTRADICTED)
+   - xml (2.12x tokens) outperforms csv (1.00x) on GPT models by 1.5-2x
+   - csv only outperforms xml on Claude models
+   - Structure aids comprehension more than compactness
 
-| ID | Hypothesis | Source | How to Test | Status |
-|----|------------|--------|-------------|--------|
-| H1 | Separator style (`:` vs `: `) affects scale limits | Sclar et al. 2024 | Compare kv_colon vs kv_colon_space | [CONTRADICTED by TK-001] |
-| H2 | JSON may not be optimal despite structure | Microsoft/MIT 2024 | Compare JSON vs CSV vs Markdown scale limits | Pending |
-| H3 | Format preferences differ by model family | Microsoft/MIT 2024 | Compare GPT-5 vs Claude format rankings | Pending |
-| H4 | Optimal format depends on content complexity | Microsoft CFPO 2025 | Compare format rankings at different row counts | Pending |
-| H5 | Token-efficient formats enable higher scale | Token efficiency theory | Compare csv_raw (1.00x) vs xml (2.12x) limits | Pending |
-| H6 | Key-value formats outperform structured formats | TK-001 benchmark | Compare kv_colon_space vs JSON/XML/YAML | Pending |
+3. **JSON is NOT universally optimal** (H2 MIXED)
+   - JSON is best for Claude (opus: 265, sonnet: 189)
+   - JSON is mid-tier for GPT (gpt-5-mini: 335 vs yaml: 500)
 
-**Expected Outcomes:**
-- If H5 confirmed: csv_raw > xml by ~2x in scale limit
-- If H6 confirmed: kv_colon_space matches or exceeds JSON/XML/YAML
-- If H2 confirmed: Markdown or CSV may outperform JSON
-- If H3 confirmed: GPT-5 and Claude have different optimal formats
+4. **Key-value format results are model-specific** (H6 CONTRADICTED)
+   - kv_colon_space ties for best on gpt-5-mini (500)
+   - kv_colon_space is worst on gpt-5.2 (100 vs csv_quoted: 268)
+
+### Best Format Per Model
+
+| Model           | Best Format    | Scale | Worst Format   | Scale | Ratio |
+|-----------------|----------------|-------|----------------|-------|-------|
+| gpt-5-mini      | yaml/kv        | 500   | markdown_table | 163   | 3.1x  |
+| gpt-5           | yaml           | 333   | markdown_table | 83    | 4.0x  |
+| gpt-5.2         | csv_quoted     | 268   | toml           | 46    | 5.8x  |
+| claude-opus-4.5 | json           | 265   | csv_quoted     | 171   | 1.5x  |
+| claude-sonnet   | json           | 189   | xml            | 99    | 1.9x  |
+
+**IMPORTANT**: Test 02 uses simplified dataset (7/7 columns) vs Test 01 (7/20 columns). Results not directly comparable to Test 01 baselines. See `TBLF-FL-005`.
+
+### Test Design
+
+- 8 formats: csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
+- 5 models: gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
+- Binary search with 3 runs per scale point
+- Filter: department="Engineering" AND salary>75000
+
+### Hypothesis Evaluation (Test 02 Results)
+
+| ID | Hypothesis | Source | Status | Evidence |
+|----|------------|--------|--------|----------|
+| H1 | Separator style affects scale | Sclar et al. 2024 | CONTRADICTED | TK-001: no measurable difference on modern models |
+| H2 | JSON not optimal despite structure | Microsoft/MIT 2024 | MIXED | GPT: JSON mid-tier (335 vs yaml 500). Claude: JSON is BEST (265, 189) |
+| H3 | Format preferences differ by family | Microsoft/MIT 2024 | **CONFIRMED** | GPT prefers yaml/xml. Claude prefers json. Rankings inverted. |
+| H4 | Optimal format depends on complexity | Microsoft CFPO 2025 | INCONCLUSIVE | Requires tests at multiple complexity levels |
+| H5 | Token-efficient formats enable higher scale | Token efficiency theory | **CONTRADICTED** | xml (2.12x) beats csv (1.00x) on GPT by 1.5-2x |
+| H6 | Key-value outperforms structured | TK-001 benchmark | **CONTRADICTED** | Only true for gpt-5-mini. Worst format for gpt-5.2 |
+
+### Detailed Evidence
+
+**H3 - Format preferences differ by model family:**
+```
+GPT-5-mini best:  yaml (500), kv_colon_space (500)
+GPT-5 best:       yaml (333), xml (327)
+GPT-5.2 best:     csv_quoted (268), xml (261)
+Claude-opus best: json (265), yaml (259)
+Claude-sonnet:    json (189), csv (126)
+```
+GPT models consistently rank yaml/xml high; Claude models rank json highest.
+
+**H5 - Token efficiency vs scale (csv 1.00x vs xml 2.12x):**
+```
+gpt-5-mini: csv (194) < xml (296) - xml 1.5x better despite 2x tokens
+gpt-5:      csv (166) < xml (327) - xml 2.0x better
+gpt-5.2:    csv (215) < xml (261) - xml 1.2x better
+claude-opus: csv (232) > xml (182) - csv 1.3x better
+claude-sonnet: csv (126) > xml (99) - csv 1.3x better
+```
+Token efficiency predicts scale for Claude but NOT for GPT.
+
+**H6 - Key-value vs structured formats:**
+```
+gpt-5-mini: kv (500) > json (335), xml (296) - CONFIRMED
+gpt-5:      kv (238) < yaml (333), xml (327) - CONTRADICTED
+gpt-5.2:    kv (100) << csv_quoted (268) - CONTRADICTED (worst format)
+claude-opus: kv (226) < json (265) - CONTRADICTED
+claude-sonnet: kv (126) < json (189) - CONTRADICTED
+```
+Only gpt-5-mini confirms TK-001 finding. Other models contradict.
 
 ### Format Size Comparison (300 rows)
 
@@ -193,15 +241,38 @@ Clearance: Level 4: Top Secret
   - "Format stable" refers to OUTPUT format instructions, NOT input data format
 - **Limitation:** Does not test CSV vs JSON vs XML for data representation
 
-## Expected Outcomes
+## Production Recommendations
 
-**If CSV outperforms other formats:**
-- Confirms token efficiency matters for scale
-- Supports CSV as optimal production format
+**Based on Test 02 results (40/40 tests, 2026-03-10):**
 
-**If key-value formats match or exceed CSV:**
-- Confirms TK-001 finding that format TYPE > token count
-- Key-value structure aids extraction comprehension
+### By Model Family
+
+**GPT Models:**
+- Use **yaml** or **xml** for maximum scale
+- Avoid markdown_table (consistently worst)
+- csv_quoted is safe middle-ground choice
+
+**Claude Models:**
+- Use **json** for maximum scale
+- csv is good second choice
+- Avoid xml (worst for both opus and sonnet)
+
+### Cost-Efficiency (CPKC - Cost Per Kilo Cells)
+
+| Model           | Best CPKC Format | CPKC   | Scale |
+|-----------------|------------------|--------|-------|
+| gpt-5-mini      | csv_quoted       | $0.033 | 437   |
+| gpt-5-mini      | yaml             | $0.034 | 500   |
+| gpt-5           | yaml             | $0.180 | 333   |
+| gpt-5.2         | toml             | $0.373 | 46    |
+| claude-opus     | csv              | $0.566 | 232   |
+| claude-sonnet   | csv              | $0.340 | 126   |
+
+**Best overall value:** gpt-5-mini with csv_quoted ($0.033/KC) or yaml ($0.034/KC, +14% scale)
+
+### Key Insight
+
+Format choice matters more than previously thought - up to **5.8x scale difference** between best and worst format on gpt-5.2. Always test your target model with your intended format.
 
 ## Source Documents
 
@@ -210,6 +281,14 @@ Clearance: Level 4: Top Secret
 - POC: `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/poc` - Format samples
 
 ## Document History
+
+**[2026-03-10 08:40]**
+- Added: Test 02 results (40/40 tests complete)
+- Added: Hypothesis evaluations with evidence
+- Added: Best format per model table
+- Added: Production recommendations
+- Added: Cost-efficiency analysis (CPKC)
+- Changed: Summary rewritten with key findings
 
 **[2026-03-09 19:48]**
 - Changed: Scope expanded from kv_colon only to 8 formats

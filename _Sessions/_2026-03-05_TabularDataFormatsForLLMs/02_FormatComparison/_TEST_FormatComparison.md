@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-**Status**: 39/40 tests complete. 1 pending (gpt-5-mini yaml).
+**Status**: 40/40 tests complete.
 
 ### Test Setup
 
@@ -28,64 +28,76 @@
 
 ### Hypothesis Status
 
-| ID | Hypothesis | Status | Evidence |
-|----|------------|--------|----------|
-| H2 | JSON not optimal despite structure | Pending | - |
-| H3 | Format preferences differ by model family | Pending | - |
-| H4 | Optimal format depends on complexity | Pending | - |
-| H5 | Token-efficient formats enable higher scale | Pending | - |
-| H6 | Key-value outperforms structured formats | Pending | - |
+| ID | Hypothesis | Source | Status | Evidence |
+|----|------------|--------|--------|----------|
+| H2 | JSON not optimal despite structure | Microsoft/MIT 2024 | MIXED | GPT: JSON mid-tier. Claude: JSON is BEST |
+| H3 | Format preferences differ by model family | Microsoft/MIT 2024 | **CONFIRMED** | GPT prefers yaml/xml. Claude prefers json |
+| H4 | Optimal format depends on complexity | Microsoft CFPO 2025 | INCONCLUSIVE | Requires multi-complexity tests |
+| H5 | Token-efficient formats enable higher scale | Token efficiency theory | **CONTRADICTED** | xml (2.12x) beats csv (1.00x) on GPT |
+| H6 | Key-value outperforms structured formats | TK-001 benchmark | **CONTRADICTED** | Only true for gpt-5-mini |
 
 ### Results Table (All Tests)
 
 Percentages relative to best format per model (100% = max scale limit).
 
-| Model            | Effort | Format         | Scale | vs Best | In (K) | Out (K) | Time     | Cost   |
-|------------------|--------|----------------|-------|---------|--------|---------|----------|--------|
-| gpt-5-mini       | medium | kv_colon_space | **500** | 100%  | 98     | 42      | ~9.3 min | $0.13  |
-| gpt-5-mini       | medium | csv_quoted     | **437** | 87%   | 62     | 39      | ~4.7 min | $0.10  |
-| gpt-5-mini       | medium | json           | **335** | 67%   | 86     | 35      | ~5.1 min | $0.10  |
-| gpt-5-mini       | medium | xml            | **296** | 59%   | 87     | 42      | ~4.0 min | $0.10  |
-| gpt-5-mini       | medium | toml           | **296** | 59%   | 63     | 29      | ~3.7 min | $0.09  |
-| gpt-5-mini       | medium | csv            | **194** | 39%   | 28     | 27      | ~3.6 min | $0.07  |
-| gpt-5-mini       | medium | markdown_table | **163** | 33%   | 24     | 22      | ~2.2 min | $0.07  |
-| gpt-5-mini       | medium | yaml           | -       | -     | -      | -       | -        | -      |
-|                  |        |                |         |       |        |         |          |        |
-| gpt-5            | low    | yaml           | **333** | 100%  | 73     | 38      | ~2.6 min | $0.42  |
-| gpt-5            | low    | xml            | **327** | 98%   | 96     | 32      | ~3.2 min | $0.42  |
-| gpt-5            | low    | json           | **249** | 75%   | 64     | 32      | ~3.0 min | $0.37  |
-| gpt-5            | low    | kv_colon_space | **238** | 71%   | 47     | 29      | ~3.9 min | $0.36  |
-| gpt-5            | low    | csv_quoted     | **222** | 67%   | 33     | 23      | ~2.7 min | $0.32  |
-| gpt-5            | low    | toml           | **216** | 65%   | 46     | 23      | ~2.4 min | $0.34  |
-| gpt-5            | low    | csv            | **166** | 50%   | 24     | 21      | ~2.3 min | $0.25  |
-| gpt-5            | low    | markdown_table | **83**  | 25%   | 13     | 13      | ~2.4 min | $0.20  |
-|                  |        |                |         |       |        |         |          |        |
-| gpt-5.2          | medium | csv_quoted     | **268** | 100%  | 39     | 20      | ~1.4 min | $0.37  |
-| gpt-5.2          | medium | xml            | **261** | 97%   | 77     | 24      | ~1.5 min | $0.46  |
-| gpt-5.2          | medium | json           | **241** | 90%   | 62     | 20      | ~1.2 min | $0.40  |
-| gpt-5.2          | medium | csv            | **215** | 80%   | 30     | 19      | ~1.3 min | $0.34  |
-| gpt-5.2          | medium | markdown_table | **154** | 57%   | 22     | 18      | ~1.1 min | $0.29  |
-| gpt-5.2          | medium | yaml           | **134** | 50%   | 30     | 10      | ~0.6 min | $0.22  |
-| gpt-5.2          | medium | kv_colon_space | **100** | 37%   | 20     | 6       | ~0.5 min | $0.15  |
-| gpt-5.2          | medium | toml           | **46**  | 17%   | 11     | 3       | ~0.4 min | $0.12  |
-|                  |        |                |         |       |        |         |          |        |
-| claude-opus-4.5  | medium | json           | **265** | 100%  | 81     | 30      | ~1.8 min | $1.23  |
-| claude-opus-4.5  | medium | yaml           | **259** | 98%   | 69     | 29      | ~1.7 min | $1.03  |
-| claude-opus-4.5  | medium | csv            | **232** | 88%   | 38     | 29      | ~1.6 min | $0.92  |
-| claude-opus-4.5  | medium | kv_colon_space | **221** | 83%   | 51     | 30      | ~1.7 min | $0.98  |
-| claude-opus-4.5  | medium | markdown_table | **221** | 83%   | 38     | 28      | ~1.8 min | $0.93  |
-| claude-opus-4.5  | medium | xml            | **182** | 69%   | 63     | 29      | ~1.8 min | $0.82  |
-| claude-opus-4.5  | medium | toml           | **182** | 69%   | 47     | 27      | ~1.7 min | $0.97  |
-| claude-opus-4.5  | medium | csv_quoted     | **171** | 65%   | 29     | 27      | ~1.3 min | $0.82  |
-|                  |        |                |         |       |        |         |          |        |
-| claude-sonnet-4.5| medium | json           | **189** | 100%  | 58     | 22      | ~1.6 min | $0.54  |
-| claude-sonnet-4.5| medium | csv            | **126** | 67%   | 21     | 16      | ~1.1 min | $0.30  |
-| claude-sonnet-4.5| medium | kv_colon_space | **126** | 67%   | 29     | 19      | ~1.2 min | $0.37  |
-| claude-sonnet-4.5| medium | markdown_table | **126** | 67%   | 22     | 16      | ~1.2 min | $0.32  |
-| claude-sonnet-4.5| medium | csv_quoted     | **120** | 63%   | 21     | 14      | ~1.0 min | $0.29  |
-| claude-sonnet-4.5| medium | yaml           | **120** | 63%   | 33     | 15      | ~1.1 min | $0.32  |
-| claude-sonnet-4.5| medium | toml           | **115** | 61%   | 30     | 14      | ~1.0 min | $0.31  |
-| claude-sonnet-4.5| medium | xml            | **99**  | 52%   | 35     | 12      | ~1.0 min | $0.33  |
+**Columns:**
+- **Scale** - Maximum reliable rows at 100% accuracy (3/3 runs passed)
+- **vs Best** - Percentage relative to best format for this model (100% = top performer)
+- **In (K)** - Input tokens in thousands at scale limit
+- **Out (K)** - Output tokens in thousands at scale limit
+- **Time** - Average time per request at scale limit
+- **TPKC** - Time Per Kilo Cells (seconds) = time / (rows x 7 columns) x 1000
+- **Cost** - Cost per request at scale limit
+- **CPKC** - Cost Per Kilo Cells = cost / (rows x 7 columns) x 1000
+
+**Why per-kilo-cell metrics?** Raw time and cost are measured at different scale limits (row counts). TPKC and CPKC normalize these to a common unit (1000 cells), making formats directly comparable regardless of their scale limit.
+
+| Model            | Effort | Format         | Scale | vs Best | In (K) | Out (K) | Time     | TPKC | Cost   | CPKC   |
+|------------------|--------|----------------|-------|---------|--------|---------|----------|------|--------|--------|
+| gpt-5-mini       | medium | kv_colon_space | **500** | 100%  | 98     | 42      | ~9.3 min | 159s | $0.13  | $0.037 |
+| gpt-5-mini       | medium | yaml           | **500** | 100%  | 110    | 44      | ~4.4 min | 76s  | $0.12  | $0.034 |
+| gpt-5-mini       | medium | csv_quoted     | **437** | 87%   | 62     | 39      | ~4.7 min | 92s  | $0.10  | $0.033 |
+| gpt-5-mini       | medium | json           | **335** | 67%   | 86     | 35      | ~5.1 min | 131s | $0.10  | $0.043 |
+| gpt-5-mini       | medium | xml            | **296** | 59%   | 87     | 42      | ~4.0 min | 116s | $0.10  | $0.048 |
+| gpt-5-mini       | medium | toml           | **296** | 59%   | 63     | 29      | ~3.7 min | 107s | $0.09  | $0.043 |
+| gpt-5-mini       | medium | csv            | **194** | 39%   | 28     | 27      | ~3.6 min | 159s | $0.07  | $0.052 |
+| gpt-5-mini       | medium | markdown_table | **163** | 33%   | 24     | 22      | ~2.2 min | 116s | $0.07  | $0.061 |
+|                  |        |                |         |       |        |         |          |      |        |        |
+| gpt-5            | low    | yaml           | **333** | 100%  | 73     | 38      | ~2.6 min | 67s  | $0.42  | $0.180 |
+| gpt-5            | low    | xml            | **327** | 98%   | 96     | 32      | ~3.2 min | 84s  | $0.42  | $0.183 |
+| gpt-5            | low    | json           | **249** | 75%   | 64     | 32      | ~3.0 min | 103s | $0.37  | $0.212 |
+| gpt-5            | low    | kv_colon_space | **238** | 71%   | 47     | 29      | ~3.9 min | 141s | $0.36  | $0.216 |
+| gpt-5            | low    | csv_quoted     | **227** | 68%   | 33     | 23      | ~2.7 min | 102s | $0.32  | $0.201 |
+| gpt-5            | low    | toml           | **216** | 65%   | 46     | 23      | ~2.4 min | 95s  | $0.34  | $0.225 |
+| gpt-5            | low    | csv            | **166** | 50%   | 24     | 21      | ~2.3 min | 119s | $0.25  | $0.215 |
+| gpt-5            | low    | markdown_table | **83**  | 25%   | 13     | 13      | ~2.4 min | 248s | $0.20  | $0.344 |
+|                  |        |                |         |       |        |         |          |      |        |        |
+| gpt-5.2          | medium | csv_quoted     | **268** | 100%  | 39     | 20      | ~1.4 min | 45s  | $0.37  | $0.197 |
+| gpt-5.2          | medium | xml            | **261** | 97%   | 77     | 24      | ~1.5 min | 49s  | $0.46  | $0.252 |
+| gpt-5.2          | medium | json           | **241** | 90%   | 62     | 20      | ~1.2 min | 43s  | $0.40  | $0.237 |
+| gpt-5.2          | medium | csv            | **215** | 80%   | 30     | 19      | ~1.3 min | 52s  | $0.34  | $0.226 |
+| gpt-5.2          | medium | markdown_table | **154** | 57%   | 22     | 18      | ~1.1 min | 61s  | $0.29  | $0.269 |
+| gpt-5.2          | medium | yaml           | **134** | 50%   | 30     | 10      | ~0.6 min | 38s  | $0.22  | $0.235 |
+| gpt-5.2          | medium | kv_colon_space | **100** | 37%   | 20     | 6       | ~0.5 min | 43s  | $0.15  | $0.214 |
+| gpt-5.2          | medium | toml           | **46**  | 17%   | 11     | 3       | ~0.4 min | 75s  | $0.12  | $0.373 |
+|                  |        |                |         |       |        |         |          |      |        |        |
+| claude-opus-4.5  | medium | json           | **265** | 100%  | 81     | 30      | ~1.8 min | 58s  | $1.23  | $0.663 |
+| claude-opus-4.5  | medium | yaml           | **259** | 98%   | 69     | 29      | ~1.7 min | 56s  | $1.03  | $0.568 |
+| claude-opus-4.5  | medium | csv            | **232** | 88%   | 38     | 29      | ~1.6 min | 59s  | $0.92  | $0.566 |
+| claude-opus-4.5  | medium | kv_colon_space | **226** | 85%   | 51     | 30      | ~1.7 min | 65s  | $0.98  | $0.619 |
+| claude-opus-4.5  | medium | markdown_table | **221** | 83%   | 38     | 28      | ~1.8 min | 70s  | $0.93  | $0.601 |
+| claude-opus-4.5  | medium | xml            | **182** | 69%   | 63     | 29      | ~1.8 min | 85s  | $0.82  | $0.644 |
+| claude-opus-4.5  | medium | toml           | **182** | 69%   | 47     | 27      | ~1.7 min | 80s  | $0.97  | $0.761 |
+| claude-opus-4.5  | medium | csv_quoted     | **171** | 65%   | 29     | 27      | ~1.3 min | 65s  | $0.82  | $0.685 |
+|                  |        |                |         |       |        |         |          |      |        |        |
+| claude-sonnet-4.5| medium | json           | **189** | 100%  | 58     | 22      | ~1.6 min | 73s  | $0.54  | $0.408 |
+| claude-sonnet-4.5| medium | csv            | **126** | 67%   | 21     | 16      | ~1.1 min | 75s  | $0.30  | $0.340 |
+| claude-sonnet-4.5| medium | kv_colon_space | **126** | 67%   | 29     | 19      | ~1.2 min | 82s  | $0.37  | $0.419 |
+| claude-sonnet-4.5| medium | markdown_table | **126** | 67%   | 22     | 16      | ~1.2 min | 82s  | $0.32  | $0.363 |
+| claude-sonnet-4.5| medium | csv_quoted     | **120** | 63%   | 21     | 14      | ~1.0 min | 71s  | $0.29  | $0.345 |
+| claude-sonnet-4.5| medium | yaml           | **120** | 63%   | 33     | 15      | ~1.1 min | 79s  | $0.32  | $0.381 |
+| claude-sonnet-4.5| medium | toml           | **115** | 61%   | 30     | 14      | ~1.0 min | 75s  | $0.31  | $0.385 |
+| claude-sonnet-4.5| medium | xml            | **99**  | 52%   | 35     | 12      | ~1.0 min | 87s  | $0.33  | $0.476 |
 
 **Total: 40 tests** (5 models × 8 formats)
 
