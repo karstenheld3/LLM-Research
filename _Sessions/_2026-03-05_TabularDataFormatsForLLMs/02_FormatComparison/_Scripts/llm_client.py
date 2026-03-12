@@ -194,7 +194,7 @@ def calculate_output_tokens(num_expected_records: int, tokens_per_record: int = 
 
 
 def build_api_params(model: str, reasoning_effort: str = 'medium', 
-                     output_length: str = 'high', seed: int = None) -> tuple:
+                     output_length: str = 'high', verbosity: str = None, seed: int = None) -> tuple:
   """
   Build API parameters based on model type and effort levels.
   
@@ -211,7 +211,15 @@ def build_api_params(model: str, reasoning_effort: str = 'medium',
     factor = effort_map[reasoning_effort]['temperature_factor']
     params['temperature'] = factor * model_config.get('temp_max', 2.0)
   elif method == 'reasoning_effort':
-    params['reasoning_effort'] = effort_map[reasoning_effort]['openai_reasoning_effort']
+    effort_value = effort_map[reasoning_effort]['openai_reasoning_effort']
+    supported = model_config.get('effort', [])
+    if effort_value not in supported and supported:
+      fallback_map = {'none': 'minimal', 'minimal': 'low'}
+      if effort_value in fallback_map and fallback_map[effort_value] in supported:
+        effort_value = fallback_map[effort_value]
+    params['reasoning_effort'] = effort_value
+    if verbosity:
+      params['verbosity'] = effort_map[verbosity]['openai_verbosity']
   elif method == 'effort':
     params['effort'] = effort_map[reasoning_effort]['openai_reasoning_effort']
   elif method == 'thinking':
@@ -285,25 +293,53 @@ def call_llm(client, model: str, prompt: str, api_params: dict, provider: str) -
     return _call_anthropic(client, model, prompt, api_params)
 
 
-def _call_openai(client, model: str, prompt: str, api_params: dict) -> dict:
-  """Call OpenAI API."""
+def _call_openai_responses(client, model: str, prompt: str, api_params: dict) -> dict:
+  """Call OpenAI Responses API for reasoning models with verbosity support."""
+  call_params = {'model': model, 'input': prompt}
+  
+  if 'reasoning_effort' in api_params:
+    call_params['reasoning'] = {'effort': api_params['reasoning_effort']}
+  
+  if 'verbosity' in api_params:
+    call_params['text'] = {'verbosity': api_params['verbosity']}
+  
+  if 'max_tokens' in api_params:
+    call_params['max_output_tokens'] = api_params['max_tokens']
+  
+  response = client.responses.create(**call_params)
+  
+  output_text = ""
+  for item in response.output:
+    if hasattr(item, 'content') and item.content is not None:
+      for content in item.content:
+        if hasattr(content, 'text'):
+          output_text += content.text
+  
+  return {
+    "text": output_text,
+    "usage": {
+      "input_tokens": response.usage.input_tokens,
+      "output_tokens": response.usage.output_tokens
+    },
+    "model": response.model,
+    "finish_reason": "stop"
+  }
+
+
+def _call_openai_chat(client, model: str, prompt: str, api_params: dict) -> dict:
+  """Call OpenAI Chat Completions API for temperature models."""
   messages = [{"role": "user", "content": prompt}]
   call_params = {'model': model, 'messages': messages}
   
   if 'temperature' in api_params:
     call_params['temperature'] = api_params['temperature']
-  if 'reasoning_effort' in api_params:
-    call_params['reasoning_effort'] = api_params['reasoning_effort']
   if 'seed' in api_params:
     call_params['seed'] = api_params['seed']
   
-  # Use max_completion_tokens for newer models
-  token_param = 'max_completion_tokens' if any(x in model for x in ['gpt-5', 'o1-', 'o3-', 'o4-']) else 'max_tokens'
-  call_params[token_param] = api_params.get('max_tokens', 16384)
+  call_params['max_tokens'] = api_params.get('max_tokens', 16384)
   
   response = client.chat.completions.create(**call_params)
   
-  # Extract text - handle None content from reasoning models
   text = response.choices[0].message.content or ""
   
   return {
@@ -315,6 +351,14 @@ def _call_openai(client, model: str, prompt: str, api_params: dict) -> dict:
     "model": response.model,
     "finish_reason": response.choices[0].finish_reason
   }
+
+
+def _call_openai(client, model: str, prompt: str, api_params: dict) -> dict:
+  """Call OpenAI API - routes to Responses API for reasoning models, Chat for temperature."""
+  if 'reasoning_effort' in api_params:
+    return _call_openai_responses(client, model, prompt, api_params)
+  else:
+    return _call_openai_chat(client, model, prompt, api_params)
 
 
 def _call_anthropic(client, model: str, prompt: str, api_params: dict) -> dict:
@@ -367,12 +411,12 @@ class LLMClient:
   """
   
   def __init__(self, model: str, reasoning_effort: str = 'medium', 
-               output_length: str = 'high', api_key: str = None, timeout: int = 300):
+               output_length: str = 'high', verbosity: str = None, api_key: str = None, timeout: int = 300):
     self.model = model
     self.timeout = timeout
     self.model_config = get_model_config(model)
     self.api_params, self.method, self.provider = build_api_params(
-      model, reasoning_effort, output_length
+      model, reasoning_effort, output_length, verbosity
     )
     self.client = create_client(self.provider, api_key, timeout)
   
