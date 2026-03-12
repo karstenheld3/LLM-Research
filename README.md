@@ -35,9 +35,12 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - This variance makes model selection critical for production use
 
 - **Format choice causes up to 5.8x scale difference** (Test 02)
-  - GPT models prefer yaml/xml; Claude models prefer json
+  - **csv_quoted is a safe default** - solid mid-tier performance across all models, no conversion cost
+  - csv (RFC4180): -20% to -56% on GPT vs csv_quoted, but +5% to +36% on Claude
+  - GPT optimal: yaml (+14% over csv_quoted on gpt-5-mini); Claude optimal: json (+55% on opus)
+  - Avoid markdown_table on GPT (-67% to -75%) and xml on Claude (-31% to -48%)
   - Token efficiency does NOT predict scale (xml 2.12x tokens beats csv 1.00x on GPT)
-  - Best format for one model family can be worst for another
+  - Format preferences may change with model updates - csv_quoted future-proofs your pipeline
 
 ## Production Recommendations
 
