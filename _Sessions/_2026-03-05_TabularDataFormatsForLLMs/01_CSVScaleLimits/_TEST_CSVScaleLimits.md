@@ -80,7 +80,7 @@
 | gpt-5-mini | medium | **389** | comprehension | ~2%* | $0.00* | ~4 min |
 | gpt-5 | low | **356** | comprehension | 2.1% | $0.87 | ~2.4 min |
 | gpt-5.2 | medium | **215** | comprehension | 1.4% | $0.57 | ~1 min |
-| claude-opus | medium | **177** | truncation | 25.1% | $0.00* | ~1.6 min |
+| claude-opus | medium | **177** | truncation | 25.1% | $5.36 | ~1.6 min |
 | claude-sonnet | medium | **168** | comprehension | 8.4% | $0.89 | ~1.4 min |
 | gpt-5-mini | low | **65** | comprehension | 4.3% | $0.13 | ~1 min |
 | claude-haiku | medium | **9** | comprehension | 8.3% | $0.09 | ~12 sec |

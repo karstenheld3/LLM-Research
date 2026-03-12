@@ -31,7 +31,7 @@
 | gpt-5-mini     | medium | **500**     | comprehension | 7.1%      | ~3.5 min | 0.034    |
 | gpt-5          | low    | **356**     | comprehension | 2.1%      | ~2.4 min | 0.05     |
 | gpt-5.2        | medium | **215**     | comprehension | 1.4%      | ~1 min   | 0.031    |
-| claude-opus    | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 0.00*    |
+| claude-opus    | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 5.36     |
 | claude-sonnet  | medium | **168**     | comprehension | 8.4%      | ~1.4 min | 0.040    |
 | gpt-5-mini     | low    | **65**      | comprehension | 4.3%      | ~1 min   | 0.007    |
 | claude-haiku   | medium | **9**       | comprehension | 8.3%      | ~12 sec  | 0.09     |
@@ -341,7 +341,7 @@ python test_llm_client.py
 | gpt-5.2           | OpenAI    | reasoning   | medium | 215         | 1.4%      | comprehension   | $0.57 |
 | claude-haiku-4-5  | Anthropic | temperature | medium | 9           | 8.3%      | comprehension   | $0.09 |
 | claude-sonnet-4-5 | Anthropic | thinking    | medium | 168         | 8.4%      | comprehension   | $0.89 |
-| claude-opus-4-5   | Anthropic | effort      | medium | 177         | 25.1%     | truncation      | $0.00*|
+| claude-opus-4-5   | Anthropic | thinking    | medium | 177         | 25.1%     | truncation      | $5.36 |
 
 *Cost tracking errors; gpt-5-mini high had evaluation errors at 1012+ rows
 
