@@ -34,7 +34,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Worst: gpt-4o (4 rows)
   - This variance makes model selection critical for production use
 
-- **gpt-5.4 reaches max scale with json format** (Test 02)
+- **gpt-5.4 medium reaches max scale with json format** (Test 02)
   - json: 702 rows (best overall)
   - markdown_table: 554 rows
   - xml: 546 rows

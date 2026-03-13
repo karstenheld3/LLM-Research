@@ -15,8 +15,8 @@
 ### Key Findings
 
 1. **Format preferences differ dramatically by model family** (H3 CONFIRMED)
-   - GPT models prefer: yaml, xml, kv_colon_space
-   - Claude models prefer: json (both opus and sonnet)
+   - Older GPT models prefer: yaml, xml, kv_colon_space
+   - gpt-5.4 and Claude models prefer: json
    - Best format for one family can be worst for another
 
 2. **Token efficiency does NOT predict scale limits** (H5 CONTRADICTED)
@@ -25,8 +25,8 @@
    - Structure aids comprehension more than compactness
 
 3. **JSON is NOT universally optimal** (H2 MIXED)
-   - JSON is best for Claude (opus: 265, sonnet: 189)
-   - JSON is mid-tier for GPT (gpt-5-mini: 335 vs yaml: 500)
+   - JSON is best for Claude (opus: 265, sonnet: 189) and gpt-5.4 (702)
+   - JSON is mid-tier for older GPT (gpt-5-mini: 335 vs yaml: 500)
 
 4. **Key-value format results are model-specific** (H6 CONTRADICTED)
    - kv_colon_space ties for best on gpt-5-mini (500)
@@ -34,14 +34,14 @@
 
 ### Best Format Per Model
 
-| Model           | Best Format    | Scale | Worst Format   | Scale | Ratio |
-|-----------------|----------------|-------|----------------|-------|-------|
-| gpt-5.4         | json           | 702   | kv_colon_space | 359   | 2.0x  |
-| gpt-5-mini      | yaml/kv        | 500   | markdown_table | 163   | 3.1x  |
-| gpt-5           | yaml           | 333   | markdown_table | 83    | 4.0x  |
-| gpt-5.2         | csv_quoted     | 268   | toml           | 46    | 5.8x  |
-| claude-opus-4.5 | json           | 265   | csv_quoted     | 171   | 1.5x  |
-| claude-sonnet   | json           | 189   | xml            | 99    | 1.9x  |
+| Model        | Best Format | Scale | Worst Format   | Scale | Ratio |
+|--------------|-------------|-------|----------------|-------|-------|
+| gpt-5.4      | json        | 702   | kv_colon_space | 359   | 2.0x  |
+| gpt-5-mini   | yaml/kv     | 500   | markdown_table | 163   | 3.1x  |
+| gpt-5        | yaml        | 333   | markdown_table | 83    | 4.0x  |
+| gpt-5.2      | csv_quoted  | 268   | toml           | 46    | 5.8x  |
+| opus-4.5     | json        | 265   | csv_quoted     | 171   | 1.5x  |
+| sonnet-4.5   | json        | 189   | xml            | 99    | 1.9x  |
 
 **IMPORTANT**: Test 02 uses simplified dataset (7/7 columns) vs Test 01 (7/20 columns). Results not directly comparable to Test 01 baselines. See `TBLF-FL-005`.
 
