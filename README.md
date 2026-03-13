@@ -67,7 +67,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 | Moderate | ~1.4 min  | claude-sonnet medium + json       | 189 rows | $0.408   | Anthropic, most versatile   |
 | Moderate | ~1.4 min  | claude-sonnet medium + csv        | 126 rows | $0.340   | Anthropic, most compact     |
 | Moderate | ~1.6 min  | claude-opus medium + json         | 265 rows | $0.663   | Max Anthropic scale         |
-| Moderate | ~2.4 min  | gpt-5.4 medium + json             | 702 rows | $0.93    | **Max scale overall**       |
+| Moderate | ~2.9 min  | gpt-5.4 medium + json             | 702 rows | $0.189   | **Max scale overall**       |
 | Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.180   | Larger tables, good balance |
 | Moderate | ~2.4 min  | gpt-5 low + xml                   | 327 rows | $0.183   | Alternative format          |
 | Moderate | ~2.4 min  | gpt-5 low + json                  | 249 rows | $0.212   | Most versatile format       |
