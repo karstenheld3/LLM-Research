@@ -34,7 +34,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Worst: gpt-4o (4 rows)
   - This variance makes model selection critical for production use
 
-- **gpt-5.4 sets new scale records with json format** (Test 02)
+- **gpt-5.4 reaches max scale with json format** (Test 02)
   - json: 702 rows (best overall)
   - markdown_table: 554 rows
   - xml: 546 rows
@@ -59,7 +59,6 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 | Tier     | Time      | Model + Format                    | Scale    | CPKC     | Use Case                    |
 |----------|-----------|-----------------------------------|----------|----------|-----------------------------|
-| Moderate | ~2.4 min  | gpt-5.4 medium + json             | 702 rows | $0.93    | **NEW: Max scale overall**  |
 | Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.197   | Interactive, user-facing    |
 | Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.252   | Alternative format          |
 | Fast     | ~1 min    | gpt-5.2 medium + json             | 241 rows | $0.237   | Most versatile format       |
@@ -68,6 +67,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 | Moderate | ~1.4 min  | claude-sonnet medium + json       | 189 rows | $0.408   | Anthropic, most versatile   |
 | Moderate | ~1.4 min  | claude-sonnet medium + csv        | 126 rows | $0.340   | Anthropic, most compact     |
 | Moderate | ~1.6 min  | claude-opus medium + json         | 265 rows | $0.663   | Max Anthropic scale         |
+| Moderate | ~2.4 min  | gpt-5.4 medium + json             | 702 rows | $0.93    | **Max scale overall**       |
 | Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.180   | Larger tables, good balance |
 | Moderate | ~2.4 min  | gpt-5 low + xml                   | 327 rows | $0.183   | Alternative format          |
 | Moderate | ~2.4 min  | gpt-5 low + json                  | 249 rows | $0.212   | Most versatile format       |
