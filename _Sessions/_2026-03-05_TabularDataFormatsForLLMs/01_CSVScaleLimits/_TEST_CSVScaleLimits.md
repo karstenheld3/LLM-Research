@@ -280,6 +280,7 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 | 6    | gpt-4o                     | OpenAI    | temperature      | $2.50 / $10.00       | Temperature baseline  |
 | 7    | claude-sonnet-4-5-20250929 | Anthropic | thinking         | $3.00 / $15.00       | Mid Anthropic         |
 | 8    | claude-opus-4-5-20251101   | Anthropic | effort           | $5.00 / $25.00       | Top Anthropic         |
+| 9    | gpt-5.4                    | OpenAI    | reasoning_effort | $30.00 / $60.00      | Latest reasoning      |
 
 ### 2.2 Model Groupings for Hypothesis Testing
 
@@ -323,8 +324,9 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 | T10     | claude-haiku-4-5-20251001  | medium | H2, H3                | ~10             |
 | T11     | claude-sonnet-4-5-20250929 | medium | H2, H3                | ~10             |
 | T12     | claude-opus-4-5-20251101   | medium | H2, H3                | ~10             |
+| T13     | gpt-5.4                    | medium | H2, H3                | ~10             |
 
-**Total: 12 test runs, ~120 iterations**
+**Total: 13 test runs, ~130 iterations**
 
 ## 4. Test Execution Order
 
@@ -523,6 +525,7 @@ Assumptions:
 | gpt-4o            | $0.125     | $0.200      | **$0.33** |
 | claude-sonnet-4-5 | $0.150     | $0.300      | **$0.45** |
 | claude-opus-4-5   | $0.250     | $0.500      | **$0.75** |
+| gpt-5.4           | $1.500     | $1.200      | **$2.70** |
 
 ### 6.2 Total Cost Estimate
 

@@ -165,10 +165,11 @@ Percentages relative to best format per model (100% = max scale limit).
 
 ## 2. Test Matrix
 
-### 2.1 Models (5)
+### 2.1 Models (6)
 
 | Model         | Effort | CSV Baseline | Start Row |
 |---------------|--------|--------------|-----------|
+| gpt-5.4       | medium | 523          | 523       |
 | gpt-5-mini    | medium | 500          | 500       |
 | gpt-5         | low    | 356          | 356       |
 | gpt-5.2       | medium | 215          | 215       |
@@ -227,8 +228,16 @@ Percentages relative to best format per model (100% = max scale limit).
 | F33     | claude-sonnet | xml            | H3, H5     |
 | F34     | claude-sonnet | yaml           | H2, H3     |
 | F35     | claude-sonnet | toml           | H3         |
+| F36     | gpt-5.4       | csv            | H3, H5     |
+| F37     | gpt-5.4       | csv_quoted     | H3         |
+| F38     | gpt-5.4       | kv_colon_space | H3, H6     |
+| F39     | gpt-5.4       | markdown_table | H3         |
+| F40     | gpt-5.4       | json           | H2, H3     |
+| F41     | gpt-5.4       | xml            | H3, H5     |
+| F42     | gpt-5.4       | yaml           | H2, H3     |
+| F43     | gpt-5.4       | toml           | H3         |
 
-**Total: 35 tests**
+**Total: 43 tests** (35 original + 8 gpt-5.4)
 
 ## 3. Hypothesis Testing Strategy
 

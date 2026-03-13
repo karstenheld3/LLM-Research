@@ -89,6 +89,7 @@
 
 **H3 - Format preferences differ by model family:**
 ```
+gpt-5.4 best:     json (702), markdown_table (554)
 GPT-5-mini best:  yaml (500), kv_colon_space (500)
 GPT-5 best:       yaml (333), xml (327)
 GPT-5.2 best:     csv_quoted (268), xml (261)
@@ -99,6 +100,7 @@ GPT models consistently rank yaml/xml high; Claude models rank json highest.
 
 **H5 - Token efficiency vs scale (csv 1.00x vs xml 2.12x):**
 ```
+gpt-5.4:    csv (523) < xml (546) - xml 1.04x better
 gpt-5-mini: csv (194) < xml (296) - xml 1.5x better despite 2x tokens
 gpt-5:      csv (166) < xml (327) - xml 2.0x better
 gpt-5.2:    csv (215) < xml (261) - xml 1.2x better
@@ -284,6 +286,8 @@ Clearance: Level 4: Top Secret
 
 | Model           | Best CPKC Format | CPKC   | Scale |
 |-----------------|------------------|--------|-------|
+| gpt-5.4         | kv_colon_space   | $0.131 | 359   |
+| gpt-5.4         | json             | $0.189 | 702   |
 | gpt-5-mini      | csv_quoted       | $0.033 | 437   |
 | gpt-5-mini      | yaml             | $0.034 | 500   |
 | gpt-5           | yaml             | $0.180 | 333   |

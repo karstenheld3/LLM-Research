@@ -343,7 +343,7 @@ python test_llm_client.py
 
 ### 6.4 Results
 
-#### Scale Limit Results (All 12 Configurations) [TESTED]
+#### Scale Limit Results (All 13 Configurations) [TESTED]
 
 | Model             | Provider  | Method      | Effort | Scale Limit | Context % | Primary Failure | Cost  |
 |-------------------|-----------|-------------|--------|-------------|-----------|-----------------|-------|
@@ -356,6 +356,7 @@ python test_llm_client.py
 | gpt-5             | OpenAI    | reasoning   | medium | 450         | 6.4%      | comprehension   | $5.95 |
 | gpt-5             | OpenAI    | reasoning   | high   | 492         | 8.0%      | truncation      | $5.47 |
 | gpt-5.2           | OpenAI    | reasoning   | medium | 215         | 1.4%      | comprehension   | $0.57 |
+| gpt-5.4           | OpenAI    | reasoning   | medium | 492         | 6.8%      | comprehension   | $2.49 |
 | claude-haiku-4-5  | Anthropic | temperature | medium | 9           | 8.3%      | comprehension   | $0.09 |
 | claude-sonnet-4-5 | Anthropic | thinking    | medium | 168         | 8.4%      | comprehension   | $0.89 |
 | claude-opus-4-5   | Anthropic | thinking    | medium | 177         | 25.1%     | truncation      | $5.36 |
