@@ -55,7 +55,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 **CPKC** = Cost Per Kilo Cells = cost / (rows × columns) × 1000.
 
-> **Note**: Cost calculations use OpenAI Batch API pricing (50% off standard rates). Batch API processes requests asynchronously within 24 hours - suitable for the binary search test methodology used here. For real-time API calls, double the OpenAI CPKC values. Claude/Anthropic costs are standard rates (no batch discount available).
+> **Note**: OpenAI costs calculated at Batch API rates (50% off standard). For real-time API pricing, double the OpenAI CPKC values. Anthropic costs are standard rates.
 
 ### By Response Time (Primary Selection Criterion)
 
