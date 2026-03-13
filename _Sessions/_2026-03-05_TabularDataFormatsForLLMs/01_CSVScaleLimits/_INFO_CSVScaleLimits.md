@@ -290,14 +290,30 @@ python test_llm_client.py
 
 ### 6.2 Hypothesis Summary Table
 
-| ID | Hypothesis                   | Script                   | Metric                      |
-|----|------------------------------|--------------------------|-----------------------------|
-| H1 | Scale limit 300-600 rows     | `03_find_scale_limit.py` | `max_reliable_rows`         |
-| H2 | Bimodal failure (cliff)      | `03_find_scale_limit.py` | Variance at boundary        |
-| H3 | Truncation > comprehension   | `03_find_scale_limit.py` | `failure_mode` distribution |
-| H4 | Higher effort = higher limit | `04_batch_scale_test.py` | Scale limit by effort       |
-| H5 | Reasoning > temperature      | `04_batch_scale_test.py` | Scale limit by model family |
-| H6 | CSV best format              | Test 02                  | Scale limit by format       |
+- **H1**
+  - **Hypothesis**: Scale limit 300-600 rows
+  - **Script**: `03_find_scale_limit.py`
+  - **Metric**: `max_reliable_rows`
+- **H2**
+  - **Hypothesis**: Bimodal failure (cliff)
+  - **Script**: `03_find_scale_limit.py`
+  - **Metric**: Variance at boundary
+- **H3**
+  - **Hypothesis**: Truncation > comprehension
+  - **Script**: `03_find_scale_limit.py`
+  - **Metric**: `failure_mode` distribution
+- **H4**
+  - **Hypothesis**: Higher effort = higher limit
+  - **Script**: `04_batch_scale_test.py`
+  - **Metric**: Scale limit by effort
+- **H5**
+  - **Hypothesis**: Reasoning > temperature
+  - **Script**: `04_batch_scale_test.py`
+  - **Metric**: Scale limit by model family
+- **H6**
+  - **Hypothesis**: CSV best format
+  - **Script**: Test 02
+  - **Metric**: Scale limit by format
 
 ### 6.3 Script Pipeline
 
@@ -325,7 +341,7 @@ python test_llm_client.py
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 6.4 Results Template
+### 6.4 Results
 
 #### Scale Limit Results (All 12 Configurations) [TESTED]
 

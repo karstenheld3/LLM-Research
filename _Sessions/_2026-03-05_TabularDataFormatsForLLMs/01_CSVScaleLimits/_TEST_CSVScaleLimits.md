@@ -135,17 +135,17 @@
 **Result**: Comprehension is primary failure mode (8/9 tests). [VERIFIED]
 
 **Evidence** [VERIFIED against JSON `primary_failure_mode` fields]:
-| Model | Primary Failure | Truncated | Context Used |
-|-------|-----------------|-----------|--------------|
-| gpt-4o-mini | comprehension | No | 2.1% |
-| gpt-4o | comprehension | No | 11.3% |
-| gpt-5-mini low | comprehension | No | 4.3% |
-| gpt-5-mini medium | comprehension | No | ~2%* |
-| gpt-5 low | comprehension | No | 2.1% |
-| gpt-5.2 | comprehension | No | 1.4% |
-| claude-haiku | comprehension | Yes (2 early iterations) | 8.3% |
-| claude-sonnet | comprehension | No | 8.4% |
-| claude-opus | **truncation** | Yes | 25.1% |
+| Model             | Primary Failure | Truncated                | Context Used |
+|-------------------|-----------------|--------------------------|-------------|
+| gpt-4o-mini       | comprehension   | No                       | 2.1%        |
+| gpt-4o            | comprehension   | No                       | 11.3%       |
+| gpt-5-mini low    | comprehension   | No                       | 4.3%        |
+| gpt-5-mini medium | comprehension   | No                       | ~2%*        |
+| gpt-5 low         | comprehension   | No                       | 2.1%        |
+| gpt-5.2           | comprehension   | No                       | 1.4%        |
+| claude-haiku      | comprehension   | Yes (2 early iterations) | 8.3%        |
+| claude-sonnet     | comprehension   | No                       | 8.4%        |
+| claude-opus       | **truncation**  | Yes                      | 25.1%       |
 
 *Estimated - older JSON format lacks field
 
@@ -161,19 +161,19 @@
 
 **gpt-5-mini Effort Comparison** [VERIFIED]:
 | Effort | Scale Limit | Improvement vs Low |
-|--------|-------------|-------------------|
-| low | 65 | baseline |
-| medium | 389 | **+498%** (6x) |
-| high | 675+* | **+938%+** (10x+) |
+|--------|-------------|--------------------|
+| low    | 65          | baseline           |
+| medium | 389         | **+498%** (6x)     |
+| high   | 675+*       | **+938%+** (10x+)  |
 
 *T04 passed at 675 rows but had evaluation errors at higher scales
 
 **gpt-5 Effort Comparison** [TESTED]:
-| Effort | Scale Limit | Improvement vs Low | Cost | Time |
-|--------|-------------|-------------------|------|------|
-| low | 356 | baseline | $0.87 | 14.2 min |
-| medium | 450 | **+26%** | $5.95 | 81.0 min |
-| high | 492 | **+38%** | $5.47 | 162.5 min |
+| Effort | Scale Limit | Improvement vs Low | Cost  | Time      |
+|--------|-------------|--------------------| ------|-----------|
+| low    | 356         | baseline           | $0.87 | 14.2 min  |
+| medium | 450         | **+26%**           | $5.95 | 81.0 min  |
+| high   | 492         | **+38%**           | $5.47 | 162.5 min |
 
 **Calculation verification**: 
 - gpt-5-mini: (389 - 65) / 65 = 498%, 389 / 65 = 5.98 ≈ 6x [VERIFIED]
@@ -193,16 +193,16 @@
 **Result**: MASSIVE performance difference. [VERIFIED]
 
 **Mini Tier Comparison** [VERIFIED]:
-| Model | Method | Scale Limit | Ratio |
-|-------|--------|-------------|-------|
-| gpt-4o-mini | temperature | 6 | 1x |
-| gpt-5-mini | reasoning | 389 | **65x** |
+| Model       | Method      | Scale Limit | Ratio    |
+|-------------|-------------|-------------|----------|
+| gpt-4o-mini | temperature | 6           | 1x       |
+| gpt-5-mini  | reasoning   | 389         | **65x**  |
 
 **Full Tier Comparison** [VERIFIED]:
-| Model | Method | Scale Limit | Ratio |
-|-------|--------|-------------|-------|
-| gpt-4o | temperature | 4 | 1x |
-| gpt-5 | reasoning (low) | 356 | **89x** |
+| Model  | Method          | Scale Limit | Ratio   |
+|--------|-----------------|-------------|---------|  
+| gpt-4o | temperature     | 4           | 1x      |
+| gpt-5  | reasoning (low) | 356         | **89x** |
 
 **Calculation verification**: 389 / 6 = 64.83 ≈ 65x, 356 / 4 = 89x [VERIFIED]
 
@@ -255,14 +255,14 @@
 
 This test plan validates 6 hypotheses about LLM scale limits for tabular data extraction:
 
-| ID | Hypothesis | Models Required | Effort Levels |
-|----|------------|-----------------|---------------|
-| H1 | Scale limit 300-600 rows | gpt-5-mini (baseline) | medium |
-| H2 | Bimodal failure pattern | All models | medium |
-| H3 | Truncation > comprehension | All models | medium |
-| H4 | Higher effort = higher limit | gpt-5-mini, gpt-5 | low, medium, high |
-| H5 | Reasoning > temperature | gpt-4o vs gpt-5, gpt-4o-mini vs gpt-5-mini | medium |
-| H6 | CSV best format | (Test 02 - future) | - |
+| ID | Hypothesis                   | Models Required                            | Effort Levels     |
+|----|------------------------------|--------------------------------------------| ------------------|
+| H1 | Scale limit 300-600 rows     | gpt-5-mini (baseline)                      | medium            |
+| H2 | Bimodal failure pattern      | All models                                 | medium            |
+| H3 | Truncation > comprehension   | All models                                 | medium            |
+| H4 | Higher effort = higher limit | gpt-5-mini, gpt-5                          | low, medium, high |
+| H5 | Reasoning > temperature      | gpt-4o vs gpt-5, gpt-4o-mini vs gpt-5-mini | medium            |
+| H6 | CSV best format              | (Test 02 - future)                         | -                 |
 
 **Key insight**: H2 and H3 data is captured during H1 runs - no separate tests needed.
 
@@ -270,16 +270,16 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 
 ### 2.1 Model List (Ordered by Cost)
 
-| Tier | Model ID | Provider | Method | Cost (in/out per 1M) | Priority |
-|------|----------|----------|--------|----------------------|----------|
-| 1 | gpt-4o-mini | OpenAI | temperature | $0.15 / $0.60 | Setup validation |
-| 2 | gpt-5-mini | OpenAI | reasoning_effort | $0.25 / $2.00 | **Baseline** (TK-001) |
-| 3 | claude-haiku-4-5-20251001 | Anthropic | temperature | $1.00 / $5.00 | Cheapest Anthropic |
-| 4 | gpt-5 | OpenAI | reasoning_effort | $1.25 / $10.00 | Full-size reasoning |
-| 5 | gpt-5.2 | OpenAI | reasoning_effort | $1.75 / $14.00 | Latest OpenAI |
-| 6 | gpt-4o | OpenAI | temperature | $2.50 / $10.00 | Temperature baseline |
-| 7 | claude-sonnet-4-5-20250929 | Anthropic | thinking | $3.00 / $15.00 | Mid Anthropic |
-| 8 | claude-opus-4-5-20251101 | Anthropic | effort | $5.00 / $25.00 | Top Anthropic |
+| Tier | Model ID                   | Provider  | Method           | Cost (in/out per 1M) | Priority              |
+|------|----------------------------|-----------|------------------|----------------------|-----------------------|
+| 1    | gpt-4o-mini                | OpenAI    | temperature      | $0.15 / $0.60        | Setup validation      |
+| 2    | gpt-5-mini                 | OpenAI    | reasoning_effort | $0.25 / $2.00        | **Baseline** (TK-001) |
+| 3    | claude-haiku-4-5-20251001  | Anthropic | temperature      | $1.00 / $5.00        | Cheapest Anthropic    |
+| 4    | gpt-5                      | OpenAI    | reasoning_effort | $1.25 / $10.00       | Full-size reasoning   |
+| 5    | gpt-5.2                    | OpenAI    | reasoning_effort | $1.75 / $14.00       | Latest OpenAI         |
+| 6    | gpt-4o                     | OpenAI    | temperature      | $2.50 / $10.00       | Temperature baseline  |
+| 7    | claude-sonnet-4-5-20250929 | Anthropic | thinking         | $3.00 / $15.00       | Mid Anthropic         |
+| 8    | claude-opus-4-5-20251101   | Anthropic | effort           | $5.00 / $25.00       | Top Anthropic         |
 
 ### 2.2 Model Groupings for Hypothesis Testing
 
@@ -309,20 +309,20 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 
 ### 3.2 Test Matrix
 
-| Test ID | Model | Effort | Hypotheses Tested | Est. Iterations |
-|---------|-------|--------|-------------------|-----------------|
-| T01 | gpt-4o-mini | medium | Setup validation | ~10 |
-| T02 | gpt-5-mini | medium | H1, H2, H3 (baseline) | ~10 |
-| T03 | gpt-5-mini | low | H4 | ~10 |
-| T04 | gpt-5-mini | high | H4 | ~10 |
-| T05 | gpt-5 | medium | H2, H3, H5 | ~10 |
-| T06 | gpt-5 | low | H4 | ~10 |
-| T07 | gpt-5 | high | H4 | ~10 |
-| T08 | gpt-4o | medium | H2, H3, H5 | ~10 |
-| T09 | gpt-5.2 | medium | H2, H3 | ~10 |
-| T10 | claude-haiku-4-5-20251001 | medium | H2, H3 | ~10 |
-| T11 | claude-sonnet-4-5-20250929 | medium | H2, H3 | ~10 |
-| T12 | claude-opus-4-5-20251101 | medium | H2, H3 | ~10 |
+| Test ID | Model                      | Effort | Hypotheses Tested     | Est. Iterations |
+|---------|----------------------------|--------|-----------------------|-----------------|
+| T01     | gpt-4o-mini                | medium | Setup validation      | ~10             |
+| T02     | gpt-5-mini                 | medium | H1, H2, H3 (baseline) | ~10             |
+| T03     | gpt-5-mini                 | low    | H4                    | ~10             |
+| T04     | gpt-5-mini                 | high   | H4                    | ~10             |
+| T05     | gpt-5                      | medium | H2, H3, H5            | ~10             |
+| T06     | gpt-5                      | low    | H4                    | ~10             |
+| T07     | gpt-5                      | high   | H4                    | ~10             |
+| T08     | gpt-4o                     | medium | H2, H3, H5            | ~10             |
+| T09     | gpt-5.2                    | medium | H2, H3                | ~10             |
+| T10     | claude-haiku-4-5-20251001  | medium | H2, H3                | ~10             |
+| T11     | claude-sonnet-4-5-20250929 | medium | H2, H3                | ~10             |
+| T12     | claude-opus-4-5-20251101   | medium | H2, H3                | ~10             |
 
 **Total: 12 test runs, ~120 iterations**
 
@@ -513,27 +513,27 @@ Assumptions:
 - ~2000 output tokens per iteration
 - Total per run: ~50K input, ~20K output
 
-| Model | Input Cost | Output Cost | Per Run |
-|-------|------------|-------------|---------|
-| gpt-4o-mini | $0.008 | $0.012 | **$0.02** |
-| gpt-5-mini | $0.013 | $0.040 | **$0.05** |
-| claude-haiku-4-5 | $0.050 | $0.100 | **$0.15** |
-| gpt-5 | $0.063 | $0.200 | **$0.26** |
-| gpt-5.2 | $0.088 | $0.280 | **$0.37** |
-| gpt-4o | $0.125 | $0.200 | **$0.33** |
-| claude-sonnet-4-5 | $0.150 | $0.300 | **$0.45** |
-| claude-opus-4-5 | $0.250 | $0.500 | **$0.75** |
+| Model             | Input Cost | Output Cost | Per Run   |
+|-------------------|------------|-------------|-----------|
+| gpt-4o-mini       | $0.008     | $0.012      | **$0.02** |
+| gpt-5-mini        | $0.013     | $0.040      | **$0.05** |
+| claude-haiku-4-5  | $0.050     | $0.100      | **$0.15** |
+| gpt-5             | $0.063     | $0.200      | **$0.26** |
+| gpt-5.2           | $0.088     | $0.280      | **$0.37** |
+| gpt-4o            | $0.125     | $0.200      | **$0.33** |
+| claude-sonnet-4-5 | $0.150     | $0.300      | **$0.45** |
+| claude-opus-4-5   | $0.250     | $0.500      | **$0.75** |
 
 ### 6.2 Total Cost Estimate
 
-| Phase | Runs | Est. Cost |
-|-------|------|-----------|
-| 1. Setup validation | 1 | $0.02 |
-| 2. Baseline (gpt-5-mini) | 1 | $0.05 |
-| 3. Effort testing (6 runs) | 6 | $0.60 |
-| 4. Cross-model (2 runs) | 2 | $0.60 |
-| 5. Remaining models (4 runs) | 4 | $1.70 |
-| **Total** | **14** | **~$3.00** |
+| Phase                        | Runs   | Est. Cost  |
+|------------------------------|--------|------------|
+| 1. Setup validation          | 1      | $0.02      |
+| 2. Baseline (gpt-5-mini)     | 1      | $0.05      |
+| 3. Effort testing (6 runs)   | 6      | $0.60      |
+| 4. Cross-model (2 runs)      | 2      | $0.60      |
+| 5. Remaining models (4 runs) | 4      | $1.70      |
+| **Total**                    | **14** | **~$3.00** |
 
 Note: Actual costs may vary based on scale limits found.
 

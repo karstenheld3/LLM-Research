@@ -138,16 +138,16 @@ Percentages relative to best format per model (100% = max scale limit).
 
 ### 1.2 Format Token Efficiency
 
-| Format | Size (300 rows) | Relative | Hypothesis |
-|--------|-----------------|----------|------------|
-| csv | 148 KB | 1.00x | Best scale (most compact) |
-| csv_quoted | 156 KB | 1.06x | Baseline |
-| markdown_table | 197 KB | 1.33x | - |
-| kv_colon_space | 217 KB | 1.47x | May match CSV (TK-001) |
-| toml | 235 KB | 1.59x | - |
-| yaml | 249 KB | 1.68x | Structured, may help |
-| json | 269 KB | 1.82x | Structured, may help |
-| xml | 314 KB | 2.12x | Worst scale (most verbose) |
+| Format         | Size (300 rows) | Relative | Hypothesis                 |
+|----------------|-----------------|----------|----------------------------|
+| csv            | 148 KB          | 1.00x    | Best scale (most compact)  |
+| csv_quoted     | 156 KB          | 1.06x    | Baseline                   |
+| markdown_table | 197 KB          | 1.33x    | -                          |
+| kv_colon_space | 217 KB          | 1.47x    | May match CSV (TK-001)     |
+| toml           | 235 KB          | 1.59x    | -                          |
+| yaml           | 249 KB          | 1.68x    | Structured, may help       |
+| json           | 269 KB          | 1.82x    | Structured, may help       |
+| xml            | 314 KB          | 2.12x    | Worst scale (most verbose) |
 
 ### 1.3 Expected Outcomes
 
@@ -167,66 +167,66 @@ Percentages relative to best format per model (100% = max scale limit).
 
 ### 2.1 Models (5)
 
-| Model | Effort | CSV Baseline | Start Row |
-|-------|--------|--------------|-----------|
-| gpt-5-mini | medium | 500 | 500 |
-| gpt-5 | low | 356 | 356 |
-| gpt-5.2 | medium | 215 | 215 |
-| claude-opus | medium | 177 | 177 |
-| claude-sonnet | medium | 168 | 168 |
+| Model         | Effort | CSV Baseline | Start Row |
+|---------------|--------|--------------|-----------|
+| gpt-5-mini    | medium | 500          | 500       |
+| gpt-5         | low    | 356          | 356       |
+| gpt-5.2       | medium | 215          | 215       |
+| claude-opus   | medium | 177          | 177       |
+| claude-sonnet | medium | 168          | 168       |
 
 ### 2.2 Formats (7 new + 1 baseline)
 
-| Format | File Ext | Notes |
-|--------|----------|-------|
-| csv_quoted | .csv | Baseline (Test 01) |
-| csv | .csv | Unquoted CSV |
-| kv_colon_space | .txt | Key: value pairs |
-| markdown_table | .md | Markdown table |
-| json | .json | JSON array |
-| xml | .xml | XML records |
-| yaml | .yaml | YAML list |
-| toml | .toml | TOML array |
+| Format         | File Ext | Notes              |
+|----------------|----------|--------------------|
+| csv_quoted     | .csv     | Baseline (Test 01) |
+| csv            | .csv     | Unquoted CSV       |
+| kv_colon_space | .txt     | Key: value pairs   |
+| markdown_table | .md      | Markdown table     |
+| json           | .json    | JSON array         |
+| xml            | .xml     | XML records        |
+| yaml           | .yaml    | YAML list          |
+| toml           | .toml    | TOML array         |
 
 ### 2.3 Test ID Mapping
 
-| Test ID | Model | Format | Hypotheses |
-|---------|-------|--------|------------|
-| F01 | gpt-5-mini | csv | H5 |
-| F02 | gpt-5-mini | kv_colon_space | H6 |
-| F03 | gpt-5-mini | markdown_table | H5 |
-| F04 | gpt-5-mini | json | H2, H5 |
-| F05 | gpt-5-mini | xml | H5 |
-| F06 | gpt-5-mini | yaml | H2 |
-| F07 | gpt-5-mini | toml | H5 |
-| F08 | gpt-5 | csv | H3, H5 |
-| F09 | gpt-5 | kv_colon_space | H3, H6 |
-| F10 | gpt-5 | markdown_table | H3 |
-| F11 | gpt-5 | json | H2, H3 |
-| F12 | gpt-5 | xml | H3, H5 |
-| F13 | gpt-5 | yaml | H2, H3 |
-| F14 | gpt-5 | toml | H3 |
-| F15 | gpt-5.2 | csv | H5 |
-| F16 | gpt-5.2 | kv_colon_space | H6 |
-| F17 | gpt-5.2 | markdown_table | H5 |
-| F18 | gpt-5.2 | json | H2 |
-| F19 | gpt-5.2 | xml | H5 |
-| F20 | gpt-5.2 | yaml | H2 |
-| F21 | gpt-5.2 | toml | H5 |
-| F22 | claude-opus | csv | H3, H5 |
-| F23 | claude-opus | kv_colon_space | H3, H6 |
-| F24 | claude-opus | markdown_table | H3 |
-| F25 | claude-opus | json | H2, H3 |
-| F26 | claude-opus | xml | H3, H5 |
-| F27 | claude-opus | yaml | H2, H3 |
-| F28 | claude-opus | toml | H3 |
-| F29 | claude-sonnet | csv | H3, H5 |
-| F30 | claude-sonnet | kv_colon_space | H3, H6 |
-| F31 | claude-sonnet | markdown_table | H3 |
-| F32 | claude-sonnet | json | H2, H3 |
-| F33 | claude-sonnet | xml | H3, H5 |
-| F34 | claude-sonnet | yaml | H2, H3 |
-| F35 | claude-sonnet | toml | H3 |
+| Test ID | Model         | Format         | Hypotheses |
+|---------|---------------|----------------|------------|
+| F01     | gpt-5-mini    | csv            | H5         |
+| F02     | gpt-5-mini    | kv_colon_space | H6         |
+| F03     | gpt-5-mini    | markdown_table | H5         |
+| F04     | gpt-5-mini    | json           | H2, H5     |
+| F05     | gpt-5-mini    | xml            | H5         |
+| F06     | gpt-5-mini    | yaml           | H2         |
+| F07     | gpt-5-mini    | toml           | H5         |
+| F08     | gpt-5         | csv            | H3, H5     |
+| F09     | gpt-5         | kv_colon_space | H3, H6     |
+| F10     | gpt-5         | markdown_table | H3         |
+| F11     | gpt-5         | json           | H2, H3     |
+| F12     | gpt-5         | xml            | H3, H5     |
+| F13     | gpt-5         | yaml           | H2, H3     |
+| F14     | gpt-5         | toml           | H3         |
+| F15     | gpt-5.2       | csv            | H5         |
+| F16     | gpt-5.2       | kv_colon_space | H6         |
+| F17     | gpt-5.2       | markdown_table | H5         |
+| F18     | gpt-5.2       | json           | H2         |
+| F19     | gpt-5.2       | xml            | H5         |
+| F20     | gpt-5.2       | yaml           | H2         |
+| F21     | gpt-5.2       | toml           | H5         |
+| F22     | claude-opus   | csv            | H3, H5     |
+| F23     | claude-opus   | kv_colon_space | H3, H6     |
+| F24     | claude-opus   | markdown_table | H3         |
+| F25     | claude-opus   | json           | H2, H3     |
+| F26     | claude-opus   | xml            | H3, H5     |
+| F27     | claude-opus   | yaml           | H2, H3     |
+| F28     | claude-opus   | toml           | H3         |
+| F29     | claude-sonnet | csv            | H3, H5     |
+| F30     | claude-sonnet | kv_colon_space | H3, H6     |
+| F31     | claude-sonnet | markdown_table | H3         |
+| F32     | claude-sonnet | json           | H2, H3     |
+| F33     | claude-sonnet | xml            | H3, H5     |
+| F34     | claude-sonnet | yaml           | H2, H3     |
+| F35     | claude-sonnet | toml           | H3         |
 
 **Total: 35 tests**
 
@@ -343,13 +343,13 @@ Run tests in **batches of 4**: 2 slow + 2 fast models to maximize throughput whi
 
 **Time estimates per test (from Test 01 data):**
 
-| Model | Time/req | Requests (~10 iter × 3 runs) | Total/test |
-|-------|----------|------------------------------|------------|
-| gpt-5-mini | ~3.5 min | ~30 | **~105 min** |
-| gpt-5 | ~2.4 min | ~30 | **~72 min** |
-| gpt-5.2 | ~1 min | ~30 | **~30 min** |
-| claude-opus | ~1.6 min | ~30 | **~48 min** |
-| claude-sonnet | ~1.4 min | ~30 | **~42 min** |
+| Model         | Time/req | Requests (~10 iter × 3 runs) | Total/test   |
+|---------------|----------|------------------------------|--------------|  
+| gpt-5-mini    | ~3.5 min | ~30                          | **~105 min** |
+| gpt-5         | ~2.4 min | ~30                          | **~72 min**  |
+| gpt-5.2       | ~1 min   | ~30                          | **~30 min**  |
+| claude-opus   | ~1.6 min | ~30                          | **~48 min**  |
+| claude-sonnet | ~1.4 min | ~30                          | **~42 min**  |
 
 **API rate limits (tested in Test 01):**
 - OpenAI: 120+ concurrent workers
@@ -401,11 +401,11 @@ python 03_find_scale_limit.py --test-path .. --model claude-opus-4-5-20251101 --
 
 ### 4.8 Time Estimate
 
-| Strategy | Batches | Total Time |
-|----------|---------|------------|
-| Sequential (1 test) | 40 | ~14 hours |
-| Batches of 4 | 10 | **~3.5 hours** |
-| Full parallel (40) | 1 | ~2 hours (requires external terminals) |
+| Strategy            | Batches | Total Time                           |
+|---------------------|---------|--------------------------------------|
+| Sequential (1 test) | 40      | ~14 hours                            |
+| Batches of 4        | 10      | **~3.5 hours**                       |
+| Full parallel (40)  | 1       | ~2 hours (requires external terminals)|
 
 ### 4.9 Phase 6: Analysis
 
@@ -449,21 +449,21 @@ python 03_find_scale_limit.py \
 
 ### 6.1 Per-Request Metrics (Required)
 
-| Metric | Source | Unit |
-|--------|--------|------|
+| Metric           | Source               | Unit    |
+|------------------|----------------------|---------|
 | time_per_request | response_time / runs | seconds |
-| cost_per_request | total_cost / runs | USD |
-| input_tokens | API response | tokens |
-| output_tokens | API response | tokens |
+| cost_per_request | total_cost / runs    | USD     |
+| input_tokens     | API response         | tokens  |
+| output_tokens    | API response         | tokens  |
 
 ### 6.2 Scale Limit Metrics
 
-| Metric | Source |
-|--------|--------|
-| max_reliable_rows | Binary search result |
-| vs_csv_baseline | (format_limit / csv_limit) × 100% |
-| failure_mode | comprehension or truncation |
-| context_utilization_pct | tokens_used / max_context |
+| Metric                  | Source                             |
+|-------------------------|------------------------------------|
+| max_reliable_rows       | Binary search result               |
+| vs_csv_baseline         | (format_limit / csv_limit) × 100%  |
+| failure_mode            | comprehension or truncation        |
+| context_utilization_pct | tokens_used / max_context          |
 
 ### 6.3 Result File Format
 

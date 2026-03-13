@@ -54,14 +54,36 @@
 
 ### Hypothesis Evaluation (Test 02 Results)
 
-| ID | Hypothesis | Source | Status | Evidence |
-|----|------------|--------|--------|----------|
-| H1 | Separator style affects scale | Sclar et al. 2024 | CONTRADICTED | TK-001: no measurable difference on modern models |
-| H2 | JSON not optimal despite structure | Microsoft/MIT 2024 | MIXED | GPT: JSON mid-tier (335 vs yaml 500). Claude: JSON is BEST (265, 189) |
-| H3 | Format preferences differ by family | Microsoft/MIT 2024 | **CONFIRMED** | GPT prefers yaml/xml. Claude prefers json. Rankings inverted. |
-| H4 | Optimal format depends on complexity | Microsoft CFPO 2025 | INCONCLUSIVE | Requires tests at multiple complexity levels |
-| H5 | Token-efficient formats enable higher scale | Token efficiency theory | **CONTRADICTED** | xml (2.12x) beats csv (1.00x) on GPT by 1.5-2x |
-| H6 | Key-value outperforms structured | TK-001 benchmark | **CONTRADICTED** | Only true for gpt-5-mini. Worst format for gpt-5.2 |
+- **H1**
+  - **Hypothesis**: Separator style affects scale
+  - **Source**: Sclar et al. 2024
+  - **Status**: CONTRADICTED
+  - **Evidence**: TK-001: no measurable difference on modern models
+- **H2**
+  - **Hypothesis**: JSON not optimal despite structure
+  - **Source**: Microsoft/MIT 2024
+  - **Status**: MIXED
+  - **Evidence**: GPT: JSON mid-tier (335 vs yaml 500). Claude: JSON is BEST (265, 189)
+- **H3**
+  - **Hypothesis**: Format preferences differ by family
+  - **Source**: Microsoft/MIT 2024
+  - **Status**: **CONFIRMED**
+  - **Evidence**: GPT prefers yaml/xml. Claude prefers json. Rankings inverted.
+- **H4**
+  - **Hypothesis**: Optimal format depends on complexity
+  - **Source**: Microsoft CFPO 2025
+  - **Status**: INCONCLUSIVE
+  - **Evidence**: Requires tests at multiple complexity levels
+- **H5**
+  - **Hypothesis**: Token-efficient formats enable higher scale
+  - **Source**: Token efficiency theory
+  - **Status**: **CONTRADICTED**
+  - **Evidence**: xml (2.12x) beats csv (1.00x) on GPT by 1.5-2x
+- **H6**
+  - **Hypothesis**: Key-value outperforms structured
+  - **Source**: TK-001 benchmark
+  - **Status**: **CONTRADICTED**
+  - **Evidence**: Only true for gpt-5-mini. Worst format for gpt-5.2
 
 ### Detailed Evidence
 
@@ -152,18 +174,18 @@ Clearance: Level 4: Top Secret
 
 **Source:** `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`
 
-| Rank | Format | Precision | Std Dev | Recall |
-|------|--------|-----------|---------|--------|
-| 1 | `::` (double colon) | 1.000 | 0.000 | 0.997 |
-| 2 | `: ` (colon space) | 1.000 | 0.000 | 0.989 |
-| 3 | CSV quoted | 1.000 | 0.000 | 0.991 |
-| 4 | TOML | 0.999 | 0.003 | 0.988 |
-| 5 | `:` (colon) | 0.999 | 0.003 | 0.998 |
-| 6 | CSV raw | 0.999 | 0.002 | 0.953 |
-| 7 | JSON | 0.998 | 0.004 | 0.979 |
-| 8 | YAML | 0.991 | 0.006 | 0.991 |
-| 9 | Markdown table | 0.978 | 0.038 | 0.950 |
-| 10 | XML | 0.956 | 0.161 | 0.965 |
+| Rank | Format              | Precision | Std Dev | Recall |
+|------|---------------------|-----------|---------|--------|
+| 1    | `::` (double colon) | 1.000     | 0.000   | 0.997  |
+| 2    | `: ` (colon space)  | 1.000     | 0.000   | 0.989  |
+| 3    | CSV quoted          | 1.000     | 0.000   | 0.991  |
+| 4    | TOML                | 0.999     | 0.003   | 0.988  |
+| 5    | `:` (colon)         | 0.999     | 0.003   | 0.998  |
+| 6    | CSV raw             | 0.999     | 0.002   | 0.953  |
+| 7    | JSON                | 0.998     | 0.004   | 0.979  |
+| 8    | YAML                | 0.991     | 0.006   | 0.991  |
+| 9    | Markdown table      | 0.978     | 0.038   | 0.950  |
+| 10   | XML                 | 0.956     | 0.161   | 0.965  |
 
 **Key insight:** Format TYPE matters more than token efficiency. Key-value formats outperform structured formats (XML, YAML) despite intuition.
 
