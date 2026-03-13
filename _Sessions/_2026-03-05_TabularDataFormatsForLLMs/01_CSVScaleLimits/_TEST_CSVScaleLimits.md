@@ -51,12 +51,12 @@
 
 **Best combinations for single-shot production use:**
 
-| Priority | Model | Effort | Scale | Cost/run | Time | Use Case |
-|----------|-------|--------|-------|----------|------|----------|
-| **Quality** | gpt-5 | high | 400 rows | ~$2.75 | 160 min | Critical extractions, max accuracy |
-| **Balanced** | gpt-5 | low | 300 rows | ~$0.45 | 14 min | Standard production workloads |
-| **Speed** | gpt-5-mini | medium | 300 rows | ~$0.03 | 48 min | High volume, cost-sensitive |
-| **Budget** | gpt-5-mini | low | 50 rows | ~$0.07 | 6 min | Small datasets, minimal cost |
+| Priority     | Model      | Effort | Scale    | Cost/run | Time    | Use Case                           |
+|--------------|------------|--------|----------|----------|---------|-------------------------------------|
+| **Quality**  | gpt-5      | high   | 400 rows | ~$2.75   | 160 min | Critical extractions, max accuracy |
+| **Balanced** | gpt-5      | low    | 300 rows | ~$0.45   | 14 min  | Standard production workloads      |
+| **Speed**    | gpt-5-mini | medium | 300 rows | ~$0.03   | 48 min  | High volume, cost-sensitive        |
+| **Budget**   | gpt-5-mini | low    | 50 rows  | ~$0.07   | 6 min   | Small datasets, minimal cost       |
 
 **Realistic boundaries:**
 - **Maximum reliable scale**: 400 rows (gpt-5 high, 80% of 492 limit)
