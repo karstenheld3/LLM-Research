@@ -12,7 +12,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 *Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
 
-**Status:** Test 01: 12/12 complete | Test 02: 40/40 complete (March 2026)
+**Status:** Test 01: 13/13 complete | Test 02: 48/48 complete (March 2026)
 
 ## Key Findings
 
@@ -30,9 +30,16 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Average context utilization at failure: only 6.5% - context window is NOT the bottleneck
 
 - **Scale limits vary 168x across models**
-  - Best: gpt-5-mini high (675+ rows)
+  - Best: gpt-5.4 medium with json format (702 rows)
   - Worst: gpt-4o (4 rows)
   - This variance makes model selection critical for production use
+
+- **gpt-5.4 sets new scale records with json format** (Test 02)
+  - json: 702 rows (best overall)
+  - markdown_table: 554 rows
+  - xml: 546 rows
+  - csv/csv_quoted/toml/yaml: 523 rows
+  - kv_colon_space: 359 rows (worst for gpt-5.4)
 
 - **Format choice causes up to 5.8x scale difference** (Test 02)
   - **csv_quoted is a safe default** - solid mid-tier performance across all models, no conversion cost
@@ -52,6 +59,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 | Tier     | Time      | Model + Format                    | Scale    | CPKC     | Use Case                    |
 |----------|-----------|-----------------------------------|----------|----------|-----------------------------|
+| Moderate | ~2.4 min  | gpt-5.4 medium + json             | 702 rows | $0.93    | **NEW: Max scale overall**  |
 | Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.197   | Interactive, user-facing    |
 | Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.252   | Alternative format          |
 | Fast     | ~1 min    | gpt-5.2 medium + json             | 241 rows | $0.237   | Most versatile format       |

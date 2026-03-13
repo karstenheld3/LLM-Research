@@ -1,0 +1,306 @@
+{
+  "model": "gpt-5.4",
+  "provider": "openai",
+  "method": "reasoning_effort",
+  "output_format": "xml",
+  "reasoning_effort": "medium",
+  "max_output_tokens": 16384,
+  "max_reliable_rows": 546,
+  "last_working_lower_bound": 546,
+  "last_failed_upper_bound": 554,
+  "primary_failure_mode": "comprehension",
+  "context_utilization_at_failure_pct": 20.8,
+  "max_context_tokens": 1047576,
+  "total_cost_usd": 4.425123,
+  "search_history": [
+    {
+      "rows": 500,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "passed": true,
+      "runs_passed": 3,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_02.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 450,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "input_tokens": 145797,
+      "output_tokens": 50401,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": null,
+      "cost_usd": 0.560254,
+      "iteration": 1,
+      "duration_secs": 178.17437553405762
+    },
+    {
+      "rows": 750,
+      "precision": 1.0,
+      "recall": 0.9897,
+      "f1": 0.9947666666666667,
+      "passed": false,
+      "runs_passed": 1,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_02.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9735
+        },
+        {
+          "file": "eval_03.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9956
+        }
+      ],
+      "true_positives": 671,
+      "false_positives": 0,
+      "false_negatives": 7,
+      "input_tokens": 218046,
+      "output_tokens": 67651,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": "comprehension",
+      "cost_usd": 0.77994,
+      "iteration": 2,
+      "duration_secs": 239.40924882888794
+    },
+    {
+      "rows": 625,
+      "precision": 1.0,
+      "recall": 0.9964000000000001,
+      "f1": 0.9982000000000001,
+      "passed": false,
+      "runs_passed": 1,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9946
+        },
+        {
+          "file": "eval_02.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9946
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 553,
+      "false_positives": 0,
+      "false_negatives": 2,
+      "input_tokens": 181917,
+      "output_tokens": 62188,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": "comprehension",
+      "cost_usd": 0.693806,
+      "iteration": 3,
+      "duration_secs": 232.33677887916565
+    },
+    {
+      "rows": 562,
+      "precision": 1.0,
+      "recall": 0.9979666666666667,
+      "f1": 0.9989666666666667,
+      "passed": false,
+      "runs_passed": 2,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_02.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9939
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 491,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "input_tokens": 163728,
+      "output_tokens": 53609,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": "comprehension",
+      "cost_usd": 0.606727,
+      "iteration": 4,
+      "duration_secs": 192.55703449249268
+    },
+    {
+      "rows": 531,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "passed": true,
+      "runs_passed": 3,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_02.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 468,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "input_tokens": 154731,
+      "output_tokens": 54477,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": null,
+      "cost_usd": 0.601991,
+      "iteration": 5,
+      "duration_secs": 269.48653960227966
+    },
+    {
+      "rows": 546,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "passed": true,
+      "runs_passed": 3,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_02.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 471,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "input_tokens": 159078,
+      "output_tokens": 54743,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": null,
+      "cost_usd": 0.60942,
+      "iteration": 6,
+      "duration_secs": 211.69902348518372
+    },
+    {
+      "rows": 554,
+      "precision": 1.0,
+      "recall": 0.9979333333333334,
+      "f1": 0.9989666666666667,
+      "passed": false,
+      "runs_passed": 2,
+      "runs_total": 3,
+      "run_results": [
+        {
+          "file": "eval_01.json",
+          "passed": false,
+          "precision": 1.0,
+          "recall": 0.9938
+        },
+        {
+          "file": "eval_02.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "file": "eval_03.json",
+          "passed": true,
+          "precision": 1.0,
+          "recall": 1.0
+        }
+      ],
+      "true_positives": 482,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "input_tokens": 161412,
+      "output_tokens": 49496,
+      "finish_reason": "stop",
+      "truncated": false,
+      "failure_mode": "comprehension",
+      "cost_usd": 0.572985,
+      "iteration": 7,
+      "duration_secs": 168.98574209213257
+    }
+  ],
+  "total_iterations": 7,
+  "elapsed_time_seconds": 1492.7,
+  "timing_stats": {
+    "min_secs": 169.0,
+    "max_secs": 269.5,
+    "avg_secs": 213.2
+  },
+  "verify_runs": 1,
+  "verify_results": null
+}

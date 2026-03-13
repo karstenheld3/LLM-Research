@@ -12,7 +12,7 @@
 
 *Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
 
-**Key Findings:** (12/12 tests complete as of 2026-03-09)
+**Key Findings:** (13/13 tests complete as of 2026-03-12)
 
 - **Scale limits vary dramatically by model**: gpt-5-mini high (675+) vs gpt-4o (4 rows) - **168x+ difference**
 - **Reasoning models massively outperform temperature models**: gpt-5-mini (500) vs gpt-4o-mini (6) = **83x better**
@@ -21,11 +21,12 @@
 - **gpt-5 effort shows diminishing returns**: low (356) → medium (450) → high (492) = only **38% improvement**
 - **Claude models mid-range**: sonnet (168), opus (177) - similar despite 67% price premium
 
-### Final Results Table (12/12 tests complete)
+### Final Results Table (13/13 tests complete)
 
 | Model          | Effort | Scale Limit | Failure Mode  | Context % | Time/req | Cost ($) |
 |----------------|--------|-------------|---------------|-----------|----------|----------|
 | gpt-5-mini     | high   | **675+***   | (errors)      | -         | -        | -        |
+| gpt-5.4        | medium | **492**     | comprehension | 6.8%      | ~2.4 min | 2.49     |
 | gpt-5          | high   | **492**     | truncation    | 8.0%      | ~20 min  | 0.26     |
 | gpt-5          | medium | **450**     | comprehension | 6.4%      | ~10 min  | 0.26     |
 | gpt-5-mini     | medium | **500**     | comprehension | 7.1%      | ~3.5 min | 0.034    |

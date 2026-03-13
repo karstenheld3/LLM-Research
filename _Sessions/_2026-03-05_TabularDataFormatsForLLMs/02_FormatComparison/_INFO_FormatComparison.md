@@ -10,7 +10,7 @@
 
 **Research Question:** Does input format affect LLM extraction scale limits?
 
-**Status:** 40/40 tests complete (2026-03-10)
+**Status:** 48/48 tests complete (2026-03-12)
 
 ### Key Findings
 
@@ -36,6 +36,7 @@
 
 | Model           | Best Format    | Scale | Worst Format   | Scale | Ratio |
 |-----------------|----------------|-------|----------------|-------|-------|
+| gpt-5.4         | json           | 702   | kv_colon_space | 359   | 2.0x  |
 | gpt-5-mini      | yaml/kv        | 500   | markdown_table | 163   | 3.1x  |
 | gpt-5           | yaml           | 333   | markdown_table | 83    | 4.0x  |
 | gpt-5.2         | csv_quoted     | 268   | toml           | 46    | 5.8x  |
@@ -47,7 +48,7 @@
 ### Test Design
 
 - 8 formats: csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
-- 5 models: gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
+- 6 models: gpt-5.4 medium, gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
 - Binary search with 3 runs per scale point
 - Filter: department="Engineering" AND salary>75000
 
