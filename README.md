@@ -21,8 +21,8 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - Reasoning architecture enables systematic data processing that temperature sampling cannot achieve
 
 - **Higher reasoning effort dramatically increases scale limit** (up to 10x improvement)
-  - gpt-5-mini: low → medium = 7.7x rows (65 → 500), 3.5x time (~1 → ~3.5 min), 5x cost ($0.007 → $0.034)
-  - Diminishing returns for gpt-5: low → high = 38% more rows (356 → 492), 8x time (~2.4 → ~20 min), 6x cost ($0.05 → $0.28)
+  - gpt-5-mini: low → medium = 7.7x rows (65 → 500), 3.5x time (~1 → ~3.5 min), 5x cost ($0.004 → $0.017)
+  - Diminishing returns for gpt-5: low → high = 38% more rows (356 → 492), 8x time (~2.4 → ~20 min), 6x cost ($0.03 → $0.14)
   - **Trade-off**: gpt-5-mini low processes 455 cells/min vs medium at 1000 cells/min. Medium is 2.2x faster per cell despite 3.5x longer total time.
 
 - **Comprehension is the primary failure mode, not truncation**
@@ -59,25 +59,25 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 | Tier     | Time      | Model + Format                    | Scale    | CPKC     | Use Case                    |
 |----------|-----------|-----------------------------------|----------|----------|-----------------------------|
-| Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.197   | Interactive, user-facing    |
-| Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.252   | Alternative format          |
-| Fast     | ~1 min    | gpt-5.2 medium + json             | 241 rows | $0.237   | Most versatile format       |
-| Fast     | ~1 min    | gpt-5.2 medium + csv              | 215 rows | $0.226   | Most compact format         |
-| Fast     | ~1 min    | gpt-5-mini low + yaml             | 65 rows  | $0.015   | Small tables, lowest cost   |
+| Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.101   | Interactive, user-facing    |
+| Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.126   | Alternative format          |
+| Fast     | ~1 min    | gpt-5.2 medium + json             | 241 rows | $0.119   | Most versatile format       |
+| Fast     | ~1 min    | gpt-5.2 medium + csv              | 215 rows | $0.113   | Most compact format         |
+| Fast     | ~1 min    | gpt-5-mini low + yaml             | 65 rows  | $0.008   | Small tables, lowest cost   |
 | Moderate | ~1.4 min  | claude-sonnet medium + json       | 189 rows | $0.408   | Anthropic, most versatile   |
 | Moderate | ~1.4 min  | claude-sonnet medium + csv        | 126 rows | $0.340   | Anthropic, most compact     |
 | Moderate | ~1.6 min  | claude-opus medium + json         | 265 rows | $0.663   | Max Anthropic scale         |
 | Moderate | ~2.9 min  | gpt-5.4 medium + json             | 702 rows | $0.189   | **Max scale overall**       |
-| Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.180   | Larger tables, good balance |
-| Moderate | ~2.4 min  | gpt-5 low + xml                   | 327 rows | $0.183   | Alternative format          |
-| Moderate | ~2.4 min  | gpt-5 low + json                  | 249 rows | $0.212   | Most versatile format       |
-| Moderate | ~2.4 min  | gpt-5 low + csv                   | 166 rows | $0.215   | Most compact format         |
-| Batch    | ~3.5 min  | gpt-5-mini medium + yaml          | 500 rows | $0.034   | Background jobs, max scale  |
-| Batch    | ~3.5 min  | gpt-5-mini medium + kv_colon_space| 500 rows | $0.037   | Alternative format          |
-| Batch    | ~3.5 min  | gpt-5-mini medium + csv_quoted    | 437 rows | $0.033   | Best cost efficiency        |
-| Batch    | ~3.5 min  | gpt-5-mini medium + json          | 335 rows | $0.043   | Most versatile format       |
-| Batch    | ~3.5 min  | gpt-5-mini medium + csv           | 194 rows | $0.052   | Most compact format         |
-| Avoid    | 10-20 min | gpt-5 medium/high                 | 450-492  | $0.26+   | Too slow for any use case   |
+| Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.090   | Larger tables, good balance |
+| Moderate | ~2.4 min  | gpt-5 low + xml                   | 327 rows | $0.092   | Alternative format          |
+| Moderate | ~2.4 min  | gpt-5 low + json                  | 249 rows | $0.109   | Most versatile format       |
+| Moderate | ~2.4 min  | gpt-5 low + csv                   | 166 rows | $0.112   | Most compact format         |
+| Batch    | ~3.5 min  | gpt-5-mini medium + yaml          | 500 rows | $0.017   | Background jobs, max scale  |
+| Batch    | ~3.5 min  | gpt-5-mini medium + kv_colon_space| 500 rows | $0.020   | Alternative format          |
+| Batch    | ~3.5 min  | gpt-5-mini medium + csv_quoted    | 437 rows | $0.016   | Best cost efficiency        |
+| Batch    | ~3.5 min  | gpt-5-mini medium + json          | 335 rows | $0.021   | Most versatile format       |
+| Batch    | ~3.5 min  | gpt-5-mini medium + csv           | 194 rows | $0.029   | Most compact format         |
+| Avoid    | 10-20 min | gpt-5 medium/high                 | 450-492  | $0.13+   | Too slow for any use case   |
 
 **Decision tree:**
 1. Need <1 min response? → gpt-5.2 medium (268 rows) or gpt-5-mini low (65 rows)

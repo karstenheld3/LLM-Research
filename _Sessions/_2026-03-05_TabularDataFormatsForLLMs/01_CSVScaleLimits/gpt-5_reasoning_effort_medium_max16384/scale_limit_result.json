@@ -10,7 +10,7 @@
   "primary_failure_mode": "comprehension",
   "context_utilization_at_failure_pct": 6.4,
   "max_context_tokens": 1000000,
-  "total_cost_usd": 5.946309,
+  "total_cost_usd": 2.973154,
   "search_history": [
     {
       "rows": 300,
@@ -48,7 +48,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.48159,
+      "cost_usd": 0.240795,
       "iteration": 1,
       "duration_secs": 214.7243299484253
     },
@@ -88,7 +88,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.790139,
+      "cost_usd": 0.395069,
       "iteration": 2,
       "duration_secs": 270.58603167533875
     },
@@ -122,7 +122,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.685323,
+      "cost_usd": 0.342661,
       "iteration": 3,
       "duration_secs": 2707.987956047058
     },
@@ -162,7 +162,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.83425,
+      "cost_usd": 0.417125,
       "iteration": 4,
       "duration_secs": 251.792311668396
     },
@@ -202,7 +202,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.750509,
+      "cost_usd": 0.375254,
       "iteration": 5,
       "duration_secs": 294.2692000865936
     },
@@ -242,7 +242,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.912231,
+      "cost_usd": 0.456116,
       "iteration": 6,
       "duration_secs": 273.78047156333923
     },
@@ -282,7 +282,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.712207,
+      "cost_usd": 0.356104,
       "iteration": 7,
       "duration_secs": 555.7025611400604
     },
@@ -322,7 +322,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.78006,
+      "cost_usd": 0.39003,
       "iteration": 8,
       "duration_secs": 291.10293841362
     }

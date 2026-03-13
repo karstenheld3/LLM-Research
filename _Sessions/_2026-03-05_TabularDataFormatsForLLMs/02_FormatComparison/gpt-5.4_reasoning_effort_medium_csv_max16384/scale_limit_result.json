@@ -11,7 +11,7 @@
   "primary_failure_mode": "comprehension",
   "context_utilization_at_failure_pct": 9.9,
   "max_context_tokens": 1047576,
-  "total_cost_usd": 3.089011,
+  "total_cost_usd": 3.08901,
   "search_history": [
     {
       "rows": 500,

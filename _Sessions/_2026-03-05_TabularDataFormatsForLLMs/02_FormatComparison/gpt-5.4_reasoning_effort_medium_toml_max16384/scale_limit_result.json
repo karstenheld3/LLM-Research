@@ -11,7 +11,7 @@
   "primary_failure_mode": "comprehension",
   "context_utilization_at_failure_pct": 15.0,
   "max_context_tokens": 1047576,
-  "total_cost_usd": 3.687928,
+  "total_cost_usd": 3.687926,
   "search_history": [
     {
       "rows": 500,
@@ -49,7 +49,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.455498,
+      "cost_usd": 0.455497,
       "iteration": 1,
       "duration_secs": 153.4267978668213
     },
@@ -169,7 +169,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.447983,
+      "cost_usd": 0.447982,
       "iteration": 4,
       "duration_secs": 138.0860402584076
     },

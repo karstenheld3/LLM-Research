@@ -53,16 +53,16 @@
 
 | Priority | Model | Effort | Scale | Cost/run | Time | Use Case |
 |----------|-------|--------|-------|----------|------|----------|
-| **Quality** | gpt-5 | high | 400 rows | ~$5.50 | 160 min | Critical extractions, max accuracy |
-| **Balanced** | gpt-5 | low | 300 rows | ~$0.90 | 14 min | Standard production workloads |
-| **Speed** | gpt-5-mini | medium | 300 rows | ~$0.05 | 48 min | High volume, cost-sensitive |
-| **Budget** | gpt-5-mini | low | 50 rows | ~$0.13 | 6 min | Small datasets, minimal cost |
+| **Quality** | gpt-5 | high | 400 rows | ~$2.75 | 160 min | Critical extractions, max accuracy |
+| **Balanced** | gpt-5 | low | 300 rows | ~$0.45 | 14 min | Standard production workloads |
+| **Speed** | gpt-5-mini | medium | 300 rows | ~$0.03 | 48 min | High volume, cost-sensitive |
+| **Budget** | gpt-5-mini | low | 50 rows | ~$0.07 | 6 min | Small datasets, minimal cost |
 
 **Realistic boundaries:**
 - **Maximum reliable scale**: 400 rows (gpt-5 high, 80% of 492 limit)
 - **Recommended production scale**: 300 rows (safe margin for all models)
 - **Minimum viable scale**: 50 rows (even low-effort models reliable here)
-- **Cost range**: $0.05-$6.00 per extraction run
+- **Cost range**: $0.03-$3.00 per extraction run
 - **Time range**: 6-160 minutes per binary search run
 
 **DO NOT USE for tabular extraction:**
@@ -76,14 +76,14 @@
 |---------------|--------|-------------|---------------|-----------|-------|----------|
 | gpt-5-mini    | high   | **675+***   | (errors)      | -         | -     | -        |
 | gpt-5.4       | medium | **492**     | comprehension | 6.8%      | $2.49 | ~2.4 min |
-| gpt-5         | high   | **492**     | truncation    | 8.0%      | $5.47 | ~20 min  |
-| gpt-5         | medium | **450**     | comprehension | 6.4%      | $5.95 | ~10 min  |
-| gpt-5-mini    | medium | **389**     | comprehension | ~2%*      | $0.00*| ~4 min   |
-| gpt-5         | low    | **356**     | comprehension | 2.1%      | $0.87 | ~2.4 min |
-| gpt-5.2       | medium | **215**     | comprehension | 1.4%      | $0.57 | ~1 min   |
+| gpt-5         | high   | **492**     | truncation    | 8.0%      | $2.74 | ~20 min  |
+| gpt-5         | medium | **450**     | comprehension | 6.4%      | $2.98 | ~10 min  |
+| gpt-5-mini    | medium | **389**     | comprehension | ~2%*      | $0.05 | ~4 min   |
+| gpt-5         | low    | **356**     | comprehension | 2.1%      | $0.44 | ~2.4 min |
+| gpt-5.2       | medium | **215**     | comprehension | 1.4%      | $0.29 | ~1 min   |
 | claude-opus   | medium | **177**     | truncation    | 25.1%     | $5.36 | ~1.6 min |
 | claude-sonnet | medium | **168**     | comprehension | 8.4%      | $0.89 | ~1.4 min |
-| gpt-5-mini    | low    | **65**      | comprehension | 4.3%      | $0.13 | ~1 min   |
+| gpt-5-mini    | low    | **65**      | comprehension | 4.3%      | $0.07 | ~1 min   |
 | claude-haiku  | medium | **9**       | comprehension | 8.3%      | $0.09 | ~12 sec  |
 | gpt-4o-mini   | medium | **6**       | comprehension | 2.1%      | $0.00 | ~9 sec   |
 | gpt-4o        | medium | **4**       | comprehension | 11.3%     | $0.19 | ~19 sec  |
@@ -171,9 +171,9 @@
 **gpt-5 Effort Comparison** [TESTED]:
 | Effort | Scale Limit | Improvement vs Low | Cost  | Time      |
 |--------|-------------|--------------------| ------|-----------|
-| low    | 356         | baseline           | $0.87 | 14.2 min  |
-| medium | 450         | **+26%**           | $5.95 | 81.0 min  |
-| high   | 492         | **+38%**           | $5.47 | 162.5 min |
+| low    | 356         | baseline           | $0.44 | 14.2 min  |
+| medium | 450         | **+26%**           | $2.98 | 81.0 min  |
+| high   | 492         | **+38%**           | $2.74 | 162.5 min |
 
 **Calculation verification**: 
 - gpt-5-mini: (389 - 65) / 65 = 498%, 389 / 65 = 5.98 ≈ 6x [VERIFIED]
@@ -182,7 +182,7 @@
 **Key Insights**:
 1. **gpt-5-mini shows dramatic improvement** (6x from low→medium) while **gpt-5 shows moderate improvement** (38% from low→high)
 2. **Diminishing returns at higher tiers**: gpt-5 medium→high adds only 42 rows (+9%) but costs 6x more time
-3. **Cost efficiency varies**: gpt-5 low ($0.87) delivers 356 rows; gpt-5 high ($5.47) delivers only 136 more rows
+3. **Cost efficiency varies**: gpt-5 low ($0.44) delivers 356 rows; gpt-5 high ($2.74) delivers only 136 more rows
 
 **Verdict**: SUPPORTED. Higher effort increases scale limit, but with diminishing returns for larger models. [TESTED]
 
@@ -221,7 +221,7 @@
 3. **Context utilization is irrelevant**: All models failed well below context limits (<30% utilization). The 1M token context of gpt-5 models provides no practical advantage when attention fails at <50K tokens. [VERIFIED]
 
 4. **Cost efficiency varies wildly** [VERIFIED]:
-   - Best: gpt-5-mini medium - 389 rows for ~$0.05
+   - Best: gpt-5-mini medium - 389 rows for ~$0.03
    - Worst: gpt-4o - 4 rows for $0.19 (0.05 rows/$0.01)
 
 ## MUST-NOT-FORGET

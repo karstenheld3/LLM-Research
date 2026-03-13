@@ -50,9 +50,9 @@
 
 Balancing accuracy, cost, and speed for real-world use (times are per single LLM request):
 
-- **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.05) - excellent balance of scale, speed, and cost
-- **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.031) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (500 rows, ~3.5 min/request, $0.034) - highest scale at lowest cost
+- **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.03) - excellent balance of scale, speed, and cost
+- **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.016) - when speed matters more than scale
+- **Maximum scale**: gpt-5-mini medium (500 rows, ~3.5 min/request, $0.017) - highest scale at lowest cost
 - **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.040) - when Anthropic API is required
 
 **NOT recommended for production:**
@@ -349,13 +349,13 @@ python test_llm_client.py
 |-------------------|-----------|-------------|--------|-------------|-----------|-----------------|-------|
 | gpt-4o-mini       | OpenAI    | temperature | medium | 6           | 2.1%      | comprehension   | $0.00 |
 | gpt-4o            | OpenAI    | temperature | medium | 4           | 11.3%     | comprehension   | $0.19 |
-| gpt-5-mini        | OpenAI    | reasoning   | low    | 65          | 4.3%      | comprehension   | $0.13 |
-| gpt-5-mini        | OpenAI    | reasoning   | medium | 389         | ~2%       | comprehension   | $0.00*|
+| gpt-5-mini        | OpenAI    | reasoning   | low    | 65          | 4.3%      | comprehension   | $0.07 |
+| gpt-5-mini        | OpenAI    | reasoning   | medium | 389         | ~2%       | comprehension   | $0.05 |
 | gpt-5-mini        | OpenAI    | reasoning   | high   | 675+*       | -         | (errors)        | -     |
-| gpt-5             | OpenAI    | reasoning   | low    | 356         | 2.1%      | comprehension   | $0.87 |
-| gpt-5             | OpenAI    | reasoning   | medium | 450         | 6.4%      | comprehension   | $5.95 |
-| gpt-5             | OpenAI    | reasoning   | high   | 492         | 8.0%      | truncation      | $5.47 |
-| gpt-5.2           | OpenAI    | reasoning   | medium | 215         | 1.4%      | comprehension   | $0.57 |
+| gpt-5             | OpenAI    | reasoning   | low    | 356         | 2.1%      | comprehension   | $0.44 |
+| gpt-5             | OpenAI    | reasoning   | medium | 450         | 6.4%      | comprehension   | $2.98 |
+| gpt-5             | OpenAI    | reasoning   | high   | 492         | 8.0%      | truncation      | $2.74 |
+| gpt-5.2           | OpenAI    | reasoning   | medium | 215         | 1.4%      | comprehension   | $0.29 |
 | gpt-5.4           | OpenAI    | reasoning   | medium | 492         | 6.8%      | comprehension   | $2.49 |
 | claude-haiku-4-5  | Anthropic | temperature | medium | 9           | 8.3%      | comprehension   | $0.09 |
 | claude-sonnet-4-5 | Anthropic | thinking    | medium | 168         | 8.4%      | comprehension   | $0.89 |

@@ -88,7 +88,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.208687,
+      "cost_usd": 0.208688,
       "iteration": 2,
       "duration_secs": 76.09714603424072
     },

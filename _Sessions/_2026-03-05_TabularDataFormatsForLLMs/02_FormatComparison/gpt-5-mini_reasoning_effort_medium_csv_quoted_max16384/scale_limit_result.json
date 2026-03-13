@@ -11,7 +11,7 @@
   "primary_failure_mode": "comprehension",
   "context_utilization_at_failure_pct": 7.1,
   "max_context_tokens": 1000000,
-  "total_cost_usd": 0.692508,
+  "total_cost_usd": 0.346255,
   "search_history": [
     {
       "rows": 500,
@@ -49,7 +49,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.106767,
+      "cost_usd": 0.053384,
       "iteration": 1,
       "duration_secs": 221.88282680511475
     },
@@ -89,7 +89,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.066327,
+      "cost_usd": 0.033163,
       "iteration": 2,
       "duration_secs": 155.79524302482605
     },
@@ -129,7 +129,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.093121,
+      "cost_usd": 0.04656,
       "iteration": 3,
       "duration_secs": 234.34149742126465
     },
@@ -169,7 +169,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": null,
-      "cost_usd": 0.093636,
+      "cost_usd": 0.046818,
       "iteration": 4,
       "duration_secs": 197.38639640808105
     },
@@ -209,7 +209,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.109403,
+      "cost_usd": 0.054702,
       "iteration": 5,
       "duration_secs": 298.58961367607117
     },
@@ -249,7 +249,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.101349,
+      "cost_usd": 0.050675,
       "iteration": 6,
       "duration_secs": 562.4758143424988
     },
@@ -289,7 +289,7 @@
       "finish_reason": "stop",
       "truncated": false,
       "failure_mode": "comprehension",
-      "cost_usd": 0.121905,
+      "cost_usd": 0.060953,
       "iteration": 7,
       "duration_secs": 284.60255098342896
     }

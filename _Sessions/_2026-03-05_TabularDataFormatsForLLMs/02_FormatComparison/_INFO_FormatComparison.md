@@ -286,16 +286,16 @@ Clearance: Level 4: Top Secret
 
 | Model           | Best CPKC Format | CPKC   | Scale |
 |-----------------|------------------|--------|-------|
+| gpt-5-mini      | csv_quoted       | $0.016 | 437   |
+| gpt-5-mini      | yaml             | $0.017 | 500   |
+| gpt-5           | yaml             | $0.090 | 333   |
+| gpt-5.2         | csv_quoted       | $0.101 | 268   |
 | gpt-5.4         | kv_colon_space   | $0.131 | 359   |
 | gpt-5.4         | json             | $0.189 | 702   |
-| gpt-5-mini      | csv_quoted       | $0.033 | 437   |
-| gpt-5-mini      | yaml             | $0.034 | 500   |
-| gpt-5           | yaml             | $0.180 | 333   |
-| gpt-5.2         | toml             | $0.373 | 46    |
-| claude-opus     | csv              | $0.566 | 232   |
 | claude-sonnet   | csv              | $0.340 | 126   |
+| claude-opus     | csv              | $0.566 | 232   |
 
-**Best overall value:** gpt-5-mini with csv_quoted ($0.033/KC) or yaml ($0.034/KC, +14% scale)
+**Best overall value:** gpt-5-mini with csv_quoted ($0.016/KC) or yaml ($0.017/KC, +14% scale)
 
 ### Key Insight
 
