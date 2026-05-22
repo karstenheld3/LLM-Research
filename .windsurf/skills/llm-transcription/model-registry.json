@@ -1,11 +1,9 @@
 {
-  "_version": "1.5.0",
-  "_updated": "2026-05-22",
+  "_version": "1.4.0",
+  "_updated": "2026-04-20",
   "_comment": "Model properties and boundaries. context_window = max input tokens, max_output in tokens, temp_max for temperature models, thinking_max for extended thinking models.",
   
   "models": [
-    {"provider": "openai", "model_id": "gpt-5.5", "name": "GPT-5.5", "context_window": 1050000, "enabled": true, "status": "available"},
-    {"provider": "openai", "model_id": "gpt-5.5-pro", "name": "GPT-5.5 Pro", "context_window": 1050000, "enabled": false, "status": "available"},
     {"provider": "openai", "model_id": "gpt-5.4", "name": "GPT-5.4", "context_window": 1047576, "enabled": true, "status": "available"},
     {"provider": "openai", "model_id": "gpt-5.4-pro", "name": "GPT-5.4 Pro", "context_window": 1047576, "enabled": false, "status": "untested"},
     {"provider": "openai", "model_id": "gpt-5.4-mini", "name": "GPT-5.4 Mini", "context_window": 272000, "enabled": false, "status": "untested"},
@@ -34,9 +32,9 @@
     {"provider": "openai", "model_id": "o4-mini-deep-research", "name": "O4 Mini Deep Research", "context_window": 200000, "enabled": false, "status": "untested"},
     {"provider": "openai", "model_id": "computer-use-preview", "name": "Computer Use Preview", "context_window": 128000, "enabled": false, "status": "untested"},
     {"provider": "openai", "model_id": "gpt-image-1.5", "name": "GPT Image 1.5", "context_window": null, "enabled": false, "status": "untested"},
-    {"provider": "anthropic", "model_id": "claude-opus-4-7", "name": "Claude Opus 4.7", "context_window": 1000000, "enabled": false, "status": "untested"},
+    {"provider": "anthropic", "model_id": "claude-opus-4-7", "name": "Claude Opus 4.7", "context_window": 200000, "enabled": false, "status": "untested"},
     {"provider": "anthropic", "model_id": "claude-opus-4-6", "name": "Claude Opus 4.6", "context_window": 200000, "enabled": false, "status": "untested"},
-    {"provider": "anthropic", "model_id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "context_window": 1000000, "enabled": false, "status": "untested"},
+    {"provider": "anthropic", "model_id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "context_window": 200000, "enabled": false, "status": "untested"},
     {"provider": "anthropic", "model_id": "claude-opus-4-5-20251101", "name": "Claude Opus 4.5", "context_window": 200000, "enabled": true, "status": "available"},
     {"provider": "anthropic", "model_id": "claude-opus-4-1-20250805", "name": "Claude Opus 4.1", "context_window": 200000, "enabled": false, "status": "untested"},
     {"provider": "anthropic", "model_id": "claude-sonnet-4-5-20250929", "name": "Claude Sonnet 4.5", "context_window": 200000, "enabled": true, "status": "available"},
@@ -62,7 +60,6 @@
     { "prefix": "gpt-5-pro",       "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["high"], "default": "high", "seed": false },
     { "prefix": "gpt-5.1-codex-max", "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 65536, "effort": ["none", "minimal", "low", "medium", "high", "xhigh"], "default": "none", "seed": false },
     { "prefix": "gpt-5.1",   "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["none", "minimal", "low", "medium", "high"], "default": "none", "seed": false },
-    { "prefix": "gpt-5.5",   "provider": "openai", "method": "reasoning_effort", "max_input": 1050000, "max_output": 128000, "effort": ["none", "low", "medium", "high", "xhigh"], "default": "none", "seed": false },
     { "prefix": "gpt-5.4",   "provider": "openai", "method": "reasoning_effort", "max_input": 1047576, "max_output": 32768, "effort": ["none", "low", "medium", "high", "xhigh"], "default": "none", "seed": false },
     { "prefix": "gpt-5.2",   "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["none", "low", "medium", "high", "xhigh"], "default": "none", "seed": false },
     { "prefix": "gpt-5",     "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["minimal", "low", "medium", "high"], "default": "medium", "seed": false },

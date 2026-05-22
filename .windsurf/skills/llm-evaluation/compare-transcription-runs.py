@@ -69,6 +69,9 @@ def build_judge_api_params(model: str, mapping: dict, registry: dict,
     params['temperature'] = factor * model_config.get('temp_max', 2.0)
   elif method == 'reasoning_effort' and reasoning_effort in effort_map:
     params['reasoning_effort'] = effort_map[reasoning_effort].get('openai_reasoning_effort', 'medium')
+  elif method == 'adaptive_thinking' and reasoning_effort in effort_map:
+    params['thinking'] = {'type': 'adaptive'}
+    params['anthropic_effort'] = effort_map[reasoning_effort]['anthropic_adaptive_effort']
   elif method == 'thinking' and reasoning_effort in effort_map:
     factor = effort_map[reasoning_effort].get('anthropic_thinking_factor', 0.0)
     thinking_max = model_config.get('thinking_max', 100000)
@@ -261,10 +264,22 @@ def call_judge_llm(prompt: str, model: str, keys: dict, api_params: dict, method
       }
       if 'temperature' in api_params:
         call_params['temperature'] = api_params['temperature']
+      use_streaming = False
       if 'thinking' in api_params:
-        call_params['thinking'] = api_params['thinking']
+        thinking_config = api_params['thinking']
+        if thinking_config.get('type') == 'adaptive':
+          call_params['thinking'] = thinking_config
+          if 'anthropic_effort' in api_params:
+            call_params['extra_body'] = {'output_config': {'effort': api_params['anthropic_effort']}}
+          use_streaming = True
+        else:
+          call_params['thinking'] = thinking_config
             
-      response = client.messages.create(**call_params)
+      if use_streaming:
+        with client.messages.stream(**call_params) as stream:
+          response = stream.get_final_message()
+      else:
+        response = client.messages.create(**call_params)
       text = response.content[0].text if hasattr(response.content[0], 'text') else ""
       usage = {"input_tokens": response.usage.input_tokens, "output_tokens": response.usage.output_tokens}
         

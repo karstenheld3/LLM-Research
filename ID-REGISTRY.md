@@ -141,6 +141,9 @@ Format: `[TOPIC]-[DOC]-SC-[SOURCE_ID]-[SOURCE_REF]`
 
 ## Project Topics
 
-
+- `TBLF` - Tabular Data Formats for LLMs (parent session)
+- `DATBMRS` - LLM Data Processing Benchmarks (standalone session `_2026-05-22_LLMDataBenchmarks`)
+- `NOLIMA` - NoLiMa Benchmark deep-research (topic folder T02 in DATBMRS session)
+- `TQAB` - TQA-Bench: Multi-Table QA with Scalable Context (deep-research topic in DATBMRS)
 
 ## Document History

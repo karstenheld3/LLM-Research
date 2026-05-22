@@ -74,6 +74,28 @@ Agent-created files (helper scripts, intermediate data, temp artifacts) MUST res
 - `__` = multi-run scaffolding. Persists during active work, deleted by `/cleanup` after goal reached
 - Commit both along with task or session files. Only delete after final goal is reached.
 
+## Prompt Templates in NOTES.md
+
+Workflow calls (`/deep-research`, `/go`, `/verify`, etc.) MUST be standalone lines inside fenced prompt blocks.
+
+**BAD** (workflow buried in code block, not recognized):
+
+````text
+... context ... /deep-research
+... more instructions ... /go
+````
+
+**GOOD** (workflow calls on standalone lines, recognized as blue links):
+````text
+... context ...
+
+/deep-research
+
+... post-workflow instructions ...
+
+/go
+````
+
 ## Before Ending Session
 
 1. Run `/session-save` to document findings

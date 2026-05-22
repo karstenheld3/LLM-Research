@@ -448,7 +448,7 @@ This file is usually stable — effort levels and their numeric mappings rarely 
 ### 7.1 Check Compatibility
 
 For each new model added in Phase 5:
-1. Identify its `method` from `model_id_startswith[]` (temperature, reasoning_effort, thinking, effort).
+1. Identify its `method` from `model_id_startswith[]` (temperature, reasoning_effort, thinking, effort, adaptive_thinking).
 2. Verify the method exists in `effort_mapping` (it maps to `temperature_factor`, `openai_reasoning_effort`, `anthropic_thinking_factor`, etc.).
 3. If a new method type appears that isn't covered → **flag for manual update** and escalate to user.
 
@@ -467,10 +467,11 @@ $r = Get-Content "[SKILL_FOLDER]/model-registry.json" -Raw | ConvertFrom-Json
 $methods = $r.model_id_startswith | ForEach-Object { $_.method } | Sort-Object -Unique
 foreach ($method in $methods) {
   $key = switch ($method) {
-    "temperature"       { "temperature_factor" }
-    "reasoning_effort"  { "openai_reasoning_effort" }
-    "thinking"          { "anthropic_thinking_factor" }
-    default             { $method }
+    "temperature"        { "temperature_factor" }
+    "reasoning_effort"   { "openai_reasoning_effort" }
+    "thinking"           { "anthropic_thinking_factor" }
+    "adaptive_thinking"  { "anthropic_adaptive_effort" }
+    default              { $method }
   }
   if (-not $m.effort_mapping.$key) { throw "Missing effort_mapping for method '$method' (key '$key')" }
 }
@@ -492,6 +493,8 @@ foreach ($modelId in $newEnabledModels) {
 If `test-call-llm.py` has no test entries for a new model, the `--model` filter returns zero tests. In that case:
 1. Add a minimal test entry to the appropriate `OPENAI_TESTS` or `ANTHROPIC_TESTS` list in `test-call-llm.py`.
 2. Re-run.
+
+**Streaming note**: Models with `method: "adaptive_thinking"` require the Anthropic streaming API (`client.messages.stream()`) because the SDK enforces streaming for operations that may exceed 10 minutes. The `call-llm.py` scripts handle this automatically.
 
 **Gate 8**: All test runs exit with code 0. If a model fails:
 - API error (401, 403): likely no access — set `status: "no_access"`, `enabled: false` in registry.
@@ -573,6 +576,13 @@ Print a concise summary:
 - **Duplicate model in pricing vs registry**: reconcile toward the pricing file (prices are authoritative for existence); registry must follow.
 
 ## Document History
+
+**[2026-05-22 15:58]**
+- Fixed: Gate 7 `adaptive_thinking` key mapping `openai_reasoning_effort` → `anthropic_adaptive_effort` (matches config-driven lookup in code)
+
+**[2026-05-22 12:25]**
+- Added: `adaptive_thinking` method to Phase 7.1 method list and Gate 7 switch block
+- Added: Phase 8 streaming note for adaptive_thinking models (SDK requires streaming for Opus 4-7+)
 
 **[2026-05-22 09:25]**
 - Added: Long context pricing support in Phase 6 Rules 5-7 (nested `long_context` object with `threshold_k`)

@@ -1,12 +1,15 @@
 # Tested Models
 
-Session testing from **2026-01-22 to 2026-01-26**.
+Session testing from **2026-01-22 to 2026-05-22**.
 
-## Self-Test Passed (16 models)
+## Self-Test Passed (18 models)
 
 All passed 15/15 API integration tests via `llm-evaluation-selftest.py`:
 
 **OpenAI - Reasoning Models:**
+- `gpt-5.5` (2026-05-22, 1050K context, long-context pricing tier)
+- `gpt-5.5-pro` (2026-05-22, 1050K context, long-context pricing tier)
+- `gpt-5.4`
 - `gpt-5.2`
 - `gpt-5.1`
 - `gpt-5`
@@ -57,4 +60,6 @@ Burst capacity tested via `find-workers-limit.py`:
 
 - `o1-preview`, `o1-mini` - No API access
 - `claude-opus-4-20250514` - Requires streaming for extended thinking (>10 min timeout)
+- `claude-3-7-sonnet-20250219` - Model deprecated
 - `claude-3-5-sonnet-20241022` - Model deprecated (404 error)
+- `claude-3-5-haiku-20241022` - Model deprecated

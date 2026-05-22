@@ -127,6 +127,9 @@ python analyze-costs.py --input-folder transcriptions/ --output-file costs.json
 - `--output-file` - Output JSON file
 - `--pricing` - Custom pricing file (default: model-pricing.json)
 
+**Long context pricing:**
+Models with a `long_context` entry in `model-pricing.json` (gpt-5.5, gpt-5.5-pro, gpt-5.4, gpt-5.4-pro) use higher rates when average tokens per call exceeds `threshold_k * 1000`. Returns `long_context_applied: true` in cost output when triggered. Currently `threshold_k: null` (never triggers until OpenAI documents the exact threshold).
+
 ## compare-transcription-runs.py - Hybrid Comparison
 
 ```powershell
@@ -161,6 +164,7 @@ python llm-evaluation-selftest.py [--skip-api-calls]
 
 **Tests:**
 - Configuration file loading (model-registry.json, model-pricing.json, model-parameter-mapping.json)
+- Long context schema validation (verifies `long_context` entries have required fields)
 - Script help text availability
 - File type detection logic
 - JSON output schema validation
@@ -171,7 +175,7 @@ python llm-evaluation-selftest.py [--skip-api-calls]
 ## Configuration Files
 
 - `model-registry.json` - Model definitions with provider, method (temperature/reasoning_effort/thinking), max_output, and parameter constraints
-- `model-pricing.json` - Token costs per model (USD)
+- `model-pricing.json` - Token costs per model (USD). Models with long-context tiers have nested `long_context` object with `input_per_1m`, `output_per_1m`, `threshold_k`
 - `model-parameter-mapping.json` - Effort level mappings (none/minimal/low/medium/high/xhigh) to API parameters
 - `schemas/default-questions.json` - Default question categories
 

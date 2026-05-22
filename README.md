@@ -123,7 +123,7 @@ Note: Times vary by row count. At scale limit, expect times near the upper range
 
 ## Hypothesis Sources
 
-Hypotheses derive from two sources:
+Hypotheses derive from three sources:
 
 1. **TK-001 Internal Benchmark** (March 2026) - Prior format comparison testing 10 variants on gpt-5-mini extraction tasks. Documented in `_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`.
 
@@ -132,6 +132,10 @@ Hypotheses derive from two sources:
    - [LIFBench](https://arxiv.org/abs/2411.07037) (Wu et al., 2024) - Long-context instruction following degrades at scale
    - [Does Prompt Formatting Impact LLM?](https://arxiv.org/abs/2411.10541) (He et al., Microsoft/MIT 2024) - Format affects performance up to 40%
    - [CFPO](https://arxiv.org/abs/2502.04295) (Liu et al., Microsoft Research 2025) - Content-format integration
+
+3. **External Benchmarks** - Corroborating evidence from independent evaluations:
+   - [TQA-Bench](https://arxiv.org/abs/2411.19504) (Qiu et al., 2024) - Multi-table QA with format comparison (Markdown vs CSV). Confirms CSV suboptimal (H6), model family drives format preference (H7), temperature models degrade gradually not cliff-like (H2). Models tested: GPT-4o, GPT-4o-mini, open-source 7B-8B. No reasoning models.
+   - [NoLiMa](https://arxiv.org/abs/2502.05167) (Modarressi et al., ICML 2025) - Long-context evaluation beyond literal matching. Proves attention is the bottleneck not truncation (H3), reasoning helps but with diminishing returns at scale (H4), reasoning models maintain attention better (H5). Models tested: GPT-4o/4.1, o1/o3/o3-mini/o4-mini, Claude 3.5 Sonnet, Gemini 2.5. No gpt-5 family.
 
 ## Hypothesis Results
 
@@ -215,6 +219,26 @@ Hypotheses derive from two sources:
 | **Reasoning** | Structure aids comprehension more than compactness. xml (2.12x tokens) beats csv (1.00x) on older GPT. |
 | **Data** | gpt-5: xml (327) > csv (166) despite 2x tokens. gpt-5.5: csv (494) > xml (375) - reversed like Claude. |
 
+### H9: Structural Format Markers Serve as Attention Anchors
+
+| | |
+|---|---|
+| **Status** | ❌ CONTRADICTED |
+| **Hypothesis** | Formats with distinctive structural markers (keys, tags, delimiters) improve comprehension by providing attention anchor points that guide the model to relevant data |
+| **Source** | [NoLiMa](https://arxiv.org/abs/2502.05167) mechanism finding: attention relies on literal cues; format markers create such cues |
+| **Reasoning** | XML (most markers, 2.12x tokens) is worst in 5/7 models. Format preferences shift between model generations (gpt-5.4: json, gpt-5.5: toml), indicating training data composition drives preference, not structural properties. |
+| **Data** | XML worst: gpt-5.5 (375), gpt-5-mini (163), gpt-5.2 (89), opus (164), sonnet (99). XML 2nd only on gpt-5.4 (609) and gpt-5 (327). |
+
+### H10: Comprehension Benchmark Scores Predict Extraction Scale Limits
+
+| | |
+|---|---|
+| **Status** | UNTESTED |
+| **Hypothesis** | A model's effective comprehension length (measured by any semantic understanding benchmark) correlates with its maximum reliable extraction scale |
+| **Source** | [NoLiMa](https://arxiv.org/abs/2502.05167): effective length metric; our Test 01 scale limits; shared pattern of failure far below claimed context window |
+| **Reasoning** | Both extraction and comprehension fail at the same bottleneck (attention degradation). Models with stronger attention should excel at both tasks proportionally. |
+| **Prediction** | Strong positive correlation (r > 0.7) between comprehension benchmark effective lengths and our scale limit breakpoints across models. |
+
 ## Source Documents
 
 **Test 01 (CSV Scale Limits):**
@@ -227,3 +251,23 @@ Hypotheses derive from two sources:
 
 **Prior Research:**
 - TK-001: Format benchmarking (March 2026)
+
+**Papers Screened** (`Papers/`):
+- [Chain-of-Thought Prompting Elicits Reasoning in LLMs](https://arxiv.org/abs/2201.11903) (Wei et al., 2022)
+- [Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155) (Ouyang et al., 2022)
+- [Self-Consistency Improves Chain-of-Thought Reasoning](https://arxiv.org/abs/2203.11171) (Wang et al., 2022)
+- [Least-to-Most Prompting Enables Complex Reasoning in LLMs](https://arxiv.org/abs/2205.10625) (Zhou et al., 2022)
+- [Large Language Models Are Zero-Shot Reasoners](https://arxiv.org/abs/2205.11916) (Kojima et al., 2022)
+- [Instruction-Following Evaluation for Large Language Models](https://arxiv.org/abs/2311.07911) (Zhou et al., 2023)
+- [Chain-of-Thought Reasoning Without Prompting](https://arxiv.org/abs/2402.10200) (Wang & Zhou, 2024)
+- [Efficient Prompting Methods for LLMs - A Survey](https://arxiv.org/abs/2404.01077) (2024)
+- [Quantifying Language Models Sensitivity to Spurious Features in Prompt Design](https://arxiv.org/abs/2310.11324) (2024)
+- [The Instruction Hierarchy - Training LLMs to Prioritize Privileged Instructions](https://arxiv.org/abs/2404.13208) (2024)
+- [Prompt Compression for Large Language Models - A Survey](https://arxiv.org/abs/2410.12388) (2024)
+- [LIFBench - Evaluating Instruction Following in Long Context](https://arxiv.org/abs/2411.07037) (Wu et al., 2024)
+- [Does Prompt Formatting Have Any Impact on LLM Performance?](https://arxiv.org/abs/2411.10541) (He et al., Microsoft/MIT 2024)
+- [TQA-Bench - Evaluating LLMs for Multi-Table QA with Scalable Context](https://arxiv.org/abs/2411.19504) (Qiu et al., 2024)
+- [Beyond Prompt Content - Enhancing LLM Performance via Content-Format Integration](https://arxiv.org/abs/2502.04295) (Liu et al., Microsoft Research 2025)
+- [NoLiMa - Long-Context Evaluation Beyond Literal Matching](https://arxiv.org/abs/2502.05167) (Modarressi et al., ICML 2025)
+- [IHEval - Evaluating Instruction Hierarchy Following](https://arxiv.org/abs/2502.08745) (2025)
+- [Incorporating Token Usage into Prompting Strategy Evaluation](https://arxiv.org/abs/2505.14880) (2025)

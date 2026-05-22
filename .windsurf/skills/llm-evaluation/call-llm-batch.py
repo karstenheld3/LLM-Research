@@ -77,6 +77,9 @@ def build_api_params(model: str, mapping: dict, registry: dict,
       params['verbosity'] = effort_map[verbosity]['openai_verbosity']
   elif method == 'effort':
     params['effort'] = effort_map[reasoning_effort]['openai_reasoning_effort']
+  elif method == 'adaptive_thinking':
+    params['thinking'] = {'type': 'adaptive'}
+    params['anthropic_effort'] = effort_map[reasoning_effort]['anthropic_adaptive_effort']
   elif method == 'thinking':
     factor = effort_map[reasoning_effort]['anthropic_thinking_factor']
     budget = int(factor * model_config.get('thinking_max', 100000))
@@ -366,10 +369,22 @@ def call_anthropic(client, model: str, prompt: str, api_params: dict, method: st
   if 'temperature' in api_params:
     call_params['temperature'] = api_params['temperature']
     
-  if 'thinking' in api_params and api_params['thinking'].get('budget_tokens', 0) > 0:
-    call_params['thinking'] = api_params['thinking']
+  use_streaming = False
+  if 'thinking' in api_params:
+    thinking_config = api_params['thinking']
+    if thinking_config.get('type') == 'adaptive':
+      call_params['thinking'] = thinking_config
+      if 'anthropic_effort' in api_params:
+        call_params['extra_body'] = {'output_config': {'effort': api_params['anthropic_effort']}}
+      use_streaming = True
+    elif thinking_config.get('budget_tokens', 0) > 0:
+      call_params['thinking'] = thinking_config
     
-  response = client.messages.create(**call_params)
+  if use_streaming:
+    with client.messages.stream(**call_params) as stream:
+      response = stream.get_final_message()
+  else:
+    response = client.messages.create(**call_params)
     
   text_content = ""
   for block in response.content:

@@ -66,6 +66,14 @@ ANTHROPIC_TESTS = [
   ("claude-sonnet-4-20250514", "medium", "none", None, "thinking"),
   ("claude-sonnet-4-5-20250929", "low", "none", None, "thinking"),
   ("claude-sonnet-4-5-20250929", "medium", "low", None, "thinking"),
+    
+  # Reasoning effort models (adaptive thinking via model registry)
+  ("claude-opus-4-7", "none", "none", None, "reasoning_effort"),
+  ("claude-opus-4-7", "minimal", "none", None, "reasoning_effort"),
+  ("claude-opus-4-7", "low", "none", None, "reasoning_effort"),
+  ("claude-opus-4-7", "medium", "none", None, "reasoning_effort"),
+  ("claude-opus-4-7", "high", "none", None, "reasoning_effort"),
+  ("claude-opus-4-7", "xhigh", "none", None, "reasoning_effort"),
 ]
 
 # Fallback tests - verify fallback mapping works

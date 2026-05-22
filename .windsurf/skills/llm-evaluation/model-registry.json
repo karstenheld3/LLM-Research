@@ -67,6 +67,8 @@
     { "prefix": "gpt-5.2",   "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["none", "low", "medium", "high", "xhigh"], "default": "none", "seed": false },
     { "prefix": "gpt-5",     "provider": "openai", "method": "reasoning_effort", "max_input": null, "max_output": 32768, "effort": ["minimal", "low", "medium", "high"], "default": "medium", "seed": false },
     
+    { "prefix": "claude-opus-4-7",   "provider": "anthropic", "method": "adaptive_thinking", "max_input": 1000000, "max_output": 128000, "effort": ["low", "medium", "high", "max"] },
+    { "prefix": "claude-opus-4-6",   "provider": "anthropic", "method": "adaptive_thinking", "max_input": 200000, "max_output": 128000, "effort": ["low", "medium", "high", "max"] },
     { "prefix": "claude-opus-4.5",   "provider": "anthropic", "method": "effort", "max_input": 200000, "max_output": 8192, "effort": ["low", "medium", "high"], "default": "high", "beta": "effort-2025-11-24" },
     { "prefix": "claude-opus-4",     "provider": "anthropic", "method": "thinking", "max_input": 200000, "max_output": 8192, "thinking_max": 100000 },
     { "prefix": "claude-sonnet-4.5", "provider": "anthropic", "method": "thinking", "max_input": 200000, "max_output": 16384, "thinking_max": 100000 },

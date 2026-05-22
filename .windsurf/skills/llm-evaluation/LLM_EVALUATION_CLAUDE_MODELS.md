@@ -8,7 +8,12 @@ Anthropic model IDs follow `{model-family}-{version}-{YYYYMMDD}` format. The dat
 - Using aliases without dates (e.g., `claude-opus-4-5` may not work via direct API)
 - Assuming date patterns from other models apply universally
 
-## Verified Model IDs (2026-01-25)
+## Verified Model IDs (2026-05-22)
+
+**Claude 4.6 / 4.7 Family:**
+- `claude-opus-4-7` - Opus 4.7 (alias, no date suffix; 1M context)
+- `claude-opus-4-6` - Opus 4.6 (alias, no date suffix; 200K context)
+- `claude-sonnet-4-6` - Sonnet 4.6 (alias, no date suffix; 1M context)
 
 **Claude 4.5 Family:**
 - `claude-opus-4-5-20251101` - Opus 4.5 (Nov 1, 2025)

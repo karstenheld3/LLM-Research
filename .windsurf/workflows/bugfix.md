@@ -28,9 +28,9 @@ Complete bug-fixing workflow from problem discovery to verified fix and document
 ## Quick Reference
 
 SESSION-MODE (bug found during active session):
-- Folder: `[SESSION_FOLDER]/`
+- Folder: `[SESSION_FOLDER]/_BugFixes/`
 - Bug ID: `[TOPIC]-BG-NNNN` (4-digit)
-- Bug Folder: `[SESSION_FOLDER]/[TOPIC]-BG-NNNN_IssueDescription/`
+- Bug Folder: `[SESSION_FOLDER]/_BugFixes/[TOPIC]-BG-NNNN_IssueDescription/`
 - Docs: SPEC, IMPL, TEST
 - Commit: `fix([TOPIC]-BG-NNNN): description`
 
@@ -59,10 +59,11 @@ Folder structure:
 ```
 [SESSION_FOLDER]/
 ├── NOTES.md, PROBLEMS.md, PROGRESS.md
-└── [TOPIC]-BG-NNNN_IssueDescription/    <- [BUG_FOLDER]
-    ├── PROBLEMS.md                      <- Full detail
-    ├── _INFO_*.md, __STRUT_*.md
-    ├── backup/, poc/, test/
+└── _BugFixes/
+    └── [TOPIC]-BG-NNNN_IssueDescription/    <- [BUG_FOLDER]
+        ├── PROBLEMS.md                      <- Full detail
+        ├── _INFO_*.md, __STRUT_*.md
+        ├── backup/, poc/, test/
 ```
 
 Documentation on completion:
@@ -150,7 +151,7 @@ A problem is confirmed as a **bug** when it's a deviation from desired behavior 
 
 Create [BUG_FOLDER] (only when problem confirmed as bug):
 
-- SESSION-MODE: `[SESSION_FOLDER]/[TOPIC]-BG-NNNN_IssueDescription/`
+- SESSION-MODE: `[SESSION_FOLDER]/_BugFixes/[TOPIC]-BG-NNNN_IssueDescription/`
   - Get next BG number from `[SESSION_FOLDER]/NOTES.md` "Bug List" section (count existing entries + 1)
 - PROJECT-MODE: `[BUGFIXES_FOLDER]/GLOB-BG-NNNN_IssueDescription/`
   - Get next BG number from `[BUGFIXES_FOLDER]/NOTES.md` (single source of truth)
