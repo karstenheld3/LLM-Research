@@ -1,12 +1,21 @@
 <DevSystem MarkdownTablesAllowed=true />
 
-# INFO: Format Comparison (8 Formats)
+# INFO: Format Comparison (8 Formats) - SUPERSEDED
 
-**Doc ID**: TBLF-IN02
+**Doc ID**: TBLF-IN02 (RETIRED - ID collision with Test 01's restructured results doc)
 **Goal**: Compare scale limits across 8 input formats for LLM tabular extraction
-**Timeline**: Created 2026-03-09
+**Timeline**: Created 2026-03-09, superseded 2026-05-22
 
-## Summary
+## SUPERSEDED
+
+This document has been split into two documents following the 4-document methodology (`_INFO_LLM_TEST_METHODOLOGY.md [TBLF-IN04]`):
+
+- **Test Results**: `_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]` - All 56 test results, format rankings, cost efficiency
+- **Findings**: `_INFO_02_FormatComparison-Findings.md [TBLF-IN06]` - Hypothesis verdicts, analysis, recommendations, emergent hypotheses
+
+This file is retained as reference for the original document structure. All content below is frozen at the state before restructuring.
+
+## Summary (frozen)
 
 **Research Question:** Does input format affect LLM extraction scale limits?
 

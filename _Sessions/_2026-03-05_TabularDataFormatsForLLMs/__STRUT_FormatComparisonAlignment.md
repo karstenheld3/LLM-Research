@@ -30,43 +30,43 @@ Current state vs TBLF-IN04 methodology:
 
 ## Plan
 
-[ ] P1 [RESTRUCTURE]: Split documents and fix identifiers
+[x] P1 [RESTRUCTURE]: Split documents and fix identifiers
 ├─ Objectives:
 │   ├─ [ ] 4-document structure established ← P1-D1, P1-D2, P1-D3
 │   └─ [ ] No Doc ID collisions ← P1-D4
 ├─ Strategy: Create INFO_01 (results) and INFO_02 (findings) from existing monolithic INFO. Move results table from TEST to INFO_01. Assign new Doc IDs.
 │   - New IDs: TBLF-IN05 (FormatComparison results), TBLF-IN06 (FormatComparison findings)
 │   - SPEC (TBLF-SP02) and TEST (TBLF-TP02) keep existing IDs
-├─ [ ] P1-S1 [CREATE](_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]) with results table from TEST doc + format examples + methodology
-├─ [ ] P1-S2 [CREATE](_INFO_02_FormatComparison-Findings.md [TBLF-IN06]) with hypothesis verdicts, analysis, recommendations from INFO doc
-├─ [ ] P1-S3 [UPDATE](_TEST_FormatComparison.md) - remove results table, add cross-references to INFO_01/INFO_02
-├─ [ ] P1-S4 [UPDATE](old _INFO_FormatComparison.md) - replace content with redirect notice to new documents
-├─ [ ] P1-S5 [UPDATE](ID-REGISTRY.md) - register TBLF-IN05, TBLF-IN06, fix TBLF-IN02 collision
+├─ [x] P1-S1 [CREATE](_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]) with results table from TEST doc + format examples + methodology
+├─ [x] P1-S2 [CREATE](_INFO_02_FormatComparison-Findings.md [TBLF-IN06]) with hypothesis verdicts, analysis, recommendations from INFO doc
+├─ [x] P1-S3 [UPDATE](_TEST_FormatComparison.md) - remove results table, add cross-references to INFO_01/INFO_02
+├─ [x] P1-S4 [UPDATE](old _INFO_FormatComparison.md) - replace content with redirect notice to new documents
+├─ [x] P1-S5 [UPDATE](ID-REGISTRY.md) - register TBLF-IN05, TBLF-IN06, fix TBLF-IN02 collision
 ├─ Deliverables:
-│   ├─ [ ] P1-D1: _INFO_01_FormatComparison-TestResults.md exists with all result data
-│   ├─ [ ] P1-D2: _INFO_02_FormatComparison-Findings.md exists with analysis
-│   ├─ [ ] P1-D3: _TEST_FormatComparison.md contains only execution procedures
-│   └─ [ ] P1-D4: ID-REGISTRY.md updated, no collisions
+│   ├─ [x] P1-D1: _INFO_01_FormatComparison-TestResults.md exists with all result data
+│   ├─ [x] P1-D2: _INFO_02_FormatComparison-Findings.md exists with analysis
+│   ├─ [x] P1-D3: _TEST_FormatComparison.md contains only execution procedures
+│   └─ [x] P1-D4: ID-REGISTRY.md updated, no collisions
 └─> Transitions:
     - P1-D1 - P1-D4 checked → P2 [ENHANCE]
 
-[ ] P2 [ENHANCE]: Apply TBLF-IN04 analysis patterns to findings document
+[x] P2 [ENHANCE]: Apply TBLF-IN04 analysis patterns to findings document
 ├─ Objectives:
 │   ├─ [ ] Structured hypothesis evaluation with evidence chains ← P2-D1
 │   ├─ [ ] Emergent hypotheses separated from original ← P2-D2
 │   └─ [ ] Quality signals present (labels, caveats, questions) ← P2-D3, P2-D4
 ├─ Strategy: Transform flat hypothesis table into detailed per-hypothesis analysis sections. Reclassify H9 as emergent. Add verification labels, caveats, open questions.
-├─ [ ] P2-S1 [RESTRUCTURE](hypothesis verdicts section) - add Prediction/Result/Evidence/Verdict per hypothesis
-├─ [ ] P2-S2 [ADD](verification labels) - [TESTED] on data-backed claims, [VERIFIED] on cross-referenced calculations
-├─ [ ] P2-S3 [RECLASSIFY](H9 as E1) - structural markers hypothesis emerged during testing, move to Emergent Hypotheses section
-├─ [ ] P2-S4 [ADD](Caveats and Limitations section) - measurement precision, column config mismatch (TBLF-FL-005), task specificity, model temporal validity
-├─ [ ] P2-S5 [ADD](Open Questions section) - format-complexity interaction (H4 inconclusive), training data composition theory, position effects
-├─ [ ] P2-S6 [ADD](Precision note to verdicts section) - bridge to caveats, clarify confidence
+├─ [x] P2-S1 [RESTRUCTURE](hypothesis verdicts section) - add Prediction/Result/Evidence/Verdict per hypothesis
+├─ [x] P2-S2 [ADD](verification labels) - [TESTED] on data-backed claims, [VERIFIED] on cross-referenced calculations
+├─ [x] P2-S3 [RECLASSIFY](H9 as E1) - structural markers hypothesis emerged during testing, move to Emergent Hypotheses section
+├─ [x] P2-S4 [ADD](Caveats and Limitations section) - measurement precision, column config mismatch (TBLF-FL-005), task specificity, model temporal validity
+├─ [x] P2-S5 [ADD](Open Questions section) - format-complexity interaction (H4 inconclusive), training data composition theory, position effects
+├─ [x] P2-S6 [ADD](Precision note to verdicts section) - bridge to caveats, clarify confidence
 ├─ Deliverables:
-│   ├─ [ ] P2-D1: Each hypothesis has Prediction/Result/Evidence/Verdict structure
-│   ├─ [ ] P2-D2: Emergent hypotheses section with E-prefix
-│   ├─ [ ] P2-D3: Verification labels on all claims
-│   └─ [ ] P2-D4: Caveats, open questions, precision note present
+│   ├─ [x] P2-D1: Each hypothesis has Prediction/Result/Evidence/Verdict structure
+│   ├─ [x] P2-D2: Emergent hypotheses section with E-prefix
+│   ├─ [x] P2-D3: Verification labels on all claims
+│   └─ [x] P2-D4: Caveats, open questions, precision note present
 └─> Transitions:
     - P2-D1 - P2-D4 checked → P3 [VERIFY]
 

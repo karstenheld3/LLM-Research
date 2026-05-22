@@ -146,4 +146,18 @@ Format: `[TOPIC]-[DOC]-SC-[SOURCE_ID]-[SOURCE_REF]`
 - `NOLIMA` - NoLiMa Benchmark deep-research (topic folder T02 in DATBMRS session)
 - `TQAB` - TQA-Bench: Multi-Table QA with Scalable Context (deep-research topic in DATBMRS)
 
+### TBLF Document IDs
+
+- `TBLF-SP01` - `01_CSVScaleLimits/_SPEC_CSVScaleLimits.md` (test framework spec)
+- `TBLF-SP02` - `02_FormatComparison/_SPEC_FormatComparison.md` (format comparison spec)
+- `TBLF-TP01` - `01_CSVScaleLimits/_TEST_CSVScaleLimits.md` (CSV test execution)
+- `TBLF-TP02` - `02_FormatComparison/_TEST_FormatComparison.md` (format comparison execution)
+- `TBLF-IN01` - `01_CSVScaleLimits/_INFO_CSVScaleLimits.md` (original monolithic, superseded)
+- `TBLF-IN02` - RETIRED (was `02_FormatComparison/_INFO_FormatComparison.md`, collided with IN02 below after restructure). Superseded by TBLF-IN05 + TBLF-IN06.
+- `TBLF-IN02` - `01_CSVScaleLimits/_INFO_01_CSVScaleLimits-TestResults.md` (CSV test results)
+- `TBLF-IN03` - `01_CSVScaleLimits/_INFO_02_CSVScaleLimits-Findings.md` (CSV findings)
+- `TBLF-IN04` - `_INFO_LLM_TEST_METHODOLOGY.md` (methodology document)
+- `TBLF-IN05` - `02_FormatComparison/_INFO_01_FormatComparison-TestResults.md` (format comparison results)
+- `TBLF-IN06` - `02_FormatComparison/_INFO_02_FormatComparison-Findings.md` (format comparison findings)
+
 ## Document History
