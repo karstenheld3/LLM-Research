@@ -238,6 +238,11 @@ def build_api_params(model: str, reasoning_effort: str = 'medium',
       params['verbosity'] = effort_map[verbosity]['openai_verbosity']
   elif method == 'effort':
     params['effort'] = effort_map[reasoning_effort]['openai_reasoning_effort']
+  elif method == 'adaptive_thinking':
+    params['thinking'] = {'type': 'adaptive'}
+    effort_value = effort_map[reasoning_effort].get('openai_reasoning_effort', 'medium')
+    effort_remap = {'none': 'low', 'minimal': 'low', 'xhigh': 'max'}
+    params['anthropic_effort'] = effort_remap.get(effort_value, effort_value)
   elif method == 'thinking':
     factor = effort_map[reasoning_effort]['anthropic_thinking_factor']
     budget = int(factor * model_config.get('thinking_max', 100000))
@@ -388,8 +393,15 @@ def _call_anthropic(client, model: str, prompt: str, api_params: dict) -> dict:
   if 'temperature' in api_params:
     call_params['temperature'] = api_params['temperature']
   
-  if 'thinking' in api_params and api_params['thinking'].get('budget_tokens', 0) > 0:
-    call_params['thinking'] = api_params['thinking']
+  if 'thinking' in api_params:
+    thinking_config = api_params['thinking']
+    if thinking_config.get('type') == 'adaptive':
+      call_params['thinking'] = thinking_config
+      if 'anthropic_effort' in api_params:
+        # SDK 0.76.0 lacks native output_config; inject via extra_body
+        call_params['extra_body'] = {'output_config': {'effort': api_params['anthropic_effort']}}
+    elif thinking_config.get('budget_tokens', 0) > 0:
+      call_params['thinking'] = thinking_config
   
   # Handle effort parameter for claude-opus-4-5 (requires beta header)
   betas = []
