@@ -1,0 +1,24 @@
+[
+  {
+    "model": "gpt-5",
+    "model_display": "gpt-5",
+    "provider": "openai",
+    "effort": "low",
+    "format": "csv_quoted",
+    "scale_limit": 227,
+    "bounds": [227, 238],
+    "failure_mode": "comprehension",
+    "context_pct": null,
+    "max_context_tokens": 128000,
+    "cost_per_request": 0.16,
+    "time_per_request_sec": 161.0,
+    "input_tokens_k": 33,
+    "output_tokens_k": 23,
+    "tpkc": 102,
+    "cpkc": 0.101,
+    "total_cost_usd": 1.47,
+    "iterations": null,
+    "status": "completed",
+    "folder": "OVERRIDE: gpt-5 csv_quoted from hand-curated data (test folder missing)"
+  }
+]

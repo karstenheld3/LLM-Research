@@ -41,8 +41,9 @@
 4. [Test Execution Order](#4-test-execution-order)
 5. [Test Configurations](#5-test-configurations)
 6. [Metrics Collection](#6-metrics-collection)
-7. [Verification Checklist](#7-verification-checklist)
-8. [Document History](#8-document-history)
+7. [Pipeline Automation](#7-pipeline-automation)
+8. [Verification Checklist](#8-verification-checklist)
+9. [Document History](#9-document-history)
 
 ## 1. Overview
 
@@ -406,7 +407,34 @@ python 03_find_scale_limit.py \
 }
 ```
 
-## 7. Verification Checklist
+## 7. Pipeline Automation
+
+### 7.1 Aggregation Pipeline
+
+After completing tests, aggregate results and update INFO_01:
+
+```powershell
+# Aggregate only (no new test)
+.\_Scripts\run_pipeline.ps1 -SkipTest
+
+# Run test + aggregate
+.\_Scripts\run_pipeline.ps1 -Model "gpt-5-mini" -Format "json" -ReasoningEffort "medium"
+```
+
+**Pipeline steps:**
+1. (Optional) Run `03_find_scale_limit.py` for a model+format
+2. Run `06_aggregate_results.py` to scan all `scale_limit_result.json` files + `overrides.json`
+3. Generate `all_results.json` (canonical data) and `all_results.md` (reference tables)
+4. Replace content between AUTO markers in `_INFO_01_FormatComparison-TestResults.md`
+5. Verify AUTO marker count
+
+### 7.2 Manual Overrides
+
+For tests without `scale_limit_result.json` (missing folders, external baselines), add records to `_Scripts/overrides.json`. Format matches the record schema used by `06_aggregate_results.py`.
+
+Current overrides: 1 (gpt-5 csv_quoted, scale=227, test folder missing)
+
+## 8. Verification Checklist
 
 - [ ] All 8 format functions generate correct output
 - [ ] Same seed produces identical records across formats
@@ -417,7 +445,11 @@ python 03_find_scale_limit.py \
 - [ ] At least one test per model completed
 - [ ] Hypothesis verdicts updated after analysis
 
-## 8. Document History
+## 9. Document History
+
+**[2026-05-22 19:15]**
+- Added: Section 7 (Pipeline Automation) documenting aggregation pipeline and overrides
+- Changed: Section numbering (old 7 Verification -> 8, old 8 History -> 9)
 
 **[2026-05-22 18:50]**
 - Removed: Results table (moved to `_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]`)

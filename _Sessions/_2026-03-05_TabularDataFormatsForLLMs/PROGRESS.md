@@ -66,9 +66,17 @@
 
 ## In Progress
 
-- [ ] Restructure CSV Scale Limit documents (STRUT above)
+(none)
 
 ## Done
+
+- [x] Align Format Comparison with 4-document methodology (STRUT below)
+  - Split `_INFO_FormatComparison.md` into `_INFO_01` (results) + `_INFO_02` (findings)
+  - Created `06_aggregate_results.py` + `run_pipeline.ps1` for automated pipeline
+  - Added AUTO markers, overrides.json, verification labels, caveats, emergent hypotheses
+  - Fixed filter description mismatch, Doc ID collision (TBLF-IN02 -> TBLF-IN05/IN06)
+
+## Previously Done
 
 - [x] Created _SPEC_CSVScaleLimits.md [TBLF-SP01]
 - [x] Critique via /critique - compared against working POC
