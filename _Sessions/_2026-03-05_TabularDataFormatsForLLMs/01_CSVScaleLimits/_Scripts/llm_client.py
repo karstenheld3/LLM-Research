@@ -240,9 +240,7 @@ def build_api_params(model: str, reasoning_effort: str = 'medium',
     params['effort'] = effort_map[reasoning_effort]['openai_reasoning_effort']
   elif method == 'adaptive_thinking':
     params['thinking'] = {'type': 'adaptive'}
-    effort_value = effort_map[reasoning_effort].get('openai_reasoning_effort', 'medium')
-    effort_remap = {'none': 'low', 'minimal': 'low', 'xhigh': 'max'}
-    params['anthropic_effort'] = effort_remap.get(effort_value, effort_value)
+    params['anthropic_effort'] = effort_map[reasoning_effort]['anthropic_adaptive_effort']
   elif method == 'thinking':
     factor = effort_map[reasoning_effort]['anthropic_thinking_factor']
     budget = int(factor * model_config.get('thinking_max', 100000))

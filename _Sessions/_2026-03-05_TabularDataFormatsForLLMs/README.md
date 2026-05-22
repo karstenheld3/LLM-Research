@@ -129,7 +129,9 @@ _Sessions/_2026-03-05_TabularDataFormatsForLLMs/
 - Sclar et al. (2024). "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design." ICLR 2024. arXiv:2310.11324
 - Microsoft/MIT (2024). "Does Prompt Formatting Have Any Impact on LLM Performance?" arXiv:2411.10541
 - LIFBench (2024). "Evaluating the Instruction Following Performance of LLMs in Long Context." arXiv:2411.07037
+- TQA-Bench (2024). "Evaluating LLMs for Multi-Table QA with Scalable Context." arXiv:2411.19504
 - CFPO (2025). "Beyond Prompt Content: Enhancing LLM Performance via Content-Format Integration." arXiv:2502.04295
+- NoLiMa (2025). "Long-Context Evaluation Beyond Literal Matching." ICML 2025. arXiv:2502.05167 - Source for H9 (CONTRADICTED: structural markers do not predict format performance)
 
 ### Internal Research
 - `_INFO_LLM_MARKDOWN_PREFERENCES.md` - Comprehensive format research synthesis

@@ -34,7 +34,8 @@ def run_scale_test(test_path: Path, model: str, reasoning_effort: str, initial_r
   
   # Find and load result file
   model_safe = model.replace("/", "_").replace(":", "_")
-  result_folders = list(test_path.glob(f"{model_safe}_*"))
+  results_path = test_path / "_TestsAndResults"
+  result_folders = list(results_path.glob(f"{model_safe}_*")) if results_path.exists() else []
   
   if not result_folders:
     return {

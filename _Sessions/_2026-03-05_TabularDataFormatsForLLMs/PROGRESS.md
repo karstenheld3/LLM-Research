@@ -50,7 +50,7 @@
 ├─ [x] P3-S3 [UPDATE](SPEC depends-on references if needed)
 ├─ [x] P3-S4 [ARCHIVE](old _INFO_CSVScaleLimits.md - rename with _old suffix or delete)
 ├─ [x] P3-S5 [UPDATE](document histories in all modified docs)
-├─ [ ] P3-S6 [COMMIT]
+├─ [x] P3-S6 [COMMIT]
 ├─ Deliverables:
 │   ├─ [x] P3-D1: TEST stripped to execution-only
 │   ├─ [x] P3-D2: Old INFO archived

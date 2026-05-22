@@ -26,6 +26,15 @@
 **Description**: Different formats may excel at different tasks (lookup vs aggregation vs filtering)
 **Impact**: Recommendations may need to be task-specific
 
+### TBLF-PR-007: claude-opus-4-7 requires different thinking API format
+
+**Status**: Resolved
+**Reported**: 2026-05-22 12:07
+**Resolved**: 2026-05-22 12:15
+**Description**: `llm_client.py` sends `thinking: {type: 'enabled', budget_tokens: N}` for all `claude-opus-4*` models. But claude-opus-4-7 rejects this with error: "Use thinking.type.adaptive and output_config.effort to control thinking behavior."
+**Solution**: Added `adaptive_thinking` method to llm_client.py and registry prefix entries for opus-4-7 and opus-4-6.
+**Tracked as**: TBLF-BG-0001 (`TBLF-BG-0001_AdaptiveThinkingAPI/`)
+
 ## Resolved
 
 ### TBLF-PR-005: Logging not compliant with LOG-SC rules
