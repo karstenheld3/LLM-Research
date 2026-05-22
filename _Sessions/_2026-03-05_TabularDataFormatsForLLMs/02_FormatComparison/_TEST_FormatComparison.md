@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-**Status**: 48/48 tests complete.
+**Status**: 56/56 tests complete.
 
 ### Test Setup
 
@@ -54,6 +54,15 @@ Percentages relative to best format per model (100% = max scale limit).
 
 | Model      | Effort | Format         | Scale   | vs Best | In (K) | Out (K) | Time     | TPKC | Cost  | CPKC   |
 |------------|--------|----------------|---------|---------|--------|---------|----------|------|-------|--------|
+| gpt-5.5    | medium | toml           | **828** | 100%    | -      | -       | ~1.2 min | 12s  | $0.76 | $0.131 |
+| gpt-5.5    | medium | yaml           | **675** | 82%     | -      | -       | ~1.0 min | 13s  | $0.67 | $0.142 |
+| gpt-5.5    | medium | markdown_table | **627** | 76%     | -      | -       | ~0.7 min | 10s  | $0.58 | $0.132 |
+| gpt-5.5    | medium | kv_colon_space | **588** | 71%     | -      | -       | ~0.8 min | 12s  | $0.52 | $0.126 |
+| gpt-5.5    | medium | csv            | **494** | 60%     | -      | -       | ~0.6 min | 12s  | $0.43 | $0.124 |
+| gpt-5.5    | medium | csv_quoted     | **491** | 59%     | -      | -       | ~0.6 min | 12s  | $0.43 | $0.125 |
+| gpt-5.5    | medium | json           | **430** | 52%     | -      | -       | ~0.7 min | 14s  | $0.44 | $0.146 |
+| gpt-5.5    | medium | xml            | **375** | 45%     | -      | -       | ~0.7 min | 16s  | $0.40 | $0.152 |
+|            |        |                |         |         |        |         |          |      |       |        |
 | gpt-5.4    | medium | json           | **702** | 100%    | -      | -       | ~2.9 min | 35s  | $0.93 | $0.189 |
 | gpt-5.4    | medium | markdown_table | **554** | 79%     | -      | -       | ~3.0 min | 46s  | $0.54 | $0.139 |
 | gpt-5.4    | medium | xml            | **546** | 78%     | -      | -       | ~3.0 min | 47s  | $0.63 | $0.165 |
@@ -108,7 +117,7 @@ Percentages relative to best format per model (100% = max scale limit).
 | sonnet-4.5 | medium | toml           | **115** | 61%     | 30     | 14      | ~1.0 min | 75s  | $0.31 | $0.385 |
 | sonnet-4.5 | medium | xml            | **99**  | 52%     | 35     | 12      | ~1.0 min | 87s  | $0.33 | $0.476 |
 
-**Total: 48 tests** (6 models × 8 formats)
+**Total: 56 tests** (7 models × 8 formats)
 
 ## MUST-NOT-FORGET
 
@@ -502,6 +511,13 @@ python 03_find_scale_limit.py \
 - [ ] Hypothesis verdicts updated after analysis
 
 ## 8. Document History
+
+**[2026-05-22 12:30]**
+- Added: gpt-5.5 medium results (8/8 formats complete)
+- Results: toml=828, yaml=675, markdown_table=627, kv_colon_space=588, csv=494, csv_quoted=491, json=430, xml=375
+- Key: gpt-5.5 format ranking inverts vs gpt-5.4 (toml best vs json best)
+- Key: gpt-5.5 3-4x faster per request than gpt-5.4 (TPKC 10-16s vs 35-52s)
+- Changed: Status 48/48 -> 56/56 tests
 
 **[2026-03-09 21:03]**
 - Changed: Format naming - csv_quoted (baseline, QUOTE_ALL) and csv (regular, QUOTE_MINIMAL)

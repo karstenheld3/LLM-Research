@@ -10,13 +10,14 @@
 
 **Research Question:** Does input format affect LLM extraction scale limits?
 
-**Status:** 48/48 tests complete (2026-03-12)
+**Status:** 56/56 tests complete (2026-05-22)
 
 ### Key Findings
 
 1. **Format preferences differ dramatically by model family** (H3 CONFIRMED)
    - Older GPT models prefer: yaml, xml, kv_colon_space
    - gpt-5.4 and Claude models prefer: json
+   - gpt-5.5 prefers: toml (828), yaml (675) - completely different from gpt-5.4 (json: 702)
    - Best format for one family can be worst for another
 
 2. **Token efficiency does NOT predict scale limits** (H5 CONTRADICTED)
@@ -27,6 +28,7 @@
 3. **JSON is NOT universally optimal** (H2 MIXED)
    - JSON is best for Claude (opus: 265, sonnet: 189) and gpt-5.4 (702)
    - JSON is mid-tier for older GPT (gpt-5-mini: 335 vs yaml: 500)
+   - JSON collapsed on gpt-5.5: 430 rows (-39% vs gpt-5.4's 702)
 
 4. **Key-value format results are model-specific** (H6 CONTRADICTED)
    - kv_colon_space ties for best on gpt-5-mini (500)
@@ -34,8 +36,11 @@
 
 ### Best Format Per Model
 
+Ratio = best/worst scale limit per model. Higher ratio = model more sensitive to format choice.
+
 | Model        | Best Format | Scale | Worst Format   | Scale | Ratio |
 |--------------|-------------|-------|----------------|-------|-------|
+| gpt-5.5      | toml        | 828   | xml            | 375   | 2.2x  |
 | gpt-5.4      | json        | 702   | kv_colon_space | 359   | 2.0x  |
 | gpt-5-mini   | yaml/kv     | 500   | markdown_table | 163   | 3.1x  |
 | gpt-5        | yaml        | 333   | markdown_table | 83    | 4.0x  |
@@ -48,7 +53,7 @@
 ### Test Design
 
 - 8 formats: csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
-- 6 models: gpt-5.4 medium, gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
+- 7 models: gpt-5.5 medium, gpt-5.4 medium, gpt-5-mini medium, gpt-5 low, gpt-5.2 medium, claude-opus medium, claude-sonnet medium
 - Binary search with 3 runs per scale point
 - Filter: department="Engineering" AND salary>75000
 
@@ -89,17 +94,19 @@
 
 **H3 - Format preferences differ by model family:**
 ```
-gpt-5.4 best:     json (702), markdown_table (554)
-GPT-5-mini best:  yaml (500), kv_colon_space (500)
-GPT-5 best:       yaml (333), xml (327)
-GPT-5.2 best:     csv_quoted (268), xml (261)
-Claude-opus best: json (265), yaml (259)
-Claude-sonnet:    json (189), csv (126)
+gpt-5.5 best:      toml (828), yaml (675)
+gpt-5.4 best:      json (702), markdown_table (554)
+gpt-5-mini best:   yaml (500), kv_colon_space (500)
+gpt-5 best:        yaml (333), xml (327)
+gpt-5.2 best:      csv_quoted (268), xml (261)
+claude-opus best:   json (265), yaml (259)
+claude-sonnet best: json (189), csv (126)
 ```
-GPT models consistently rank yaml/xml high; Claude models rank json highest.
+gpt-5.5 prefers toml (828) and yaml (675), abandoning gpt-5.4's json preference. Claude models rank json highest.
 
 **H5 - Token efficiency vs scale (csv 1.00x vs xml 2.12x):**
 ```
+gpt-5.5:    csv (494) > xml (375) - csv 1.3x better (REVERSAL from older GPT)
 gpt-5.4:    csv (523) < xml (546) - xml 1.04x better
 gpt-5-mini: csv (194) < xml (296) - xml 1.5x better despite 2x tokens
 gpt-5:      csv (166) < xml (327) - xml 2.0x better
@@ -107,10 +114,11 @@ gpt-5.2:    csv (215) < xml (261) - xml 1.2x better
 claude-opus: csv (232) > xml (182) - csv 1.3x better
 claude-sonnet: csv (126) > xml (99) - csv 1.3x better
 ```
-Token efficiency predicts scale for Claude but NOT for GPT.
+Token efficiency predicts scale for Claude and gpt-5.5, but NOT for older GPT models.
 
 **H6 - Key-value vs structured formats:**
 ```
+gpt-5.5:    kv (588) < yaml (675) - CONTRADICTED
 gpt-5-mini: kv (500) > json (335), xml (296) - CONFIRMED
 gpt-5:      kv (238) < yaml (333), xml (327) - CONTRADICTED
 gpt-5.2:    kv (100) << csv_quoted (268) - CONTRADICTED (worst format)
@@ -308,6 +316,13 @@ Format choice matters more than previously thought - up to **5.8x scale differen
 - POC: `IPPS/_PrivateSessions/_2026-03-04_LLMMarkdownOptimization/poc` - Format samples
 
 ## Document History
+
+**[2026-05-22 12:30]**
+- Added: gpt-5.5 medium results (8/8 formats complete)
+- Finding: gpt-5.5 prefers toml (828) and yaml (675), NOT json (430)
+- Finding: gpt-5.5 format preference completely inverts vs gpt-5.4 (json best at 702)
+- Finding: csv > xml on gpt-5.5 (reversal from older GPT pattern)
+- Updated: Best Format Per Model table, hypothesis evidence
 
 **[2026-03-10 08:40]**
 - Added: Test 02 results (40/40 tests complete)

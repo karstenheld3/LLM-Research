@@ -12,7 +12,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 *Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
 
-**Status:** Test 01: 13/13 complete | Test 02: 48/48 complete (March 2026)
+**Status:** Test 01: 14/14 complete | Test 02: 56/56 complete (May 2026)
 
 ## Key Findings
 
@@ -29,25 +29,28 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
   - 9/11 tests failed due to comprehension errors (attention degradation)
   - Average context utilization at failure: only 6.5% - context window is NOT the bottleneck
 
-- **Scale limits vary 168x across models**
-  - Best: gpt-5.4 medium with json format (702 rows)
+- **Scale limits vary 207x across models**
+  - Best: gpt-5.5 medium with toml format (828 rows)
   - Worst: gpt-4o (4 rows)
   - This variance makes model selection critical for production use
 
-- **gpt-5.4 medium reaches max scale with json format** (Test 02)
-  - json: 702 rows (best overall)
-  - markdown_table: 554 rows
-  - xml: 546 rows
-  - csv/csv_quoted/toml/yaml: 523 rows
-  - kv_colon_space: 359 rows (worst for gpt-5.4)
+- **Newer/pricier models can regress on specific formats**
+  - gpt-5.5 CSV extraction (437 rows) underperforms gpt-5.4 (492 rows) by 11% (Test 01)
+  - But gpt-5.5 with toml (828 rows) exceeds gpt-5.4 json (702 rows) by 18% (Test 02)
+  - gpt-5.5 costs 2x more ($5/$30 vs $2.5/$15 per 1M tokens)
+  - Format selection is critical: wrong format loses the advantage, right format unlocks it
+
+- **gpt-5.5 medium with toml achieves highest scale** (Test 02)
+  - toml: 828 rows (best overall across all models)
+  - yaml: 675, markdown_table: 627, kv_colon_space: 588
+  - csv/csv_quoted: ~493, json: 430, xml: 375 (worst)
+  - Completely different ranking from gpt-5.4 (json best at 702, toml mid-tier at 523)
 
 - **Format choice causes up to 5.8x scale difference** (Test 02)
   - **csv_quoted is a safe default** - solid mid-tier performance across all models, no conversion cost
-  - csv (RFC4180): -20% to -56% on GPT vs csv_quoted, but +5% to +36% on Claude
-  - GPT optimal: yaml (+14% over csv_quoted on gpt-5-mini); Claude optimal: json (+55% on opus)
-  - Avoid markdown_table on GPT (-67% to -75%) and xml on Claude (-31% to -48%)
-  - Token efficiency does NOT predict scale (xml 2.12x tokens beats csv 1.00x on GPT)
-  - Format preferences may change with model updates - csv_quoted future-proofs your pipeline
+  - Each model generation has different optimal format (see Format Selection below)
+  - Token efficiency does NOT predict scale (xml 2.12x tokens beats csv 1.00x on older GPT)
+  - Format preferences shift with model updates - benchmark before committing to a format
 
 ## Production Recommendations
 
@@ -61,36 +64,39 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 | Tier     | Time      | Model + Format                    | Scale    | CPKC     | Use Case                    |
 |----------|-----------|-----------------------------------|----------|----------|-----------------------------|
-| Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.101   | Interactive, user-facing    |
-| Fast     | ~1 min    | gpt-5.2 medium + xml              | 261 rows | $0.126   | Alternative format          |
-| Fast     | ~1 min    | gpt-5.2 medium + json             | 241 rows | $0.119   | Most versatile format       |
-| Fast     | ~1 min    | gpt-5.2 medium + csv              | 215 rows | $0.113   | Most compact format         |
+| Fast     | ~1.2 min  | gpt-5.5 medium + toml             | 828 rows | $0.131   | **Max scale overall**       |
+| Fast     | ~1.0 min  | gpt-5.5 medium + yaml             | 675 rows | $0.142   | Second-best scale           |
+| Fast     | ~0.7 min  | gpt-5.5 medium + markdown_table   | 627 rows | $0.132   | Fastest high-scale          |
+| Fast     | ~0.8 min  | gpt-5.5 medium + kv_colon_space   | 588 rows | $0.126   | Simple format, good scale   |
+| Fast     | ~0.6 min  | gpt-5.5 medium + csv_quoted       | 491 rows | $0.125   | No conversion cost          |
+| Fast     | ~1 min    | gpt-5.2 medium + csv_quoted       | 268 rows | $0.101   | Budget option, user-facing  |
 | Fast     | ~1 min    | gpt-5-mini low + yaml             | 65 rows  | $0.008   | Small tables, lowest cost   |
 | Moderate | ~1.4 min  | claude-sonnet medium + json       | 189 rows | $0.408   | Anthropic, most versatile   |
-| Moderate | ~1.4 min  | claude-sonnet medium + csv        | 126 rows | $0.340   | Anthropic, most compact     |
 | Moderate | ~1.6 min  | claude-opus medium + json         | 265 rows | $0.663   | Max Anthropic scale         |
-| Moderate | ~2.9 min  | gpt-5.4 medium + json             | 702 rows | $0.189   | **Max scale overall**       |
-| Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.090   | Larger tables, good balance |
-| Moderate | ~2.4 min  | gpt-5 low + xml                   | 327 rows | $0.092   | Alternative format          |
-| Moderate | ~2.4 min  | gpt-5 low + json                  | 249 rows | $0.109   | Most versatile format       |
-| Moderate | ~2.4 min  | gpt-5 low + csv                   | 166 rows | $0.112   | Most compact format         |
-| Batch    | ~3.5 min  | gpt-5-mini medium + yaml          | 500 rows | $0.017   | Background jobs, max scale  |
+| Moderate | ~2.9 min  | gpt-5.4 medium + json             | 702 rows | $0.189   | Legacy max (pre-gpt-5.5)    |
+| Moderate | ~2.4 min  | gpt-5 low + yaml                  | 333 rows | $0.090   | Budget, larger tables       |
+| Batch    | ~3.5 min  | gpt-5-mini medium + yaml          | 500 rows | $0.017   | Background jobs, best CPKC  |
 | Batch    | ~3.5 min  | gpt-5-mini medium + kv_colon_space| 500 rows | $0.020   | Alternative format          |
 | Batch    | ~3.5 min  | gpt-5-mini medium + csv_quoted    | 437 rows | $0.016   | Best cost efficiency        |
-| Batch    | ~3.5 min  | gpt-5-mini medium + json          | 335 rows | $0.021   | Most versatile format       |
-| Batch    | ~3.5 min  | gpt-5-mini medium + csv           | 194 rows | $0.029   | Most compact format         |
 | Avoid    | 10-20 min | gpt-5 medium/high                 | 450-492  | $0.13+   | Too slow for any use case   |
 
 **Decision tree:**
-1. Need <1 min response? → gpt-5.2 medium (268 rows) or gpt-5-mini low (65 rows)
-2. Can tolerate ~2 min? → gpt-5 low (333 rows) - best scale/time ratio
-3. Background processing? → gpt-5-mini medium (500 rows) - best scale/cost ratio
+1. Need max scale + fast? → gpt-5.5 medium + toml (828 rows, ~1.2 min)
+2. Need <1 min response? → gpt-5.5 medium + markdown_table (627 rows, ~0.7 min)
+3. Need low cost? → gpt-5.2 medium (268 rows) or gpt-5-mini low (65 rows)
+4. Background processing? → gpt-5-mini medium + yaml (500 rows, $0.017 CPKC)
 
 ### Format Selection
 
-**OpenAI:** yaml (+3% scale) or csv_quoted (best value). Avoid markdown_table (-59% scale).
+**gpt-5.5:** toml (+68% vs csv_quoted). Avoid xml (-24%) and json (-12%).
+
+**Older GPT (5-mini, 5, 5.2):** yaml (+14% vs csv_quoted). Avoid markdown_table (-59%).
+
+**gpt-5.4:** json (+34% vs csv_quoted). Avoid kv_colon_space (-31%).
 
 **Anthropic:** json (+27% scale). Avoid xml (-38% scale).
+
+**Safe default (all models):** csv_quoted - mid-tier everywhere, no format conversion cost.
 
 ### NOT Recommended
 
@@ -187,7 +193,7 @@ Hypotheses derive from two sources:
 | **Hypothesis** | Quoted CSV is optimal format for LLM tabular extraction at scale |
 | **Source** | TK-001 format benchmarks ([LLMO-IN01] §6.2); [CFPO](https://arxiv.org/abs/2502.04295) format impact theory |
 | **Reasoning** | Format preferences are model-specific. CSV is mid-tier for most models. |
-| **Data** | GPT-5-mini: yaml (500) > csv (194). Claude-opus: json (265) > csv (232). Best format varies by family. |
+| **Data** | gpt-5.5: toml (828) > csv (494). gpt-5-mini: yaml (500) > csv (194). Claude-opus: json (265) > csv (232). |
 
 ### H7: Format Preferences Differ by Model Family
 
@@ -196,8 +202,8 @@ Hypotheses derive from two sources:
 | **Status** | ✅ CONFIRMED |
 | **Hypothesis** | GPT and Claude have different optimal input formats |
 | **Source** | [Microsoft/MIT 2024](https://arxiv.org/abs/2411.10541) - format preferences don't transfer between families |
-| **Reasoning** | Rankings are inverted between GPT and Claude. Best format for one is often worst for other. |
-| **Data** | GPT best: yaml/xml. Claude best: json. Up to 5.8x scale difference between best/worst format. |
+| **Reasoning** | Rankings are inverted between GPT and Claude. Even within GPT, each generation has different preferences. |
+| **Data** | gpt-5.5 best: toml. gpt-5.4 best: json. Older GPT best: yaml/xml. Claude best: json. Up to 5.8x difference. |
 
 ### H8: Token Efficiency Predicts Scale
 
@@ -206,8 +212,8 @@ Hypotheses derive from two sources:
 | **Status** | ❌ NOT SUPPORTED |
 | **Hypothesis** | More compact formats (fewer tokens) enable higher scale limits |
 | **Source** | Token efficiency theory; intuition that smaller input = more headroom |
-| **Reasoning** | Structure aids comprehension more than compactness. xml (2.12x tokens) beats csv (1.00x) on GPT. |
-| **Data** | GPT-5: xml (327) > csv (166) despite 2x token overhead. Claude: csv (232) > xml (182) - reversed. |
+| **Reasoning** | Structure aids comprehension more than compactness. xml (2.12x tokens) beats csv (1.00x) on older GPT. |
+| **Data** | gpt-5: xml (327) > csv (166) despite 2x tokens. gpt-5.5: csv (494) > xml (375) - reversed like Claude. |
 
 ## Source Documents
 
@@ -216,8 +222,8 @@ Hypotheses derive from two sources:
 - [`_TEST_CSVScaleLimits.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/01_CSVScaleLimits/_TEST_CSVScaleLimits.md) - Test plan and detailed analysis
 
 **Test 02 (Format Comparison):**
-- [`_INFO_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_INFO_FormatComparison.md) - 8 formats × 5 models findings
-- [`_TEST_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_TEST_FormatComparison.md) - 40 test results with hypothesis evaluations
+- [`_INFO_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_INFO_FormatComparison.md) - 8 formats × 7 models findings
+- [`_TEST_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_TEST_FormatComparison.md) - 56 test results with hypothesis evaluations
 
 **Prior Research:**
 - TK-001: Format benchmarking (March 2026)
