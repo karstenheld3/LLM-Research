@@ -12,7 +12,11 @@ def load_results(test_path: Path) -> list:
   """Load all scale_limit_result.json files from test path."""
   results = []
   
-  for folder in test_path.iterdir():
+  results_path = test_path / "_TestsAndResults"
+  if not results_path.exists():
+    return results
+  
+  for folder in results_path.iterdir():
     if not folder.is_dir():
       continue
     

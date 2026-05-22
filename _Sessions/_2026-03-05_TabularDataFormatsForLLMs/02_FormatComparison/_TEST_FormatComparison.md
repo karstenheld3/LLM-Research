@@ -35,6 +35,7 @@
 | H4 | Optimal format depends on complexity       | Microsoft CFPO 2025    | INCONCLUSIVE    | Requires multi-complexity tests                |
 | H5 | Token-efficient formats enable higher scale| Token efficiency theory| **CONTRADICTED**| xml (2.12x) beats csv (1.00x) on GPT           |
 | H6 | Key-value outperforms structured formats   | TK-001 benchmark       | **CONTRADICTED**| Only true for gpt-5-mini                       |
+| H9 | Structural markers serve as attention anchors | NoLiMa 2025         | **CONTRADICTED**| XML (most markers) worst in 5/7 models         |
 
 ### Results Table (All Tests)
 

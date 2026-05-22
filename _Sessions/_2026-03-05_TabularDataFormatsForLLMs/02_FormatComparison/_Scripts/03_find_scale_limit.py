@@ -176,7 +176,9 @@ def find_scale_limit(test_path: Path, initial_rows: int, tolerance: int, model: 
     folder_name = f"{model_safe_name}_{method}_{reasoning}_{output_format}_max{max_tokens}"
   else:
     folder_name = f"{model_safe_name}_{method}_{reasoning}_max{max_tokens}"
-  model_output_path = test_path / folder_name
+  results_path = test_path / "_TestsAndResults"
+  results_path.mkdir(exist_ok=True)
+  model_output_path = results_path / folder_name
   
   # Check for existing result file - skip if exists and has content (unless --force)
   result_file = model_output_path / "scale_limit_result.json"

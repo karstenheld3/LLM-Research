@@ -89,6 +89,11 @@ Ratio = best/worst scale limit per model. Higher ratio = model more sensitive to
   - **Source**: TK-001 benchmark
   - **Status**: **CONTRADICTED**
   - **Evidence**: Only true for gpt-5-mini. Worst format for gpt-5.2
+- **H9**
+  - **Hypothesis**: Structural format markers serve as attention anchors
+  - **Source**: [NoLiMa](https://arxiv.org/abs/2502.05167) mechanism finding: attention relies on literal cues
+  - **Status**: **CONTRADICTED**
+  - **Evidence**: XML (most markers, 2.12x tokens) is worst in 5/7 models. Format preferences correlate with model training data, not structural marker density. See H9 detailed evidence below.
 
 ### Detailed Evidence
 
@@ -126,6 +131,20 @@ claude-opus: kv (226) < json (265) - CONTRADICTED
 claude-sonnet: kv (126) < json (189) - CONTRADICTED
 ```
 Only gpt-5-mini confirms TK-001 finding. Other models contradict.
+
+**H9 - Structural markers as attention anchors (marker density ranking: xml > json > yaml > toml > markdown > kv > csv):**
+```
+If H9 true, expected ranking: xml > json > yaml/toml > csv
+
+gpt-5.5:       xml WORST (375). toml BEST (828). Prediction WRONG.
+gpt-5.4:       xml 2nd (609), json BEST (702). Partially supports.
+gpt-5-mini:    xml WORST (163, tied). yaml BEST (500). Prediction WRONG.
+gpt-5:         xml 2nd (327), yaml BEST (333). Partially supports.
+gpt-5.2:       xml 7th (89). csv_quoted BEST (268). Prediction WRONG.
+claude-opus:   xml WORST (164). json BEST (265). Prediction WRONG.
+claude-sonnet: xml WORST (99). json BEST (189). Prediction WRONG.
+```
+XML (most structural markers) is worst or near-worst in 5/7 models. Marker density does NOT predict scale performance. Format preference shifts across model generations (gpt-5.4 json→gpt-5.5 toml) suggesting training data composition drives preference, not format structural properties.
 
 ### Format Size Comparison (300 rows)
 
