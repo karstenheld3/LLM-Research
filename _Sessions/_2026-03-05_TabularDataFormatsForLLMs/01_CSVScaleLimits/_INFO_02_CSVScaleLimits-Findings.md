@@ -46,6 +46,8 @@ Derived from 19/19 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults
 
 ## 2. Hypothesis Verdicts
 
+**Precision note**: All verdicts below are based on n=3 verification runs per binary search iteration. Confidence labels reflect directional strength of evidence, not statistical certainty. See section 8 for measurement precision caveats.
+
 Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`):
 - gpt-5-mini reliable at 300 records, unreliable at 600 (43% failure rate)
 - At 600 records: bimodal behavior (near-perfect OR complete failure)
@@ -106,6 +108,8 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 **Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. [VERIFIED]
 
 **Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (14/17 completed tests; 3 truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5). [TESTED]
+
+**Note**: "Comprehension" is an exclusion category (non-truncation failure), not a mechanistic diagnosis. Possible underlying mechanisms include: "lost-in-the-middle" effects (Liu et al., 2023 - LLMs perform worst on information in the middle of long contexts), filter logic errors at scale, or counting errors during output generation. Position analysis of missed records (do they cluster in the CSV middle?) would narrow the diagnosis.
 
 ### 3.4 H4: Effort Level Impact
 
@@ -175,8 +179,8 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
    - Exception: claude-opus-4.6 high reaches 55.4%, suggesting high-effort thinking genuinely engages more of the context window.
 
 8. **Cost efficiency varies wildly** [VERIFIED]
-   - Best: gpt-5-mini medium - 500 rows for ~$0.40
-   - Worst: claude-opus-4.6 medium - 6 rows for $1.12 (0.05 rows/$0.01)
+   - Best: gpt-5-mini medium - 500 rows at $0.017/request (29K rows/$)
+   - Worst: claude-opus-4.6 medium - 6 rows at $0.006/request (1K rows/$)
 
 ## 5. Production Recommendations
 
@@ -186,16 +190,16 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
 
 **Detailed per-workload cost/time data**: See `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` section 9.6 (Production Decision Matrix).
 
-Best combinations for single-shot production use (per-request values at operating point):
+Best combinations for single-shot production use (per-request cost/time at stated row count):
 
 - **Balanced** - gpt-5-mini medium, 300 rows
-  - $0.017/request, ~1.2 min/request. Best rows/$ efficiency (29K rows/$)
+  - $0.008/request, ~39 sec/request. Best rows/$ efficiency (29K rows/$ at scale limit)
 - **Speed** - gpt-5.5 medium, 300 rows
-  - $0.347/request, ~27 sec/request. Fastest at 300+ rows
+  - ~$0.28/request, ~35 sec/request (interpolated; measured $0.239 at 250, $0.347 at 375)
 - **Max capability** - claude-opus-4.6 high, 400 rows
-  - $0.558/request, ~1.0 min/request. Highest confirmed scale (667 rows)
+  - ~$0.50/request, ~1.0 min/request (interpolated; measured $0.433 at 300, $0.558 at 450)
 - **Budget + fast** - gpt-5.2 medium, 150 rows
-  - $0.032/request, ~39 sec/request. Cheapest config under 60s
+  - $0.032/request, ~39 sec/request (measured at 150 rows)
 
 Pareto-optimal configs (no other is better on ALL of rows, cost, time):
 - claude-opus-4.6 high (667 rows, $0.81/req, 1.5m)
@@ -258,12 +262,14 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
 
 5. **Do different CSV structures affect scale limits?** Current test uses 7 columns with adversarial content. Would simpler data (fewer columns, no adversarial content) extend limits?
 
+6. **Are missed records position-dependent within the CSV?** If recall failures cluster in middle rows (rather than uniformly distributed), "lost-in-the-middle" (Liu et al., 2023) explains the mechanism and suggests positional chunking or record reordering as mitigation.
+
 ## 8. Caveats and Limitations
 
 - **Measurement precision**: Binary search with n=3 runs has ~28% variance between independent searches (observed: gpt-5-mini found 389 then 500). Model differences <20% may be within noise.
 - **Statistical significance**: With n=3 per iteration, the test cannot distinguish 90% reliability from 99% reliability. Confirmed row counts are lower bounds, not precise boundaries.
 - **Task specificity**: All tests use one task type (7-column CSV, compound filter, 20% adversarial content). Results may not generalize to different column counts, filter complexities, or data patterns.
-- **Cost estimates**: Per-workload costs in section 5 are measured at the closest tested row count (not interpolated). Actual production costs at exact operating points may differ slightly.
+- **Cost estimates**: Per-workload costs in section 5 use measured values where available and interpolated estimates where exact row count was not tested. Interpolated values are marked.
 - **H5 confounding**: H5 compares gpt-4o (temperature) vs gpt-5 (reasoning), but these are different architectures. Results show "newer reasoning models perform better" rather than isolating the reasoning mechanism.
 - **Production latency threshold**: The 2 min/request limit is a research assumption. Actual production requirements vary by use case.
 - **Temporal validity**: Models may be silently updated. Results are snapshots from May 2026.
@@ -276,6 +282,15 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
 - `_INFO_ANTAPI-IN13_EXTENDED_THINKING.md [ANTAPI-IN13]` - Anthropic adaptive thinking API docs (explains E1/E4 mechanisms)
 
 ## 10. Document History
+
+**[2026-05-22 18:30]**
+- Fixed: Section 5 production costs corrected to operating-point values (gpt-5-mini 300 rows: $0.008/39s, not $0.017/1.2m which was the 500-row measurement)
+- Fixed: Section 4 finding #8 cost values corrected to per-request (was showing total test costs as if per-request)
+- Added: Section 3.3 note explaining "comprehension" as exclusion category with lost-in-the-middle (Liu et al., 2023) as testable mechanism
+- Added: Open Question #6 (position-dependent missed records)
+- Added: Section 2 precision note bridging to section 8 caveats
+- Changed: Section 8 cost caveat updated to reflect interpolated values
+- Note: History entries below reference "E4" which was merged into E3's mechanism description
 
 **[2026-05-22 18:15]**
 - Fixed: E1 incorrectly stated opus-4.5 uses "manual thinking" - actually uses `effort` parameter (beta). Three distinct methods clarified: 1) manual thinking (sonnet-4/4.5), 2) effort param (opus-4.5), 3) adaptive thinking (opus-4.6/4.7)
