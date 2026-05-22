@@ -112,7 +112,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
    - sonnet-4.5: 1.9x (best=189)
    - opus-4.5: 1.5x (best=265)
 
-5. **gpt-5.5 is 1.4x faster than gpt-5.4 (TPKC)** [TESTED]
+5. **gpt-5.5 is 1.4x faster than gpt-5.4 (Time Per Kilo-Cell, TPKC)** [TESTED]
    - gpt-5.5 avg TPKC: 12s. gpt-5.4 avg TPKC: 16s
 
 ## findings-5
@@ -133,7 +133,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | opus-4.5   | json          | 265   | yaml           | 259   | csv_quoted     | 171   |
 | sonnet-4.5 | json          | 189   | csv            | 126   | xml            | 99    |
 
-### By Cost Efficiency (lowest CPKC)
+### By Cost Efficiency (lowest Cost Per Kilo-Cell, CPKC)
 
 | Model      | Best CPKC Format | CPKC   | Scale | 2nd Best         | CPKC   |
 |------------|------------------|--------|-------|------------------|--------|

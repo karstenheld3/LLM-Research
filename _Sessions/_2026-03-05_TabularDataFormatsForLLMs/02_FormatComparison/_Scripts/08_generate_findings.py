@@ -339,7 +339,7 @@ def gen_unexpected_findings(records: list, models: dict) -> str:
     avg55 = sum(gpt55_tpkc) / len(gpt55_tpkc)
     avg54 = sum(gpt54_tpkc) / len(gpt54_tpkc)
     speedup = avg54 / max(avg55, 1)
-    lines.append(f"\n5. **gpt-5.5 is {speedup:.1f}x faster than gpt-5.4 (TPKC)** [TESTED]")
+    lines.append(f"\n5. **gpt-5.5 is {speedup:.1f}x faster than gpt-5.4 (Time Per Kilo-Cell, TPKC)** [TESTED]")
     lines.append(f"   - gpt-5.5 avg TPKC: {avg55:.0f}s. gpt-5.4 avg TPKC: {avg54:.0f}s")
 
   return "\n".join(lines)
@@ -378,7 +378,7 @@ def gen_production_recs(records: list, models: dict) -> str:
   lines.append("")
 
   # By cost efficiency
-  lines.append("### By Cost Efficiency (lowest CPKC)")
+  lines.append("### By Cost Efficiency (lowest Cost Per Kilo-Cell, CPKC)")
   lines.append("")
   lines.append("| Model      | Best CPKC Format | CPKC   | Scale | 2nd Best         | CPKC   |")
   lines.append("|------------|------------------|--------|-------|------------------|--------|")

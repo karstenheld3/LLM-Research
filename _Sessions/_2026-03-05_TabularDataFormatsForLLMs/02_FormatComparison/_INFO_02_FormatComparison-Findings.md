@@ -165,7 +165,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
    - sonnet-4.5: 1.9x (best=189)
    - opus-4.5: 1.5x (best=265)
 
-5. **gpt-5.5 is 1.4x faster than gpt-5.4 (TPKC)** [TESTED]
+5. **gpt-5.5 is 1.4x faster than gpt-5.4 (Time Per Kilo-Cell, TPKC)** [TESTED]
    - gpt-5.5 avg TPKC: 12s. gpt-5.4 avg TPKC: 16s
 <!-- AUTO:findings-4:end -->
 
@@ -188,7 +188,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | opus-4.5   | json          | 265   | yaml           | 259   | csv_quoted     | 171   |
 | sonnet-4.5 | json          | 189   | csv            | 126   | xml            | 99    |
 
-### By Cost Efficiency (lowest CPKC)
+### By Cost Efficiency (lowest Cost Per Kilo-Cell, CPKC)
 
 | Model      | Best CPKC Format | CPKC   | Scale | 2nd Best         | CPKC   |
 |------------|------------------|--------|-------|------------------|--------|
@@ -207,7 +207,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 
 ### Chunking Strategy (Not Yet Tested)
 
-For datasets exceeding the recommended row count, chunk into N batches of [safe limit] rows and merge results. Cost scales linearly with chunk count. Example: 3x gpt-5-mini at 300 rows = $0.024 for 900 rows vs 1x opus-4.5 at 265 rows = $0.19. Chunking with a cheap model likely dominates single-shot optimization for most production use cases. Empirical validation of chunk+merge accuracy is future work (Open Question #3).
+For datasets exceeding the recommended row count, chunk into N batches of [safe limit] rows and merge results. Cost scales linearly with chunk count. Example: 3x gpt-5-mini at 300 rows = $0.024 for 900 rows vs 1x opus-4.5 at 265 rows = $0.19. Chunking with a cheap model likely dominates single-shot optimization for most production use cases. Empirical validation of chunk+merge accuracy is future work.
 
 ### Measurement Precision Note
 
