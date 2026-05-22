@@ -1,0 +1,53 @@
+{
+  "filters_applied": [
+    {
+      "column": "clearance",
+      "operator": "in",
+      "value": [
+        "Level 3",
+        "Level 4",
+        "Level 5"
+      ]
+    },
+    {
+      "column": "salary",
+      "operator": "gte",
+      "value": 150000
+    }
+  ],
+  "columns_requested": [
+    "id",
+    "name",
+    "department",
+    "salary",
+    "clearance",
+    "rating",
+    "projects"
+  ],
+  "expected_records": [
+    {
+      "id": "EMP-0002",
+      "name": "Alexander Garcia",
+      "department": "Research & Development",
+      "salary": "$325,000.00/year",
+      "clearance": "Level 4: Top Secret",
+      "rating": "Meets Expectations",
+      "projects": "Culture 2025: Sponsor | DEI: Executive Lead"
+    },
+    {
+      "id": "EMP-0003",
+      "name": "Isabella Park",
+      "department": "IT, Infrastructure",
+      "salary": "$385,000.00/year",
+      "clearance": "Level 3: Secret",
+      "rating": "Exceeds Expectations: Promotion Ready",
+      "projects": "Q4 Push: Owner, Enterprise | SMB Expansion"
+    }
+  ],
+  "expected_count": 2,
+  "expected_ids": [
+    "EMP-0002",
+    "EMP-0003"
+  ],
+  "token_estimate": 1006
+}

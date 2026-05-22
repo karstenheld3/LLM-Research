@@ -1,0 +1,37 @@
+{
+  "extracted_ids": [
+    "EMP-0002",
+    "EMP-0003",
+    "EMP-0011",
+    "EMP-0012",
+    "EMP-0013",
+    "EMP-0014",
+    "EMP-0015",
+    "EMP-0016",
+    "EMP-0024",
+    "EMP-0025"
+  ],
+  "metrics": {
+    "true_positives": 7,
+    "false_positives": 3,
+    "false_negatives": 1,
+    "precision": 0.7,
+    "recall": 0.875,
+    "f1": 0.7778
+  },
+  "missing_ids": [
+    "EMP-0022"
+  ],
+  "extra_ids": [
+    "EMP-0011",
+    "EMP-0012",
+    "EMP-0013"
+  ],
+  "run_id": 1,
+  "response_file": "run_01.md",
+  "truncated": false,
+  "finish_reason": "stop",
+  "input_tokens": 1528,
+  "output_tokens": 470,
+  "errors": []
+}

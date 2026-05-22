@@ -1,0 +1,46 @@
+{
+  "test_name": "TabularExtraction",
+  "description": "Extract filtered records from CSV data",
+  "data_generation": {
+    "number_of_rows": 150,
+    "number_of_columns": 7,
+    "seed": 42,
+    "include_adversarial_chars": true
+  },
+  "extraction_task": {
+    "task_prompt": "task_prompt_template.md",
+    "columns_to_extract": [
+      "id",
+      "name",
+      "department",
+      "salary",
+      "clearance",
+      "rating",
+      "projects"
+    ],
+    "filters": [
+      {
+        "column": "clearance",
+        "operator": "in",
+        "value": [
+          "Level 3",
+          "Level 4",
+          "Level 5"
+        ]
+      },
+      {
+        "column": "salary",
+        "operator": "gte",
+        "value": 150000
+      }
+    ]
+  },
+  "execution": {
+    "model": "claude-opus-4-5-20251101",
+    "number_of_runs": 3,
+    "number_of_workers": 3,
+    "reasoning_effort": "medium",
+    "max_output_tokens": 16384,
+    "max_context_tokens": 128000
+  }
+}
