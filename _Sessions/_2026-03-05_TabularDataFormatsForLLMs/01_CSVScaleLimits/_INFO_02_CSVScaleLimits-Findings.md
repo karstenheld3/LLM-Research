@@ -222,6 +222,14 @@ DO NOT USE for tabular extraction (confirmed at <10 rows):
 - Any temperature-based model without reasoning capability
 - claude-opus adaptive_thinking at medium effort (6-12 rows)
 
+### Chunking Strategy (Not Yet Tested)
+
+For datasets exceeding the conservative operating limit, chunk into N batches of [safe limit] rows and merge results. Cost scales linearly. Example: 3x gpt-5-mini at 300 rows = $0.024 for 900 rows vs 1x opus-4.6 high at 400 rows = ~$0.50. Chunking with a cheap model likely dominates single-shot optimization for most production use cases. Empirical validation of chunk+merge accuracy is an open question.
+
+### Measurement Precision Note
+
+All row counts have ~28% variance between independent binary searches. Differences <20% between models or configurations should be considered equivalent. Treat recommendations as tier groupings, not strict orderings.
+
 ## 6. Emergent Hypotheses
 
 Hypotheses not in the original H1-H6 set, derived from observed data patterns. Negatives of existing hypotheses (e.g., "context is irrelevant" = H3 NOT SUPPORTED) do not qualify.
@@ -282,6 +290,10 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
 - `_INFO_ANTAPI-IN13_EXTENDED_THINKING.md [ANTAPI-IN13]` - Anthropic adaptive thinking API docs (explains E1/E4 mechanisms)
 
 ## 10. Document History
+
+**[2026-05-22 19:45]**
+- Added: Chunking Strategy subsection in section 5 (production recommendation gap from review)
+- Added: Measurement Precision Note in section 5 (~20% noise band, tier groupings)
 
 **[2026-05-22 18:30]**
 - Fixed: Section 5 production costs corrected to operating-point values (gpt-5-mini 300 rows: $0.008/39s, not $0.017/1.2m which was the 500-row measurement)

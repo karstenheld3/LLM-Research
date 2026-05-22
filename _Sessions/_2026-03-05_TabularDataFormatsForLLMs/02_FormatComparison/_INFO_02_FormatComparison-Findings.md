@@ -205,6 +205,14 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 **Always test your specific model with your intended format.** Format choice matters more than previously thought - up to 5.8x scale difference. No universal best format exists.
 <!-- AUTO:findings-5:end -->
 
+### Chunking Strategy (Not Yet Tested)
+
+For datasets exceeding the recommended row count, chunk into N batches of [safe limit] rows and merge results. Cost scales linearly with chunk count. Example: 3x gpt-5-mini at 300 rows = $0.024 for 900 rows vs 1x opus-4.5 at 265 rows = $0.19. Chunking with a cheap model likely dominates single-shot optimization for most production use cases. Empirical validation of chunk+merge accuracy is future work (Open Question #3).
+
+### Measurement Precision Note
+
+Rankings within ~20% of each other should be considered equivalent due to ~28% observed variance between independent binary searches (Test 01 data). Treat tables as tier groupings, not strict orderings.
+
 ## 6. Emergent Hypotheses
 
 Hypotheses not in the original H1-H6 set, derived from observed data patterns.
@@ -227,6 +235,7 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns.
 - **E3: Format sensitivity inversely correlates with model capability** [VERIFIED]
   - Evidence: gpt-5.2 ratio 5.8x, gpt-5 4.0x, gpt-5-mini 3.1x, gpt-5.5 2.2x, gpt-5.4 2.0x, sonnet 1.9x, opus 1.5x
   - Mechanism: More capable models develop format-agnostic comprehension strategies
+  - Caveat: May partly reflect floor effects - models with low absolute scale limits have less room for variance, mechanically producing higher ratios. The correlation is consistent but causality is not established.
   - Testable: Compare sensitivity ratio across reasoning effort levels (low vs high on same model)
 
 ## 7. Open Questions
@@ -261,6 +270,11 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns.
 - NoLiMa 2025 - https://arxiv.org/abs/2502.05167 (attention mechanism finding)
 
 ## 10. Document History
+
+**[2026-05-22 19:45]**
+- Added: Chunking Strategy subsection in section 5 (production recommendation gap from review)
+- Added: Measurement Precision Note in section 5 (~20% noise band, tier groupings)
+- Added: E3 floor-effect caveat (sensitivity-capability correlation may be partly mathematical artifact)
 
 **[2026-05-22 19:30]**
 - Added: AUTO markers on sections 1, 3, 4, 5 (data-backed sections)
