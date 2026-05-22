@@ -118,20 +118,33 @@ def parse_effort_from_folder(folder_name: str) -> str:
 
 
 def compute_time_per_request(data: dict) -> float | None:
-  """Time for one binary search iteration at scale limit (includes all verification runs)."""
+  """Time for a single LLM API call at scale limit (iteration duration / runs).
+
+  Prefers iterations with multiple verification runs (more reliable average).
+  Falls back to single-run iterations if no multi-run passes exist.
+  """
   history = data.get("search_history", [])
   scale_limit = data.get("max_reliable_rows")
   if not history or not scale_limit:
     return None
 
-  # Find passing iteration at highest row count (closest to scale limit)
-  best = None
-  for entry in history:
-    if entry.get("passed") and entry.get("duration_secs"):
-      if best is None or entry.get("rows", 0) >= best.get("rows", 0):
-        best = {"rows": entry.get("rows", 0), "duration": entry["duration_secs"]}
+  best_multi = None  # iterations with runs_total >= 3
+  best_any = None    # any passing iteration
 
-  return round(best["duration"], 1) if best else None
+  for entry in history:
+    if not entry.get("passed") or not entry.get("duration_secs"):
+      continue
+    runs = entry.get("runs_total", 1)
+    per_request = entry["duration_secs"] / max(runs, 1)
+    rows = entry.get("rows", 0)
+
+    if best_any is None or rows > best_any["rows"]:
+      best_any = {"rows": rows, "per_request": per_request}
+    if runs >= 3 and (best_multi is None or rows > best_multi["rows"]):
+      best_multi = {"rows": rows, "per_request": per_request}
+
+  pick = best_multi or best_any
+  return round(pick["per_request"], 1) if pick else None
 
 
 def load_overrides(overrides_path: Path) -> list:

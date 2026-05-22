@@ -31,7 +31,7 @@
     "context_pct": null,
     "truncated": "No",
     "cost_usd": 30.0,
-    "time_per_request_sec": 600,
+    "time_per_request_sec": 200,
     "iterations": null,
     "status": "cancelled",
     "folder": "claude-opus-4-7_adaptive_thinking_high_max16384",

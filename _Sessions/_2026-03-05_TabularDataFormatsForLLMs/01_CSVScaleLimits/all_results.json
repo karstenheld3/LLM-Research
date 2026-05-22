@@ -45,7 +45,7 @@
       "max_context_tokens": 200000,
       "truncated": "Yes",
       "cost_usd": 5.36,
-      "time_per_request_sec": 96.8,
+      "time_per_request_sec": 32.3,
       "iterations": 6,
       "status": "completed",
       "folder": "claude-opus-4-5-20251101_thinking_medium_max16384"
@@ -67,7 +67,7 @@
       "max_context_tokens": 200000,
       "truncated": "No",
       "cost_usd": 17.59,
-      "time_per_request_sec": 272.4,
+      "time_per_request_sec": 90.8,
       "iterations": 9,
       "status": "completed",
       "folder": "claude-opus-4-6_adaptive_thinking_high_max16384"
@@ -89,7 +89,7 @@
       "max_context_tokens": 200000,
       "truncated": "No",
       "cost_usd": 1.12,
-      "time_per_request_sec": 5.1,
+      "time_per_request_sec": 1.7,
       "iterations": 6,
       "status": "completed",
       "folder": "claude-opus-4-6_adaptive_thinking_medium_max16384"
@@ -111,7 +111,7 @@
       "max_context_tokens": 1000000,
       "truncated": "No",
       "cost_usd": 1.96,
-      "time_per_request_sec": 5.5,
+      "time_per_request_sec": 1.8,
       "iterations": 6,
       "status": "completed",
       "folder": "claude-opus-4-7_adaptive_thinking_medium_max16384"
@@ -133,7 +133,7 @@
       "max_context_tokens": 200000,
       "truncated": "Yes",
       "cost_usd": 3.41,
-      "time_per_request_sec": 120.1,
+      "time_per_request_sec": 40.0,
       "iterations": 6,
       "status": "completed",
       "folder": "claude-sonnet-4-20250514_thinking_medium_max16384"
@@ -221,7 +221,7 @@
       "max_context_tokens": 1000000,
       "truncated": "No",
       "cost_usd": 0.07,
-      "time_per_request_sec": 48.5,
+      "time_per_request_sec": 16.2,
       "iterations": 6,
       "status": "completed",
       "folder": "gpt-5-mini_reasoning_effort_low_max16384"
@@ -243,7 +243,7 @@
       "max_context_tokens": 1000000,
       "truncated": "No",
       "cost_usd": 0.4,
-      "time_per_request_sec": 210.3,
+      "time_per_request_sec": 70.1,
       "iterations": 7,
       "status": "completed",
       "folder": "gpt-5-mini_reasoning_effort_medium_max16384"
@@ -287,7 +287,7 @@
       "max_context_tokens": 1047576,
       "truncated": "No",
       "cost_usd": 2.49,
-      "time_per_request_sec": 153.2,
+      "time_per_request_sec": 51.1,
       "iterations": 7,
       "status": "completed",
       "folder": "gpt-5.4_reasoning_effort_medium_max16384"
@@ -309,7 +309,7 @@
       "max_context_tokens": 1050000,
       "truncated": "No",
       "cost_usd": 8.15,
-      "time_per_request_sec": 97.4,
+      "time_per_request_sec": 32.5,
       "iterations": 7,
       "status": "completed",
       "folder": "gpt-5.5_reasoning_effort_medium_max16384"
@@ -331,7 +331,7 @@
       "max_context_tokens": 1000000,
       "truncated": "Yes",
       "cost_usd": 2.73,
-      "time_per_request_sec": 2712.0,
+      "time_per_request_sec": 295.1,
       "iterations": 8,
       "status": "completed",
       "folder": "gpt-5_reasoning_effort_high_max16384"
@@ -375,7 +375,7 @@
       "max_context_tokens": 1000000,
       "truncated": "No",
       "cost_usd": 2.97,
-      "time_per_request_sec": 270.6,
+      "time_per_request_sec": 90.2,
       "iterations": 8,
       "status": "completed",
       "folder": "gpt-5_reasoning_effort_medium_max16384"
@@ -418,7 +418,7 @@
       "context_pct": null,
       "truncated": "No",
       "cost_usd": 30.0,
-      "time_per_request_sec": 600,
+      "time_per_request_sec": 200,
       "iterations": null,
       "status": "cancelled",
       "folder": "claude-opus-4-7_adaptive_thinking_high_max16384",
