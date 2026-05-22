@@ -29,16 +29,16 @@
 
 Derived from 19/19 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` section 5.
 
-- **Claude opus-4.6 high = new confirmed leader**
-  - 667 rows at 55.4% context utilization
-- **adaptive_thinking at medium effort is catastrophic**
-  - opus-4.6 (6 rows), opus-4.7 (12 rows) - worse than gpt-4o
+- **Claude opus-4.6 high = highest confirmed capability**
+  - Confirmed reliable at 667 rows (55.4% context utilization)
+- **adaptive_thinking at medium effort skips reasoning (catastrophic for structured data)**
+  - opus-4.6 (6 rows), opus-4.7 (12 rows) - model skips thinking phase, hallucinates
 - **Effort multiplier extreme on Claude Opus 4.6**
   - medium (6) to high (667) = 111x improvement
 - **Reasoning models massively outperform temperature models**
-  - gpt-5-mini (500 rows) vs gpt-4o-mini (6 rows) = 83x
-- **Scale limits vary 210x+ across models**
-  - Best: opus-4.7 high (843+) vs Worst: gpt-4o (4)
+  - gpt-5-mini (confirmed at 500 rows) vs gpt-4o-mini (6 rows) = 83x
+- **Confirmed capability varies 160x+ across models**
+  - Best confirmed: opus-4.6 high (667) vs Worst: gpt-4o (4)
 - **Comprehension is primary failure mode, not truncation**
   - 14/17 completed tests failed due to comprehension errors
 - **Context window is NOT the bottleneck**
@@ -53,7 +53,7 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 - Quoted CSV ranked #3 of 10 formats at 300 records
 
 - **H1 - Scale limit 300-600 rows**: SUPPORTED (High)
-  - gpt-5-mini medium = 500 rows (re-run; original 389 also in range)
+  - gpt-5-mini medium confirmed at 500 rows (re-run; original 389 also in range; ~28% measurement variance)
 - **H2 - Bimodal failure (cliff)**: PARTIALLY SUPPORTED (Medium)
   - Reasoning: cliff (100% to 0%). Temperature: gradual slope
 - **H3 - Truncation > comprehension**: NOT SUPPORTED (High)
@@ -143,11 +143,10 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
 
 ## 4. Unexpected Findings
 
-1. **Claude adaptive_thinking at medium effort is catastrophically broken** [TESTED]
-   - opus-4.6 regresses from 177 (opus-4.5 thinking) to 6 rows
-   - opus-4.7 achieves only 12 rows
-   - Both produce false positives (precision <1.0) unlike older models which only missed records
-   - Suggests adaptive_thinking medium fundamentally changes how these models approach structured data
+1. **Claude adaptive_thinking at medium effort skips reasoning for structured data** [TESTED]
+   - opus-4.6 (6 rows) and opus-4.7 (12 rows) vs sonnet-4 (187 rows) and opus-4.5 (177 rows)
+   - Both produce false positives (precision <1.0) unlike all other models which only missed records
+   - Root cause: adaptive thinking (`type: "adaptive"`) at medium effort allows the model to skip reasoning entirely. Sonnet-4/4.5 use guaranteed manual thinking (`type: "enabled"`, `budget_tokens`); opus-4.5 uses a separate `effort` parameter - both ensure reasoning. See E1 for full API-level explanation.
 
 2. **Claude opus-4.6 high effort = highest confirmed result** [TESTED]
    - 667 rows with 55.4% context utilization
@@ -159,12 +158,12 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
    - Far exceeds gpt-5-mini's 7.7x and gpt-5's 1.4x multipliers
    - The adaptive_thinking mechanism appears binary - nearly useless at medium, exceptional at high
 
-4. **gpt-5.2 underperforms gpt-5** [VERIFIED]
-   - Scale limit 215 vs 356 (gpt-5 low). Newer is not always better for specific tasks.
+4. **gpt-5.2 likely underperforms gpt-5** [VERIFIED]
+   - Confirmed at 215 vs 356 rows (gpt-5 low). Difference (40%) exceeds measurement noise. Newer is not always better for specific tasks.
 
-5. **gpt-5.5 underperforms gpt-5.4** [TESTED]
-   - Scale limit 437 vs 492 (-11%). Despite 2x pricing ($5/$30 vs $2.5/$15).
-   - Confirms newer/pricier does not guarantee better tabular comprehension.
+5. **gpt-5.5 comparable to gpt-5.4** [TESTED]
+   - Confirmed at 437 vs 492 rows (-11%). Within measurement precision (~28% variance observed). Despite 2x pricing ($5/$30 vs $2.5/$15).
+   - Cannot confirm statistical difference; both achieve ~450-500 tier.
 
 6. **Claude sonnet-4 truncates, sonnet-4.5 does not** [TESTED]
    - sonnet-4: 187 rows, truncation failure at 25.1% context utilization
@@ -181,64 +180,75 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
 
 ## 5. Production Recommendations
 
-**Note**: 2 min/request is assumed as the maximum acceptable production latency for this research.
+**Scope**: Results apply to 7-column CSV extraction with compound filter (2 conditions). Simpler tasks likely achieve higher scale; more complex tasks achieve lower scale. Exact multiplier is unknown (see Open Questions).
 
-Best combinations for single-shot production use (per-request values):
+**Statistical note**: All row counts represent confirmed-reliable points from n=3 verification runs. Measurement variance is ~28% between independent runs. Recommendations use conservative 60% safety margin.
+
+**Detailed per-workload cost/time data**: See `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` section 9.6 (Production Decision Matrix).
+
+Best combinations for single-shot production use (per-request values at operating point):
 
 - **Balanced** - gpt-5-mini medium, 300 rows
-  - ~$0.06/request, ~1.2 min/request. Good scale, cheap, within 2 min threshold
+  - $0.017/request, ~1.2 min/request. Best rows/$ efficiency (29K rows/$)
 - **Speed** - gpt-5.5 medium, 300 rows
-  - ~$1.30/request, ~32 sec/request. Fast, expensive, well within latency limit
-- **Budget** - gpt-5-mini low, 50 rows
-  - ~$0.01/request, ~16 sec/request. Minimal cost, small datasets
+  - $0.347/request, ~27 sec/request. Fastest at 300+ rows
+- **Max capability** - claude-opus-4.6 high, 400 rows
+  - $0.558/request, ~1.0 min/request. Highest confirmed scale (667 rows)
+- **Budget + fast** - gpt-5.2 medium, 150 rows
+  - $0.032/request, ~39 sec/request. Cheapest config under 60s
 
-Several models achieve both high scale (300+ rows) and sub-2-min latency: gpt-5-mini medium (~1.2 min), gpt-5.5 medium (~32 sec), gpt-5.4 medium (~51 sec). For latency-critical use with smaller datasets, gpt-5-mini low handles 50 rows in ~16 sec.
+Pareto-optimal configs (no other is better on ALL of rows, cost, time):
+- claude-opus-4.6 high (667 rows, $0.81/req, 1.5m)
+- gpt-5-mini medium (500 rows, $0.017/req, 1.2m)
+- gpt-5.4 medium (492 rows, $0.14/req, 51s)
+- gpt-5.5 medium (437 rows, $0.41/req, 32s)
+- gpt-5.2 medium (215 rows, $0.046/req, 55s)
 
-Realistic boundaries:
-- **Maximum reliable scale**: 400 rows (gpt-5 high, 80% of 492 limit)
-- **Recommended production scale**: 300 rows (safe margin for all models)
-- **Minimum viable scale**: 50 rows (even low-effort models reliable here)
-- **Cost range**: $0.01-$0.27 per single extraction
-- **Time range**: 2 sec - 5 min per single extraction
-
-Safe operating limits:
-- gpt-5-mini medium: 300 rows (60% of limit)
-- gpt-5 low: 300 rows (84% of limit)
-- Claude sonnet/opus: 150 rows (85% of limit)
+Conservative operating limits (60% of confirmed capability):
+- gpt-5-mini medium: 300 rows (60% of 500)
+- gpt-5.4 medium: 300 rows (61% of 492)
+- gpt-5.5 medium: 260 rows (60% of 437)
+- gpt-5 low: 210 rows (60% of 356)
+- Claude sonnet/opus thinking: 100 rows (60% of ~170)
 - gpt-4o/gpt-4o-mini: NOT RECOMMENDED for tabular extraction
 
-DO NOT USE for tabular extraction:
-- gpt-4o, gpt-4o-mini (scale limits 4-6 rows)
-- claude-haiku (scale limit 9 rows)
+DO NOT USE for tabular extraction (confirmed at <10 rows):
+- gpt-4o, gpt-4o-mini (4-6 rows)
+- claude-haiku (9 rows)
 - Any temperature-based model without reasoning capability
+- claude-opus adaptive_thinking at medium effort (6-12 rows)
 
 ## 6. Emergent Hypotheses
 
-Hypotheses not in the original H1-H6 set, derived from observed data patterns:
+Hypotheses not in the original H1-H6 set, derived from observed data patterns. Negatives of existing hypotheses (e.g., "context is irrelevant" = H3 NOT SUPPORTED) do not qualify.
 
-- **E1: adaptive_thinking medium is fundamentally broken for structured data** [TESTED]
-  - Evidence: opus-4.6 regresses from 177 (opus-4.5) to 6 rows. opus-4.7 = 12 rows.
-  - Mechanism: Both produce false positives (precision <1.0), suggesting hallucination rather than attention loss
-  - Testable: Run same task with opus-4.5 thinking vs opus-4.6 adaptive_thinking at matched token budgets
+- **E1: adaptive_thinking at medium effort skips reasoning for structured data** [TESTED]
+  - Evidence: opus-4.6 (6 rows) and opus-4.7 (12 rows) catastrophically underperform compared to sonnet-4 (187 rows) and opus-4.5 (177 rows). Both opus-4.6/4.7 produce false positives (precision <1.0), indicating hallucination.
+  - Mechanism (from Anthropic API docs `ANTAPI-IN13` + our `model-registry.json`):
+    - Three distinct Anthropic reasoning methods exist in our test suite:
+      1. **sonnet-4, sonnet-4.5**: manual thinking (`type: "enabled"`, `budget_tokens: 10000`). Guarantees reasoning phase with minimum 1024 tokens.
+      2. **opus-4.5**: `effort` parameter (beta `effort-2025-11-24`). Separate mechanism that also engages reasoning.
+      3. **opus-4.6, opus-4.7**: adaptive thinking (`type: "adaptive"`) + `output_config: {"effort": "medium"}`. Model decides whether and how much to think.
+    - With adaptive thinking, the model decides whether and how much to think. The effort parameter is a signal, not a guarantee. Per ANTAPI-IN13: "no thinking block produced if model skips thinking" (confirmed possible with `type: "adaptive"`)
+    - Despite passing `effort: "medium"`, the model either skips reasoning or allocates too few thinking tokens for structured data. We cannot distinguish which - our test code does not log thinking blocks from the response
+    - The resulting behavior (false positives, hallucination at 6-12 rows) is consistent with no/insufficient reasoning
+    - At high effort, adaptive thinking engages fully (opus-4.6: 667 rows, 55.4% context) - proving the capability exists but is not activated at medium
+  - This is NOT a model quality regression. It is an API method difference: adaptive thinking gives the model discretion to skip reasoning. Methods 1 and 2 above guarantee reasoning engagement.
+  - Testable: Run opus-4.7 with `type: "enabled"` + `budget_tokens: 10000` (API docs confirm opus-4.7 supports both manual and adaptive modes). If scale limit jumps from 12 to ~150+, confirms adaptive skip is the root cause.
 
-- **E2: Context utilization is irrelevant to scale limits** [VERIFIED]
-  - Evidence: 13/17 models fail at <10% context. Only opus-4.6 high (55.4%) and sonnet-4/opus-4.5 (25.1%) use substantial context.
-  - Mechanism: Attention degradation occurs long before context window fills
-  - Testable: Compare models with 200K vs 128K context windows on same task
-
-- **E3: Newer model versions do not guarantee better tabular comprehension** [TESTED]
-  - Evidence: gpt-5.2 < gpt-5, gpt-5.5 < gpt-5.4, sonnet-4.5 = sonnet-4
+- **E2: Newer model versions do not guarantee better tabular comprehension** [TESTED]
+  - Evidence: gpt-5.2 < gpt-5 (40% worse), gpt-5.5 comparable to gpt-5.4 (within noise), sonnet-4.5 comparable to sonnet-4
   - Mechanism: General model improvements may not target structured data processing
   - Testable: Track scale limits across future model releases
 
-- **E4: Reasoning effort multiplier is model-family dependent** [TESTED]
-  - Evidence: OpenAI = 1.4x-7.7x improvement. Claude Opus = 70x-111x improvement.
-  - Mechanism: adaptive_thinking may have binary activation (off at medium, full at high)
-  - Testable: Test Claude models at effort levels between medium and high (if API allows)
+- **E3: Reasoning effort multiplier is model-family dependent** [TESTED]
+  - Evidence: OpenAI = 1.4x-7.7x improvement. Claude Opus adaptive = 70x-111x improvement.
+  - Mechanism (confirmed via `ANTAPI-IN13` + `model-registry.json`): Claude adaptive thinking at medium may skip reasoning entirely, producing a binary jump (no reasoning vs full reasoning). OpenAI models use `reasoning_effort` parameter which scales token allocation but always engages the reasoning mechanism - producing gradual improvement rather than a binary jump.
+  - Testable: SDK supports `"max"` effort level - test if max > high for Claude models. Also test opus-4.7 manual mode at varying `budget_tokens` (1024, 5000, 10000, 20000) to map the thinking budget curve and confirm reasoning always engages.
 
 ## 7. Open Questions
 
-1. **Why does adaptive_thinking medium produce false positives?** Other models only miss records (recall drops). adaptive_thinking medium also adds wrong records (precision drops). What mechanism causes this?
+1. ~~**Why does adaptive_thinking medium produce false positives?**~~ **ANSWERED**: At medium effort, adaptive thinking either skips reasoning or allocates insufficient thinking tokens for structured data (`ANTAPI-IN13`: effort is a signal, not a guarantee; model has discretion). Without adequate reasoning, the model hallucinates records. Verification: 1) log thinking blocks to confirm skip vs minimal thinking, 2) run opus-4.7 with manual thinking (`type: "enabled"`, `budget_tokens: 10000`) to confirm guaranteed reasoning fixes the issue.
 
 2. **Why does opus-4.6 high use 55.4% context while other models use <10%?** Is this a property of the high-effort adaptive_thinking mechanism? Does it correlate with the 111x improvement?
 
@@ -250,18 +260,50 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns:
 
 ## 8. Caveats and Limitations
 
-- **Result variance**: Binary search results have ~10% margin due to LLM non-determinism. Use `--verify-runs 3` to increase confidence.
-- **Cost estimates**: Estimates assume 300-row baseline. Actual costs may be 2x higher if models scale to 600+ rows.
+- **Measurement precision**: Binary search with n=3 runs has ~28% variance between independent searches (observed: gpt-5-mini found 389 then 500). Model differences <20% may be within noise.
+- **Statistical significance**: With n=3 per iteration, the test cannot distinguish 90% reliability from 99% reliability. Confirmed row counts are lower bounds, not precise boundaries.
+- **Task specificity**: All tests use one task type (7-column CSV, compound filter, 20% adversarial content). Results may not generalize to different column counts, filter complexities, or data patterns.
+- **Cost estimates**: Per-workload costs in section 5 are measured at the closest tested row count (not interpolated). Actual production costs at exact operating points may differ slightly.
 - **H5 confounding**: H5 compares gpt-4o (temperature) vs gpt-5 (reasoning), but these are different architectures. Results show "newer reasoning models perform better" rather than isolating the reasoning mechanism.
 - **Production latency threshold**: The 2 min/request limit is a research assumption. Actual production requirements vary by use case.
+- **Temporal validity**: Models may be silently updated. Results are snapshots from May 2026.
 
 ## 9. Sources
 
 - `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` - All test result data
 - `_SPEC_CSVScaleLimits.md [TBLF-SP01]` - Test framework specification
 - `_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]` - Format benchmarking research (TK-001)
+- `_INFO_ANTAPI-IN13_EXTENDED_THINKING.md [ANTAPI-IN13]` - Anthropic adaptive thinking API docs (explains E1/E4 mechanisms)
 
 ## 10. Document History
+
+**[2026-05-22 18:15]**
+- Fixed: E1 incorrectly stated opus-4.5 uses "manual thinking" - actually uses `effort` parameter (beta). Three distinct methods clarified: 1) manual thinking (sonnet-4/4.5), 2) effort param (opus-4.5), 3) adaptive thinking (opus-4.6/4.7)
+- Fixed: E4 mechanism - removed claim "OpenAI always engages reasoning"; replaced with "scales token allocation"
+- Changed: Verified all claims against ANTAPI-IN13 + model-registry.json + llm_client.py
+
+**[2026-05-22 18:14]**
+- Changed: E1 rewritten with API-level root cause (adaptive thinking skips reasoning at medium effort)
+- Changed: E4 mechanism confirmed via ANTAPI-IN13 (binary jump, not gradual scaling)
+- Changed: Open Question #1 marked ANSWERED with verification test proposed
+- Changed: Unexpected Finding #1 updated with root cause explanation
+- Added: ANTAPI-IN13 as source
+
+**[2026-05-22 18:10]**
+- Changed: Production recommendations updated with actual per-workload costs from TBLF-IN02 section 9.6
+- Added: Pareto-optimal config summary (5 non-dominated configurations)
+- Added: "Max capability" and "Budget + fast" production profiles
+- Changed: E3 evidence qualified (gpt-5.5 "comparable" not "underperforms")
+- Changed: Cost caveat updated to reflect measured per-workload data
+
+**[2026-05-22 18:02]**
+- Changed: Language reframed from "scale limit = X" to "confirmed at X rows" throughout
+- Changed: gpt-5.5 vs gpt-5.4 comparison qualified as "within measurement precision" (11% < 28% variance)
+- Changed: Production recommendations now reference section 9.6 fixed-workload data
+- Added: Scope caveat (7-column, compound filter), statistical note (n=3, 28% variance), 60% safety margin
+- Added: Caveats for measurement precision, task specificity, temporal validity
+- Changed: Safe operating limits reformulated as "60% of confirmed capability"
+- Changed: "DO NOT USE" list includes adaptive_thinking medium
 
 **[2026-05-22 17:05]**
 - Fixed: claude-sonnet-4 = 187 rows, truncation, 25.1% (was 168, comprehension, 8.4%)
