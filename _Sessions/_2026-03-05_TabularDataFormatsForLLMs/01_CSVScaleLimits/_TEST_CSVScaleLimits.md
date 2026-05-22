@@ -5,7 +5,7 @@
 **Doc ID**: TBLF-TP01
 **Goal**: Efficiently test 6 hypotheses across 8 models to find scale limits for LLM tabular extraction
 **Timeline**: Created 2026-03-05, 3 updates, date range 2026-03-05 to 2026-03-06
-**Target file**: `04_batch_scale_test.py`, `05_analyze_results.py`
+**Target file**: `03_find_scale_limit.py`, `06_aggregate_results.py`, `run_pipeline.ps1`
 
 **Depends on:**
 - `_SPEC_CSVScaleLimits.md [TBLF-SP01]` for test framework specification
@@ -64,23 +64,29 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 
 ### 2.1 Model List (Ordered by Cost)
 
-| Tier | Model ID                   | Provider  | Method           | Cost (in/out per 1M) | Priority             |
-|------|----------------------------|-----------|------------------|----------------------|----------------------|
-| 1    | gpt-4o-mini                | OpenAI    | temperature      | $0.15 / $0.60        | Setup validation     |
-| 2    | gpt-5-mini                 | OpenAI    | reasoning_effort | $0.25 / $2.00        | Baseline (TK-001)    |
-| 3    | claude-haiku-4-5-20251001  | Anthropic | temperature      | $1.00 / $5.00        | Cheapest Anthropic   |
-| 4    | gpt-5                      | OpenAI    | reasoning_effort | $1.25 / $10.00       | Full-size reasoning  |
-| 5    | gpt-5.2                    | OpenAI    | reasoning_effort | $1.75 / $14.00       | Latest OpenAI        |
-| 6    | gpt-4o                     | OpenAI    | temperature      | $2.50 / $10.00       | Temperature baseline |
-| 7    | claude-sonnet-4-5-20250929 | Anthropic | thinking         | $3.00 / $15.00       | Mid Anthropic        |
-| 8    | claude-opus-4-5-20251101   | Anthropic | effort           | $5.00 / $25.00       | Top Anthropic        |
-| 9    | gpt-5.4                    | OpenAI    | reasoning_effort | $30.00 / $60.00      | Latest reasoning     |
+| Tier | Model ID                   | Provider  | Method            | Cost (in/out per 1M) | Priority             |
+|------|----------------------------|-----------|-------------------|----------------------|----------------------|
+| 1    | gpt-4o-mini                | OpenAI    | temperature       | $0.15 / $0.60        | Setup validation     |
+| 2    | gpt-5-mini                 | OpenAI    | reasoning_effort  | $0.25 / $2.00        | Baseline (TK-001)    |
+| 3    | claude-haiku-4-5           | Anthropic | temperature       | $1.00 / $5.00        | Cheapest Anthropic   |
+| 4    | gpt-5                      | OpenAI    | reasoning_effort  | $1.25 / $10.00       | Full-size reasoning  |
+| 5    | gpt-5.2                    | OpenAI    | reasoning_effort  | $1.75 / $14.00       | Generational compare |
+| 6    | gpt-4o                     | OpenAI    | temperature       | $2.50 / $10.00       | Temperature baseline |
+| 7    | claude-sonnet-4            | Anthropic | thinking          | $3.00 / $15.00       | Mid Anthropic        |
+| 8    | claude-sonnet-4.5          | Anthropic | thinking          | $3.00 / $15.00       | Generational compare |
+| 9    | claude-opus-4.5            | Anthropic | thinking          | $5.00 / $25.00       | Top thinking         |
+| 10   | claude-opus-4.6            | Anthropic | adaptive_thinking | $5.00 / $25.00       | Effort comparison    |
+| 11   | claude-opus-4.7            | Anthropic | adaptive_thinking | $5.00 / $25.00       | Latest Anthropic     |
+| 12   | gpt-5.4                    | OpenAI    | reasoning_effort  | $2.50 / $15.00       | Generational compare |
+| 13   | gpt-5.5                    | OpenAI    | reasoning_effort  | $5.00 / $30.00       | Latest OpenAI        |
 
 ### 2.2 Model Groupings for Hypothesis Testing
 
-**H4 (Effort levels)** - Test on 2 models:
+**H4 (Effort levels)** - Test on 4 models:
 - gpt-5-mini: low, medium, high
 - gpt-5: low, medium, high
+- claude-opus-4.6: medium, high
+- claude-opus-4.7: medium, high
 
 **H5 (Reasoning vs Temperature)** - Paired comparisons:
 - gpt-4o-mini (temp) vs gpt-5-mini (reasoning) - mini tier
@@ -104,24 +110,29 @@ This test plan validates 6 hypotheses about LLM scale limits for tabular data ex
 
 ### 3.2 Test Matrix
 
-| Test ID | Model                      | Effort | Hypotheses Tested      | Est. Iterations |
-|---------|----------------------------|--------|------------------------|-----------------|
-| T01     | gpt-4o-mini                | medium | Setup validation       | ~10             |
-| T02     | gpt-5-mini                 | medium | H1, H2, H3 (baseline) | ~10             |
-| T03     | gpt-5-mini                 | low    | H4                     | ~10             |
-| T04     | gpt-5-mini                 | high   | H4                     | ~10             |
-| T05     | gpt-5                      | medium | H2, H3, H5            | ~10             |
-| T06     | gpt-5                      | low    | H4                     | ~10             |
-| T07     | gpt-5                      | high   | H4                     | ~10             |
-| T08     | gpt-4o                     | medium | H2, H3, H5            | ~10             |
-| T09     | gpt-5.2                    | medium | H2, H3                 | ~10             |
-| T10     | claude-haiku-4-5-20251001  | medium | H2, H3                 | ~10             |
-| T11     | claude-sonnet-4-5-20250929 | medium | H2, H3                 | ~10             |
-| T12     | claude-opus-4-5-20251101   | medium | H2, H3                 | ~10             |
-| T13     | gpt-5.4                    | medium | H2, H3                 | ~10             |
-| T14     | gpt-5.5                    | medium | H2, H3                 | ~10             |
+| Test ID | Model            | Effort | Hypotheses Tested      | Est. Iterations |
+|---------|------------------|--------|------------------------|-----------------|
+| T01     | gpt-4o-mini      | medium | Setup validation       | ~10             |
+| T02     | gpt-5-mini       | medium | H1, H2, H3 (baseline) | ~10             |
+| T03     | gpt-5-mini       | low    | H4                     | ~10             |
+| T04     | gpt-5-mini       | high   | H4                     | ~10             |
+| T05     | gpt-5            | medium | H2, H3, H5            | ~10             |
+| T06     | gpt-5            | low    | H4                     | ~10             |
+| T07     | gpt-5            | high   | H4                     | ~10             |
+| T08     | gpt-4o           | medium | H2, H3, H5            | ~10             |
+| T09     | gpt-5.2          | medium | H2, H3                 | ~10             |
+| T10     | claude-haiku-4.5 | medium | H2, H3                 | ~10             |
+| T11     | claude-sonnet-4  | medium | H2, H3                 | ~10             |
+| T12     | claude-opus-4.5  | medium | H2, H3                 | ~10             |
+| T13     | gpt-5.4          | medium | H2, H3                 | ~10             |
+| T14     | gpt-5.5          | medium | H2, H3                 | ~10             |
+| T15     | claude-sonnet-4.5| medium | H2, H3                 | ~10             |
+| T16     | claude-opus-4.6  | medium | H4, E1                 | ~10             |
+| T17     | claude-opus-4.6  | high   | H4, E1                 | ~10             |
+| T18     | claude-opus-4.7  | medium | H4, E1                 | ~10             |
+| T19     | claude-opus-4.7  | high   | H4, E1                 | ~10             |
 
-**Total: 14 test runs, ~140 iterations**
+**Total: 19 test runs, ~190 iterations**
 
 ## 4. Test Execution Order
 
@@ -476,7 +487,7 @@ After running a test, use the pipeline script to update all documentation automa
 
 ```powershell
 cd _Scripts
-.\run_pipeline.ps1 -ModelId "gpt-5-mini" -Method "reasoning_effort" -Effort "medium"
+.\run_pipeline.ps1 -Model "gpt-5-mini" -ReasoningEffort "medium"
 ```
 
 ### Aggregate Only (no test, just update docs from existing results)
@@ -492,7 +503,7 @@ cd _Scripts
 cd _Scripts
 
 # Step 1: Run test
-python 04_batch_scale_test.py --model gpt-5-mini --method reasoning_effort --effort medium --max-rows 16384 --verify-runs 3 --test-path ..
+python 03_find_scale_limit.py --model gpt-5-mini --reasoning-effort medium --initial-rows 500 --verify-runs 3 --test-path ..
 
 # Step 2+3: Aggregate + update INFO_01
 python 06_aggregate_results.py --test-path .. --overrides overrides.json --update-file ../_INFO_01_CSVScaleLimits-TestResults.md
@@ -510,7 +521,7 @@ python 06_aggregate_results.py --test-path .. --overrides overrides.json --updat
 
 1. Add model to `model-parameter-mapping.json`
 2. Add display name to `MODEL_DISPLAY_NAMES` in `06_aggregate_results.py`
-3. Run pipeline: `.\run_pipeline.ps1 -ModelId "new-model" -Method "reasoning_effort" -Effort "medium"`
+3. Run pipeline: `.\run_pipeline.ps1 -Model "new-model" -ReasoningEffort "medium"`
 4. If test was cancelled/had errors: add entry to `overrides.json`
 5. Commit results
 
