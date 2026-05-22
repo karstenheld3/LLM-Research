@@ -31,7 +31,7 @@
 
 - **Columns**: 7 (id, name, department, salary, clearance, rating, projects)
 - **Column selection**: 7 from 7 available (NOT 7 from 20 as in Test 01)
-- **Filter**: department="Engineering" AND salary>75000
+- **Filter**: clearance IN [Level 3, Level 4, Level 5] AND salary >= 150000
 - **Seed**: 42
 - **Adversarial content**: Yes (~20% records contain delimiter characters)
 

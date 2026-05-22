@@ -70,16 +70,16 @@ Current state vs TBLF-IN04 methodology:
 └─> Transitions:
     - P2-D1 - P2-D4 checked → P3 [VERIFY]
 
-[ ] P3 [VERIFY]: Quality assurance
+[x] P3 [VERIFY]: Quality assurance
 ├─ Objectives:
 │   └─ [ ] All documents pass /verify ← P3-D1, P3-D2
 ├─ Strategy: Run /verify on new INFO_01 and INFO_02. Fix any issues found.
-├─ [ ] P3-S1 [VERIFY](INFO_01 - results document)
-├─ [ ] P3-S2 [VERIFY](INFO_02 - findings document)
-├─ [ ] P3-S3 [FIX](any issues from verification)
-├─ [ ] P3-S4 [COMMIT](all changes)
+├─ [x] P3-S1 [VERIFY](INFO_01 - results document)
+├─ [x] P3-S2 [VERIFY](INFO_02 - findings document)
+├─ [x] P3-S3 [FIX](filter description corrected: was "department=Engineering AND salary>75000", actual: "clearance IN [Level 3-5] AND salary >= 150000")
+├─ [x] P3-S4 [COMMIT](all changes)
 ├─ Deliverables:
-│   ├─ [ ] P3-D1: INFO_01 passes verification
-│   └─ [ ] P3-D2: INFO_02 passes verification
+│   ├─ [x] P3-D1: INFO_01 passes verification
+│   └─ [x] P3-D2: INFO_02 passes verification
 └─> Transitions:
     - P3-D1, P3-D2 checked → [END]

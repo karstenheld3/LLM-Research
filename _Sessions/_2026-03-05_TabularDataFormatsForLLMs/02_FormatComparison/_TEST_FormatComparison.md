@@ -29,7 +29,7 @@
 ## MUST-NOT-FORGET
 
 - **TBLF-FL-005**: Test uses 7/7 columns, NOT Test 01's 7/20 - results not comparable
-- Seed: 42, Filter: department="Engineering" AND salary>75000
+- Seed: 42, Filter: clearance IN [Level 3, Level 4, Level 5] AND salary >= 150000
 - Capture per-request metrics: time/req, cost/req (NOT totals)
 - Best format varies by model family (see results)
 
