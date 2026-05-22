@@ -149,25 +149,25 @@ A test **PASSES** when:
 
 | Model             | Provider  | Method            | Effort | Scale Limit | Failure Mode  | Context % | Cost    | Time/req |
 |-------------------|-----------|-------------------|--------|-------------|---------------|-----------|---------|----------|
-| claude-opus-4.7   | Anthropic | adaptive_thinking | high   | 843+*       | (cancelled)   | -         | ~$30+   | ~10 min  |
-| gpt-5-mini        | OpenAI    | reasoning         | high   | 675+**      | (errors)      | -         | -       | -        |
-| claude-opus-4.6   | Anthropic | adaptive_thinking | high   | 667         | comprehension | 55.4%     | $17.59  | ~4.5 min |
-| gpt-5-mini        | OpenAI    | reasoning         | medium | 500         | comprehension | 7.1%      | $0.40   | ~3.5 min |
-| gpt-5.4           | OpenAI    | reasoning         | medium | 492         | comprehension | 6.8%      | $2.49   | ~2.4 min |
-| gpt-5             | OpenAI    | reasoning         | high   | 492         | truncation    | 8.0%      | $2.74   | ~20 min  |
-| gpt-5             | OpenAI    | reasoning         | medium | 450         | comprehension | 6.4%      | $2.98   | ~10 min  |
-| gpt-5.5           | OpenAI    | reasoning         | medium | 437         | comprehension | 6.8%      | $8.15   | ~1.8 min |
-| gpt-5             | OpenAI    | reasoning         | low    | 356         | comprehension | 2.1%      | $0.44   | ~2.4 min |
-| gpt-5.2           | OpenAI    | reasoning         | medium | 215         | comprehension | 1.4%      | $0.29   | ~1 min   |
-| claude-opus-4.5   | Anthropic | thinking          | medium | 177         | truncation    | 25.1%     | $5.36   | ~1.6 min |
-| claude-sonnet-4   | Anthropic | thinking          | medium | 168         | comprehension | 8.4%      | $0.04   | ~1.4 min |
-| claude-sonnet-4.5 | Anthropic | thinking          | medium | 168         | comprehension | 8.4%      | $0.12   | ~1.1 min |
-| gpt-5-mini        | OpenAI    | reasoning         | low    | 65          | comprehension | 4.3%      | $0.07   | ~1 min   |
-| claude-opus-4.7   | Anthropic | adaptive_thinking | medium | 12          | comprehension | 5.1%      | $0.04   | ~6 sec   |
-| claude-haiku-4.5  | Anthropic | temperature       | medium | 9           | comprehension | 8.3%      | $0.09   | ~12 sec  |
-| gpt-4o-mini       | OpenAI    | temperature       | medium | 6           | comprehension | 2.1%      | $0.00   | ~9 sec   |
-| claude-opus-4.6   | Anthropic | adaptive_thinking | medium | 6           | comprehension | 16.9%     | $0.02   | ~5 sec   |
-| gpt-4o            | OpenAI    | temperature       | medium | 4           | comprehension | 11.3%     | $0.19   | ~19 sec  |
+| claude-opus-4.7   | Anthropic | adaptive_thinking | high   | 843+*       | (cancelled)   | -         | ~$30+   | ~3.3 min |
+| gpt-5-mini        | OpenAI    | reasoning         | high   | 675+**      | (errors)      | -         | $0.00   | -        |
+| claude-opus-4.6   | Anthropic | adaptive_thinking | high   | 667         | comprehension | 55.4%     | ~$18+   | ~1.5 min |
+| gpt-5-mini        | OpenAI    | reasoning         | medium | 500         | comprehension | 7.1%      | $0.40   | ~1.2 min |
+| gpt-5.4           | OpenAI    | reasoning         | medium | 492         | comprehension | 6.8%      | $2.49   | ~51 sec  |
+| gpt-5             | OpenAI    | reasoning         | high   | 492         | truncation    | 8.0%      | $2.73   | ~4.9 min |
+| gpt-5             | OpenAI    | reasoning         | medium | 450         | comprehension | 6.4%      | $2.97   | ~1.5 min |
+| gpt-5.5           | OpenAI    | reasoning         | medium | 437         | comprehension | 6.8%      | $8.15   | ~32 sec  |
+| gpt-5             | OpenAI    | reasoning         | low    | 356         | comprehension | 2.1%      | $0.43   | ~2.2 min |
+| gpt-5.2           | OpenAI    | reasoning         | medium | 215         | comprehension | 1.4%      | $0.29   | ~55 sec  |
+| claude-sonnet-4   | Anthropic | thinking          | medium | 187         | truncation    | 25.1%     | $3.41   | ~40 sec  |
+| claude-opus-4.5   | Anthropic | thinking          | medium | 177         | truncation    | 25.1%     | $5.36   | ~32 sec  |
+| claude-sonnet-4.5 | Anthropic | thinking          | medium | 168         | comprehension | 8.4%      | $0.89   | ~1.1 min |
+| gpt-5-mini        | OpenAI    | reasoning         | low    | 65          | comprehension | 4.3%      | $0.07   | ~16 sec  |
+| claude-opus-4.7   | Anthropic | adaptive_thinking | medium | 12          | comprehension | 5.1%      | $1.96   | ~2 sec   |
+| claude-haiku-4.5  | Anthropic | temperature       | medium | 9           | comprehension | 8.3%      | $0.09   | ~2 sec   |
+| gpt-4o-mini       | OpenAI    | temperature       | medium | 6           | comprehension | 2.1%      | $0.00   | ~5 sec   |
+| claude-opus-4.6   | Anthropic | adaptive_thinking | medium | 6           | comprehension | 16.9%     | $1.12   | ~2 sec   |
+| gpt-4o            | OpenAI    | temperature       | medium | 4           | comprehension | 11.3%     | $0.10   | ~3 sec   |
 
 *claude-opus-4.7 high cancelled (>$30, endless reasoning tokens; boundary 843-1012)
 **gpt-5-mini high passed at 675 rows but had evaluation errors at higher scales
@@ -196,8 +196,8 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | gpt-5.2            | comprehension   | No                     | 1.4%         |
 | gpt-5.4            | comprehension   | No                     | 6.8%         |
 | gpt-5.5            | comprehension   | No                     | 6.8%         |
-| claude-haiku       | comprehension   | Yes (2 early iters)    | 8.3%         |
-| claude-sonnet-4    | comprehension   | No                     | 8.4%         |
+| claude-haiku-4.5   | comprehension   | Yes (early iters)      | 8.3%         |
+| claude-sonnet-4    | TRUNCATION      | Yes                    | 25.1%        |
 | claude-sonnet-4.5  | comprehension   | No                     | 8.4%         |
 | claude-opus-4.5    | TRUNCATION      | Yes                    | 25.1%        |
 | claude-opus-4.6 m  | comprehension   | No                     | 16.9%        |
@@ -206,8 +206,8 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 
 ### 6.2 Failure Mode Summary
 
-- **Comprehension failures**: 15 of 17 tests with clear failure modes
-- **Truncation failures**: 2 of 17 (gpt-5 high, claude-opus-4.5)
+- **Comprehension failures**: 14 of 17 tests with clear failure modes
+- **Truncation failures**: 3 of 17 (gpt-5 high, claude-sonnet-4, claude-opus-4.5)
 - **Excluded**: gpt-5-mini high (errors), claude-opus-4.7 high (cancelled)
 
 ## 7. Effort Level Data
@@ -216,33 +216,33 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 
 | Effort | Scale Limit | Cost  | Time/req |
 |--------|-------------|-------|----------|
-| low    | 65          | $0.07 | ~1 min   |
-| medium | 500         | $0.40 | ~3.5 min |
+| low    | 65          | $0.07 | ~16 sec  |
+| medium | 500         | $0.40 | ~1.2 min |
 | high   | 675+*       | -     | -        |
 
 *T04 passed at 675 rows but had evaluation errors at higher scales
 
 ### 7.2 gpt-5 Effort Comparison
 
-| Effort | Scale Limit | Cost  | Total Search Time |
-|--------|-------------|-------|-------------------|
-| low    | 356         | $0.44 | 14.2 min          |
-| medium | 450         | $2.98 | 81.0 min          |
-| high   | 492         | $2.74 | 162.5 min         |
+| Effort | Scale Limit | Cost  | Time/req |
+|--------|-------------|-------|----------|
+| low    | 356         | $0.43 | ~2.2 min |
+| medium | 450         | $2.97 | ~1.5 min |
+| high   | 492         | $2.73 | ~4.9 min |
 
 ### 7.3 Claude Opus 4.6 Effort Comparison
 
-| Effort | Scale Limit | Cost   |
-|--------|-------------|--------|
-| medium | 6           | $0.02  |
-| high   | 667         | $17.59 |
+| Effort | Scale Limit | Cost   | Time/req |
+|--------|-------------|--------|----------|
+| medium | 6           | $1.12  | ~2 sec   |
+| high   | 667         | ~$18+  | ~1.5 min |
 
 ### 7.4 Claude Opus 4.7 Effort Comparison
 
-| Effort | Scale Limit | Cost  |
-|--------|-------------|-------|
-| medium | 12          | $0.04 |
-| high   | 843+*       | ~$30+ |
+| Effort | Scale Limit | Cost   | Time/req |
+|--------|-------------|--------|----------|
+| medium | 12          | $1.96  | ~2 sec   |
+| high   | 843+*       | ~$30+  | ~3.3 min |
 
 *Cancelled due to cost >$30 and endless reasoning token generation; boundary 843-1012
 
@@ -272,7 +272,7 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 ### 8.4 Anthropic Thinking Method Comparison (Medium Effort)
 
 - **claude-haiku-4.5** (temperature): 9 rows
-- **claude-sonnet-4** (thinking): 168 rows
+- **claude-sonnet-4** (thinking): 187 rows
 - **claude-sonnet-4.5** (thinking): 168 rows
 - **claude-opus-4.5** (thinking): 177 rows
 - **claude-opus-4.6** (adaptive_thinking): 6 rows
@@ -291,8 +291,11 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 
 ## 9. Data Verification
 
-- All scale limit values verified against `scale_limit_result.json` files [TESTED 2026-05-22]
+- All data generated by `06_aggregate_results.py` from source `scale_limit_result.json` files
+- Time/req = single LLM API call time (iteration duration / verification runs)
+- Costs = total test cost (all iterations combined)
 - gpt-5-mini medium re-run confirmed 500 rows (original run found 389; bounds [500, 507])
+- claude-sonnet-4 corrected: 187 rows, truncation, 25.1% (previously miscategorized as 168, comprehension)
 - Calculation verifications:
   - gpt-5-mini effort improvement: (500 - 65) / 65 = 669%, 500 / 65 = 7.69 = 7.7x
   - gpt-5 effort improvement: (492 - 356) / 356 = 38%, (450 - 356) / 356 = 26%
@@ -310,6 +313,13 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 - `_TestsAndResults/*/scale_limit_result.json` - Raw test result data
 
 ## 11. Document History
+
+**[2026-05-22 17:05]**
+- Fixed: claude-sonnet-4 corrected to 187 rows, truncation, 25.1% (was 168, comprehension, 8.4%)
+- Fixed: Time/req now = single API call time (was inconsistent mix of iteration/total)
+- Fixed: Costs updated to total test cost from JSON source
+- Changed: Data now generated by `06_aggregate_results.py` (single source of truth)
+- Changed: Failure mode summary: 14 comprehension / 3 truncation (was 15/2)
 
 **[2026-05-22 16:40]**
 - Initial document created from restructuring of `_INFO_CSVScaleLimits.md [TBLF-IN01]` and `_TEST_CSVScaleLimits.md [TBLF-TP01]`

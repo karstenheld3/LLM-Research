@@ -40,7 +40,7 @@ Derived from 19/19 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults
 - **Scale limits vary 210x+ across models**
   - Best: opus-4.7 high (843+) vs Worst: gpt-4o (4)
 - **Comprehension is primary failure mode, not truncation**
-  - 15/18 tests failed due to comprehension errors
+  - 14/17 completed tests failed due to comprehension errors
 - **Context window is NOT the bottleneck**
   - Most failures occur at <10% context utilization
 
@@ -57,7 +57,7 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 - **H2 - Bimodal failure (cliff)**: PARTIALLY SUPPORTED (Medium)
   - Reasoning: cliff (100% to 0%). Temperature: gradual slope
 - **H3 - Truncation > comprehension**: NOT SUPPORTED (High)
-  - Comprehension = 15/18 tests. Truncation: gpt-5 high, claude-opus-4.5
+  - Comprehension = 14/17 tests. Truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5
 - **H4 - Higher effort = higher limit**: SUPPORTED (High)
   - gpt-5-mini: 65 to 500 (+669%). gpt-5: 356 to 492 (+38%)
 - **H5 - Reasoning > temperature**: STRONGLY SUPPORTED (Very High)
@@ -101,11 +101,11 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 
 **Prediction**: Based on TK-001 attribution, truncation expected as primary failure mode.
 
-**Result**: Comprehension is primary failure mode (15/17 tests with clear failure modes). [VERIFIED]
+**Result**: Comprehension is primary failure mode (14/17 tests with clear failure modes). [VERIFIED]
 
 **Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. [VERIFIED]
 
-**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (15/17 completed tests; 2 truncation). [TESTED]
+**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (14/17 completed tests; 3 truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5). [TESTED]
 
 ### 3.4 H4: Effort Level Impact
 
@@ -166,8 +166,10 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
    - Scale limit 437 vs 492 (-11%). Despite 2x pricing ($5/$30 vs $2.5/$15).
    - Confirms newer/pricier does not guarantee better tabular comprehension.
 
-6. **Claude sonnet-4.5 = sonnet-4** [TESTED]
-   - Both achieve exactly 168 rows. No generational improvement for tabular extraction despite model upgrade.
+6. **Claude sonnet-4 truncates, sonnet-4.5 does not** [TESTED]
+   - sonnet-4: 187 rows, truncation failure at 25.1% context utilization
+   - sonnet-4.5: 168 rows, comprehension failure at 8.4% context utilization
+   - Newer model actually achieves fewer rows but with a healthier (non-truncation) failure mode
 
 7. **Context utilization mostly irrelevant** [VERIFIED]
    - Most models fail at <10% context utilization.
@@ -184,20 +186,20 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
 Best combinations for single-shot production use (per-request values):
 
 - **Balanced** - gpt-5-mini medium, 300 rows
-  - ~$0.06/request, ~3.5 min/request. Good scale, cheap but above 2 min threshold
-- **Speed** - gpt-5 low, 300 rows
-  - ~$0.05/request, ~2.4 min/request. High scale, borderline acceptable latency
+  - ~$0.06/request, ~1.2 min/request. Good scale, cheap, within 2 min threshold
+- **Speed** - gpt-5.5 medium, 300 rows
+  - ~$1.30/request, ~32 sec/request. Fast, expensive, well within latency limit
 - **Budget** - gpt-5-mini low, 50 rows
-  - ~$0.01/request, ~1 min/request. Minimal cost, small datasets
+  - ~$0.01/request, ~16 sec/request. Minimal cost, small datasets
 
-No tested model achieves both high scale (300+ rows) and sub-2-min latency. For latency-critical use, chunk into smaller batches (50-100 rows) with gpt-5-mini low (~1 min/request).
+Several models achieve both high scale (300+ rows) and sub-2-min latency: gpt-5-mini medium (~1.2 min), gpt-5.5 medium (~32 sec), gpt-5.4 medium (~51 sec). For latency-critical use with smaller datasets, gpt-5-mini low handles 50 rows in ~16 sec.
 
 Realistic boundaries:
 - **Maximum reliable scale**: 400 rows (gpt-5 high, 80% of 492 limit)
 - **Recommended production scale**: 300 rows (safe margin for all models)
 - **Minimum viable scale**: 50 rows (even low-effort models reliable here)
 - **Cost range**: $0.01-$0.27 per single extraction
-- **Time range**: 1-20 minutes per single extraction
+- **Time range**: 2 sec - 5 min per single extraction
 
 Safe operating limits:
 - gpt-5-mini medium: 300 rows (60% of limit)
@@ -220,7 +222,7 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns:
   - Testable: Run same task with opus-4.5 thinking vs opus-4.6 adaptive_thinking at matched token budgets
 
 - **E2: Context utilization is irrelevant to scale limits** [VERIFIED]
-  - Evidence: 14/17 models fail at <10% context. Only opus-4.6 high (55.4%) uses substantial context.
+  - Evidence: 13/17 models fail at <10% context. Only opus-4.6 high (55.4%) and sonnet-4/opus-4.5 (25.1%) use substantial context.
   - Mechanism: Attention degradation occurs long before context window fills
   - Testable: Compare models with 200K vs 128K context windows on same task
 
@@ -260,6 +262,13 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns:
 - `_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]` - Format benchmarking research (TK-001)
 
 ## 10. Document History
+
+**[2026-05-22 17:05]**
+- Fixed: claude-sonnet-4 = 187 rows, truncation, 25.1% (was 168, comprehension, 8.4%)
+- Fixed: H3 verdict updated to 14/17 comprehension, 3/17 truncation (was 15/17 and 2)
+- Fixed: Production recommendations updated with single-request times
+- Fixed: Unexpected finding #6 rewritten (sonnet-4 truncates, sonnet-4.5 doesn't)
+- Changed: Time values throughout now represent single API call time
 
 **[2026-05-22 16:40]**
 - Initial document created from restructuring of `_INFO_CSVScaleLimits.md [TBLF-IN01]` and `_TEST_CSVScaleLimits.md [TBLF-TP01]`
