@@ -42,7 +42,8 @@
 7. [Test Phases](#7-test-phases)
 8. [Replication Guide](#8-replication-guide)
 9. [Verification Checklist](#9-verification-checklist)
-10. [Document History](#10-document-history)
+10. [Pipeline Automation](#10-pipeline-automation)
+11. [Document History](#11-document-history)
 
 ## 1. Overview
 
@@ -467,7 +468,57 @@ python 05_analyze_results.py --test-path .. --output ../analysis_report.md
 - [ ] Results committed to repository
 - [ ] Cost tracking matches estimates (within 2x)
 
-## 10. Document History
+## 10. Pipeline Automation
+
+After running a test, use the pipeline script to update all documentation automatically.
+
+### Full Pipeline (new model test + aggregate + update docs)
+
+```powershell
+cd _Scripts
+.\run_pipeline.ps1 -ModelId "gpt-5-mini" -Method "reasoning_effort" -Effort "medium"
+```
+
+### Aggregate Only (no test, just update docs from existing results)
+
+```powershell
+cd _Scripts
+.\run_pipeline.ps1 -SkipTest
+```
+
+### Manual Steps (equivalent to pipeline)
+
+```powershell
+cd _Scripts
+
+# Step 1: Run test
+python 04_batch_scale_test.py --model gpt-5-mini --method reasoning_effort --effort medium --max-rows 16384 --verify-runs 3 --test-path ..
+
+# Step 2+3: Aggregate + update INFO_01
+python 06_aggregate_results.py --test-path .. --overrides overrides.json --update-file ../_INFO_01_CSVScaleLimits-TestResults.md
+```
+
+### How It Works
+
+1. Test writes `scale_limit_result.json` to `_TestsAndResults/<config_folder>/`
+2. `06_aggregate_results.py` reads all JSON results + `overrides.json`
+3. Generates `all_results.json` (canonical data) and `all_results.md` (reference tables)
+4. `--update-file` replaces content between `<!-- AUTO:section-X:start/end -->` markers in INFO_01
+5. Sections 5.1, 6.1, 6.2, 7, 8 are auto-updated; all other content is preserved
+
+### Adding a New Model
+
+1. Add model to `model-parameter-mapping.json`
+2. Add display name to `MODEL_DISPLAY_NAMES` in `06_aggregate_results.py`
+3. Run pipeline: `.\run_pipeline.ps1 -ModelId "new-model" -Method "reasoning_effort" -Effort "medium"`
+4. If test was cancelled/had errors: add entry to `overrides.json`
+5. Commit results
+
+## 11. Document History
+
+**[2026-05-22 17:15]**
+- Added: Section 10 "Pipeline Automation" with run_pipeline.ps1 usage, manual steps, and "Adding a New Model" guide
+- Added: AUTO markers in INFO_01 for automated section replacement
 
 **[2026-05-22 16:40]**
 - Removed: Executive Summary, Detailed Analysis, Unexpected Findings (moved to `_INFO_02_CSVScaleLimits-Findings.md [TBLF-IN03]`)

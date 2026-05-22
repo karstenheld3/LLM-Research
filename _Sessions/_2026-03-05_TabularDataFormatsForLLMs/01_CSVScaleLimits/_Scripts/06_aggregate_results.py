@@ -10,9 +10,10 @@ Outputs:
 Usage:
   python 06_aggregate_results.py --test-path ..
   python 06_aggregate_results.py --test-path .. --overrides overrides.json
+  python 06_aggregate_results.py --test-path .. --overrides overrides.json --update-file ../_INFO_01_CSVScaleLimits-TestResults.md
 """
 
-import argparse, json, math
+import argparse, json, math, re
 from pathlib import Path
 
 
@@ -326,6 +327,162 @@ def write_markdown(records: list, output_path: Path):
     f.write("\n".join(lines))
 
 
+# ============================================================ Marker-based update =============================================
+
+
+def generate_sections(records: list) -> dict:
+  """Generate content for each AUTO marker section. Returns {section_id: content_string}."""
+  sorted_desc = sorted(records, key=lambda r: r.get("scale_limit") or 0, reverse=True)
+  sections = {}
+
+  # section-5.1: main results table
+  lines = []
+  lines.append("| Model             | Provider  | Method            | Effort | Scale Limit | Failure Mode  | Context % | Cost    | Time/req |")
+  lines.append("|-------------------|-----------|-------------------|--------|-------------|---------------|-----------|---------|----------|")
+  for r in sorted_desc:
+    lines.append(
+      f"| {pad(r['model_display'], 17)} "
+      f"| {pad(provider_display(r['provider']), 9)} "
+      f"| {pad(r['method_display'], 17)} "
+      f"| {pad(r['effort'], 6)} "
+      f"| {pad(fmt_limit(r), 11)} "
+      f"| {pad(r.get('failure_mode') or '(' + r['status'] + ')', 13)} "
+      f"| {pad(fmt_pct(r.get('context_pct')), 9)} "
+      f"| {pad(fmt_cost(r.get('cost_usd')), 7)} "
+      f"| {pad(fmt_time(r.get('time_per_request_sec')), 8)} |"
+    )
+  sections["section-5.1"] = "\n".join(lines)
+
+  # section-6.1: failure mode table
+  lines = []
+  lines.append("| Model              | Primary Failure | Truncated              | Context Used |")
+  lines.append("|--------------------|-----------------|------------------------|--------------|")
+  for r in sorted_desc:
+    if r["status"] not in ("completed",):
+      continue
+    label = r["model_display"]
+    if r["effort"] != "medium":
+      label += f" {r['effort']}"
+    lines.append(
+      f"| {pad(label, 18)} "
+      f"| {pad((r.get('failure_mode') or '-').upper() if r.get('failure_mode') == 'truncation' else (r.get('failure_mode') or '-'), 15)} "
+      f"| {pad(r.get('truncated', 'No'), 22)} "
+      f"| {pad(fmt_pct(r.get('context_pct')), 12)} |"
+    )
+  sections["section-6.1"] = "\n".join(lines)
+
+  # section-6.2: failure mode summary
+  completed = [r for r in records if r["status"] == "completed"]
+  trunc_count = sum(1 for r in completed if r.get("failure_mode") == "truncation")
+  comp_count = len(completed) - trunc_count
+  trunc_models = ", ".join(r["model_display"] + (f" {r['effort']}" if r["effort"] != "medium" else "") for r in sorted_desc if r.get("failure_mode") == "truncation" and r["status"] == "completed")
+  excluded = [r for r in records if r["status"] != "completed"]
+  excluded_list = ", ".join(f"{r['model_display']} {r['effort']} ({r['status']})" for r in excluded)
+  lines = []
+  lines.append(f"- **Comprehension failures**: {comp_count} of {len(completed)} tests with clear failure modes")
+  lines.append(f"- **Truncation failures**: {trunc_count} of {len(completed)} ({trunc_models})")
+  lines.append(f"- **Excluded**: {excluded_list}")
+  sections["section-6.2"] = "\n".join(lines)
+
+  # section-7: effort level comparisons
+  by_model = {}
+  for r in records:
+    key = r["model_display"]
+    if key not in by_model:
+      by_model[key] = []
+    by_model[key].append(r)
+  effort_order = {"low": 0, "medium": 1, "high": 2}
+  lines = []
+  for model_name, runs in by_model.items():
+    if len(runs) < 2:
+      continue
+    runs_sorted = sorted(runs, key=lambda x: effort_order.get(x["effort"], 1))
+    lines.append(f"### {model_name} Effort Comparison")
+    lines.append("")
+    lines.append("| Effort | Scale Limit | Cost    | Time/req |")
+    lines.append("|--------|-------------|---------|----------|")
+    for r in runs_sorted:
+      lines.append(
+        f"| {pad(r['effort'], 6)} "
+        f"| {pad(fmt_limit(r), 11)} "
+        f"| {pad(fmt_cost(r.get('cost_usd')), 7)} "
+        f"| {pad(fmt_time(r.get('time_per_request_sec')), 8)} |"
+      )
+    lines.append("")
+  sections["section-7"] = "\n".join(lines).rstrip()
+
+  # section-8: tier comparison
+  lines = []
+  mini_temp = next((r for r in records if r["model_display"] == "gpt-4o-mini"), None)
+  mini_reason = next((r for r in records if r["model_display"] == "gpt-5-mini" and r["effort"] == "medium"), None)
+  if mini_temp and mini_reason:
+    lines.append("### 8.1 Mini Tier (Temperature vs Reasoning)")
+    lines.append("")
+    lines.append("| Model       | Method      | Scale Limit |")
+    lines.append("|-------------|-------------|-------------|")
+    lines.append(f"| {pad(mini_temp['model_display'], 11)} | {pad(mini_temp['method_display'], 11)} | {pad(str(mini_temp.get('scale_limit', '-')), 11)} |")
+    lines.append(f"| {pad(mini_reason['model_display'], 11)} | {pad(mini_reason['method_display'], 11)} | {pad(str(mini_reason.get('scale_limit', '-')), 11)} |")
+    lines.append("")
+
+  full_temp = next((r for r in records if r["model_display"] == "gpt-4o"), None)
+  full_reason = next((r for r in records if r["model_display"] == "gpt-5" and r["effort"] == "low"), None)
+  if full_temp and full_reason:
+    lines.append("### 8.2 Full Tier (Temperature vs Reasoning)")
+    lines.append("")
+    lines.append("| Model  | Method          | Scale Limit |")
+    lines.append("|--------|-----------------|-------------|")
+    lines.append(f"| {pad(full_temp['model_display'], 6)} | {pad(full_temp['method_display'], 15)} | {pad(str(full_temp.get('scale_limit', '-')), 11)} |")
+    lines.append(f"| {pad(full_reason['model_display'], 6)} | {pad(full_reason['method_display'] + ' (low)', 15)} | {pad(str(full_reason.get('scale_limit', '-')), 11)} |")
+    lines.append("")
+
+  # Generational comparison
+  gen_models = [("gpt-5.2", "medium"), ("gpt-5", "medium"), ("gpt-5.4", "medium"), ("gpt-5.5", "medium")]
+  gen_records = [r for r in records if (r["model_display"], r["effort"]) in gen_models]
+  if gen_records:
+    lines.append("### 8.3 Generational Comparison (Same Provider)")
+    lines.append("")
+    for model, effort in gen_models:
+      rec = next((r for r in records if r["model_display"] == model and r["effort"] == effort), None)
+      if rec:
+        lines.append(f"- **{model} {effort}**: {rec.get('scale_limit', '-')} rows")
+    lines.append("")
+
+  # Anthropic comparison
+  anthropic_order = [("claude-haiku-4.5", "temperature"), ("claude-sonnet-4", "thinking"), ("claude-sonnet-4.5", "thinking"), ("claude-opus-4.5", "thinking"), ("claude-opus-4.6", "adaptive_thinking"), ("claude-opus-4.7", "adaptive_thinking")]
+  anth_records = [r for r in records if r["provider"] == "anthropic" and r["effort"] == "medium"]
+  if anth_records:
+    lines.append("### 8.4 Anthropic Thinking Method Comparison (Medium Effort)")
+    lines.append("")
+    for model, method in anthropic_order:
+      rec = next((r for r in records if r["model_display"] == model and r["effort"] == "medium"), None)
+      if rec:
+        lines.append(f"- **{model}** ({method}): {rec.get('scale_limit', '-')} rows")
+
+  sections["section-8"] = "\n".join(lines).rstrip()
+
+  return sections
+
+
+def update_file(file_path: Path, sections: dict) -> int:
+  """Replace content between AUTO markers in file. Returns count of sections replaced."""
+  content = file_path.read_text(encoding="utf-8")
+  replaced = 0
+
+  for section_id, new_content in sections.items():
+    pattern = re.compile(
+      rf"(<!-- AUTO:{re.escape(section_id)}:start -->\n).*?(\n<!-- AUTO:{re.escape(section_id)}:end -->)",
+      re.DOTALL
+    )
+    new_block = f"\\1{new_content}\\2"
+    result, count = pattern.subn(new_block, content)
+    if count > 0:
+      content = result
+      replaced += count
+
+  file_path.write_text(content, encoding="utf-8")
+  return replaced
+
+
 # ============================================================ Main ============================================================
 
 
@@ -334,6 +491,7 @@ def main():
   parser.add_argument("--test-path", type=Path, required=True, help="Path to test folder (parent of _TestsAndResults)")
   parser.add_argument("--overrides", type=Path, default=None, help="JSON file with manual override records (cancelled/error tests)")
   parser.add_argument("--output-dir", type=Path, default=None, help="Output directory (default: test-path)")
+  parser.add_argument("--update-file", type=Path, default=None, help="Update AUTO markers in target markdown file")
   args = parser.parse_args()
 
   test_path = args.test_path.resolve()
@@ -379,6 +537,16 @@ def main():
 
   write_markdown(records, md_path)
   print(f"Markdown: {md_path}")
+
+  # Update target file if requested
+  if args.update_file:
+    target = args.update_file.resolve()
+    if not target.exists():
+      print(f"ERROR: Update target not found: {target}")
+      return
+    sections = generate_sections(records)
+    count = update_file(target, sections)
+    print(f"Updated: {target} ({count} sections replaced)")
 
   print("=" * 36 + " END: AGGREGATE RESULTS " + "=" * 35)
 
