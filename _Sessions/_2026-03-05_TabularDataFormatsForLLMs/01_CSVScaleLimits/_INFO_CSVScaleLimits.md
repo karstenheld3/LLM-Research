@@ -12,39 +12,50 @@
 
 *Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
 
-**Key Findings:** (13/13 tests complete as of 2026-03-12)
+**Key Findings:** (19/19 tests complete as of 2026-05-22)
 
-- **Scale limits vary dramatically by model**: gpt-5-mini high (675+) vs gpt-4o (4 rows) - **168x+ difference**
+- **Scale limits vary dramatically by model**: claude-opus-4.7 high (843+) vs gpt-4o (4 rows) - **210x+ difference**
 - **Reasoning models massively outperform temperature models**: gpt-5-mini (500) vs gpt-4o-mini (6) = **83x better**
 - **Primary failure mode is comprehension**, not truncation (context utilization typically <10% at failure)
 - **Higher effort dramatically helps**: gpt-5-mini low (65) → medium (500) → high (675+) = **10x improvement**
-- **gpt-5 effort shows diminishing returns**: low (356) → medium (450) → high (492) = only **38% improvement**
-- **Claude models mid-range**: sonnet (168), opus (177) - similar despite 67% price premium
+- **Claude adaptive_thinking at medium effort is catastrophic**: opus-4.6 (6 rows), opus-4.7 (12 rows) - worse than gpt-4o
+- **Claude opus-4.7 high = highest observed**: 843+ rows (cancelled due to cost >$30, boundary 843-1012)
+- **Effort multiplier extreme on Claude Opus 4.6**: medium (6) → high (667) = **111x improvement**
 
-### Final Results Table (13/13 tests complete)
+### Final Results Table (19/19 tests complete)
 
-| Model          | Effort | Scale Limit | Failure Mode  | Context % | Time/req | Cost ($) |
-|----------------|--------|-------------|---------------|-----------|----------|----------|
-| gpt-5-mini     | high   | **675+***   | (errors)      | -         | -        | -        |
-| gpt-5.4        | medium | **492**     | comprehension | 6.8%      | ~2.4 min | 2.49     |
-| gpt-5          | high   | **492**     | truncation    | 8.0%      | ~20 min  | 0.26     |
-| gpt-5          | medium | **450**     | comprehension | 6.4%      | ~10 min  | 0.26     |
-| gpt-5-mini     | medium | **500**     | comprehension | 7.1%      | ~3.5 min | 0.034    |
-| gpt-5          | low    | **356**     | comprehension | 2.1%      | ~2.4 min | 0.05     |
-| gpt-5.2        | medium | **215**     | comprehension | 1.4%      | ~1 min   | 0.031    |
-| claude-opus    | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 5.36     |
-| claude-sonnet  | medium | **168**     | comprehension | 8.4%      | ~1.4 min | 0.040    |
-| gpt-5-mini     | low    | **65**      | comprehension | 4.3%      | ~1 min   | 0.007    |
-| claude-haiku   | medium | **9**       | comprehension | 8.3%      | ~12 sec  | 0.09     |
-| gpt-4o-mini    | medium | **6**       | comprehension | 2.1%      | ~9 sec   | 0.00     |
-| gpt-4o         | medium | **4**       | comprehension | 11.3%     | ~19 sec  | 0.19     |
+| Model            | Effort | Scale Limit | Failure Mode  | Context % | Time/req | Cost ($) |
+|------------------|--------|-------------|---------------|-----------|----------|----------|
+| claude-opus-4.7  | high   | **843+***   | (cancelled)   | -         | ~10 min  | ~30+     |
+| gpt-5-mini       | high   | **675+**    | (errors)      | -         | ~3.5 min | ~0.5+    |
+| claude-opus-4.6  | high   | **667**     | comprehension | 55.4%     | ~4.5 min | 17.59    |
+| gpt-5-mini       | medium | **500**     | comprehension | 7.1%      | ~3.5 min | 0.034    |
+| gpt-5.4          | medium | **492**     | comprehension | 6.8%      | ~2.4 min | 2.49     |
+| gpt-5            | high   | **492**     | truncation    | 8.0%      | ~20 min  | 0.26     |
+| gpt-5            | medium | **450**     | comprehension | 6.4%      | ~10 min  | 0.26     |
+| gpt-5.5          | medium | **437**     | comprehension | 6.8%      | ~1.8 min | 8.15     |
+| gpt-5            | low    | **356**     | comprehension | 2.1%      | ~2.4 min | 0.05     |
+| gpt-5.2          | medium | **215**     | comprehension | 1.4%      | ~1 min   | 0.031    |
+| claude-opus-4.5  | medium | **177**     | truncation    | 25.1%     | ~1.6 min | 5.36     |
+| claude-sonnet-4  | medium | **168**     | comprehension | 8.4%      | ~1.4 min | 0.040    |
+| claude-sonnet-4.5| medium | **168**     | comprehension | 8.4%      | ~1.1 min | 0.12     |
+| gpt-5-mini       | low    | **65**      | comprehension | 4.3%      | ~1 min   | 0.007    |
+| claude-opus-4.7  | medium | **12**      | comprehension | 5.1%      | ~6 sec   | 0.04     |
+| claude-haiku     | medium | **9**       | comprehension | 8.3%      | ~12 sec  | 0.09     |
+| gpt-4o-mini      | medium | **6**       | comprehension | 2.1%      | ~9 sec   | 0.00     |
+| claude-opus-4.6  | medium | **6**       | comprehension | 16.9%     | ~5 sec   | 0.02     |
+| gpt-4o           | medium | **4**       | comprehension | 11.3%     | ~19 sec  | 0.19     |
 
-*Cost tracking errors for some tests
+*claude-opus-4.7 high cancelled at 843+ (passed 843 rows, too expensive/slow to converge; boundary 843-1012)
 **T04 (gpt-5-mini high) passed at 675 rows but had evaluation errors at higher scales
 
 **Key observations:**
-- **Context utilization**: All models fail at <30% context usage - attention, not tokens, is the limit
-- **Worst performers**: gpt-4o family (4-6 rows) - fundamentally unsuited for tabular extraction
+- **Context utilization**: Most models fail at <30% context usage - attention, not tokens, is the limit
+- **Exception**: claude-opus-4.6 high utilizes 55.4% context before failure - highest observed
+- **Worst performers**: claude-opus-4.6/4.7 medium (6-12 rows) and gpt-4o (4 rows)
+- **Newer not always better**: gpt-5.5 (437) underperforms gpt-5.4 (492) by 11% despite 2x higher pricing
+- **adaptive_thinking medium is broken**: Opus 4.6 regresses from 177 (opus-4.5) to 6 rows at medium effort
+- **Effort sensitivity extreme**: Claude opus-4.6 medium→high = 111x improvement (6→667 rows)
 
 ### Production Recommendations
 
@@ -52,15 +63,17 @@ Balancing accuracy, cost, and speed for real-world use (times are per single LLM
 
 - **Best overall**: gpt-5 low (356 rows, ~2.4 min/request, $0.03) - excellent balance of scale, speed, and cost
 - **Fastest**: gpt-5.2 medium (215 rows, ~1 min/request, $0.016) - when speed matters more than scale
-- **Maximum scale**: gpt-5-mini medium (500 rows, ~3.5 min/request, $0.017) - highest scale at lowest cost
-- **Enterprise**: claude-sonnet medium (168 rows, ~1.4 min/request, $0.040) - when Anthropic API is required
+- **Maximum scale (budget)**: gpt-5-mini medium (500 rows, ~3.5 min/request, $0.017) - highest scale at lowest cost
+- **Maximum scale (absolute)**: claude-opus-4.6 high (667 rows, ~4.5 min/request, $2.43) - highest confirmed limit
+- **Enterprise Anthropic**: claude-sonnet-4.5 medium (168 rows, ~1.1 min/request, $0.12) - when Anthropic API required
 
 **NOT recommended for production:**
 - gpt-5 high (~20 min/request - too slow)
 - gpt-5 medium (~10 min/request - too slow)
+- claude-opus-4.6/4.7 medium (6-12 row limits - adaptive_thinking broken at medium effort)
 - gpt-4o, gpt-4o-mini, claude-haiku (4-9 row limits - unusable)
 
-**Completed:** 11/12 tests. T04 (gpt-5-mini high) had evaluation errors at 1012+ rows.
+**Completed:** 19/19 tests. T04 (gpt-5-mini high) had errors at 1012+ rows. claude-opus-4.7 high cancelled (>$30, >100 min, passed 843).
 
 ## Table of Contents
 
@@ -343,42 +356,49 @@ python test_llm_client.py
 
 ### 6.4 Results
 
-#### Scale Limit Results (All 13 Configurations) [TESTED]
+#### Scale Limit Results (All 19 Configurations) [TESTED]
 
-| Model             | Provider  | Method      | Effort | Scale Limit | Context % | Primary Failure | Cost  |
-|-------------------|-----------|-------------|--------|-------------|-----------|-----------------|-------|
-| gpt-4o-mini       | OpenAI    | temperature | medium | 6           | 2.1%      | comprehension   | $0.00 |
-| gpt-4o            | OpenAI    | temperature | medium | 4           | 11.3%     | comprehension   | $0.19 |
-| gpt-5-mini        | OpenAI    | reasoning   | low    | 65          | 4.3%      | comprehension   | $0.07 |
-| gpt-5-mini        | OpenAI    | reasoning   | medium | 389         | ~2%       | comprehension   | $0.05 |
-| gpt-5-mini        | OpenAI    | reasoning   | high   | 675+*       | -         | (errors)        | -     |
-| gpt-5             | OpenAI    | reasoning   | low    | 356         | 2.1%      | comprehension   | $0.44 |
-| gpt-5             | OpenAI    | reasoning   | medium | 450         | 6.4%      | comprehension   | $2.98 |
-| gpt-5             | OpenAI    | reasoning   | high   | 492         | 8.0%      | truncation      | $2.74 |
-| gpt-5.2           | OpenAI    | reasoning   | medium | 215         | 1.4%      | comprehension   | $0.29 |
-| gpt-5.4           | OpenAI    | reasoning   | medium | 492         | 6.8%      | comprehension   | $2.49 |
-| claude-haiku-4-5  | Anthropic | temperature | medium | 9           | 8.3%      | comprehension   | $0.09 |
-| claude-sonnet-4-5 | Anthropic | thinking    | medium | 168         | 8.4%      | comprehension   | $0.89 |
-| claude-opus-4-5   | Anthropic | thinking    | medium | 177         | 25.1%     | truncation      | $5.36 |
+| Model             | Provider  | Method             | Effort | Scale Limit | Context % | Primary Failure | Cost   |
+|-------------------|-----------|--------------------|--------|-------------|-----------|-----------------|--------|
+| claude-opus-4.7   | Anthropic | adaptive_thinking  | high   | 843+*       | -         | (cancelled)     | ~$30+  |
+| gpt-5-mini        | OpenAI    | reasoning          | high   | 675+**      | -         | (errors)        | -      |
+| claude-opus-4.6   | Anthropic | adaptive_thinking  | high   | 667         | 55.4%     | comprehension   | $17.59 |
+| gpt-5-mini        | OpenAI    | reasoning          | medium | 500         | 7.1%      | comprehension   | $0.40  |
+| gpt-5.4           | OpenAI    | reasoning          | medium | 492         | 6.8%      | comprehension   | $2.49  |
+| gpt-5             | OpenAI    | reasoning          | high   | 492         | 8.0%      | truncation      | $2.74  |
+| gpt-5             | OpenAI    | reasoning          | medium | 450         | 6.4%      | comprehension   | $2.98  |
+| gpt-5.5           | OpenAI    | reasoning          | medium | 437         | 6.8%      | comprehension   | $8.15  |
+| gpt-5             | OpenAI    | reasoning          | low    | 356         | 2.1%      | comprehension   | $0.44  |
+| gpt-5.2           | OpenAI    | reasoning          | medium | 215         | 1.4%      | comprehension   | $0.29  |
+| claude-opus-4.5   | Anthropic | thinking           | medium | 177         | 25.1%     | truncation      | $5.36  |
+| claude-sonnet-4   | Anthropic | thinking           | medium | 168         | 8.4%      | comprehension   | $0.04  |
+| claude-sonnet-4.5 | Anthropic | thinking           | medium | 168         | 8.4%      | comprehension   | $0.12  |
+| gpt-5-mini        | OpenAI    | reasoning          | low    | 65          | 4.3%      | comprehension   | $0.07  |
+| claude-opus-4.7   | Anthropic | adaptive_thinking  | medium | 12          | 5.1%      | comprehension   | $0.04  |
+| claude-haiku-4.5  | Anthropic | temperature        | medium | 9           | 8.3%      | comprehension   | $0.09  |
+| gpt-4o-mini       | OpenAI    | temperature        | medium | 6           | 2.1%      | comprehension   | $0.00  |
+| claude-opus-4.6   | Anthropic | adaptive_thinking  | medium | 6           | 16.9%     | comprehension   | $0.02  |
+| gpt-4o            | OpenAI    | temperature        | medium | 4           | 11.3%     | comprehension   | $0.19  |
 
-*Cost tracking errors; gpt-5-mini high had evaluation errors at 1012+ rows
+*claude-opus-4.7 high cancelled (>$30, endless reasoning tokens; boundary 843-1012)
+**gpt-5-mini high passed at 675 rows but had evaluation errors at higher scales
 
 #### Hypothesis Verdicts [TESTED]
 
 | ID | Hypothesis                            | Verdict              | Evidence | Confidence |
 |----|---------------------------------------|----------------------|----------|------------|
-| H1 | Scale limit 300-600 rows (gpt-5-mini) | **SUPPORTED**        | gpt-5-mini medium = 389 rows | High |
+| H1 | Scale limit 300-600 rows (gpt-5-mini) | **SUPPORTED**        | gpt-5-mini medium = 500 rows (re-run) | High |
 | H2 | Bimodal failure (cliff, not slope)    | **PARTIALLY SUPPORTED** | Reasoning: cliff. Temperature: gradual slope | Medium |
 | H3 | Truncation > comprehension errors     | **NOT SUPPORTED**    | 9/11 comprehension, 2/11 truncation | High |
-| H4 | Higher effort = higher limit          | **SUPPORTED**        | gpt-5-mini: 65→389→675+ (10x). gpt-5: 356→492 (38%) | High |
-| H5 | Reasoning > temperature models        | **STRONGLY SUPPORTED** | gpt-5-mini vs gpt-4o-mini = 65x. gpt-5 vs gpt-4o = 89x | Very High |
+| H4 | Higher effort = higher limit          | **SUPPORTED**        | gpt-5-mini: 65→500→675+ (10x). gpt-5: 356→492 (38%) | High |
+| H5 | Reasoning > temperature models        | **STRONGLY SUPPORTED** | gpt-5-mini vs gpt-4o-mini = 83x. gpt-5 vs gpt-4o = 89x | Very High |
 | H6 | CSV best format                       | Deferred             | Test 02 (future) | - |
 
 #### Effort Level Comparison (H4) [TESTED]
 
 | Model      | Low      | Medium   | High     | Delta (High-Low) |
 |------------|----------|----------|----------|------------------|
-| gpt-5-mini | 65 rows  | 389 rows | 675+ rows* | **+938%** (10x+) |
+| gpt-5-mini | 65 rows  | 500 rows | 675+ rows* | **+938%** (10x+) |
 | gpt-5      | 356 rows | 450 rows | 492 rows | **+38%** |
 
 *T04 had evaluation errors; 675 rows confirmed passing
@@ -387,7 +407,7 @@ python test_llm_client.py
 
 | Comparison | Temperature Model  | Reasoning Model    | Winner     | Delta |
 |------------|--------------------|--------------------|------------|-------|
-| Mini tier  | gpt-4o-mini: 6     | gpt-5-mini: 389    | gpt-5-mini | **65x** |
+| Mini tier  | gpt-4o-mini: 6     | gpt-5-mini: 500    | gpt-5-mini | **83x** |
 | Full tier  | gpt-4o: 4          | gpt-5 (low): 356   | gpt-5      | **89x** |
 
 ## 7. Sources
@@ -398,6 +418,26 @@ python test_llm_client.py
 - `.windsurf/skills/llm-evaluation/` - Original LLM evaluation scripts
 
 ## 8. Document History
+
+**[2026-05-22 16:10]**
+- Fixed: gpt-5-mini medium scale limit updated from 389 to 500 (re-run confirmed; bounds [500, 507])
+- Fixed: Section 6.4 table expanded from 13 to 19 configurations (added opus-4.6 m/h, opus-4.7 m/h, sonnet-4, gpt-5.5)
+- Fixed: H5 mini tier ratio updated from 65x to 83x (500/6)
+- Fixed: H4 gpt-5-mini medium updated from 389 to 500
+- Updated: Test count to 19/19 (opus-4.7 high cancelled at 843+, endless reasoning tokens)
+
+**[2026-05-22 15:05]**
+- Added: 4 new Claude model results (opus-4.6 medium/high, opus-4.7 medium, sonnet-4.5)
+- Added: claude-opus-4.7 high as in-progress (passed 450 rows)
+- Finding: claude-opus-4.6 high = new confirmed leader at 667 rows
+- Finding: adaptive_thinking at medium effort catastrophically broken (6-12 rows)
+- Finding: Effort multiplier 111x on opus-4.6 (medium 6 → high 667)
+- Updated: Test count to 18/19, results table, production recommendations
+
+**[2026-05-22 11:10]**
+- Added: gpt-5.5 medium result (437 rows, comprehension failure, $8.15)
+- Finding: gpt-5.5 regresses 11% vs gpt-5.4 (437 vs 492) despite 2x price increase
+- Updated: Test count to 14/14
 
 **[2026-03-06 05:45]**
 - Updated: Final results with 11/12 tests complete

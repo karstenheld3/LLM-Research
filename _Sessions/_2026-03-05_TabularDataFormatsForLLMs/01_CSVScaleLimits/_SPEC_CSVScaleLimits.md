@@ -70,9 +70,10 @@ A **Test** is a reusable test definition with shared scripts and configuration t
 01_CSVScaleLimits/
 ├── _Scripts/
 │   ├── 01_generate_data.py
-│   ├── 02_execute_llm.py
-│   ├── 03_evaluate_responses.py
-│   └── 04_summarize_results.py
+│   ├── 02_execute_and_evaluate.py
+│   ├── 03_find_scale_limit.py
+│   ├── 04_batch_scale_test.py
+│   └── 05_analyze_results.py
 ├── _PromptsAndTemplates/
 │   └── task_prompt_template.md
 └── test-config-template.json
@@ -459,7 +460,7 @@ Automated tool to find the maximum number of rows where a model achieves 100% ac
 ### CLI Interface
 
 ```bash
-python 05_find_scale_limit.py --test-path 01_CSVScaleLimits --initial-rows 500 --tolerance 10
+python 03_find_scale_limit.py --test-path .. --initial-rows 500 --tolerance 10
 ```
 
 **Arguments:**
@@ -530,9 +531,8 @@ Automated runner to test multiple models and effort levels for hypothesis testin
 ### Purpose
 
 Tests hypotheses that require cross-configuration comparison:
-- **H1**: Low reasoning effort degrades performance (compare low/medium/high)
-- **H6**: Reasoning models outperform temperature models (compare gpt-5 vs gpt-4o)
-- **H7**: Larger context models handle more rows (compare model families)
+- **H4**: Higher effort = higher limit (compare low/medium/high)
+- **H5**: Reasoning models outperform temperature models (compare gpt-5 vs gpt-4o)
 
 ### CLI Interface
 
@@ -597,9 +597,9 @@ Analyzes `scale_limit_result.json` files to test hypotheses and generate compari
 ### Purpose
 
 Tests hypotheses from collected data:
-- **H2**: Truncation is primary failure mode (analyze `primary_failure_mode` distribution)
-- **H3**: Scale correlates with tokens (correlate `input_tokens` with `max_reliable_rows`)
-- **H4**: Failure at ~80% context (analyze `context_utilization_at_failure_pct`)
+- **H1**: Scale limit 300-600 rows (analyze `max_reliable_rows`)
+- **H2**: Bimodal failure pattern (analyze variance at boundary)
+- **H3**: Truncation vs comprehension (analyze `primary_failure_mode` distribution)
 
 ### CLI Interface
 
@@ -678,13 +678,13 @@ Generated: 2026-03-05 23:15
 - [ ] `01_generate_data.py` produces deterministic output with same seed
 - [ ] `01_generate_data.py` applies fixed filters from config, creates ground_truth.json with expected_ids
 - [ ] `01_generate_data.py` calculates and stores token count
-- [ ] `02_execute_llm.py` renders prompt template with CSV, filters, columns
-- [ ] `02_execute_llm.py` warns if token count exceeds max_context_tokens
-- [ ] `02_execute_llm.py` runs parallel with worker limit
-- [ ] `02_execute_llm.py` skips existing run files (idempotent)
-- [ ] `02_execute_llm.py` supports temperature, reasoning_effort, max_output_tokens
-- [ ] `03_evaluate_responses.py` extracts IDs via regex (deterministic, no LLM judge)
-- [ ] `03_evaluate_responses.py` calculates TP, FP, FN, precision, recall, F1
+- [ ] `02_execute_and_evaluate.py` renders prompt template with CSV, filters, columns
+- [ ] `02_execute_and_evaluate.py` warns if token count exceeds max_context_tokens
+- [ ] `02_execute_and_evaluate.py` runs parallel with worker limit
+- [ ] `02_execute_and_evaluate.py` skips existing run files (idempotent)
+- [ ] `02_execute_and_evaluate.py` supports temperature, reasoning_effort, max_output_tokens
+- [ ] `02_execute_and_evaluate.py` extracts IDs via regex (deterministic, no LLM judge)
+- [ ] `02_execute_and_evaluate.py` calculates TP, FP, FN, precision, recall, F1
 - [ ] `03_find_scale_limit.py` captures input_tokens, output_tokens, finish_reason
 - [ ] `03_find_scale_limit.py` calculates failure_mode and context_utilization
 - [ ] `03_find_scale_limit.py` calculates cost per iteration and total cost
@@ -697,6 +697,12 @@ Generated: 2026-03-05 23:15
 - [ ] All scripts accept appropriate CLI arguments
 
 ## 13. Document History
+
+**[2026-05-22 16:10]**
+- Fixed: Script names updated to match implementation (02_execute_and_evaluate.py, 03_find_scale_limit.py)
+- Fixed: Folder structure in Section 2 updated (5 scripts, not 4)
+- Fixed: Hypothesis numbering in Sections 10-11 aligned with INFO/TEST (H1-H5)
+- Fixed: Verification checklist script references
 
 **[2026-03-05 23:55]**
 - Updated: Hypothesis numbering to match INFO (H1-H5)
