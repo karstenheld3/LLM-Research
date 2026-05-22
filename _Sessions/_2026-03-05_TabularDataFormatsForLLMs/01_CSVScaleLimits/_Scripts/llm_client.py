@@ -160,21 +160,37 @@ def calculate_cost(usage: dict, model: str, provider: str = None) -> dict:
       "output_cost": 0.0,
       "total_cost": 0.0,
       "currency": "USD",
-      "pricing_found": False
+      "pricing_found": False,
+      "long_context_applied": False
     }
   
   input_tokens = usage.get("input_tokens", 0)
   output_tokens = usage.get("output_tokens", 0)
   
-  input_cost = (input_tokens / 1_000_000) * pricing.get("input_per_1m", 0)
-  output_cost = (output_tokens / 1_000_000) * pricing.get("output_per_1m", 0)
+  # Check long_context pricing tier
+  long_context = pricing.get("long_context")
+  threshold = long_context.get("threshold_k") if long_context else None
+  use_long = False
+  if threshold is not None:
+    use_long = (input_tokens + output_tokens) > threshold * 1000
+  
+  if use_long:
+    input_rate = long_context.get("input_per_1m", pricing.get("input_per_1m", 0))
+    output_rate = long_context.get("output_per_1m", pricing.get("output_per_1m", 0))
+  else:
+    input_rate = pricing.get("input_per_1m", 0)
+    output_rate = pricing.get("output_per_1m", 0)
+  
+  input_cost = (input_tokens / 1_000_000) * input_rate
+  output_cost = (output_tokens / 1_000_000) * output_rate
   
   return {
     "input_cost": round(input_cost, 6),
     "output_cost": round(output_cost, 6),
     "total_cost": round(input_cost + output_cost, 6),
     "currency": pricing.get("currency", "USD"),
-    "pricing_found": True
+    "pricing_found": True,
+    "long_context_applied": use_long
   }
 
 

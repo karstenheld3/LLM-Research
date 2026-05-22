@@ -9,7 +9,6 @@ Create test plans from specifications.
 
 ## Required Skills
 
-Invoke these skills before proceeding:
 - @write-documents for document structure and formatting rules
 
 ## MUST-NOT-FORGET

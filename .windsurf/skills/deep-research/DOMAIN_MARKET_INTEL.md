@@ -17,11 +17,10 @@ Research domain for companies, financial reports, competitive analysis, market t
 ## Document Handling
 
 - **Mandatory PDF download**: Quarterly and annual reports MUST be downloaded and transcribed via source processing pipeline
-- For reports >50 pages: Transcribe fully via `@llm-transcription` (batch mode, 12 workers). Use `<transcription_json>` tags to extract all financial tables without additional LLM calls.
+- For reports >50 pages: Transcribe fully via `@skills:llm-transcription` (batch mode, 12 workers). Use `<transcription_json>` tags to extract all financial tables without additional LLM calls.
 - Extract key data as structured JSON via grep of `<transcription_json>` tags: revenue, margins, guidance, segment breakdown
-- Store both full transcription (`report.md`) and extracted data (`report_data.jsonl`) in `_SOURCES/`
-- **Model selection**: Use `gpt-5-mini` for financial documents (99.5% accuracy on numerical data)
-- For press releases and news: `read_url_content` or `@ms-playwright-mcp` screenshot + transcribe
+- Download reports to `_DOWNLOADS_gitignore/`, store transcriptions (`report.md`) in `_SOURCES/`
+- For press releases and news: `read_url_content` or `@skills:ms-playwright-mcp` screenshot + transcribe
 
 ## Template Additions
 

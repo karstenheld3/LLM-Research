@@ -5,12 +5,17 @@ description: Provides coding style rules for Python and PowerShell. Apply when w
 
 # Coding Conventions
 
+**Code quality standard:** All code MUST follow:
+- `MECT_CODING_RULES.md` - Precision, brevity, consistency, naming design, documentation (MECT + APAPALAN for code)
+
+Read before writing or reviewing any code.
+
 ## Files
 
+MECT_CODING_RULES.md - Code quality (precision, brevity, consistency, naming, documentation)
 PYTHON-RULES.md - Python (formatting, imports, naming, comments)
 JSON-RULES.md - JSON (field naming, 2-space indent)
 WORKFLOW-RULES.md - Workflow documents (structure, token optimization)
-AGENT-SKILL-RULES.md - Agent skill development (structure, setup, token optimization)
 
 ## Logging Files (read when writing or reviewing logging/output code)
 

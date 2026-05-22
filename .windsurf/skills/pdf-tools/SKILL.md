@@ -11,7 +11,7 @@ Rules and usage for PDF tools in `[WORKSPACE_FOLDER]/../.tools/`.
 
 - Check existing conversions before converting
 - Default output: `../.tools/_pdf_to_jpg_converted/[PDF_FILENAME]/`
-- Use 150 DPI for screen, 300 DPI for OCR
+- Use 120 DPI for screen/transcription, 300 DPI for OCR
 - Two-pass downsizing: Ghostscript (images) then QPDF (structure)
 
 ## PDF to JPG Conversion
@@ -40,7 +40,7 @@ python DevSystemV2/skills/pdf-tools/convert-pdf-to-jpg.py invoice.pdf --pages 1
 
 **Parameters:**
 - `--output`: Output directory (default: `../.tools/_pdf_to_jpg_converted/`)
-- `--dpi`: Resolution (default: 150)
+- `--dpi`: Resolution (default: 120)
 - `--pages`: Page range - "1", "1-3", or "all" (default: all)
 
 ## 7-Zip CLI Tools

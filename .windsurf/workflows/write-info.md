@@ -9,7 +9,6 @@ Create research and analysis documents following INFO_TEMPLATE.md structure.
 
 ## Required Skills
 
-Invoke these skills before proceeding:
 - @write-documents for INFO document structure and formatting rules
 
 ## MUST-NOT-FORGET

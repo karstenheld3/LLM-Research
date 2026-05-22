@@ -8,7 +8,7 @@ Skill files are consumed by LLMs, not humans. Optimize for:
 - Medium-reasoning models
 - Low context windows - every saved token = more space for the actual task
 - Instruction following over prose comprehension
-- ASANAPAP principle: As short as necessary, as precise as possible.
+- APAPALAN principle: As precise as possible, as little as necessary.
 
 Design principles:
 1. Maximum clarity - one interpretation per instruction, no ambiguity

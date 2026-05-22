@@ -1,6 +1,6 @@
 # Domain Profile: DEFAULT
 
-Generic research domain profile. Use when no specific domain profile matches (SOFTWARE, MARKET_INTEL, DOCUMENT_INTEL, LEGAL).
+Generic research domain profile. Use when no specific domain profile matches (SOFTWARE, MARKET_INTEL, LEGAL).
 
 ## When to Use
 
@@ -22,7 +22,7 @@ Generic research domain profile. Use when no specific domain profile matches (SO
 
 ## Document Handling
 
-- **PDFs**: Full transcription via `@pdf-tools` + `@llm-transcription` pipeline
+- **PDFs**: Full transcription via `@skills:pdf-tools` + `@skills:llm-transcription` pipeline
 - **Web pages**: Full read via `read_url_content` or Playwright MCP
 - **Media**: Podcast/video transcription when relevant
 - **Large documents**: Process completely (no agent-selected chunks)
@@ -36,8 +36,8 @@ Generic research domain profile. Use when no specific domain profile matches (SO
 - `Playwriter MCP` - Authenticated sessions, complex interactions
 
 ### Document Processing
-- `@pdf-tools` - PDF to JPG conversion (`convert-pdf-to-jpg.py`)
-- `@llm-transcription` - Image/PDF to markdown with structured data extraction
+- `@skills:pdf-tools` - PDF to JPG conversion (`convert-pdf-to-jpg.py`)
+- `@skills:llm-transcription` - Image/PDF to markdown with structured data extraction
 - Full transcription required - every page, not agent-selected chunks
 
 ### Media Processing
@@ -46,7 +46,7 @@ Generic research domain profile. Use when no specific domain profile matches (SO
 - Audio transcription via Whisper or similar
 
 ### Source Handling
-- **Primary sources**: Download and store locally in `_SOURCES/`
+- **Primary sources**: Download to `_DOWNLOADS_gitignore/`, transcribe to `_SOURCES/`
 - **Source IDs**: Assign in format `[TOPIC]-SC-[SOURCE]-[DOCNAME]`
 - **Secondary sources**: Cite with `[COMMUNITY]` label and access date
 - **Access dates**: All sources MUST include `Accessed: YYYY-MM-DD`

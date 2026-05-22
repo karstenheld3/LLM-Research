@@ -49,7 +49,9 @@ No brackets for tokens in **conditions** - things the agent checks for branching
 
 ### Decision Context
 
-- **[ACTOR]** - Decision-making entity (default: user, in /go-autonomous: agent)
+- **[ACTOR]** - Decision-making entity. Default: user. `/go` workflow sets `[ACTOR] = agent` for fully autonomous execution
+  - When `[ACTOR] = agent`: all Communication verbs (`[CONSULT]`, `[CONFIRMS]`, `[QUESTION]`, `[PROPOSE]`) target the agent itself
+  - Agent self-resolves, logs decision, proceeds without user interaction
 
 ### Folder Paths
 

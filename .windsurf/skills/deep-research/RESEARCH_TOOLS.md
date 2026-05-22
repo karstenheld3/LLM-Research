@@ -129,7 +129,7 @@ Captures full screen to `../.tools/_screenshots/` - helps identify popups, dialo
 
 **Source access failure handling:**
 If both `read_url_content` and Playwright fail after 2 retries:
-1. Document source as `[INACCESSIBLE]` in `__[TOPIC]_SOURCES.md`
+1. Document source as `[INACCESSIBLE]` in `_INFO_[TOPIC]_02-SOURCES.md`
 2. Note reason: blocked, requires auth, geofenced, etc.
 3. Search for alternative source (mirror, archive.org, cached version)
 4. If no alternative, proceed without - document gap in research
@@ -181,20 +181,19 @@ python compress-pdf.py "source.pdf" --output "[SESSION]/compressed/"
 
 ```
 [SESSION]/
-├── pdf_sources/
-│   └── [original PDFs - reference only]
-├── pdf_images/
-│   └── [PDF_NAME]/
-│       ├── page_001.jpg
-│       ├── page_002.jpg
-│       └── ...
-├── transcribed/
-│   └── [PDF_NAME]/
-│       ├── page_001.md
-│       ├── page_002.md
-│       └── ...
-└── compressed/
-    └── [PDF_NAME]_compressed.pdf
+├── _DOWNLOADS_gitignore/
+│   ├── [original PDFs - not checked in]
+│   ├── pdf_images/
+│   │   └── [PDF_NAME]/
+│   │       ├── page_001.jpg
+│   │       └── ...
+│   └── compressed/
+│       └── [PDF_NAME]_compressed.pdf
+└── _SOURCES/
+    └── [PDF_NAME]/
+        ├── page_001.md
+        ├── page_002.md
+        └── ...
 ```
 
 **Decision criteria:**

@@ -3,10 +3,11 @@ description: Resume a development session
 auto_execution_mode: 1
 ---
 
+# Load Session Workflow
+
 ## Required Skills
 
-Invoke these skills before proceeding:
-- @session-management for session file structure
+- @skills:session-management for session file structure
 
 ## MUST-NOT-FORGET
 
@@ -22,6 +23,8 @@ Check if user provided a session path:
 ```powershell
 Get-ChildItem -Path "[DEFAULT_SESSIONS_FOLDER]" -Directory -Filter "_*" | Where-Object { Test-Path "$($_.FullName)\NOTES.md" } | Sort-Object { (Get-ChildItem $_.FullName -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1).LastWriteTime } -Descending | Select-Object -First 1 -ExpandProperty FullName
 ```
+
+**Topic Folder Detection:** Run @skills:session-management **Topic Folder Detection** procedure. If target matches `T##_*`, load parent session context before proceeding.
 
 ## Step 2: Load Context
 

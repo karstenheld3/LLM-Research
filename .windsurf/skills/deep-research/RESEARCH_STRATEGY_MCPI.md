@@ -4,6 +4,12 @@ Research **[SUBJECT]** exhaustively using the MCPI (Most Complete Point of Infor
 
 This strategy follows the global Phase 1-4 model defined in SKILL.md.
 
+## Prerequisites
+
+- Output folder created per SKILL.md "Output Folder" section
+- Topic ID registered in ID-REGISTRY.md
+- All file paths below are relative to the output folder
+
 ## MUST-NOT-FORGET
 
 - Run `/verify` on STRUT plan before proceeding
@@ -14,7 +20,7 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
 
 ### Step 1: Create STRUT and Decompose Prompt
 
-- Create `STRUT_[TOPIC].md` using `/write-strut` workflow
+- Create `__STRUT_[TOPIC].md` using `/write-strut` workflow
 - STRUT defines: phases, objectives, steps, deliverables, transitions
 - STRUT enforces 3 VCRIV checkpoints as deliverables
 - STRUT MUST include quality pipeline steps and time log:
@@ -50,13 +56,13 @@ Before collecting sources, test each discovery platform from Q7:
 - Query each platform with test search matching research criteria
 - Classify access: **FREE** (full results), **PAID** (paywall), **PARTIAL** (limited free tier)
 - Keep platforms with FREE or PARTIAL access
-- Document PAID platforms in `__SOURCES.md` for user follow-up
+- Document PAID platforms in `_INFO_[TOPIC]_02-SOURCES.md` for user follow-up
 - **Done when**: All platforms tested, access levels documented, selected platforms identified
 
 ### Step 4: Collect Sources
 
 - **Document version scope**: Explicitly state the [SUBJECT] version (e.g., `v2.1.0`, `API v3`). If not applicable, use date: `YYYY-MM-DD`
-- Create `__[TOPIC]_SOURCES.md` (double underscore = master document)
+- Create `_INFO_[TOPIC]_02-SOURCES.md`
 - **Query selected discovery platforms** from Step 3 first
 - Collect ALL official documentation URLs from vendor/project documentation
 - Collect community sources (secondary sources) for real-world insights:
@@ -73,13 +79,13 @@ Before collecting sources, test each discovery platform from Q7:
 - Group sources by category (domain-specific)
 - Include "Related" section listing similar or easily confused alternatives
 - **Source processing**: Process all PDF sources through transcription pipeline. Read `deep-research-config.json` for settings.
-- **Done when**: (a) Official docs main TOC fully enumerated, (b) 15-30 sources collected (minimum 15), (c) All sources have IDs, (d) PDF sources transcribed
+- **Done when**: (a) Official docs main navigation fully enumerated, (b) 15-30 sources collected (minimum 15), (c) All sources have IDs, (d) PDF sources transcribed
 
 ### Step 5: Verify and Correct Assumptions
 
 - Verify assumptions against primary sources
 - If >30% wrong or outdated, re-run with corrected understanding, keep originals (strikethrough). **Max 2 re-runs**, then proceed.
-- Document accuracy in `__[TOPIC]_SOURCES.md` header (e.g., "Preflight accuracy: 7/10 assumptions verified")
+- Document accuracy in `_INFO_[TOPIC]_02-SOURCES.md` header (e.g., "Preflight accuracy: 7/10 assumptions verified")
 - **Rubric**: CORRECT = matches source exactly. PARTIAL = spirit correct but details differ (counts as wrong). WRONG = contradicted by source.
 
 ### Step 6: Run First VCRIV
@@ -89,44 +95,44 @@ Run quality pipeline on Preflight deliverables (SOURCES, STRUT, PromptDecomposit
 
 ## Phase 2: Planning
 
-Create TOC, topic template, TASKS plan, run second VCRIV.
+Create Summary file (skeletal), topic template, TASKS plan, run second VCRIV.
 
-### Step 1: TOC Creation
+### Step 1: Summary File Creation
 
-- Follow [RESEARCH_CREATE_TOC.md](RESEARCH_CREATE_TOC.md) workflow
-- Use [RESEARCH_TOC_TEMPLATE.md](RESEARCH_TOC_TEMPLATE.md) as base
-- Create `__[TOPIC]_TOC.md` with detailed structure
-- **Done when**: TOC covers all major topics from sources, summary is 5-15 sentences, all links resolve
+- Follow [RESEARCH_CREATE_SUMMARY.md](RESEARCH_CREATE_SUMMARY.md) workflow
+- Use [RESEARCH_SUMMARY_TEMPLATE.md](RESEARCH_SUMMARY_TEMPLATE.md) as base
+- Create `_INFO_[TOPIC]_01-SUMMARY.md` with skeletal structure (summary placeholder, topic file links, topic count)
+- **Done when**: Summary file covers all major topics from sources, skeletal summary present, all topic file links resolve
 
 ### Step 2: Template Creation
 
-- Create `__TEMPLATE_[TOPIC]_TOPIC.md` (double underscore = master template)
+- Create `__TEMPLATE_[TOPIC]_TOPIC.md` (working template, deleted after research)
 - Template structure (base + domain-specific additions from active profile):
   - Header block (Doc ID, Goal, Dependencies, **Version/Date scope**)
-  - Summary: **5-15 sentences** (scale with complexity, match TOC Summary)
+  - Summary: **5-15 sentences** (scale with complexity)
   - Key Facts with [VERIFIED] labels
   - Use Cases
   - Quick Reference (one-screen lookup)
   - Main Sections (follow TOC structure)
   - **Limitations and Known Issues** (from community sources)
   - **Gotchas and Quirks** (undocumented behavior, edge cases)
-  - Sources section with **same IDs as `__[TOPIC]_SOURCES.md`**
+  - Sources section with **same IDs as `_INFO_[TOPIC]_02-SOURCES.md`**
   - Document History
 - Include "Template Instructions" section (to be deleted when using)
 - **Done when**: Template has all required sections, instructions clear
 
 ### Step 3: TASKS Plan
 
-- Create `TASKS_[TOPIC]_RESEARCH.md` using `/write-tasks-plan` workflow
-- Partition TOC topics into discrete tasks
+- Create `__TASKS_[TOPIC]_RESEARCH.md` using `/write-tasks-plan` workflow
+- Partition topics from Summary file into discrete tasks
 - Each task: Status, Estimated effort, Sources (official + community), Items to document, Done-when criteria
 - **Task timing format**: `- [ ] TK-01: [Description] [HH:MM-HH:MM] Xm`
   - Mark parallel tasks with `(parallel)` suffix
-- **Done when**: All TOC topics have corresponding tasks, effort estimates assigned
+- **Done when**: All topics have corresponding tasks, effort estimates assigned
 
 ### Step 4: Run Second VCRIV
 
-Run quality pipeline on Planning deliverables (TOC, template, TASKS).
+Run quality pipeline on Planning deliverables (Summary file, template, TASKS).
 - **Done when**: Phase 2 deliverables verified, critique addressed
 
 ## Phase 3: Topic-by-Topic, File-by-File Research
@@ -139,12 +145,12 @@ Adhere to TASKS plan and STRUT. Run VCRIV per granularity rules.
   1. Research using official source URLs first
   2. Cross-reference with community sources for limitations, bugs, quirks
   3. Process sources per domain profile document handling rules
-  4. Create `_INFO_[TOPIC]-IN[XX]_[SUBTOPIC].md` using template
-     - XX = sequential Doc ID number (01, 02, 03...)
-     - Files sort alphabetically in TOC order
+  4. Create `_INFO_[TOPIC]_[NN]-[NAME].md` using template
+     - NN = sequential number starting at 03 (01=Summary, 02=Sources)
+     - Files sort alphabetically
   5. Include "Limitations and Known Issues" with community source citations
   6. **Mandatory inline citations**: Critical conclusions MUST include `[VERIFICATION_LABEL] (SOURCE_ID | URL or filename)`. Referenced files MUST exist in `_SOURCES/`.
-  7. Update TASKS progress and TOC status
+  7. Update TASKS progress and Summary file status
 - All claims must have verification labels: [VERIFIED], [ASSUMED], [TESTED], [PROVEN], [COMMUNITY]
 
 ### VCRIV per Granularity Rules
@@ -166,17 +172,17 @@ Run quality pipeline as defined in STRUT (scope-based from SKILL.md):
 ### Completeness Verification
 
 - Re-read official documentation structure (main navigation/sidebar)
-- Compare against TOC - identify missed topics
+- Compare against Summary file - identify missed topics
 - For each gap: assess priority (High/Medium/Low), create INFO files for High/Medium
-- Document coverage percentage in TOC header
+- Document coverage percentage in Summary file header
 
 ### Sync and Metadata
 
-- Cross-verify all topic files against TOC checklist
-- Sync summaries from topic files back into TOC Summary section
+- Cross-verify all topic files against Summary file checklist
+- Finalize Summary section with cross-document synthesis from completed topic files
 - Verify all links work
 - Ensure community-sourced limitations included in relevant sections
-- **Add Research stats to TOC header block**: `**Research stats**: 35m net | 62 docs | 79 sources`
+- **Add Research stats to Summary file header block**: `**Research stats**: 35m net | 62 docs | 79 sources`
 
 ### Ex-Post Review Questions
 
@@ -186,7 +192,7 @@ Run quality pipeline as defined in STRUT (scope-based from SKILL.md):
 4. Did it invest substantial effort on secondary sources?
 5. Were PDFs downloaded and read (not just web research)?
 6. Are all initial research questions answered?
-7. Are findings properly linked in TOC?
+7. Are findings properly linked in Summary file?
 
 ### Run Final VCRIV
 

@@ -15,6 +15,7 @@ Language-agnostic output rules for Python, PowerShell, and future languages.
 - [LOG-GN-09](#log-gn-09-log-before-execution): Log before execution
 - [LOG-GN-10](#log-gn-10-ellipsis-usage): Ellipsis usage
 - [LOG-GN-11](#log-gn-11-sentence-endings): Sentence endings
+- [LOG-GN-12](#log-gn-12-no-acronyms): No acronyms
 
 ## Table of Contents
 
@@ -38,9 +39,9 @@ Four logging types serve distinct audiences with specific patterns.
 
 Each logging type has a specific goal that drives its rules.
 
-### ASANAPAP Principle
+### APAPALAN Principle
 
-**As short as necessary, as precise as possible.**
+**As precise as possible, as little as necessary.**
 
 Every log line should convey maximum information with minimum words. Avoid verbosity, filler words, and redundant phrases. Be concise but never ambiguous.
 
@@ -116,6 +117,7 @@ or
 - `PARTIAL FAIL: <fail summary>` (can continue, but some items failed)
 and can log additional
 - `WARNING: <non-breaking problem>` (can continue, but noticed something worth noting)
+- `HINT: <actionable advice>` (user-facing and script-level, suggests what user or admin can do to fix the issue)
 
 **Final line rule:** The last line of any activity or script must contain a status keyword (`OK.`, `FAIL:`, `PARTIAL FAIL:`, `SKIP:`) so scripts can determine success without reading the entire log.
 
@@ -249,7 +251,7 @@ Shows how each philosophy goal maps to specific rules.
 
 ## General Rules (LOG-GN)
 
-11 rules that apply to ALL logging types. These ensure consistency across user-facing, app-level, and script-level output.
+12 rules that apply to ALL logging types. These ensure consistency across user-facing, app-level, and script-level output.
 
 **Rule Index:**
 - [LOG-GN-01](#log-gn-01-indentation): Indentation (2-space per level)
@@ -263,6 +265,7 @@ Shows how each philosophy goal maps to specific rules.
 - [LOG-GN-09](#log-gn-09-log-before-execution): Log before execution
 - [LOG-GN-10](#log-gn-10-ellipsis-usage): Ellipsis usage
 - [LOG-GN-11](#log-gn-11-sentence-endings): Sentence endings
+- [LOG-GN-12](#log-gn-12-no-acronyms): No acronyms in logs
 
 ### LOG-GN-01: Indentation
 
@@ -534,6 +537,36 @@ Connecting to server...
 Processing complete.
 User 'admin@company.com' not found.
 ```
+
+### LOG-GN-12: No Acronyms
+
+**NEVER use acronyms alone in logs.** Always spell out the full term first, with the acronym in parentheses.
+
+This is especially critical for user-facing logs where readers may not know technical abbreviations.
+
+**Format:** `Full Term (ACRONYM)`
+
+**This also applies to naming:** Environment variables, configuration settings, and other identifiers should use full names, not acronyms.
+- BAD: `OBO_ENABLED`, `SPO_TENANT_ID`
+- GOOD: `ON_BEHALF_OF_ENABLED`, `SHAREPOINT_ONLINE_TENANT_ID`
+
+*BAD:*
+```
+Authenticating via OBO...
+Connecting to SPO...
+Using MI for authentication...
+Calling AOI Service...
+```
+
+*GOOD:*
+```
+Authenticating via On Behalf Of (OBO)...
+Connecting to SharePoint Online (SPO)...
+Using Managed Identity (MI) for authentication...
+Calling Azure OpenAI (AOI) Service...
+```
+
+**Rationale:** Acronyms are insider knowledge. Users, support staff, and future developers may not recognize them. Spelling out the term first ensures everyone understands the log, while the parenthesized acronym allows correlation with documentation that uses the short form.
 
 ## Complete Example
 

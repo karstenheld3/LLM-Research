@@ -41,6 +41,11 @@
 - **PYTHON-NM-01**: Use clear, fully written names
 - **PYTHON-NM-02**: Follow existing naming patterns
 - **PYTHON-NM-03**: Avoid ambiguous abbreviations
+- **PYTHON-NM-04**: Corresponding pairs (pack/unpack, do/undo)
+- **PYTHON-NM-05**: Avoid misleading concepts (visible/hidden vs visible/invisible)
+- **PYTHON-NM-06**: Specific over generic (leftTo, rightTo vs nextTo)
+- **PYTHON-NM-07**: Origin/destination not source/target
+- **PYTHON-NM-08**: Don't rename established APIs (association field)
 
 **Comments (CM)**
 - **PYTHON-CM-01**: Comment intent, not obvious code
@@ -248,6 +253,31 @@ body_attrs -> body_attributes
 content -> html_content
 dynamic_count -> use_dynamic_count_for_updating
 ```
+
+### PYTHON-NM-04: Corresponding Pairs
+Use same word stem for opposites.
+
+**Verbs:**
+`send/receive`, `pack/unpack`, `accept/reject`, `enable/disable`, `visible/hidden`, `show/hide`, `do/undo`, `open/close`, `check/uncheck`, `validate/invalidate`, `include/exclude`, `existant/nonExistant`, `empty/filled`, `expand/shrink`
+
+**Entities:**
+`Input/Output`, `Addition/Removal`, `Activation/Deactivation`, `Source/Target`, `Current/Target`, `Origin/Destination`, `Departure/Arrival`, `Prefix/Suffix`
+
+### PYTHON-NM-05: Avoid Misleading Concepts
+`visible/invisible` implies object still occupies space. Use `visible/hidden` if hidden means "not there at all".
+
+### PYTHON-NM-06: Specific Over Generic
+Avoid `nextTo` (what context?). Use specific names:
+- `leftTo`, `rightTo` (direction)
+- `northTo`, `southTo` (axis)
+- `nearTo` (distance)
+- `closeTo` (relationship)
+
+### PYTHON-NM-07: Origin/Destination Not Source/Target
+"Several planes with the target Bagdad" = bad news. "Several planes with the destination Bagdad" = travel plans.
+
+### PYTHON-NM-08: Don't Rename Established APIs
+Even if the name became a misnomer, don't rename it. People predict behavior by the evoked association field, not the literal name. If `login()` worked for years, don't rename to `authenticate()` when credentials are no longer required. "Login" already means "authenticate" in users' minds. Like "horsepower" doesn't mean horses - it's the association field, not the name.
 
 ## Comment Rules (CM)
 

@@ -141,7 +141,7 @@ begin {
             try {
                 Invoke-WebRequest -Uri "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe" -OutFile $ytdlpPath -TimeoutSec 300
             } catch {
-                Write-Host "Failed to download yt-dlp: $_" -ForegroundColor Red
+                Write-Host "Failed to download yt-dlp -> $_" -ForegroundColor Red
                 return $false
             }
         }
@@ -164,7 +164,7 @@ begin {
                 Remove-Item $ffmpegZipPath -Force
                 Write-Host "ffmpeg downloaded and extracted successfully." -ForegroundColor Green
             } catch {
-                Write-Host "Failed to download or extract ffmpeg: $_" -ForegroundColor Red
+                Write-Host "Failed to download or extract ffmpeg -> $_" -ForegroundColor Red
                 return $false
             }
         }
@@ -178,6 +178,7 @@ begin {
 
     # Collect URLs from pipeline
     $allUrls = @()
+    $scriptStartTime = Get-Date
 }
 
 process {
@@ -205,15 +206,15 @@ end {
     if ($UseCookies -and -not $ChromeProfile) {
         if (Test-Path $ytdlpPath) {
             $testUrl = $allUrls[0]
-            Write-Host "Testing Chrome profiles using URL: $testUrl"
+            Write-Host "Testing Chrome profiles using URL '$testUrl'..."
             $profiles = Get-ChildItem "$env:LOCALAPPDATA\Google\Chrome\User Data" -Directory -ErrorAction SilentlyContinue | 
                 Where-Object { $_.Name -match "^Profile \d+$" -or $_.Name -eq "Default" }
             
             foreach ($chromeProf in $profiles) {
-                Write-Host "Trying $($chromeProf.Name)..."
+                Write-Host "Trying profile '$($chromeProf.Name)'..."
                 if (Test-ChromeProfile $chromeProf.Name $testUrl) {
                     $workingProfile = $chromeProf.Name
-                    Write-Host "Found working profile: $workingProfile" -ForegroundColor Green
+                    Write-Host "Found working profile: '$workingProfile'." -ForegroundColor Green
                     break
                 }
             }
@@ -244,17 +245,21 @@ end {
     }
 
     # Display settings
-    Write-Host "`n=== Download Settings ===" -ForegroundColor Cyan
-    Write-Host "Output: $OutputFolder"
+    $urlWord = if ($allUrls.Count -eq 1) { "URL" } else { "URLs" }
+    Write-Host ""
+    Write-Host "=================================== START: YOUTUBE VIDEO DOWNLOAD ==================================" -ForegroundColor Cyan
+    Write-Host (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+    Write-Host ""
+    Write-Host "Output: '$OutputFolder'"
     Write-Host "Format: $Format"
     Write-Host "Quality: $Quality"
-    Write-Host "Cookies: $(if ($cookiesEnabled) { "Enabled ($workingProfile)" } else { "Disabled" })"
-    Write-Host "URLs: $($allUrls.Count)"
-    Write-Host "========================`n" -ForegroundColor Cyan
+    Write-Host "Cookies: $(if ($cookiesEnabled) { "Enabled ('$workingProfile')" } else { "Disabled" })"
+    Write-Host "$($allUrls.Count) $urlWord to process."
+    Write-Host ""
 
     # Download each URL
     foreach ($url in $allUrls) {
-        Write-Host "Downloading: $url" -ForegroundColor Cyan
+        Write-Host "Downloading '$url'..." -ForegroundColor Cyan
         
         $dlArgs = @(
             $url
@@ -297,5 +302,14 @@ end {
         Write-Host ""
     }
 
-    Write-Host "Download complete!" -ForegroundColor Green
+    Write-Host "Download complete." -ForegroundColor Green
+
+    # Footer
+    $elapsed = (Get-Date) - $scriptStartTime
+    if ($elapsed.TotalSeconds -lt 60) { $duration = "$([math]::Round($elapsed.TotalSeconds, 1)) secs" }
+    elseif ($elapsed.TotalMinutes -lt 60) { $duration = "$([math]::Floor($elapsed.TotalMinutes)) mins $($elapsed.Seconds) secs" }
+    else { $duration = "$([math]::Floor($elapsed.TotalHours)) hours $($elapsed.Minutes) mins" }
+    Write-Host ""
+    Write-Host "==================================== END: YOUTUBE VIDEO DOWNLOAD ===================================" -ForegroundColor Cyan
+    Write-Host "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ($duration)"
 }

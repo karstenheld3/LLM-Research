@@ -170,15 +170,33 @@ Files starting with `!` indicate high relevance. Must be treated with extra atte
 
 ### Ignored Files (_ prefix)
 
-Files starting with `_` are skipped by automatic priming workflows. Use for session-specific, WIP, or archived content.
+Files starting with `_` are skipped by automatic priming workflows. Use for session-specific, WIP, or archived content. Single `_` prefix files are deliverables (INFO, SPEC, IMPL, TEST, TASKS).
+
+### Scaffolding Files (__ prefix)
+
+Files starting with `__` (double underscore) are workflow/skill-generated process artifacts. Distinction:
+
+- **User-explicit = deliverable** (no `__`): Documents the user explicitly creates via `/write-tasks-plan`, `/write-strut`, `/write-spec`, etc.
+- **Workflow/skill-implicit = scaffolding** (`__`): Documents that workflows auto-create during execution (STRUTs, TASKS, templates for self-tracking)
+
+Scaffolding has no value after the goal is reached. Deleted by `/cleanup` category 6.
+
+**Lifecycle tiers:**
+- `.tmp_` = single-run temp (scripts, metadata). Deleted within same workflow or by `/cleanup` category 1
+- `__` = multi-run scaffolding (execution plans, task tracking, templates). Persists during active work, deleted by `/cleanup` after goal reached
+- `_` = deliverable (findings, specs, plans). Never auto-deleted
 
 ### Hidden Files (. prefix)
 
 Files starting with `.` follow Unix convention - hidden from directory listings.
 
-### Temporary Files (.tmp prefix)
+### Git Exclusion Suffix (_gitignore)
 
-Files starting with `.tmp` are temporary helper scripts created during operations. They should be deleted after use. Example: `.tmp_fix_quotes.ps1`
+Append `_gitignore` before the extension to exclude any file or folder from git without editing `.gitignore`:
+- `data_gitignore.json` - excluded file
+- `scratch_gitignore/` - excluded folder
+
+Patterns in `.gitignore`: `*_gitignore.*` and `*_gitignore/`
 
 ## Placeholders
 
@@ -192,8 +210,11 @@ Files starting with `.tmp` are temporary helper scripts created during operation
 ## Workflow Reference
 
 - `/build` - BUILD workflow entry point (code output)
+- `/bugfix` - Record and fix bugs (SESSION-MODE or PROJECT-MODE)
 - `/commit` - Create conventional commits
 - `/continue` - Execute next items on plan
+- `/conversation-start` - Create new conversation tracking file
+- `/conversation-update` - Update existing conversation tracking file
 - `/critique` - Devil's Advocate review
 - `/fail` - Record failures to FAILS.md
 - `/go` - Autonomous loop (recap + continue until done)
@@ -213,6 +234,7 @@ Files starting with `.tmp` are temporary helper scripts created during operation
 - `/solve` - SOLVE workflow entry point (knowledge output)
 - `/sync` - Document synchronization
 - `/test` - Run tests based on scope
+- `/translate` - Translate markdown or PDF files to target languages
 - `/transcribe` - PDF/web to markdown transcription
 - `/verify` - Verify work against specs and rules
 - `/write-impl-plan` - Create implementation plan from spec
@@ -225,7 +247,7 @@ Files starting with `.tmp` are temporary helper scripts created during operation
 
 STRUT plans use structured notation for progress tracking.
 
-**Creating STRUTs**: Use `/write-strut` workflow or invoke `@write-documents` skill with `STRUT_TEMPLATE.md`.
+**Creating STRUTs**: Use `/write-strut` workflow or invoke `@skills:write-documents` with `STRUT_TEMPLATE.md`.
 
 Execution follows these rules:
 

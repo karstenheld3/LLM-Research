@@ -1,91 +1,158 @@
 ---
 description: Autonomous loop until goal reached
-auto_execution_mode: 1
 ---
 
 # Go Workflow
 
-Autonomous execution loop using `/recap` and `/continue`.
+Goal: Execute plan to completion without user interaction.
 
-**Principle:** Work completely autonomously until goal is reached. Use all available tools proactively. Never sacrifice requirements for task completion. No shortcuts allowed. All requirements must be implemented 100%. All problems or bugs must be first understood and then fixed. No lazy programming allowed. 
+Fully autonomous execution loop. Agent runs independently until goal is reached or a hard stop is hit.
 
-## Step 0: Completion Check
+## Autonomous Mode
 
-Before any work, check if goal is already reached:
+**`[ACTOR] = agent`** for the entire duration of `/go` execution.
 
-1. Read STRUT plan (PROGRESS.md or session document)
-2. Run `/verify` (STRUT Transition Phase) to check:
-   - All Deliverables in final phase checked?
-   - All Objectives verified via linked Deliverables?
-   - Final Transition points to `[END]`?
+All verbs targeting `[ACTOR]` are self-resolved:
+- `[CONSULT]` → agent decides using available context, logs decision
+- `[CONFIRMS]` → agent self-confirms if evidence exists, logs rationale
+- `[QUESTION]` → agent researches answer using tools, logs finding
+- `[PROPOSE]` → agent evaluates options and picks best, logs choice
+- `[RECOMMEND]` → agent accepts if evidence supports it, logs rationale
 
-**If already complete:**
+### Autonomous Decision Protocol
+
+When facing choices, the agent MUST NOT ask the user. Instead:
+
+1. Identify options
+2. Evaluate each option against (re-read if needed):
+   - `agent-behavior.md` - execution patterns, confirmation rules
+   - `core-conventions.md` - formatting, structure rules
+   - `/verify` workflow - quality standards for the artifact type
+   - Relevant skills and their rules
+   - Current SPEC, IMPL, TEST documents (if they exist)
+3. Pick the option that best satisfies the rules
+4. Log decision with rationale to the tracking document (see Decision Logging)
+5. Proceed without waiting
+
+### Decision Logging
+
+Log autonomous decisions to the main progress tracking document:
+
+- If `__TASKS_*.md` exists and tracks progress → log decisions there
+- If `PROGRESS.md` is the main tracking document → log decisions there
+- If neither exists → create `__TASKS_[TOPIC].md` using @skills:write-documents, log there
+
+Format: `[DECISION] <what was decided> - <rationale> - <rules consulted>`
+
+### Safety Protocol
+
+The agent CAN perform destructive actions (delete, deploy, restructure) if they are **in scope** of the initial instructions, prompts, and workflows invoked before `/go`. To stay recoverable:
+
+- Before deleting substantial data or crucial files: create backup (zip or copy)
+- Use `/commit` to proceed in self-contained, reversible, traceable steps
+- Commit before AND after risky operations
+
+Backups and zips created during `/go` MUST NOT be deleted by the agent, including during cleanup after goal is reached. Only the user may delete them.
+
+**Hard stop (ONLY case):** Agent proposes a destructive action that is **NOT in scope** when compared with initial instructions, prompts, and workflows invoked before `/go`. Stop and escalate to user.
+
+## Required Reading
+
+- `rules/devsystem-core.md` - Workflow Reference lists all available workflows and skills
+
+## MUST-NOT-FORGET
+
+- `[ACTOR] = agent` - never ask the user, decide and proceed
+- Check if goal already reached (Step 1) before any work
+- Log blockers to PROBLEMS.md immediately
+- Run multi-layer completion check before declaring goal reached
+- Never sacrifice requirements - implement 100%
+- No shortcuts, no lazy programming
+
+## Step 1: Multi-Layer Completion Check
+
+Check ALL layers, not just STRUT:
+
+1. **TASKS layer**: Read `__TASKS_*.md` - any unchecked `[ ]` items?
+2. **IMPL layer**: Read `_IMPL_*.md` - any unchecked IS-XX steps?
+3. **TEST layer**: Read `_TEST_*.md` - any unchecked TC-XX?
+4. **STRUT layer**: All Deliverables checked? Final Transition = `[END]`?
+5. **PROGRESS layer**: Any items in "To Do" or "In Progress"?
+
+ALL layers that exist must show complete. If ANY layer has unchecked items:
+- Do NOT declare goal reached
+- Log which layer has gaps
+- Proceed to Step 2
+
+If all layers complete:
 ```
 Goal already reached. No further work needed.
-Last completed: [final deliverable]
 ```
-→ Stop. Do not execute. Do not re-verify on subsequent `/go` calls.
+Stop. Do not re-verify on subsequent `/go` calls.
 
-**If not complete:** Proceed to Pre-Flight Check.
-
-## Step 1: Recap
+## Step 2: Recap
 
 Run `/recap` to determine:
 - Last completed action
 - Current state
 - Any blockers
 
+## Step 3: Pre-Flight Check
 
-## Step 2: Pre-Flight Check
+1. Gather more context if unclear
+2. Verify stop/acceptance criteria exist
+3. Make internal MUST-NOT-FORGET list from conversation and plan documents
+4. List all scripts and skills needed for task completion
 
-1. Do we have enough context? If unclear, gather more.
-2. Do we have stop or acceptance criteria?
-3. Re-read conversation, make internal MUST-NOT-FORGET list.
-4. Research and list all scripts and skills that should be used for task completion and add them to internal MUST-NOT-FORGET list.
-
-## Step 3: Continue
+## Step 4: Execute
 
 Run `/continue` to:
 - Execute next task from plan
-- Update progress
+- Update progress tracking document
 - Check for completion
 
-## Step 4: Execution Loop
+## Step 5: Loop
 
-````
+```
 iteration_count = 0
-WHILE goal not reached AND iteration_count < 5:
+WHILE goal not reached AND iteration_count < 10:
     iteration_count += 1
-    /recap   # Assess current state
-    /continue # Execute next item
-    
-    IF iteration_count >= 5:
-        STOP - Ask user: "Reached 5 iterations without goal completion. Continue?"
-    
+    /recap
+    /continue
+
+    IF iteration_count % 5 == 0:
+        Run multi-layer completion check (Step 1)
+        Output iteration count and remaining work summary
+
     IF blocker:
-        Invent id [BLOCKER] for blocker 
+        Classify: TECHNICAL / KNOWLEDGE / SCOPE
         Log to PROBLEMS.md
-        /write-info `.tmp_INFO_[BLOCKER].md` about your current approach, why it does fail (root cause analysis)
-        /critique your current approach and research more information. Maybe we need to go slower and test our assumptions and implementation steps in more detail. 
-        /reconcile the critics findings
-        /write-task-plan `.tmp_TASK_[BLOCKER].md` with modified approach based on revised findings
-        run /verify -> /critique -> /reconcile -> /implement -> /verify on `.tmp_TASK_[BLOCKER].md`: will that address the blocker and reach the goal
-        /write-test-plan `.tmp_TEST_[BLOCKER].md` based on IMPL plan for fully autonomous test
-        run /verify -> /critique -> /reconcile -> /implement -> /verify on `.tmp_TASK_[BLOCKER].md`: How can we reach 100% test coverage and test every detail
-````
 
-## Step 5: Loop or Stop
+        IF TECHNICAL:
+            Try up to 3 alternative approaches
+            If all fail: simplify, implement partial, log remainder
 
-- **Goal reached?** Stop, output summary
-- **Blocker?** Log to PROBLEMS.md, ask user
-- **More work?** Return to Step 3
+        IF KNOWLEDGE:
+            [RESEARCH] using available tools
+            Make [UNVERIFIED] assumption, document it, proceed
+
+        IF SCOPE:
+            Split: implement what's in scope
+            Create new task for out-of-scope part
+            Continue with next task
+
+        IF blocker unresolved after alternatives:
+            /write-info `.tmp_INFO_[BLOCKER].md` (root cause analysis)
+            /critique -> /reconcile
+            If still stuck: Hard stop, escalate to user
+```
 
 ## Stopping Conditions
 
-- All tasks complete (final Transition = `[END]` checked)
-- Blocker requires user input
+- All layers complete (multi-layer completion check passes)
+- Hard stop triggered (see Safety Protocol above)
 - User interruption
-- Retry limit exceeded (5 attempts for MEDIUM/HIGH complexity)
+- Blocker unresolved after all self-resolution attempts
 
 ## Idempotent Behavior
 

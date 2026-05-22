@@ -4,6 +4,12 @@ Research **[SUBJECT]** using the MEPI (Most Executable Point of Information) app
 
 This strategy follows the global Phase 1-4 model defined in SKILL.md.
 
+## Prerequisites
+
+- Output folder created per SKILL.md "Output Folder" section
+- Topic ID registered in ID-REGISTRY.md
+- All file paths below are relative to the output folder
+
 ## MUST-NOT-FORGET
 
 - Run `/verify` on STRUT plan before proceeding
@@ -20,7 +26,7 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
 
 ### Step 1: Create STRUT and Decompose Prompt
 
-- Create `STRUT_[TOPIC].md` using `/write-strut` workflow
+- Create `__STRUT_[TOPIC].md` using `/write-strut` workflow
 - STRUT defines: phases, objectives, steps, deliverables, transitions
 - STRUT enforces 3 VCRIV checkpoints as deliverables
 - STRUT MUST include quality pipeline steps and time log
@@ -46,7 +52,7 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
 ### Step 3: Collect Sources (Curated)
 
 - **Document version scope**: Explicitly state the [SUBJECT] version (e.g., `v2.1.0`, `API v3`). If not applicable, use date: `YYYY-MM-DD`
-- Create `__[TOPIC]_SOURCES.md`
+- Create `_INFO_[TOPIC]_02-SOURCES.md`
 - **Classify discovery platforms** from Q7 as FREE/PAID/PARTIAL; use FREE and PARTIAL, note PAID for user follow-up
 - Collect **5-10 sources per dimension** (focus on top-tier sources first)
 - Skip exhaustive community source collection
@@ -60,7 +66,7 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
 
 - Verify assumptions against primary sources
 - If >30% wrong or outdated, re-run with corrected understanding (strikethrough originals). **Max 2 re-runs**, then proceed.
-- Document accuracy in `__[TOPIC]_SOURCES.md` header (e.g., "Preflight accuracy: 7/10 verified")
+- Document accuracy in `_INFO_[TOPIC]_02-SOURCES.md` header (e.g., "Preflight accuracy: 7/10 verified")
 - **Rubric**: CORRECT = matches exactly. PARTIAL = spirit correct, details differ (counts as wrong). WRONG = contradicted.
 
 ### Step 5: Run First VCRIV
@@ -70,19 +76,19 @@ Run quality pipeline on Preflight deliverables (SOURCES, STRUT, PromptDecomposit
 
 ## Phase 2: Planning
 
-Create TOC, topic template, TASKS plan, run second VCRIV.
+Create Summary file (skeletal), topic template, TASKS plan, run second VCRIV.
 
-### Step 1: TOC Creation
+### Step 1: Summary File Creation
 
-- Follow [RESEARCH_CREATE_TOC.md](RESEARCH_CREATE_TOC.md) workflow
-- Use [RESEARCH_TOC_TEMPLATE.md](RESEARCH_TOC_TEMPLATE.md) as base
-- Create `__[TOPIC]_TOC.md` with detailed structure
+- Follow [RESEARCH_CREATE_SUMMARY.md](RESEARCH_CREATE_SUMMARY.md) workflow
+- Use [RESEARCH_SUMMARY_TEMPLATE.md](RESEARCH_SUMMARY_TEMPLATE.md) as base
+- Create `_INFO_[TOPIC]_01-SUMMARY.md` with skeletal structure
 - Summary can be shorter than MCPI (5-10 sentences)
-- **Done when**: TOC covers major topics from sources, all links resolve
+- **Done when**: Summary file covers major topics from sources, all topic file links resolve
 
 ### Step 2: Template Creation
 
-- Create `__TEMPLATE_[TOPIC]_TOPIC.md`
+- Create `__TEMPLATE_[TOPIC]_TOPIC.md` (working template, deleted after research)
 - Template structure (base + domain-specific additions from active profile):
   - Header block (Doc ID, Goal, Dependencies, **Version/Date scope**)
   - Summary (5-10 sentences)
@@ -95,15 +101,15 @@ Create TOC, topic template, TASKS plan, run second VCRIV.
 
 ### Step 3: TASKS Plan
 
-- Create `TASKS_[TOPIC]_RESEARCH.md` using `/write-tasks-plan` workflow
-- Partition TOC topics into discrete tasks
+- Create `__TASKS_[TOPIC]_RESEARCH.md`
+- Partition topics from Summary file into discrete tasks
 - Each task: Status, Estimated effort, Sources, Done-when criteria
 - Effort estimates typically 2-4 hours total
-- **Done when**: All TOC topics have corresponding tasks
+- **Done when**: All topics have corresponding tasks
 
 ### Step 4: Run Second VCRIV
 
-Run quality pipeline on Planning deliverables (TOC, template, TASKS).
+Run quality pipeline on Planning deliverables (Summary file, template, TASKS).
 - **Done when**: Phase 2 deliverables verified, critique addressed
 
 ## Phase 3: Topic-by-Topic, File-by-File Research
@@ -115,11 +121,11 @@ Adhere to TASKS plan and STRUT. Run VCRIV per granularity rules.
 - For each topic file from TASKS:
   1. Research using official source URLs first
   2. Cross-reference with community sources for limitations, quirks
-  3. Create `_INFO_[TOPIC]-IN[XX]_[SUBTOPIC].md` using template
+  3. Create `_INFO_[TOPIC]_[NN]-[NAME].md` using template (NN starts at 03)
   4. **Focus on curated best options** - recommend, don't just list
   5. Include **clear recommendation with rationale** for each topic
   6. **Mandatory inline citations**: `[VERIFICATION_LABEL] (SOURCE_ID | URL or filename)`
-  7. Update TASKS progress and TOC status
+  7. Update TASKS progress and Summary file status
 - All claims must have verification labels
 
 ### VCRIV per Granularity Rules
@@ -139,10 +145,10 @@ Run quality pipeline as defined in STRUT (scope-based from SKILL.md):
 
 ### Sync and Metadata
 
-- Cross-verify topic files against TOC checklist
-- Sync summaries back into TOC
+- Cross-verify topic files against Summary file checklist
+- Finalize Summary section with cross-document synthesis from completed topic files
 - Verify all links work
-- **Add Research stats to TOC header block**: `**Research stats**: Xm net | Y docs | Z sources`
+- **Add Research stats to Summary file header block**: `**Research stats**: Xm net | Y docs | Z sources`
 
 ### Run Final VCRIV
 
@@ -200,3 +206,5 @@ MEPI outputs an INFO document with:
 - Missing decomposition - Phase 1 is still mandatory
 - No recommendation - MEPI must recommend, not just list
 - Shallow research - curated != minimal effort
+- Monolithic single-file research - MEPI also decomposes into individual topic files
+- Summary without synthesis - Summary file must contain cross-document synthesis, not just topic links

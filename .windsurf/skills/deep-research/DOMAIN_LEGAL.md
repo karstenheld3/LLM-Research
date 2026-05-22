@@ -19,16 +19,16 @@ Research domain for legislation, case law, regulatory frameworks, and legal anal
 - **Download and transcribe FULL legislation texts** - No summarization, no excerpts. The complete text must be available in `_SOURCES/`.
 - For EU/national legislation: Download official PDF from EUR-Lex or national gazette, transcribe fully
 - For court decisions: Download full text, transcribe fully
-- **Model selection**: Use `gpt-5-mini` exclusively (99.5% accuracy). Legal text requires verbatim transcription - wrong article numbers or terminology have regulatory consequences.
 - Cross-reference between statutes and case law
-- Store complete texts in `_SOURCES/`:
+- Download to `_DOWNLOADS_gitignore/`, transcribe to `_SOURCES/`:
   ```
+  _DOWNLOADS_gitignore/
+  ├── eu-ai-act-2024.pdf              # Original legislation PDF
+  └── case-law-c-123-24.pdf           # Court decision PDF
+
   _SOURCES/
-  \u251c\u2500\u2500 eu-ai-act-2024.pdf              # Original legislation PDF
-  \u251c\u2500\u2500 eu-ai-act-2024.md               # Full verbatim transcription
-  \u251c\u2500\u2500 eu-ai-act-2024_data.jsonl       # Extracted tables (if any)
-  \u251c\u2500\u2500 eu-ai-act-2024_transcribed/     # Individual pages
-  \u2514\u2500\u2500 case-law-c-123-24.md            # Court decision transcription
+  ├── eu-ai-act-2024.md               # Full verbatim transcription
+  └── case-law-c-123-24.md            # Court decision transcription
   ```
 
 ## Template Additions

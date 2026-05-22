@@ -80,7 +80,7 @@ Tested on EU AI Act (144 pages, German legal text, 2024-02-04):
 - 50+ [unclear] markers indicating reading difficulties
 - Content duplication and structural issues
 
-**For legal documents**: Use `--model gpt-5-mini --dpi 150` to avoid factual errors that could have regulatory consequences. The 150 DPI setting provides optimal balance between image quality and processing speed for document transcription.
+**For legal documents**: Use `--model gpt-5-mini --dpi 120` to avoid factual errors that could have regulatory consequences. The 120 DPI setting provides optimal balance between image quality and processing speed for document transcription.
 
 ## Configuration
 

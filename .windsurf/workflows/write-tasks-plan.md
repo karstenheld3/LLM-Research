@@ -60,7 +60,7 @@ Create partitioned task documents from IMPL plans. Combines `/partition` workflo
 - Estimated total: X HHW
 - Parallelizable: M tasks
 
-## Task 0 - Baseline (MANDATORY)
+## Task 1 - Baseline (MANDATORY)
 
 Run before starting any implementation:
 - [ ] Run existing tests, record pass/fail baseline
@@ -89,7 +89,7 @@ Run before starting any implementation:
 ## Task N - Final Verification (MANDATORY)
 
 Run after all tasks complete:
-- [ ] Compare test results to Task 0 baseline
+- [ ] Compare test results to Task 1 baseline
 - [ ] New failures = regressions (must fix)
 - [ ] Run /verify workflow
 - [ ] Update PROGRESS.md - mark complete
