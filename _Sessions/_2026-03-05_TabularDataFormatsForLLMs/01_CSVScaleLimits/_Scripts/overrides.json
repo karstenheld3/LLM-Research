@@ -1,0 +1,40 @@
+[
+  {
+    "model": "gpt-5-mini",
+    "model_display": "gpt-5-mini",
+    "provider": "openai",
+    "method": "reasoning_effort",
+    "method_display": "reasoning",
+    "effort": "high",
+    "scale_limit": 675,
+    "bounds": [675, null],
+    "failure_mode": null,
+    "context_pct": null,
+    "truncated": "No",
+    "cost_usd": null,
+    "time_per_request_sec": null,
+    "iterations": null,
+    "status": "errors",
+    "folder": "gpt-5-mini_reasoning_effort_high_max16384",
+    "note": "T04 passed at 675 rows but had evaluation errors at higher scales"
+  },
+  {
+    "model": "claude-opus-4-7",
+    "model_display": "claude-opus-4.7",
+    "provider": "anthropic",
+    "method": "adaptive_thinking",
+    "method_display": "adaptive_thinking",
+    "effort": "high",
+    "scale_limit": 843,
+    "bounds": [843, 1012],
+    "failure_mode": null,
+    "context_pct": null,
+    "truncated": "No",
+    "cost_usd": 30.0,
+    "time_per_request_sec": 600,
+    "iterations": null,
+    "status": "cancelled",
+    "folder": "claude-opus-4-7_adaptive_thinking_high_max16384",
+    "note": "Cancelled due to cost >$30 and endless reasoning tokens; boundary 843-1012"
+  }
+]
