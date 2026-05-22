@@ -4,9 +4,9 @@
 
 - [x] **EXPLORE** - complete - Research tabular format effectiveness for LLMs
 - [x] **DESIGN** - complete - Define test methodology and benchmarks
-- [ ] **IMPLEMENT** - in_progress - Run empirical tests
-- [ ] **REFINE** - pending - Analyze results, validate findings
-- [ ] **DELIVER** - pending - Document recommendations
+- [x] **IMPLEMENT** - complete - Test 01 (19/19 CSV scale limits), Test 02 (56/56 format comparison)
+- [x] **REFINE** - complete - Findings documents, critique/reconcile/verify cycle
+- [ ] **DELIVER** - pending - Final summary, session finalization
 
 ## STRUT: Restructure CSV Scale Limit Documents
 
@@ -60,9 +60,9 @@
 
 ## To Do
 
-- [ ] Run larger scale tests (100, 300, 600 rows)
-- [ ] Compare different models (gpt-5-mini vs others)
-- [ ] Test different tabular formats (CSV baseline established)
+- [ ] Test chunking strategy (chunk+merge vs single-shot) - highest-value next experiment
+- [ ] Fix TBLF-FL-005 (re-run Test 02 with 7/20 columns to match Test 01)
+- [ ] Test format preference at higher reasoning effort levels
 
 ## In Progress
 
@@ -70,7 +70,18 @@
 
 ## Done
 
-- [x] Align Format Comparison with 4-document methodology (STRUT below)
+- [x] Automate findings generation for Format Comparison
+  - Created `08_generate_findings.py` (reads `all_results.json`, generates 4 AUTO sections)
+  - Added to `run_pipeline.ps1` as step 3/4
+  - Sections: key findings, hypothesis evidence tables, unexpected findings, production recommendations
+- [x] Devil's Advocate review of full methodology (`_PROBLEMS_REVIEW.md`)
+  - 3 confirmed: n=3 precision, chunking gap, E3 circularity
+  - 5 disputed (already addressed or overstated), 1 dismissed (pipeline not overengineered for ongoing research)
+- [x] Reconciliation: implemented 3 confirmed findings
+  - Added Chunking Strategy + Measurement Precision Note to both INFO_02 files
+  - Added floor-effect caveat to E3
+- [x] Verify: fixed CPKC/TPKC acronym expansion, wrong Open Question #3 reference
+- [x] Align Format Comparison with 4-document methodology (STRUT complete)
   - Split `_INFO_FormatComparison.md` into `_INFO_01` (results) + `_INFO_02` (findings)
   - Created `06_aggregate_results.py` + `run_pipeline.ps1` for automated pipeline
   - Added AUTO markers, overrides.json, verification labels, caveats, emergent hypotheses
