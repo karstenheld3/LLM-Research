@@ -57,6 +57,15 @@ Derived from 56/56 completed tests. Data in `_INFO_01_FormatComparison-TestResul
   - gpt-5.4: json (702). gpt-5.5: toml (828), json drops to 430 (-39%)
 <!-- AUTO:findings-1:end -->
 
+- **json is the safest untested default** [VERIFIED]
+  - Avg rank 2.9/8, stdev 2.2 across 7 models. Worst case: 52% of best format. See section 3.5.
+
+- **Output tokens are format-independent** [VERIFIED]
+  - Input varies 2.3x (json 91K vs csv 40K). Output stable at 27-33K regardless of format.
+
+- **Failure mode is model-specific, not format-specific** [VERIFIED]
+  - 50/56 comprehension, 6/56 truncation. All truncation = opus-4.5 only. See section 3.6.
+
 ## 2. Hypothesis Verdicts
 
 **Precision note**: All verdicts are based on n=3 verification runs per binary search iteration. Scale limits have ~28% variance between independent runs (from Test 01). Differences <20% may be within noise. See section 8 for caveats.
@@ -141,6 +150,45 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 **kv_colon_space is #1 in 1/7 models.**
 <!-- AUTO:findings-3:end -->
 
+### 3.5 Format Ranking Stability (Cross-Model)
+
+Which formats rank consistently vs chaotically across all 7 models? Rank stdev measures volatility (lower = more predictable).
+
+- **json** - avg rank 2.9/8, stdev 2.2, worst case 52% of best. Best "safe default" if you cannot test.
+- **yaml** - avg rank 3.7/8, stdev 2.5, worst case 50% of best. Strong but less predictable.
+- **csv** - avg rank 4.6/8, stdev 1.9 (most stable). Mid-tier but never catastrophic.
+- **kv_colon_space** - avg rank 4.4/8, stdev 2.4. High variance (rank 1 to rank 8).
+- **csv_quoted** - avg rank 4.7/8, stdev 2.2. Similar to csv but slightly less stable.
+- **markdown_table** - avg rank 5.0/8, stdev 2.3. Below average, can be rank 2 or rank 8.
+- **xml** - avg rank 5.1/8, stdev 2.7 (most volatile). Rank 2 on gpt-5.2/sonnet, rank 8 on gpt-5.5/gpt-5.4.
+- **toml** - avg rank 5.6/8, stdev 2.2. Below average; worst case only 17% of best (gpt-5.2: 46 rows).
+
+**Production takeaway**: If you cannot run format tests, use json (best avg rank). If you need predictability, use csv (lowest variance).
+
+### 3.6 Failure Mode by Format
+
+50/56 tests fail from comprehension. 6/56 from truncation. All 6 truncation failures are opus-4.5:
+- opus-4.5 truncates on: json (60.3% context), yaml (35.3%), xml (45.7%), toml (34.1%), kv_colon_space (30.1%), markdown_table (22.7%)
+- opus-4.5 does NOT truncate on: csv (21.5% context, comprehension), csv_quoted (15.0% context, comprehension)
+
+Format does NOT determine failure mode. The truncation pattern is model-specific: opus-4.5 uniquely pushes context utilization high enough to hit output limits on verbose formats, while compact formats (csv, csv_quoted) still fail from comprehension before reaching truncation. This extends Test 01's finding that opus models engage deeper context than other families. [VERIFIED]
+
+### 3.7 Output Tokens Are Format-Independent
+
+Input tokens vary 2.3x by format at scale limit (avg across models):
+- Verbose: json 91K, xml 90K, yaml 82K
+- Compact: csv 40K, csv_quoted 47K, markdown_table 41K
+
+Output tokens are stable: 27-33K regardless of input format. Because output is always JSON extraction, the model generates roughly the same output volume regardless of how input data was formatted. The cost difference between formats is driven entirely by input token count. [VERIFIED]
+
+### 3.8 Context Utilization Does Not Predict Scale Limit
+
+Average context utilization at scale limit by format:
+- json: 22.5%, xml: 20.3%, yaml: 17.1%, toml: 16.1%
+- kv_colon_space: 14.3%, markdown_table: 10.2%, csv: 10.0%, csv_quoted: 10.0%
+
+json and xml consume 2x more context than csv at their respective scale limits, yet json has the best average ranking (2.9/8). More context consumed does NOT mean worse performance. Models fail from comprehension, not from running out of context window. This further confirms Test 01's finding that context window is not the bottleneck. [VERIFIED]
+
 ## 4. Unexpected Findings
 
 <!-- AUTO:findings-4:start -->
@@ -168,6 +216,15 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 5. **gpt-5.5 is 1.4x faster than gpt-5.4 (Time Per Kilo-Cell, TPKC)** [TESTED]
    - gpt-5.5 avg TPKC: 12s. gpt-5.4 avg TPKC: 16s
 <!-- AUTO:findings-4:end -->
+
+6. **opus-4.5 is the only model that truncates (6/8 formats)** [VERIFIED]
+   - csv and csv_quoted avoid truncation (comprehension failure instead)
+   - opus-4.5 hits 22-60% context utilization - other models stay below 16%
+   - Consistent with Test 01: opus family uniquely engages deep context
+
+7. **Context utilization at failure is 2x higher for verbose formats** [VERIFIED]
+   - json/xml: 20-22% avg context at scale limit. csv: 10%.
+   - Yet json has BEST avg rank (2.9/8). More context consumed does not mean worse performance.
 
 ## 5. Production Recommendations
 
@@ -270,6 +327,14 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns.
 - NoLiMa 2025 - https://arxiv.org/abs/2502.05167 (attention mechanism finding)
 
 ## 10. Document History
+
+**[2026-05-22 20:00]**
+- Added: Section 3.5 - Format Ranking Stability (cross-model rank stdev analysis, "safe default" finding)
+- Added: Section 3.6 - Failure Mode by Format (truncation = opus-4.5 only, not format-dependent)
+- Added: Section 3.7 - Output Tokens Are Format-Independent (input varies 2.3x, output stable 27-33K)
+- Added: Section 3.8 - Context Utilization Does Not Predict Scale Limit (confirms Test 01 finding)
+- Added: Key findings - json safe default, output token independence, failure mode model-specificity
+- Added: Unexpected findings #6 (opus-4.5 truncation), #7 (context utilization paradox)
 
 **[2026-05-22 19:45]**
 - Added: Chunking Strategy subsection in section 5 (production recommendation gap from review)
