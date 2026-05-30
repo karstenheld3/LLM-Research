@@ -2,11 +2,11 @@
 
 Global workflow for creating the Summary file in deep research. Used by all research strategies.
 
-The Summary file (`_INFO_[TOPIC]_01-SUMMARY.md`) is the master index and cross-document synthesis for a research topic. It contains a proper summary section AND a Topic Files section (the TOC). It is NOT just a table of contents.
+The Summary file (`_INFO_[TOPIC]-01_Summary.md`) is the master index and cross-document synthesis for a research topic. It contains a proper summary section AND a Topic Files section (the TOC). It is NOT just a table of contents.
 
 ## Prerequisites
 
-- `_INFO_[TOPIC]_02-SOURCES.md` exists with all sources collected and IDs assigned
+- `_INFO_[TOPIC]-02_Sources.md` exists with all sources collected and IDs assigned
 - [TOPIC] identifier defined (2-6 uppercase chars, e.g., `MSGRAPH`, `OAIAPI`)
 - Full subject name defined (e.g., "Microsoft Graph API")
 
@@ -19,7 +19,7 @@ The Summary file (`_INFO_[TOPIC]_01-SUMMARY.md`) is the master index and cross-d
    - `[VERSION]` → version or documentation date
 3. **Create categories**: Group topics logically from sources
 4. **List topic files**: One entry per topic with clickable link, Doc ID, and brief description
-   - Format: `[\`_INFO_[TOPIC]_[NN]-[NAME].md\`](./_INFO_[TOPIC]_[NN]-[NAME].md) [[TOPIC]-IN[NN]]`
+   - Format: `[\`_INFO_[TOPIC]-[NN]_[Name].md\`](./_INFO_[TOPIC]-[NN]_[Name].md) [[TOPIC]-IN[NN]]`
    - NN = sequential number starting at 03 (01=Summary, 02=Sources)
 5. **Add Topic Count section**: Summary of total and per-category counts
 6. **Write Topic Details**: For each topic add Scope, Contents, Sources
@@ -31,12 +31,12 @@ The Summary file (`_INFO_[TOPIC]_01-SUMMARY.md`) is the master index and cross-d
 
 ## File Naming
 
-Output: `_INFO_[TOPIC]_01-SUMMARY.md`
+Output: `_INFO_[TOPIC]-01_Summary.md`
 Doc ID: `[TOPIC]-IN01`
 
 Related files in the same research:
-- `_INFO_[TOPIC]_02-SOURCES.md` (Doc ID: `[TOPIC]-IN02`)
-- `_INFO_[TOPIC]_03-[NAME].md` through `_INFO_[TOPIC]_[NN]-[NAME].md` (topic files)
+- `_INFO_[TOPIC]-02_Sources.md` (Doc ID: `[TOPIC]-IN02`)
+- `_INFO_[TOPIC]-03_[Name].md` through `_INFO_[TOPIC]-[NN]_[Name].md` (topic files)
 
 ## Structure Rules
 
@@ -49,15 +49,15 @@ Related files in the same research:
 ## Quality Gates
 
 **Done when**:
-- All sources from `_INFO_[TOPIC]_02-SOURCES.md` covered by topic files
+- All sources from `_INFO_[TOPIC]-02_Sources.md` covered by topic files
 - Doc ID is `[TOPIC]-IN01`
 - Summary is 5-15 sentences of cross-document synthesis (not just topic titles)
-- All topic links follow format: `[\`_INFO_[TOPIC]_[NN]-[NAME].md\`](./_INFO_[TOPIC]_[NN]-[NAME].md) [[TOPIC]-IN[NN]]`
+- All topic links follow format: `[\`_INFO_[TOPIC]-[NN]_[Name].md\`](./_INFO_[TOPIC]-[NN]_[Name].md) [[TOPIC]-IN[NN]]`
 - Topic numbering starts at 03 (01=Summary, 02=Sources)
 - Topic Count section present with per-category breakdown
 - `/verify` passes
 
 ## Example
 
-Input: `_INFO_OAIAPI_02-SOURCES.md` with 79 sources
-Output: `_INFO_OAIAPI_01-SUMMARY.md` with 62 topics in 16 categories
+Input: `_INFO_OAIAPI-02_Sources.md` with 79 sources
+Output: `_INFO_OAIAPI-01_Summary.md` with 62 topics in 16 categories

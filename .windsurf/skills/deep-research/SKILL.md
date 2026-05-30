@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: Apply when conducting deep research on technologies, APIs, frameworks, or other software development topics requiring systematic investigation
+description: Apply when conducting deep research on technologies, APIs, frameworks, people, companies, organizations, networks, or other topics requiring systematic investigation
 ---
 
 # Deep Research Skill
@@ -26,7 +26,7 @@ Systematic research using MCPI (Most Complete Point of Information) or MEPI (Mos
 
 ## Output Folder (Pre-Phase 1)
 
-Deep research creates a Topic Folder for its outputs by default.
+Deep research ALWAYS creates a dedicated subfolder for its outputs. This ensures parallel researches on the same topic cannot have filename or ID conflicts - each folder has an independent numbering namespace.
 
 ### Step 1.1: Detect Work Mode
 
@@ -45,6 +45,8 @@ Deep research creates a Topic Folder for its outputs by default.
 **SESSION-MODE as Step (only if user explicitly requests):** Create Step Folder per @skills:session-management Step Folder naming. Folder name: `S##_[TOPIC]-[PascalCaseName]_YYYY-MM-DD/`
 
 All deep-research output files go in this folder. Each folder has independent numbering namespace per @skills:session-management.
+
+**Parallel research isolation**: Multiple deep-researches for the same TOPIC are safe because each gets its own `T##_` subfolder with independent file numbering. Topic IDs are unique per ID-REGISTRY.md, but folder-level isolation prevents file conflicts even when the same TOPIC is researched from different angles.
 
 ## Phase Model (Global)
 
@@ -77,7 +79,7 @@ Answer these 7 questions before any source collection:
 3. **Q3 - Dimensions**: Which apply? (legal, financial, administrative, practical, technical, professional, medical, psychological, personal, organizational, strategic, security, cultural, educational, historical, or custom)
 4. **Q4 - Topics**: 3-5 topics per dimension
 5. **Q5 - Strategy**: MCPI (exhaustive) or MEPI (curated)?
-6. **Q6 - Domain**: Which profile? (SOFTWARE, MARKET_INTEL, LEGAL, or DEFAULT)
+6. **Q6 - Domain**: Which profile? (SOFTWARE, MARKET_INTEL, LEGAL, PROFILES, or DEFAULT)
 7. **Q7 - Discovery Platforms**: What databases/platforms index this entity type? Test each, classify access level.
 
 Store PromptDecomposition in STRUT plan. Do NOT proceed to source collection until all 7 questions are answered.
@@ -92,7 +94,7 @@ Store PromptDecomposition in STRUT plan. Do NOT proceed to source collection unt
   "topics_per_dimension": { "dimension": ["topics"] },
   "strategy": "MCPI | MEPI",
   "strategy_rationale": "string (WHY this strategy fits the prompt)",
-  "domain": "DEFAULT | SOFTWARE | MARKET_INTEL | LEGAL",
+  "domain": "DEFAULT | SOFTWARE | MARKET_INTEL | LEGAL | PROFILES",
   "domain_rationale": "string (WHY this domain profile applies)",
   "effort_estimate": "N hours minimum",
   "discovery_platforms": {
@@ -113,6 +115,7 @@ Store PromptDecomposition in STRUT plan. Do NOT proceed to source collection unt
 
 - **STRUT required** for all research sessions (include pipeline steps and time log)
 - **Assumptions check first** - write down what you think you know before researching
+- **Google search via Playwright** - MANDATORY for all research. Use ms-playwright-mcp to search google.com with targeted queries (filetype:pdf, site:, exact phrases). Discovers PDFs, whitepapers, and public documents that `search_web` misses.
 - **Discovery platforms tested** - identify, test, classify (FREE/PAID/PARTIAL) before source collection
 - **Primary sources > secondary > community** - verify tier 1-3 before accepting tier 6-8
 - **Access dates required**: `Accessed: YYYY-MM-DD` on all sources
@@ -126,6 +129,12 @@ Store PromptDecomposition in STRUT plan. Do NOT proceed to source collection unt
 - **Document strategy choice** - OUTPUT document must include strategy (MEPI/MCPI) + domain + rationale for both in header block
 - **Distinguish** facts from opinions from assumptions
 - **Autonomous after Phase 1** - no user interaction until delivery (except [CONSULT])
+
+## Effort Validation
+
+- Decomposition MUST estimate minimum research hours in STRUT
+- If actual time < 50% of estimate, agent MUST justify or expand research
+- Goal: outperform equivalent human research time for the given scope
 
 ## Strategy Selection
 
@@ -176,10 +185,15 @@ verify → critique → reconcile → implement → verify
 3. Each research output (per VCRIV granularity rules)
 4. Complete research set ex-post (after all topics complete)
 
+**Execution modes:**
+- **Full VCRIV** (5 steps): verify → critique → reconcile → implement → verify. Use for planning deliverables and final ex-post review.
+- **Consolidated VCRIV** (1 step): All 5 steps executed in a single pass without separate review files. Use for individual topic files and single-profile research.
+
 **Granularity** (scope-based):
-- NARROW: VCRIV per topic file
-- FOCUSED/EXPLORATORY: VCRIV per dimension
-- Final VCRIV on Summary file
+- NARROW: VCRIV per topic file (consolidated)
+- FOCUSED/EXPLORATORY: VCRIV per dimension (consolidated)
+- Final VCRIV on Summary file (full)
+- Profile research: VCRIV per standalone profile document (consolidated for single, full for network sets)
 
 **Termination**: Max 2 cycles per checkpoint, then [CONSULT].
 
@@ -196,10 +210,11 @@ Referenced files MUST exist in `_SOURCES/` subfolder (transcribed markdown).
 ## Domain Profiles
 
 Read one profile per session based on Q6:
-- [DOMAIN_SOFTWARE.md](DOMAIN_SOFTWARE.md) - APIs, frameworks, libraries
-- [DOMAIN_MARKET_INTEL.md](DOMAIN_MARKET_INTEL.md) - Companies, financials
-- [DOMAIN_LEGAL.md](DOMAIN_LEGAL.md) - Legislation, case law
-- [DOMAIN_DEFAULT.md](DOMAIN_DEFAULT.md) - Generic (use when none match)
+- [DOMAIN_SOFTWARE.md](software/DOMAIN_SOFTWARE.md) - APIs, frameworks, libraries
+- [DOMAIN_MARKET_INTEL.md](market-intel/DOMAIN_MARKET_INTEL.md) - Companies, financials
+- [DOMAIN_LEGAL.md](legal/DOMAIN_LEGAL.md) - Legislation, case law
+- [DOMAIN_PROFILES.md](profiles/DOMAIN_PROFILES.md) - People, companies, organizations, networks
+- [DOMAIN_DEFAULT.md](default/DOMAIN_DEFAULT.md) - Generic (use when none match)
 
 ## Output Format
 
@@ -222,15 +237,31 @@ MEPI uses its own output format (see RESEARCH_STRATEGY_MEPI.md) with Comparison 
 
 ## Reference Files
 
+- [RESEARCH_RULES.md](RESEARCH_RULES.md) - Verification and improvement rules for research output (used by `/verify` and `/improve`)
 - [RESEARCH_TOOLS.md](RESEARCH_TOOLS.md) - Tools, source processing, configuration
+- [RESEARCH_TOC_TEMPLATE.md](RESEARCH_TOC_TEMPLATE.md) - TOC template (MUST use when >1 topic files)
+- [RESEARCH_CREATE_TOC.md](RESEARCH_CREATE_TOC.md) - TOC creation workflow
 - [RESEARCH_SUMMARY_TEMPLATE.md](RESEARCH_SUMMARY_TEMPLATE.md) - Summary file template
 - [RESEARCH_CREATE_SUMMARY.md](RESEARCH_CREATE_SUMMARY.md) - Summary creation workflow
 
-**File naming** (numbered scheme):
-- `_INFO_[TOPIC]_01-SUMMARY.md` - Summary file with cross-document synthesis + Topic Files section
-- `_INFO_[TOPIC]_02-SOURCES.md` - Collected sources with IDs and verification labels
-- `_INFO_[TOPIC]_03-[NAME].md` through `_INFO_[TOPIC]_[NN]-[NAME].md` - Individual topic files
+**Profile Templates and Rules** (in `profiles/` subfolder, see [DOMAIN_PROFILES.md](profiles/DOMAIN_PROFILES.md) for full instructions):
+- [PERSONAL_PROFILE_TEMPLATE.md](profiles/PERSONAL_PROFILE_TEMPLATE.md) + [PERSONAL_PROFILE_RULES.md](profiles/PERSONAL_PROFILE_RULES.md)
+- [COMPANY_PROFILE_TEMPLATE.md](profiles/COMPANY_PROFILE_TEMPLATE.md) + [COMPANY_PROFILE_RULES.md](profiles/COMPANY_PROFILE_RULES.md)
+- [ORGA_PROFILE_TEMPLATE.md](profiles/ORGA_PROFILE_TEMPLATE.md) + [ORGA_PROFILE_RULES.md](profiles/ORGA_PROFILE_RULES.md)
+- [NETWORK_PROFILE_TEMPLATE.md](profiles/NETWORK_PROFILE_TEMPLATE.md) + [NETWORK_PROFILE_RULES.md](profiles/NETWORK_PROFILE_RULES.md)
 
-**Decomposition rule**: Both MCPI and MEPI decompose topics into individually researched files. No monolithic single-file research. The Summary file is finalized in Phase 4 with cross-document synthesis after all topic files are complete.
+**Output Rules** (global invariant):
 
-**Source ID format**: `[TOPIC]-SC-[SOURCE]-[DOCNAME]`
+- **Always create subfolder** per "Output Folder" section above. No exceptions.
+- **Single-file output** (e.g., single profile): Apply naming convention from context (session, conversation, step, topic). File name does NOT use numbered scheme. Example: `_INFO_[TOPIC]_[SubjectName].md`
+- **Multi-file output** (multiple sub-topics): Use numbered scheme with reserved slots:
+  - `_INFO_[TOPIC]-01_Summary.md` - **RESERVED**. Mandatory. Stub created in Phase 2, finalized in Phase 4 with cross-document synthesis.
+  - `_INFO_[TOPIC]-02_Sources.md` - **RESERVED**. Mandatory. Created in Phase 1, populated during Phases 1, 2, and 3.
+  - `_INFO_[TOPIC]-03_[Name].md` through `_INFO_[TOPIC]-[NN]_[Name].md` - Individual topic files (PascalCase)
+
+**Decomposition rule**: Both MCPI and MEPI decompose topics into individually researched files. No monolithic single-file research.
+
+**Source ID format**: `[TOPIC]-SC-[SOURCE]-[DOCREF]`
+- `[SOURCE]` = site mnemonic 2-6 chars (e.g., `MSFT`, `SO`, `GH`)
+- `[DOCREF]` = page/section 2-12 chars, omit vowels (e.g., `RATELMT`, `ISSUE1234`)
+- Note: Simplified from devsystem-ids.md `[TOPIC]-[DOC]-SC-...` format. The `[DOC]` segment is omitted because all sources are defined in `_INFO_[TOPIC]-02_Sources.md` (always IN02).

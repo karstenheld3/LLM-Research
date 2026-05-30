@@ -47,7 +47,7 @@ Generic research domain profile. Use when no specific domain profile matches (SO
 
 ### Source Handling
 - **Primary sources**: Download to `_DOWNLOADS_gitignore/`, transcribe to `_SOURCES/`
-- **Source IDs**: Assign in format `[TOPIC]-SC-[SOURCE]-[DOCNAME]`
+- **Source IDs**: Assign in format `[TOPIC]-SC-[SOURCE]-[DOCREF]`
 - **Secondary sources**: Cite with `[COMMUNITY]` label and access date
 - **Access dates**: All sources MUST include `Accessed: YYYY-MM-DD`
 
@@ -57,6 +57,8 @@ Add these sections to research output template:
 - **Limitations and Known Issues** - What we couldn't verify, caveats
 - **Recommendations** - Clear actionable guidance (even if brief)
 - **Source Access Dates** - When each source was accessed
+
+**Profile templates**: When researching a specific entity (person, company, organization, network) as primary subject, use templates from the shared `profiles/` module. See [DOMAIN_PROFILES.md](../profiles/DOMAIN_PROFILES.md) for template selection and rules.
 
 ## Quality Criteria
 
@@ -68,12 +70,6 @@ Additional checks for DEFAULT domain quality pipeline:
 - Limitations section populated with honest assessment
 - Recommendations section exists (even if brief)
 - Tier 4-5 sources labeled with `[COMMUNITY]` and limitations noted
-
-## Effort Validation
-
-- Decomposition MUST estimate minimum research hours
-- If actual time < 50% of estimate, agent MUST justify or expand research
-- Goal: outperform 2 days (16 hours) of human research for EXPLORATORY scope
 
 ## VCRIV Pipeline
 

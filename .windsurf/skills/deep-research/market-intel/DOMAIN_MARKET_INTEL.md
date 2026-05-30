@@ -32,6 +32,8 @@ Add these sections to the standard topic template:
 - **Risk Factors** - From official filings and analyst reports
 - **Timeline** - Key dates (earnings, product launches, regulatory milestones)
 
+**Profile templates**: When researching a specific company as primary subject, use [COMPANY_PROFILE_TEMPLATE.md](../profiles/COMPANY_PROFILE_TEMPLATE.md) from the shared `profiles/` module. See [DOMAIN_PROFILES.md](../profiles/DOMAIN_PROFILES.md) for all profile types and rules.
+
 ## Quality Criteria
 
 Additional checks for market intelligence domain quality pipeline:

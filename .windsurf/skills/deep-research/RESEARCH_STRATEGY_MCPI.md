@@ -22,7 +22,7 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
 
 - Create `__STRUT_[TOPIC].md` using `/write-strut` workflow
 - STRUT defines: phases, objectives, steps, deliverables, transitions
-- STRUT enforces 3 VCRIV checkpoints as deliverables
+- STRUT enforces 3 VCRIV gate deliverables (Preflight, Planning, Final) + per-file VCRIV during research = 4 checkpoints total per SKILL.md
 - STRUT MUST include quality pipeline steps and time log:
   ```
   ## Time Log
@@ -34,9 +34,9 @@ Decompose prompt, document assumptions, collect sources, verify/correct, create 
   ```
 - **Domain identification**:
   1. Determine research domain from prompt context
-  2. Read corresponding `DOMAIN_*.md` profile (if available)
+  2. Read corresponding `[domain]/DOMAIN_*.md` profile (if available)
   3. Incorporate domain-specific rules (source tiers, document handling, template additions, quality criteria)
-  4. If no matching profile, use DOMAIN_DEFAULT.md and document in STRUT
+  4. If no matching profile, use `default/DOMAIN_DEFAULT.md` and document in STRUT
 - STRUT MUST include the active domain profile and its rules
 - Answer 7 decomposition questions per SKILL.md, store PromptDecomposition in STRUT
 - Run `/verify` on STRUT plan
@@ -56,13 +56,19 @@ Before collecting sources, test each discovery platform from Q7:
 - Query each platform with test search matching research criteria
 - Classify access: **FREE** (full results), **PAID** (paywall), **PARTIAL** (limited free tier)
 - Keep platforms with FREE or PARTIAL access
-- Document PAID platforms in `_INFO_[TOPIC]_02-SOURCES.md` for user follow-up
+- Document PAID platforms in `_INFO_[TOPIC]-02_Sources.md` for user follow-up
 - **Done when**: All platforms tested, access levels documented, selected platforms identified
 
 ### Step 4: Collect Sources
 
 - **Document version scope**: Explicitly state the [SUBJECT] version (e.g., `v2.1.0`, `API v3`). If not applicable, use date: `YYYY-MM-DD`
-- Create `_INFO_[TOPIC]_02-SOURCES.md`
+- Create `_INFO_[TOPIC]-02_Sources.md`
+- **MANDATORY: Google search via Playwright** (ms-playwright-mcp). Navigate to google.com and run targeted queries:
+  - `"[SUBJECT]" filetype:pdf` - Find whitepapers, specs, official PDFs
+  - `"[SUBJECT]" site:[official-domain]` - Exhaustive official content
+  - `"[SUBJECT]" [dimension keyword]` - Per-dimension discovery
+  - Collect PDF URLs, documentation pages, and public resources from results
+  - Download discovered PDFs to `_DOWNLOADS_gitignore/`
 - **Query selected discovery platforms** from Step 3 first
 - Collect ALL official documentation URLs from vendor/project documentation
 - Collect community sources (secondary sources) for real-world insights:
@@ -73,9 +79,9 @@ Before collecting sources, test each discovery platform from Q7:
   - Release notes and changelogs for version-specific behavior
 - **Community source rule**: Community sources supplement official docs, not replace. Use for limitations, quirks, gotchas. **Filter to match [SUBJECT] version** - discard outdated issues.
 - **Source collection using domain-specific tiers**: Use tiers from the active domain profile. Default: official documentation > vendor content > community/analyst sources.
-- Assign source IDs: `[SUBJECT]-SC-[SOURCE]-[DOCNAME]` (per SKILL.md format)
-  - Official: `[SUBJECT]-SC-[VENDOR]-[DOCNAME]`
-  - Community: `[SUBJECT]-SC-[PLATFORM]-[DOCNAME]` (e.g., `GRPH-SC-SO-RATELIMIT`)
+- Assign source IDs: `[TOPIC]-SC-[SOURCE]-[DOCREF]` (per SKILL.md format)
+  - Official: `[TOPIC]-SC-[VENDOR]-[DOCREF]`
+  - Community: `[TOPIC]-SC-[PLATFORM]-[DOCREF]` (e.g., `GRPH-SC-SO-RATELMT`)
 - Group sources by category (domain-specific)
 - Include "Related" section listing similar or easily confused alternatives
 - **Source processing**: Process all PDF sources through transcription pipeline. Read `deep-research-config.json` for settings.
@@ -85,7 +91,7 @@ Before collecting sources, test each discovery platform from Q7:
 
 - Verify assumptions against primary sources
 - If >30% wrong or outdated, re-run with corrected understanding, keep originals (strikethrough). **Max 2 re-runs**, then proceed.
-- Document accuracy in `_INFO_[TOPIC]_02-SOURCES.md` header (e.g., "Preflight accuracy: 7/10 assumptions verified")
+- Document accuracy in `_INFO_[TOPIC]-02_Sources.md` header (e.g., "Preflight accuracy: 7/10 assumptions verified")
 - **Rubric**: CORRECT = matches source exactly. PARTIAL = spirit correct but details differ (counts as wrong). WRONG = contradicted by source.
 
 ### Step 6: Run First VCRIV
@@ -101,7 +107,7 @@ Create Summary file (skeletal), topic template, TASKS plan, run second VCRIV.
 
 - Follow [RESEARCH_CREATE_SUMMARY.md](RESEARCH_CREATE_SUMMARY.md) workflow
 - Use [RESEARCH_SUMMARY_TEMPLATE.md](RESEARCH_SUMMARY_TEMPLATE.md) as base
-- Create `_INFO_[TOPIC]_01-SUMMARY.md` with skeletal structure (summary placeholder, topic file links, topic count)
+- Create `_INFO_[TOPIC]-01_Summary.md` with skeletal structure (summary placeholder, topic file links, topic count)
 - **Done when**: Summary file covers all major topics from sources, skeletal summary present, all topic file links resolve
 
 ### Step 2: Template Creation
@@ -116,7 +122,7 @@ Create Summary file (skeletal), topic template, TASKS plan, run second VCRIV.
   - Main Sections (follow TOC structure)
   - **Limitations and Known Issues** (from community sources)
   - **Gotchas and Quirks** (undocumented behavior, edge cases)
-  - Sources section with **same IDs as `_INFO_[TOPIC]_02-SOURCES.md`**
+  - Sources section with **same IDs as `_INFO_[TOPIC]-02_Sources.md`**
   - Document History
 - Include "Template Instructions" section (to be deleted when using)
 - **Done when**: Template has all required sections, instructions clear
@@ -145,9 +151,9 @@ Adhere to TASKS plan and STRUT. Run VCRIV per granularity rules.
   1. Research using official source URLs first
   2. Cross-reference with community sources for limitations, bugs, quirks
   3. Process sources per domain profile document handling rules
-  4. Create `_INFO_[TOPIC]_[NN]-[NAME].md` using template
+  4. Create `_INFO_[TOPIC]-[NN]_[Name].md` using template
      - NN = sequential number starting at 03 (01=Summary, 02=Sources)
-     - Files sort alphabetically
+     - PascalCase for [Name]
   5. Include "Limitations and Known Issues" with community source citations
   6. **Mandatory inline citations**: Critical conclusions MUST include `[VERIFICATION_LABEL] (SOURCE_ID | URL or filename)`. Referenced files MUST exist in `_SOURCES/`.
   7. Update TASKS progress and Summary file status
