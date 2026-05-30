@@ -286,7 +286,9 @@ Detection: determine context from file naming and content, then apply matching s
 
 **Lens**: Evidence-Finding Collaborator (Kahneman) - improve through constructive challenge backed by new evidence. Not fault-finding; evidence-finding.
 
-**Phase 1 reads**: `INFO_TEMPLATE.md` (@skills:write-documents), `RESEARCH_STRATEGY_MEPI.md` or `RESEARCH_STRATEGY_MCPI.md` (@skills:deep-research)
+**Phase 1 reads**: `INFO_TEMPLATE.md` (@skills:write-documents), `RESEARCH_STRATEGY_MEPI.md` or `RESEARCH_STRATEGY_MCPI.md` (@skills:deep-research), `RESEARCH_RULES.md` (@skills:deep-research)
+
+**Multi-file research sets** (folder with Summary + Sources + topic files): Read @skills:deep-research `RESEARCH_RULES.md` for depth indicators and enrichment techniques. Apply the "Improvement Procedure" and "Priority Order" sections from that file in addition to the techniques below.
 
 **Specialized issues** (in addition to GLOBAL):
 - Sources concentrated on single search engine or database
@@ -297,17 +299,23 @@ Detection: determine context from file naming and content, then apply matching s
 - Findings marked [ASSUMED] but testable
 - Alternative interpretations not considered
 - Search queries too narrow (premature narrowing)
+- No Google search via Playwright executed (missed PDFs and public docs)
+- No `_SOURCES/` folder (sources not transcribed for permanence)
+- Topic files shorter than 500 words for complex subjects
+- Limitations section empty or generic
 
 **Adversarial Collaborator techniques** (execute in order, skip if not applicable):
 
 1. **Key Assumptions Check** - Extract 3-5 implicit assumptions from findings. For each: is there evidence, or is it assumed?
-2. **Query Generalization** - Extract original search queries from source URLs/context. Broaden with synonyms, alternative terminology, related concepts. Compare expanded results against existing source list.
-3. **Method Challenge** - Evaluate the research method itself: Was the question decomposed correctly? Were the right source types consulted (web search vs academic databases vs official docs vs code repos)? Was the strategy appropriate (MEPI (Most Effective, Practical, Informative) vs MCPI (Most Complete, Precise, Informative))? If a different method would yield different results, execute it and compare.
-4. **Competing Hypothesis Search** - Formulate the strongest alternative explanation not yet considered. Design 2-3 queries that would confirm or deny it.
-5. **Alternative Language Search** - Re-search key topics in relevant alternative languages (determine from topic domain).
-6. **Citation Chain** - Follow references from existing tier 1-2 sources. Check "cited by" for newer work.
-7. **Temporal Freshness** - For sources >6 months old in fast-moving fields, search for superseding content.
-8. **Source Validation** - Verify top 5 primary sources still accessible (use Playwright MCP with classic Google search if available).
+2. **Source Gap Analysis** - Compare source file against domain-specific tier list. Identify missing tiers. Run Google search via Playwright (`filetype:pdf`, `site:`) for each gap.
+3. **Query Generalization** - Extract original search queries from source URLs/context. Broaden with synonyms, alternative terminology, related concepts. Compare expanded results against existing source list.
+4. **Method Challenge** - Evaluate the research method itself: Was the question decomposed correctly? Were the right source types consulted (web search vs academic databases vs official docs vs code repos)? Was the strategy appropriate (MEPI vs MCPI)? If a different method would yield different results, execute it and compare.
+5. **Competing Hypothesis Search** - Formulate the strongest alternative explanation not yet considered. Design 2-3 queries that would confirm or deny it.
+6. **Alternative Language Search** - Re-search key topics in relevant alternative languages (determine from topic domain).
+7. **Citation Chain** - Follow references from existing tier 1-2 sources. Check "cited by" for newer work.
+8. **Temporal Freshness** - For sources >6 months old in fast-moving fields, search for superseding content.
+9. **Source Validation** - Verify top 5 primary sources still accessible (use Playwright MCP with classic Google search).
+10. **Cross-Reference Synthesis** - Read all topic files. Identify connections, patterns, contradictions not captured in Summary. Update Summary synthesis section.
 
 **Integration**: New findings marked `[IMPROVED]`, challenged claims marked `[CHALLENGED]`. Update Sources section and Document History.
 

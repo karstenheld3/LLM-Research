@@ -120,6 +120,24 @@ Apply these labels to findings, requirements, and decisions in all document type
 
 # CONTEXT-SPECIFIC
 
+## Deep Research Output (Multi-File Research Set)
+
+Detect by: folder contains `_INFO_[TOPIC]-01_Summary.md` + `_INFO_[TOPIC]-02_Sources.md` + topic files + `__STRUT_[TOPIC].md`.
+
+**Read**: @skills:deep-research `RESEARCH_RULES.md` - contains all RS-*, SC-*, SM-*, TF-*, ST-*, QA-* rules with verification procedure.
+
+Execute the 6-step verification procedure from `RESEARCH_RULES.md`:
+1. **Structure Check** (RS-01 through RS-06) - file set completeness
+2. **Sources Check** (SC-01 through SC-08) - source collection quality
+3. **Summary Check** (SM-01 through SM-08) - summary file quality
+4. **Topic Files Check** (TF-01 through TF-10) - per-file quality
+5. **STRUT Check** (ST-01 through ST-07) - process execution
+6. **Quality Check** (QA-01 through QA-10) - cross-cutting quality
+
+Additionally:
+- Verify against @skills:write-documents `APAPALAN_RULES.md` (precision, brevity, structure, naming)
+- Verify against @skills:write-documents `MECT_WRITING_RULES.md` (voice, word choice, terminology, headings, lists)
+
 ## Information Gathering (INFO)
 
 - Think first: How would another person approach this? Is scope aligned with problem?
