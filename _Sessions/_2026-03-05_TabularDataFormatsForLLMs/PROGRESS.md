@@ -4,7 +4,7 @@
 
 - [x] **EXPLORE** - complete - Research tabular format effectiveness for LLMs
 - [x] **DESIGN** - complete - Define test methodology and benchmarks
-- [x] **IMPLEMENT** - complete - Test 01 (19/19 CSV scale limits), Test 02 (56/56 format comparison)
+- [x] **IMPLEMENT** - complete - Test 01 (20/20 CSV scale limits), Test 02 (56/56 format comparison)
 - [x] **REFINE** - complete - Findings documents, critique/reconcile/verify cycle
 - [ ] **DELIVER** - pending - Final summary, session finalization
 
@@ -69,6 +69,12 @@
 (none)
 
 ## Done
+
+- [x] Run claude-opus-4-8 high scale limit test (2026-05-30)
+  - Result: 492 rows (comprehension failure, 12.4% context, $19.96 total)
+  - Boundary: [492, 500]. Verified against Anthropic billing ($89.19 - $69.23 = $19.96)
+  - Notable: Regresses below opus-4.6 (667) and opus-4.7 (843+) at same effort level
+  - INFO_01 and INFO_02 updated with new data point
 
 - [x] Automate findings generation for Format Comparison
   - Created `08_generate_findings.py` (reads `all_results.json`, generates 4 AUTO sections)

@@ -12,9 +12,10 @@
 
 ## Status
 
-- **Tests completed**: 19/19
+- **Tests completed**: 20/20
 - **T04 (gpt-5-mini high)**: Passed at 675 rows, evaluation errors at higher scales
 - **claude-opus-4.7 high**: Cancelled at 843+ rows (>$30, endless reasoning tokens; boundary 843-1012)
+- **claude-opus-4.8 high**: Confirmed at 492 rows (comprehension failure; boundary 492-500; $19.96 total)
 
 ## Table of Contents
 
@@ -106,7 +107,7 @@ CSV chosen over key-value formats because CSV is a standard tabular format that 
 
 ### 3.1 Independent Variables
 
-- **Model** - gpt-4o-mini, gpt-5-mini, gpt-5, gpt-5.2, gpt-5.4, gpt-5.5, gpt-4o, claude-haiku-4.5, claude-sonnet-4, claude-sonnet-4.5, claude-opus-4.5, claude-opus-4.6, claude-opus-4.7
+- **Model** - gpt-4o-mini, gpt-5-mini, gpt-5, gpt-5.2, gpt-5.4, gpt-5.5, gpt-4o, claude-haiku-4.5, claude-sonnet-4, claude-sonnet-4.5, claude-opus-4.5, claude-opus-4.6, claude-opus-4.7, claude-opus-4.8
 - **Row count** - 50-2000 (varies per binary search)
 - **Reasoning effort** - low, medium, high
 - **Output length** - low, medium, high (max output tokens scaling)
@@ -147,7 +148,7 @@ A test **PASSES** when:
 
 ## 5. Scale Limit Results
 
-### 5.1 All Configurations (19 tests, sorted by scale limit descending)
+### 5.1 All Configurations (20 tests, sorted by scale limit descending)
 
 <!-- AUTO:section-5.1:start -->
 | Model             | Provider  | Method            | Effort | Scale Limit | Failure Mode  | Context % | Cost    | Time/req |
@@ -156,6 +157,7 @@ A test **PASSES** when:
 | gpt-5-mini        | OpenAI    | reasoning         | high   | 675+        | (errors)      | -         | $0.00   | -        |
 | claude-opus-4.6   | Anthropic | adaptive_thinking | high   | 667         | comprehension | 55.4%     | ~$18+   | ~1.5 min |
 | gpt-5-mini        | OpenAI    | reasoning         | medium | 500         | comprehension | 7.1%      | $0.40   | ~1.2 min |
+| claude-opus-4.8   | Anthropic | adaptive_thinking | high   | 492         | comprehension | 12.4%     | ~$20+   | ~59 sec  |
 | gpt-5.4           | OpenAI    | reasoning         | medium | 492         | comprehension | 6.8%      | $2.49   | ~51 sec  |
 | gpt-5             | OpenAI    | reasoning         | high   | 492         | truncation    | 8.0%      | $2.73   | ~4.9 min |
 | gpt-5             | OpenAI    | reasoning         | medium | 450         | comprehension | 6.4%      | $2.97   | ~1.5 min |
@@ -181,6 +183,7 @@ A test **PASSES** when:
 - **gpt-5-mini medium**: Bounds [500, 507]. Passed at 500 (P=1.00, R=1.00, 3/3). Failed at 507 (P=1.00, R=0.9733)
 - **claude-opus-4.7 high**: Passed at 843 rows. Search cancelled before convergence. Boundary 843-1012.
 - **gpt-5-mini high (T04)**: Passed at 675 rows. Evaluation errors at 1012+ rows.
+- **claude-opus-4.8 high**: Bounds [492, 500]. Passed at 492 (P=1.00, R=1.00, 3/3). Failed at 500 (P=1.00, R=0.998)
 
 ## 6. Failure Mode Data
 
@@ -193,6 +196,7 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 |--------------------|-----------------|------------------------|--------------|
 | claude-opus-4.6 high | comprehension   | No                     | 55.4%        |
 | gpt-5-mini         | comprehension   | No                     | 7.1%         |
+| claude-opus-4.8 high | comprehension   | No                     | 12.4%        |
 | gpt-5.4            | comprehension   | No                     | 6.8%         |
 | gpt-5 high         | TRUNCATION      | Yes                    | 8.0%         |
 | gpt-5              | comprehension   | No                     | 6.4%         |
@@ -213,8 +217,8 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 ### 6.2 Failure Mode Summary
 
 <!-- AUTO:section-6.2:start -->
-- **Comprehension failures**: 14 of 17 tests with clear failure modes
-- **Truncation failures**: 3 of 17 (gpt-5 high, claude-sonnet-4, claude-opus-4.5)
+- **Comprehension failures**: 15 of 18 tests with clear failure modes
+- **Truncation failures**: 3 of 18 (gpt-5 high, claude-sonnet-4, claude-opus-4.5)
 - **Excluded**: gpt-5-mini high (errors), claude-opus-4.7 high (cancelled)
 <!-- AUTO:section-6.2:end -->
 
@@ -333,6 +337,18 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | 562  | 1.000     | 0.998   | 0.999   | NO   | comprehension |
 | 625  | 1.000     | 0.984   | 0.992   | NO   | comprehension |
 | 750  | 0.996     | 0.648   | 0.728   | NO   | comprehension |
+
+**claude-opus-4.8 high**
+
+| Rows | Precision | Recall  | F1      | Pass | Failure Mode  |
+|------|-----------|---------|---------|------|---------------|
+| 250  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 375  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 437  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 468  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 484  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 492  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 500  | 1.000     | 0.998   | 0.999   | NO   | comprehension |
 
 **gpt-5.4 medium**
 
@@ -527,6 +543,13 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | claude-opus-4.7 medium | 50   | $0.108    | 14016     | 10133      | $0.323     |
 | claude-opus-4.7 medium | 100  | $0.180    | 26301     | 16362      | $0.541     |
 | claude-opus-4.7 medium | 200  | $0.295    | 50847     | 25237      | $0.885     |
+| claude-opus-4.8 high | 250  | $0.388    | 62979     | 33988      | $1.165     |
+| claude-opus-4.8 high | 375  | $0.543    | 93552     | 46401      | $1.628     |
+| claude-opus-4.8 high | 437  | $0.635    | 108702    | 54516      | $1.906     |
+| claude-opus-4.8 high | 468  | $0.702    | 116400    | 60956      | $2.106     |
+| claude-opus-4.8 high | 484  | $0.727    | 120336    | 63136      | $2.180     |
+| claude-opus-4.8 high | 492  | $0.721    | 122289    | 62069      | $2.163     |
+| claude-opus-4.8 high | 500  | $0.748    | 124308    | 64921      | $2.245     |
 | claude-sonnet-4 medium | 150  | $0.168    | 25650     | 28489      | $0.504     |
 | claude-sonnet-4 medium | 187  | $0.184    | 31698     | 30527      | $0.553     |
 | claude-sonnet-4 medium | 196  | $0.180    | 33162     | 29408      | $0.541     |
@@ -645,6 +668,13 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | claude-opus-4.7 medium | 50   | 13s      | 39s            |
 | claude-opus-4.7 medium | 100  | 24s      | 1.2m           |
 | claude-opus-4.7 medium | 200  | 29s      | 1.5m           |
+| claude-opus-4.8 high | 250  | 32s      | 1.6m           |
+| claude-opus-4.8 high | 375  | 44s      | 2.2m           |
+| claude-opus-4.8 high | 437  | 51s      | 2.5m           |
+| claude-opus-4.8 high | 468  | 1.0m     | 3.1m           |
+| claude-opus-4.8 high | 484  | 1.0m     | 3.0m           |
+| claude-opus-4.8 high | 492  | 59s      | 3.0m           |
+| claude-opus-4.8 high | 500  | 1.0m     | 3.1m           |
 | claude-sonnet-4 medium | 150  | 40s      | 2.0m           |
 | claude-sonnet-4 medium | 187  | 40s      | 2.0m           |
 | claude-sonnet-4 medium | 196  | 43s      | 2.1m           |
@@ -758,6 +788,7 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | gpt-5.5 medium      | 444  | 0.0000        | 0.0043     | 2/3             |
 | gpt-5.5 medium      | 452  | 0.0000        | 0.0043     | 2/3             |
 | gpt-5.5 medium      | 468  | 0.0000        | 0.0042     | 2/3             |
+| claude-opus-4.8 high | 500  | 0.0000        | 0.0039     | 2/3             |
 | gpt-5 medium        | 506  | 0.0000        | 0.0039     | 2/3             |
 | gpt-5-mini medium   | 531  | 0.0000        | 0.0037     | 2/3             |
 | gpt-5-mini medium   | 562  | 0.0000        | 0.0035     | 2/3             |
@@ -789,7 +820,7 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 | claude-opus-4.7 medium | 12                | $0.012    | 2s       | 985       | 6.5      |
 | claude-opus-4.6 medium | 6                 | $0.0064   | 2s       | 935       | 3.5      |
 | claude-opus-4.6 high | 667               | $0.811    | 1.5m     | 823       | 7.3      |
-| claude-opus-4.5 medium | 177               | $0.293    | 32s      | 605       | 5.5      |
+| claude-opus-4.8 high | 492               | $0.721    | 59s      | 682       | 8.3      |
 <!-- AUTO:section-9.5:end -->
 
 ### 9.6 Production Decision Matrix
@@ -799,7 +830,7 @@ Source: `primary_failure_mode` field in each `scale_limit_result.json`
 
 Models that pass reliably at each workload size, sorted by cost:
 
-**50 rows** (10 configs qualify)
+**50 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -812,7 +843,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**100 rows** (10 configs qualify)
+**100 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -825,7 +856,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**150 rows** (10 configs qualify)
+**150 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -838,7 +869,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**200 rows** (7 configs qualify)
+**200 rows** (8 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -849,8 +880,9 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.123    | 1.2m     | 300 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 | claude-opus-4.6 high | $0.248    | 29s      | 200 rows  |
+| claude-opus-4.8 high | $0.388    | 32s      | 250 rows  |
 
-**300 rows** (6 configs qualify)
+**300 rows** (7 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -860,8 +892,9 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.123    | 1.2m     | 300 rows  |
 | gpt-5.5 medium      | $0.347    | 27s      | 375 rows  |
 | claude-opus-4.6 high | $0.433    | 1.1m     | 300 rows  |
+| claude-opus-4.8 high | $0.543    | 44s      | 375 rows  |
 
-**400 rows** (6 configs qualify)
+**400 rows** (7 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -871,6 +904,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.140    | 4.8m     | 450 rows  |
 | gpt-5.5 medium      | $0.414    | 32s      | 437 rows  |
 | claude-opus-4.6 high | $0.558    | 1.0m     | 450 rows  |
+| claude-opus-4.8 high | $0.635    | 51s      | 437 rows  |
 
 **500 rows** (2 configs qualify)
 
@@ -911,6 +945,7 @@ Configs with >=100 rows where no other config is simultaneously better on all 3 
 - Time/req = single LLM API call time (iteration duration / verification runs)
 - Costs = total test cost (all iterations combined)
 - gpt-5-mini medium re-run confirmed 500 rows (original run found 389; bounds [500, 507])
+- claude-opus-4.8 high confirmed 492 rows (bounds [492, 500]; $19.96 total; verified against Anthropic billing: $89.19 - $69.23 = $19.96)
 - claude-sonnet-4 corrected: 187 rows, truncation, 25.1% (previously miscategorized as 168, comprehension)
 - Calculation verifications:
   - gpt-5-mini effort improvement: (500 - 65) / 65 = 669%, 500 / 65 = 7.69 = 7.7x
@@ -929,6 +964,11 @@ Configs with >=100 rows where no other config is simultaneously better on all 3 
 - `_TestsAndResults/*/scale_limit_result.json` - Raw test result data
 
 ## 12. Document History
+
+**[2026-05-30 17:39]**
+- Added: claude-opus-4.8 high test result (492 rows, comprehension failure, $19.96)
+- Changed: Test count 19/19 → 20/20
+- Changed: All AUTO sections regenerated with new data point
 
 **[2026-05-22 18:02]**
 - Added: Section 9 "Deep Analysis" with 6 subsections (9.1-9.6) using AUTO markers

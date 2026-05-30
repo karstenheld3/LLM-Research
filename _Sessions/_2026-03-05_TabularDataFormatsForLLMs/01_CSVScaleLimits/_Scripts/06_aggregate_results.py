@@ -33,6 +33,7 @@ MODEL_DISPLAY_NAMES = {
   "claude-opus-4-5-20251101": "claude-opus-4.5",
   "claude-opus-4-6": "claude-opus-4.6",
   "claude-opus-4-7": "claude-opus-4.7",
+  "claude-opus-4-8": "claude-opus-4.8",
 }
 
 METHOD_DISPLAY_NAMES = {

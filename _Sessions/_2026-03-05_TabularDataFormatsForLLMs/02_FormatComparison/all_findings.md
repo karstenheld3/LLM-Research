@@ -1,15 +1,15 @@
 ## findings-1
 
-Derived from 56/56 completed tests. Data in `_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]` section 5.
+Derived from 63/63 completed tests. Data in `_INFO_01_FormatComparison-TestResults.md [TBLF-IN05]` section 5.
 
 - **Format preferences differ dramatically by model family** [TESTED]
   - GPT best formats: gpt-5.5: toml, gpt-5.4: json, gpt-5-mini: kv_colon_space, gpt-5: yaml, gpt-5.2: csv_quoted
-  - Claude best formats: opus-4.5: json, sonnet-4.5: json
+  - Claude best formats: opus-4.8: csv, opus-4.5: json, sonnet-4.5: json
   - Max spread: 5.8x (gpt-5.2)
 
 - **Token efficiency does NOT predict scale limits** [TESTED]
-  - xml (2.12x tokens) outperforms csv (1.00x) on 4/7 models
-  - csv outperforms xml on 3/7 models (newer GPT + Claude)
+  - xml (2.12x tokens) outperforms csv (1.00x) on 4/8 models
+  - csv outperforms xml on 4/8 models (newer GPT + Claude)
 
 - **Format impact is massive - up to 5.8x within a single model** [TESTED]
   - gpt-5-mini: kv_colon_space (500) vs markdown_table (163) = 3.1x
@@ -22,6 +22,7 @@ Derived from 56/56 completed tests. Data in `_INFO_01_FormatComparison-TestResul
   - gpt-5-mini: kv_colon_space (500)
   - gpt-5: yaml (333)
   - gpt-5.2: csv_quoted (268)
+  - opus-4.8: csv (630)
   - opus-4.5: json (265)
   - sonnet-4.5: json (189)
 
@@ -39,10 +40,11 @@ Derived from 56/56 completed tests. Data in `_INFO_01_FormatComparison-TestResul
 | gpt-5-mini | 335        | 4/8      | kv_colon_space | 500        | 67%            |
 | gpt-5      | 249        | 3/8      | yaml           | 333        | 75%            |
 | gpt-5.2    | 241        | 3/8      | csv_quoted     | 268        | 90%            |
+| opus-4.8   | 576        | 4/7      | csv            | 630        | 91%            |
 | opus-4.5   | 265        | 1/8      | json           | 265        | 100%            |
 | sonnet-4.5 | 189        | 1/8      | json           | 189        | 100%            |
 
-**JSON is #1 in 3/7 models.**
+**JSON is #1 in 3/8 models.**
 
 ### 3.2 H3: Family Preference Divergence
 
@@ -57,6 +59,8 @@ gpt-5 (gpt)          TOP: yaml (333), xml (327), json (249)
                      BOT: csv (166), markdown_table (83)
 gpt-5.2 (gpt)        TOP: csv_quoted (268), xml (261), json (241)
                      BOT: kv_colon_space (100), toml (46)
+opus-4.8 (claude)    TOP: csv (630), toml (622), csv_quoted (607)
+                     BOT: xml (545), markdown_table (468)
 opus-4.5 (claude)    TOP: json (265), yaml (259), csv (232)
                      BOT: xml (182), csv_quoted (171)
 sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
@@ -72,6 +76,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | gpt-5-mini | 194       | 296       |          1.53 | YES       |
 | gpt-5      | 166       | 327       |          1.97 | YES       |
 | gpt-5.2    | 215       | 261       |          1.21 | YES       |
+| opus-4.8   | 630       | 545       |          0.87 | NO        |
 | opus-4.5   | 232       | 182       |          0.78 | NO        |
 | sonnet-4.5 | 126       | 99        |          0.79 | NO        |
 
@@ -84,19 +89,21 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | gpt-5-mini | 500      | 1/8    | kv_colon_space | 500        | 100%          |
 | gpt-5      | 238      | 4/8    | yaml           | 333        | 71%          |
 | gpt-5.2    | 100      | 7/8    | csv_quoted     | 268        | 37%          |
+| opus-4.8   | 545      | 5/7    | csv            | 630        | 87%          |
 | opus-4.5   | 226      | 4/8    | json           | 265        | 85%          |
 | sonnet-4.5 | 126      | 3/8    | json           | 189        | 67%          |
 
-**kv_colon_space is #1 in 1/7 models.**
+**kv_colon_space is #1 in 1/8 models.**
 
 ## findings-4
 
 1. **gpt-5.5 format preference inverts vs gpt-5.4** [TESTED]
    - gpt-5.4 best: json (702). gpt-5.5 best: toml (828), json drops to 430 (-39%)
 
-2. **markdown_table worst on 2 models** [TESTED]
+2. **markdown_table worst on 3 models** [TESTED]
    - gpt-5-mini: 163 (rank 8/8)
    - gpt-5: 83 (rank 8/8)
+   - opus-4.8: 468 (rank 7/7)
 
 3. **Format inversions (best for one model, worst for another)** [TESTED]
    - toml: BEST for gpt-5.5. WORST for gpt-5.2.
@@ -111,6 +118,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
    - gpt-5.4: 2.0x (best=702)
    - sonnet-4.5: 1.9x (best=189)
    - opus-4.5: 1.5x (best=265)
+   - opus-4.8: 1.3x (best=630)
 
 5. **gpt-5.5 is 1.4x faster than gpt-5.4 (Time Per Kilo-Cell, TPKC)** [TESTED]
    - gpt-5.5 avg TPKC: 12s. gpt-5.4 avg TPKC: 16s
@@ -130,6 +138,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | gpt-5-mini | kv_colon_space | 500   | yaml           | 500   | markdown_table | 163   |
 | gpt-5      | yaml          | 333   | xml            | 327   | markdown_table | 83    |
 | gpt-5.2    | csv_quoted    | 268   | xml            | 261   | toml           | 46    |
+| opus-4.8   | csv           | 630   | toml           | 622   | markdown_table | 468   |
 | opus-4.5   | json          | 265   | yaml           | 259   | csv_quoted     | 171   |
 | sonnet-4.5 | json          | 189   | csv            | 126   | xml            | 99    |
 
@@ -142,6 +151,7 @@ sonnet-4.5 (claude)  TOP: json (189), csv (126), kv_colon_space (126)
 | gpt-5-mini | kv_colon_space   | $0.005 | 500   | csv_quoted       | $0.005 |
 | gpt-5      | xml              | $0.032 | 327   | toml             | $0.032 |
 | gpt-5.2    | kv_colon_space   | $0.030 | 100   | csv_quoted       | $0.031 |
+| opus-4.8   | csv              | $0.200 | 630   | csv_quoted       | $0.208 |
 | opus-4.5   | csv              | $0.188 | 232   | markdown_table   | $0.190 |
 | sonnet-4.5 | csv_quoted       | $0.110 | 120   | csv              | $0.115 |
 

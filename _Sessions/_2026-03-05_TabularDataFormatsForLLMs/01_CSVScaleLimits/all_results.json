@@ -1,7 +1,7 @@
 {
-  "test_count": 19,
+  "test_count": 20,
   "status": {
-    "completed": 17,
+    "completed": 18,
     "errors": 1,
     "cancelled": 1
   },
@@ -115,6 +115,28 @@
       "iterations": 6,
       "status": "completed",
       "folder": "claude-opus-4-7_adaptive_thinking_medium_max16384"
+    },
+    {
+      "model": "claude-opus-4-8",
+      "model_display": "claude-opus-4.8",
+      "provider": "anthropic",
+      "method": "adaptive_thinking",
+      "method_display": "adaptive_thinking",
+      "effort": "high",
+      "scale_limit": 492,
+      "bounds": [
+        492,
+        500
+      ],
+      "failure_mode": "comprehension",
+      "context_pct": 12.4,
+      "max_context_tokens": 1000000,
+      "truncated": "No",
+      "cost_usd": 19.96,
+      "time_per_request_sec": 59.3,
+      "iterations": 7,
+      "status": "completed",
+      "folder": "claude-opus-4-8_adaptive_thinking_high_max16384"
     },
     {
       "model": "claude-sonnet-4-20250514",

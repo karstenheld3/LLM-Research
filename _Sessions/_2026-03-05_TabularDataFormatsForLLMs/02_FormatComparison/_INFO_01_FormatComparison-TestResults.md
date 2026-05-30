@@ -3,8 +3,8 @@
 # INFO: Format Comparison - Test Results
 
 **Doc ID**: TBLF-IN05
-**Goal**: Collect all test result data from format comparison experiments (56 tests across 7 models and 8 formats)
-**Timeline**: Created 2026-05-22 (data collected 2026-03-09 to 2026-05-22)
+**Goal**: Collect all test result data from format comparison experiments (63 tests across 8 models and 8 formats)
+**Timeline**: Created 2026-05-22 (data collected 2026-03-09 to 2026-05-30)
 
 **Depends on:**
 - `_SPEC_FormatComparison.md [TBLF-SP02]` for test framework specification
@@ -54,7 +54,7 @@
 
 **Independent variables:**
 - Input format (8): csv_quoted, csv, kv_colon_space, markdown_table, json, xml, yaml, toml
-- Model (7): gpt-5.5, gpt-5.4, gpt-5-mini, gpt-5, gpt-5.2, claude-opus-4.5, claude-sonnet-4.5
+- Model (8): gpt-5.5, gpt-5.4, gpt-5-mini, gpt-5, gpt-5.2, claude-opus-4.8, claude-opus-4.5, claude-sonnet-4.5
 
 **Controlled variables:**
 - Column count: 7
@@ -62,7 +62,7 @@
 - Adversarial content: ~20%
 - Seed: 42
 - Verification runs: 3 per iteration
-- Reasoning effort: medium (except gpt-5: low)
+- Reasoning effort: medium (except gpt-5: low, opus-4.8: high)
 
 **Dependent variables:**
 - Scale limit (max reliable rows)
@@ -86,7 +86,9 @@
 
 ## 5. Results
 
-### 5.1 All Tests (56 tests, sorted by model then scale limit)
+### 5.1 All Tests (63 tests, sorted by model then scale limit)
+
+**Note**: opus-4.8 yaml test stopped at 1107 rows (passed at 738) due to endless reasoning tokens consuming budget without producing output. Same Anthropic adaptive thinking issue as opus-4.7 high in Test 01. 7/8 formats shown.
 
 <!-- AUTO:section-5.1:start -->
 | Model      | Effort | Format         | Scale   | vs Best | In (K) | Out (K) | Time     | TPKC | Cost  | CPKC   |
@@ -136,6 +138,14 @@
 | gpt-5.2    | medium | kv_colon_space | **100**  | 37%     | 20     | 6       | ~7 sec   | 10s  | $0.02 | $0.030 |
 | gpt-5.2    | medium | toml           | **46**   | 17%     | 11     | 3       | ~4 sec   | 14s  | $0.01 | $0.034 |
 |            |        |                |         |         |        |         |          |      |       |        |
+| opus-4.8   | high   | csv            | **630**  | 100%    | 156    | 75      | ~1.1 min | 15s  | $0.88 | $0.200 |
+| opus-4.8   | high   | toml           | **622**  | 99%     | 223    | 76      | ~1.1 min | 16s  | $1.00 | $0.230 |
+| opus-4.8   | high   | csv_quoted     | **607**  | 96%     | 151    | 76      | ~1.1 min | 16s  | $0.88 | $0.208 |
+| opus-4.8   | high   | json           | **576**  | 91%     | 231    | 86      | ~1.7 min | 25s  | $1.10 | $0.274 |
+| opus-4.8   | high   | kv_colon_space | **545**  | 87%     | 184    | 66      | ~1.0 min | 16s  | $0.85 | $0.224 |
+| opus-4.8   | high   | xml            | **545**  | 87%     | 245    | 69      | ~1.1 min | 17s  | $0.98 | $0.258 |
+| opus-4.8   | high   | markdown_table | **468**  | 74%     | 118    | 59      | ~54 sec  | 16s  | $0.69 | $0.210 |
+|            |        |                |         |         |        |         |          |      |       |        |
 | opus-4.5   | medium | json           | **265**  | 100%    | 81     | 30      | ~34 sec  | 18s  | $0.38 | $0.206 |
 | opus-4.5   | medium | yaml           | **259**  | 98%     | 69     | 29      | ~37 sec  | 20s  | $0.36 | $0.199 |
 | opus-4.5   | medium | csv            | **232**  | 88%     | 38     | 29      | ~32 sec  | 20s  | $0.30 | $0.188 |
@@ -154,7 +164,7 @@
 | sonnet-4.5 | medium | toml           | **115**  | 61%     | 30     | 14      | ~18 sec  | 22s  | $0.10 | $0.124 |
 | sonnet-4.5 | medium | xml            | **99**   | 52%     | 35     | 12      | ~19 sec  | 28s  | $0.10 | $0.139 |
 
-**Total: 56 tests** (7 models x 8 formats)
+**Total: 63 tests** (8 models x 8 formats)
 <!-- AUTO:section-5.1:end -->
 
 ### 5.2 Best Format Per Model (Summary)
@@ -167,6 +177,7 @@
 | gpt-5-mini   | kv_colon_space | 500   | markdown_table | 163   | 3.1x  |
 | gpt-5        | yaml        | 333   | markdown_table | 83    | 4.0x  |
 | gpt-5.2      | csv_quoted  | 268   | toml           | 46    | 5.8x  |
+| opus-4.8     | csv         | 630   | markdown_table | 468   | 1.3x  |
 | opus-4.5     | json        | 265   | csv_quoted     | 171   | 1.5x  |
 | sonnet-4.5   | json        | 189   | xml            | 99    | 1.9x  |
 <!-- AUTO:section-5.2:end -->
@@ -180,6 +191,7 @@ gpt-5.4:       json (702) > markdown_table (554) > xml (546) > csv (523) > csv_q
 gpt-5-mini:    kv_colon_space (500) > yaml (500) > csv_quoted (437) > json (335) > toml (296) > xml (296) > csv (194) > markdown_table (163)
 gpt-5:         yaml (333) > xml (327) > json (249) > kv_colon_space (238) > csv_quoted (227) > toml (216) > csv (166) > markdown_table (83)
 gpt-5.2:       csv_quoted (268) > xml (261) > json (241) > csv (215) > markdown_table (154) > yaml (134) > kv_colon_space (100) > toml (46)
+opus-4.8:      csv (630) > toml (622) > csv_quoted (607) > json (576) > kv_colon_space (545) > xml (545) > markdown_table (468)
 opus-4.5:      json (265) > yaml (259) > csv (232) > kv_colon_space (226) > markdown_table (221) > toml (182) > xml (182) > csv_quoted (171)
 sonnet-4.5:    json (189) > csv (126) > kv_colon_space (126) > markdown_table (126) > csv_quoted (120) > yaml (120) > toml (115) > xml (99)
 ```
@@ -194,6 +206,7 @@ gpt-5.4:       csv (523) vs xml (546) - xml 1.0x better despite 2x tokens
 gpt-5-mini:    csv (194) vs xml (296) - xml 1.5x better despite 2x tokens
 gpt-5:         csv (166) vs xml (327) - xml 2.0x better despite 2x tokens
 gpt-5.2:       csv (215) vs xml (261) - xml 1.2x better despite 2x tokens
+opus-4.8:      csv (630) vs xml (545) - csv 1.2x better
 opus-4.5:      csv (232) vs xml (182) - csv 1.3x better
 sonnet-4.5:    csv (126) vs xml (99) - csv 1.3x better
 ```
@@ -209,13 +222,14 @@ sonnet-4.5:    csv (126) vs xml (99) - csv 1.3x better
 | gpt-5-mini   | csv_quoted       | $0.005 | 437   |
 | gpt-5        | toml             | $0.032 | 216   |
 | gpt-5.2      | kv_colon_space   | $0.030 | 100   |
+| opus-4.8     | csv              | $0.200 | 630   |
 | opus-4.5     | csv              | $0.188 | 232   |
 | sonnet-4.5   | csv_quoted       | $0.110 | 120   |
 <!-- AUTO:section-5.5:end -->
 
 ## 6. Data Sources and Pipeline
 
-- **Result files**: `_TestsAndResults/{config_folder}/scale_limit_result.json` (55 files)
+- **Result files**: `_TestsAndResults/{config_folder}/scale_limit_result.json` (62 files)
 - **Overrides**: `_Scripts/overrides.json` (1 record: gpt-5 csv_quoted, test folder missing)
 - **Config templates**: `test-config-template-{format}.json` (8 formats)
 - **Aggregation**: `_Scripts/06_aggregate_results.py` reads all results + overrides, generates `all_results.json` and `all_results.md`, updates AUTO markers in this file
@@ -224,6 +238,11 @@ sonnet-4.5:    csv (126) vs xml (99) - csv 1.3x better
 **AUTO markers**: Sections 5.1-5.5 are managed by `06_aggregate_results.py`. Manual edits between `<!-- AUTO:section-X.X:start/end -->` markers will be overwritten on next pipeline run.
 
 ## 7. Document History
+
+**[2026-05-30 20:00]**
+- Added: claude-opus-4-8 (high effort) results: 7/8 formats (yaml incomplete)
+- Changed: Test count 56 → 63, model count 7 → 8
+- Changed: Pipeline scripts updated with opus-4.8 display name and sort order
 
 **[2026-05-22 19:15]**
 - Added: AUTO markers on sections 5.1-5.5

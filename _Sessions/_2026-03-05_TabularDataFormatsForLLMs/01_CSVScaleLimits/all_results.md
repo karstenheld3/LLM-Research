@@ -6,6 +6,7 @@
 | gpt-5-mini        | OpenAI    | reasoning         | high   | 675+        | (errors)      | -         | $0.00   | -        |
 | claude-opus-4.6   | Anthropic | adaptive_thinking | high   | 667         | comprehension | 55.4%     | ~$18+   | ~1.5 min |
 | gpt-5-mini        | OpenAI    | reasoning         | medium | 500         | comprehension | 7.1%      | $0.40   | ~1.2 min |
+| claude-opus-4.8   | Anthropic | adaptive_thinking | high   | 492         | comprehension | 12.4%     | ~$20+   | ~59 sec  |
 | gpt-5.4           | OpenAI    | reasoning         | medium | 492         | comprehension | 6.8%      | $2.49   | ~51 sec  |
 | gpt-5             | OpenAI    | reasoning         | high   | 492         | truncation    | 8.0%      | $2.73   | ~4.9 min |
 | gpt-5             | OpenAI    | reasoning         | medium | 450         | comprehension | 6.4%      | $2.97   | ~1.5 min |
@@ -28,6 +29,7 @@
 |--------------------|-----------------|------------------------|--------------|
 | claude-opus-4.6 high | comprehension   | No                     | 55.4%        |
 | gpt-5-mini         | comprehension   | No                     | 7.1%         |
+| claude-opus-4.8 high | comprehension   | No                     | 12.4%        |
 | gpt-5.4            | comprehension   | No                     | 6.8%         |
 | gpt-5 high         | TRUNCATION      | Yes                    | 8.0%         |
 | gpt-5              | comprehension   | No                     | 6.4%         |

@@ -20,13 +20,13 @@ from pathlib import Path
 
 
 MODEL_SORT_ORDER = [
-  "gpt-5.5", "gpt-5.4", "gpt-5-mini", "gpt-5", "gpt-5.2", "opus-4.5", "sonnet-4.5"
+  "gpt-5.5", "gpt-5.4", "gpt-5-mini", "gpt-5", "gpt-5.2", "opus-4.8", "opus-4.5", "sonnet-4.5"
 ]
 
 MODEL_FAMILY = {
   "gpt-5.5": "gpt", "gpt-5.4": "gpt", "gpt-5-mini": "gpt",
   "gpt-5": "gpt", "gpt-5.2": "gpt",
-  "opus-4.5": "claude", "sonnet-4.5": "claude",
+  "opus-4.8": "claude", "opus-4.5": "claude", "sonnet-4.5": "claude",
 }
 
 COLUMNS = 7

@@ -32,6 +32,18 @@
 | 625  | 1.000     | 0.984   | 0.992   | NO   | comprehension |
 | 750  | 0.996     | 0.648   | 0.728   | NO   | comprehension |
 
+**claude-opus-4.8 high**
+
+| Rows | Precision | Recall  | F1      | Pass | Failure Mode  |
+|------|-----------|---------|---------|------|---------------|
+| 250  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 375  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 437  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 468  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 484  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 492  | 1.000     | 1.000   | 1.000   | YES  | -             |
+| 500  | 1.000     | 0.998   | 0.999   | NO   | comprehension |
+
 **gpt-5.4 medium**
 
 | Rows | Precision | Recall  | F1      | Pass | Failure Mode  |
@@ -223,6 +235,13 @@
 | claude-opus-4.7 medium | 50   | $0.108    | 14016     | 10133      | $0.323     |
 | claude-opus-4.7 medium | 100  | $0.180    | 26301     | 16362      | $0.541     |
 | claude-opus-4.7 medium | 200  | $0.295    | 50847     | 25237      | $0.885     |
+| claude-opus-4.8 high | 250  | $0.388    | 62979     | 33988      | $1.165     |
+| claude-opus-4.8 high | 375  | $0.543    | 93552     | 46401      | $1.628     |
+| claude-opus-4.8 high | 437  | $0.635    | 108702    | 54516      | $1.906     |
+| claude-opus-4.8 high | 468  | $0.702    | 116400    | 60956      | $2.106     |
+| claude-opus-4.8 high | 484  | $0.727    | 120336    | 63136      | $2.180     |
+| claude-opus-4.8 high | 492  | $0.721    | 122289    | 62069      | $2.163     |
+| claude-opus-4.8 high | 500  | $0.748    | 124308    | 64921      | $2.245     |
 | claude-sonnet-4 medium | 150  | $0.168    | 25650     | 28489      | $0.504     |
 | claude-sonnet-4 medium | 187  | $0.184    | 31698     | 30527      | $0.553     |
 | claude-sonnet-4 medium | 196  | $0.180    | 33162     | 29408      | $0.541     |
@@ -339,6 +358,13 @@
 | claude-opus-4.7 medium | 50   | 13s      | 39s            |
 | claude-opus-4.7 medium | 100  | 24s      | 1.2m           |
 | claude-opus-4.7 medium | 200  | 29s      | 1.5m           |
+| claude-opus-4.8 high | 250  | 32s      | 1.6m           |
+| claude-opus-4.8 high | 375  | 44s      | 2.2m           |
+| claude-opus-4.8 high | 437  | 51s      | 2.5m           |
+| claude-opus-4.8 high | 468  | 1.0m     | 3.1m           |
+| claude-opus-4.8 high | 484  | 1.0m     | 3.0m           |
+| claude-opus-4.8 high | 492  | 59s      | 3.0m           |
+| claude-opus-4.8 high | 500  | 1.0m     | 3.1m           |
 | claude-sonnet-4 medium | 150  | 40s      | 2.0m           |
 | claude-sonnet-4 medium | 187  | 40s      | 2.0m           |
 | claude-sonnet-4 medium | 196  | 43s      | 2.1m           |
@@ -450,6 +476,7 @@
 | gpt-5.5 medium      | 444  | 0.0000        | 0.0043     | 2/3             |
 | gpt-5.5 medium      | 452  | 0.0000        | 0.0043     | 2/3             |
 | gpt-5.5 medium      | 468  | 0.0000        | 0.0042     | 2/3             |
+| claude-opus-4.8 high | 500  | 0.0000        | 0.0039     | 2/3             |
 | gpt-5 medium        | 506  | 0.0000        | 0.0039     | 2/3             |
 | gpt-5-mini medium   | 531  | 0.0000        | 0.0037     | 2/3             |
 | gpt-5-mini medium   | 562  | 0.0000        | 0.0035     | 2/3             |
@@ -479,7 +506,7 @@
 | claude-opus-4.7 medium | 12                | $0.012    | 2s       | 985       | 6.5      |
 | claude-opus-4.6 medium | 6                 | $0.0064   | 2s       | 935       | 3.5      |
 | claude-opus-4.6 high | 667               | $0.811    | 1.5m     | 823       | 7.3      |
-| claude-opus-4.5 medium | 177               | $0.293    | 32s      | 605       | 5.5      |
+| claude-opus-4.8 high | 492               | $0.721    | 59s      | 682       | 8.3      |
 
 ## section-9.6
 
@@ -487,7 +514,7 @@
 
 Models that pass reliably at each workload size, sorted by cost:
 
-**50 rows** (10 configs qualify)
+**50 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -500,7 +527,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**100 rows** (10 configs qualify)
+**100 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -513,7 +540,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**150 rows** (10 configs qualify)
+**150 rows** (11 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -526,7 +553,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | claude-sonnet-4 medium | $0.168    | 40s      | 150 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 
-**200 rows** (7 configs qualify)
+**200 rows** (8 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -537,8 +564,9 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.123    | 1.2m     | 300 rows  |
 | gpt-5.5 medium      | $0.239    | 47s      | 250 rows  |
 | claude-opus-4.6 high | $0.248    | 29s      | 200 rows  |
+| claude-opus-4.8 high | $0.388    | 32s      | 250 rows  |
 
-**300 rows** (6 configs qualify)
+**300 rows** (7 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -548,8 +576,9 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.123    | 1.2m     | 300 rows  |
 | gpt-5.5 medium      | $0.347    | 27s      | 375 rows  |
 | claude-opus-4.6 high | $0.433    | 1.1m     | 300 rows  |
+| claude-opus-4.8 high | $0.543    | 44s      | 375 rows  |
 
-**400 rows** (6 configs qualify)
+**400 rows** (7 configs qualify)
 
 | Config              | Cost/req  | Time/req | Tested At |
 |---------------------|-----------|----------|-----------|
@@ -559,6 +588,7 @@ Models that pass reliably at each workload size, sorted by cost:
 | gpt-5 high          | $0.140    | 4.8m     | 450 rows  |
 | gpt-5.5 medium      | $0.414    | 32s      | 437 rows  |
 | claude-opus-4.6 high | $0.558    | 1.0m     | 450 rows  |
+| claude-opus-4.8 high | $0.635    | 51s      | 437 rows  |
 
 **500 rows** (2 configs qualify)
 

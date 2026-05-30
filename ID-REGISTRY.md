@@ -145,6 +145,8 @@ Format: `[TOPIC]-[DOC]-SC-[SOURCE_ID]-[SOURCE_REF]`
 - `DATBMRS` - LLM Data Processing Benchmarks (standalone session `_2026-05-22_LLMDataBenchmarks`)
 - `NOLIMA` - NoLiMa Benchmark deep-research (topic folder T02 in DATBMRS session)
 - `TQAB` - TQA-Bench: Multi-Table QA with Scalable Context (deep-research topic in DATBMRS)
+- `MPREG` - Model Performance Regression (article session `_2026-05-30_ModelPerformanceRegression`)
+- `CXOAI` - CXO AI Decision Landscape (mindmap of executive AI concerns, used for article hook)
 
 ### TBLF Document IDs
 

@@ -27,10 +27,12 @@
 
 ## 1. Key Findings
 
-Derived from 19/19 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` section 5.
+Derived from 20/20 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults.md [TBLF-IN02]` section 5.
 
 - **Claude opus-4.6 high = highest confirmed capability**
   - Confirmed reliable at 667 rows (55.4% context utilization)
+- **Claude Opus version regression: opus-4.8 < opus-4.6 < opus-4.7 at high effort**
+  - opus-4.8: 492 rows (12.4% context). opus-4.6: 667 rows. opus-4.7: 843+. Newer is not better.
 - **adaptive_thinking at medium effort skips reasoning (catastrophic for structured data)**
   - opus-4.6 (6 rows), opus-4.7 (12 rows) - model skips thinking phase, hallucinates
 - **Effort multiplier extreme on Claude Opus 4.6**
@@ -38,9 +40,9 @@ Derived from 19/19 completed tests. Data in `_INFO_01_CSVScaleLimits-TestResults
 - **Reasoning models massively outperform temperature models**
   - gpt-5-mini (confirmed at 500 rows) vs gpt-4o-mini (6 rows) = 83x
 - **Confirmed capability varies 160x+ across models**
-  - Best confirmed: opus-4.6 high (667) vs Worst: gpt-4o (4)
+  - Best confirmed: opus-4.6 high (667) vs Worst: gpt-4o (4). opus-4.8 (492) regresses below 4.6.
 - **Comprehension is primary failure mode, not truncation**
-  - 14/17 completed tests failed due to comprehension errors
+  - 15/18 completed tests failed due to comprehension errors
 - **Context window is NOT the bottleneck**
   - Most failures occur at <10% context utilization
 
@@ -59,7 +61,7 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 - **H2 - Bimodal failure (cliff)**: PARTIALLY SUPPORTED (Medium)
   - Reasoning: cliff (100% to 0%). Temperature: gradual slope
 - **H3 - Truncation > comprehension**: NOT SUPPORTED (High)
-  - Comprehension = 14/17 tests. Truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5
+  - Comprehension = 15/18 tests. Truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5
 - **H4 - Higher effort = higher limit**: SUPPORTED (High)
   - gpt-5-mini: 65 to 500 (+669%). gpt-5: 356 to 492 (+38%)
 - **H5 - Reasoning > temperature**: STRONGLY SUPPORTED (Very High)
@@ -103,11 +105,11 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 
 **Prediction**: Based on TK-001 attribution, truncation expected as primary failure mode.
 
-**Result**: Comprehension is primary failure mode (14/17 tests with clear failure modes). [VERIFIED]
+**Result**: Comprehension is primary failure mode (15/18 tests with clear failure modes). [VERIFIED]
 
-**Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. [VERIFIED]
+**Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. claude-opus-4.8 high fails at 12.4%. [VERIFIED]
 
-**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (14/17 completed tests; 3 truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5). [TESTED]
+**Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (15/18 completed tests; 3 truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5). [TESTED]
 
 **Note**: "Comprehension" is an exclusion category (non-truncation failure), not a mechanistic diagnosis. Possible underlying mechanisms include: "lost-in-the-middle" effects (Liu et al., 2023 - LLMs perform worst on information in the middle of long contexts), filter logic errors at scale, or counting errors during output generation. Position analysis of missed records (do they cluster in the CSV middle?) would narrow the diagnosis.
 
@@ -125,7 +127,7 @@ Key insights:
 1. **gpt-5-mini shows dramatic improvement** (7.7x from low to medium) while **gpt-5 shows moderate improvement** (38% from low to high)
 2. **Diminishing returns at higher tiers**: gpt-5 medium to high adds only 42 rows (+9%) but costs 6x more time
 3. **Cost efficiency varies**: gpt-5 low ($0.44) delivers 356 rows; gpt-5 high ($2.74) delivers only 136 more rows
-4. **Claude Opus effort sensitivity is extreme**: opus-4.6 = 111x (6 to 667), opus-4.7 = 70x+ (12 to 843+). Dwarfs OpenAI models.
+4. **Claude Opus effort sensitivity is extreme**: opus-4.6 = 111x (6 to 667), opus-4.7 = 70x+ (12 to 843+). Dwarfs OpenAI models. opus-4.8 not tested at medium (only high = 492).
 
 **Verdict**: SUPPORTED. Higher effort increases scale limit. Effect is extreme on Claude Opus: 111x on 4.6 (dwarfing gpt-5-mini's 7.7x and gpt-5's 1.4x). [TESTED]
 
@@ -181,6 +183,13 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
 8. **Cost efficiency varies wildly** [VERIFIED]
    - Best: gpt-5-mini medium - 500 rows at $0.017/request (29K rows/$)
    - Worst: claude-opus-4.6 medium - 6 rows at $0.006/request (1K rows/$)
+
+9. **Claude Opus 4.8 regresses below 4.6 and 4.7 at high effort** [TESTED]
+   - opus-4.8 high: 492 rows, $0.72/req, ~59 sec
+   - opus-4.6 high: 667 rows (+36%), $0.81/req, ~1.5 min
+   - opus-4.7 high: 843+ rows (+71%+), ~$30+, ~3.3 min
+   - Regression is beyond measurement noise (28%): opus-4.6 to 4.8 = -26%, opus-4.7 to 4.8 = -42%+
+   - opus-4.8 is cost-dominated by gpt-5.4 medium (same 492 rows, $0.14/req vs $0.72/req)
 
 ## 5. Production Recommendations
 
@@ -249,8 +258,8 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
   - Testable: Run opus-4.7 with `type: "enabled"` + `budget_tokens: 10000` (API docs confirm opus-4.7 supports both manual and adaptive modes). If scale limit jumps from 12 to ~150+, confirms adaptive skip is the root cause.
 
 - **E2: Newer model versions do not guarantee better tabular comprehension** [TESTED]
-  - Evidence: gpt-5.2 < gpt-5 (40% worse), gpt-5.5 comparable to gpt-5.4 (within noise), sonnet-4.5 comparable to sonnet-4
-  - Mechanism: General model improvements may not target structured data processing
+  - Evidence: gpt-5.2 < gpt-5 (40% worse), gpt-5.5 comparable to gpt-5.4 (within noise), sonnet-4.5 comparable to sonnet-4, **claude-opus-4.8 < opus-4.7 (42%+ worse at high effort) and < opus-4.6 (26% worse)**
+  - Mechanism: General model improvements may not target structured data processing. The opus-4.6 to 4.8 trajectory (667 -> 843+ -> 492) shows non-monotonic capability evolution.
   - Testable: Track scale limits across future model releases
 
 - **E3: Reasoning effort multiplier is model-family dependent** [TESTED]
@@ -272,6 +281,8 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
 
 6. **Are missed records position-dependent within the CSV?** If recall failures cluster in middle rows (rather than uniformly distributed), "lost-in-the-middle" (Liu et al., 2023) explains the mechanism and suggests positional chunking or record reordering as mitigation.
 
+7. **Why does opus-4.8 regress below opus-4.6 and opus-4.7 for structured extraction?** The capability trajectory (4.6: 667, 4.7: 843+, 4.8: 492) is non-monotonic. Is this a training data shift, architectural change, or optimization for different benchmarks at the expense of structured data tasks? Testing opus-4.8 at medium effort would reveal whether the effort multiplier pattern holds.
+
 ## 8. Caveats and Limitations
 
 - **Measurement precision**: Binary search with n=3 runs has ~28% variance between independent searches (observed: gpt-5-mini found 389 then 500). Model differences <20% may be within noise.
@@ -290,6 +301,15 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns. N
 - `_INFO_ANTAPI-IN13_EXTENDED_THINKING.md [ANTAPI-IN13]` - Anthropic adaptive thinking API docs (explains E1/E4 mechanisms)
 
 ## 10. Document History
+
+**[2026-05-30 17:39]**
+- Added: Key finding - Claude Opus version regression (opus-4.8 < opus-4.6 < opus-4.7 at high effort)
+- Added: Unexpected finding #9 (opus-4.8 regression with cost-dominance analysis)
+- Added: Open Question #7 (non-monotonic opus capability trajectory)
+- Changed: Test count 19/19 -> 20/20
+- Changed: H3 counts 14/17 -> 15/18 (opus-4.8 = comprehension failure) in both summary and detailed sections
+- Changed: E2 strengthened with opus-4.8 evidence (42%+ regression)
+- Fixed: Display name standardized to "claude-opus-4.8" (dot) matching other Opus models
 
 **[2026-05-22 19:45]**
 - Added: Chunking Strategy subsection in section 5 (production recommendation gap from review)
