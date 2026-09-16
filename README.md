@@ -1,4 +1,4 @@
-<DevSystem MarkdownTablesAllowed=true />
+<PromptSystem MarkdownTablesAllowed=true EmojisAllowed=true />
 
 # LLM Tabular Data Extraction: Scale Limits Research
 
@@ -12,7 +12,7 @@ Research on maximum reliable row counts for LLM tabular data extraction across m
 
 *Extraction accuracy at scale serves as a practical proxy for tabular data comprehension capacity - models that can reliably extract filtered records demonstrate working comprehension of the underlying data.*
 
-**Status:** Test 01: 14/14 complete | Test 02: 56/56 complete (May 2026)
+**Status:** Test 01: 14/14 complete | Test 02: 56/56 complete (March-May 2026)
 
 ## Key Findings
 
@@ -125,7 +125,7 @@ Note: Times vary by row count. At scale limit, expect times near the upper range
 
 Hypotheses derive from three sources:
 
-1. **TK-001 Internal Benchmark** (March 2026) - Prior format comparison testing 10 variants on gpt-5-mini extraction tasks. Documented in `_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-IN01]`.
+1. **TK-001 Internal Benchmark** (March 2026) - Prior format comparison testing 10 variants on gpt-5-mini extraction tasks.
 
 2. **Academic Literature** - Theoretical foundations from peer-reviewed research:
    - [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) (Wei et al., NeurIPS 2022) - Reasoning improves complex tasks
@@ -262,11 +262,8 @@ Shared methodology: [_shared/test-methodology.md](_shared/test-methodology.md)
 - [`format-comparison_Mar2026-May2026/spec.md`](format-comparison_Mar2026-May2026/spec.md) - Test specification
 - [`format-comparison_Mar2026-May2026/test-plan.md`](format-comparison_Mar2026-May2026/test-plan.md) - 56 test results with hypothesis evaluations
 
-**Benchmark Research:**
-- [`llm-data-benchmarks_May2026/`](llm-data-benchmarks_May2026/) - Benchmark landscape and survey
-
 **Prior Research:**
-- TK-001: Format benchmarking (March 2026)
+- TK-001: Format benchmarking (March 2026) - internal session, not published
 
 **Papers Screened** (`Papers/`):
 - [Chain-of-Thought Prompting Elicits Reasoning in LLMs](https://arxiv.org/abs/2201.11903) (Wei et al., 2022)
