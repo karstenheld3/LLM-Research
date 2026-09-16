@@ -105,9 +105,9 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 
 **Prediction**: Based on TK-001 attribution, truncation expected as primary failure mode.
 
-**Result**: Comprehension is primary failure mode (15/18 tests with clear failure modes). [VERIFIED]
+**Result**: Comprehension is primary failure mode (15/18 tests with clear failure modes).
 
-**Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. claude-opus-4.8 high fails at 12.4%. [VERIFIED]
+**Key Insight**: Context windows are NOT the bottleneck. Models fail at <5-16% context utilization on average (data: TBLF-IN02 section 6.1). Exception: claude-opus-4.6 high reaches 55.4% - the only model to use >30% of its context before failure. claude-opus-4.8 high fails at 12.4%.
 
 **Verdict**: NOT SUPPORTED. TK-001 attribution was incorrect. Comprehension (attention degradation) is the true failure mode (15/18 completed tests; 3 truncation: gpt-5 high, claude-sonnet-4, claude-opus-4.5). [TESTED]
 
@@ -117,11 +117,11 @@ Prior evidence from TK-001 benchmark (`_INFO_LLM_MARKDOWN_PREFERENCES.md [LLMO-I
 
 **Prediction**: Higher reasoning effort extends scale limit.
 
-**Result**: DRAMATIC improvement with higher effort. [VERIFIED]
+**Result**: DRAMATIC improvement with higher effort.
 
 Calculations (verified in TBLF-IN02 section 9):
-- gpt-5-mini: (500 - 65) / 65 = 669%, 500 / 65 = 7.7x [VERIFIED]
-- gpt-5: (492 - 356) / 356 = 38%, (450 - 356) / 356 = 26% [VERIFIED]
+- gpt-5-mini: (500 - 65) / 65 = 669%, 500 / 65 = 7.7x
+- gpt-5: (492 - 356) / 356 = 38%, (450 - 356) / 356 = 26%
 
 Key insights:
 1. **gpt-5-mini shows dramatic improvement** (7.7x from low to medium) while **gpt-5 shows moderate improvement** (38% from low to high)
@@ -135,7 +135,7 @@ Key insights:
 
 **Prediction**: Reasoning models (gpt-5) outperform temperature models (gpt-4o).
 
-**Result**: MASSIVE performance difference. [VERIFIED]
+**Result**: MASSIVE performance difference.
 
 Calculations (data: TBLF-IN02 section 8.1, 8.2):
 - Mini tier: 500 / 6 = 83x
@@ -164,7 +164,7 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
    - Far exceeds gpt-5-mini's 7.7x and gpt-5's 1.4x multipliers
    - The adaptive_thinking mechanism appears binary - nearly useless at medium, exceptional at high
 
-4. **gpt-5.2 likely underperforms gpt-5** [VERIFIED]
+4. **gpt-5.2 likely underperforms gpt-5**
    - Confirmed at 215 vs 356 rows (gpt-5 low). Difference (40%) exceeds measurement noise. Newer is not always better for specific tasks.
 
 5. **gpt-5.5 comparable to gpt-5.4** [TESTED]
@@ -176,11 +176,11 @@ Calculations (data: TBLF-IN02 section 8.1, 8.2):
    - sonnet-4.5: 168 rows, comprehension failure at 8.4% context utilization
    - Newer model actually achieves fewer rows but with a healthier (non-truncation) failure mode
 
-7. **Context utilization mostly irrelevant** [VERIFIED]
+7. **Context utilization mostly irrelevant**
    - Most models fail at <10% context utilization.
    - Exception: claude-opus-4.6 high reaches 55.4%, suggesting high-effort thinking genuinely engages more of the context window.
 
-8. **Cost efficiency varies wildly** [VERIFIED]
+8. **Cost efficiency varies wildly**
    - Best: gpt-5-mini medium - 500 rows at $0.017/request (29K rows/$)
    - Worst: claude-opus-4.6 medium - 6 rows at $0.006/request (1K rows/$)
 

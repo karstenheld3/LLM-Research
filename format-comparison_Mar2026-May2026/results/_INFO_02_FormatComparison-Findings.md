@@ -58,13 +58,13 @@ Derived from 63 tests (62 completed + 1 incomplete). opus-4.8 yaml incomplete (p
   - gpt-5.4: json (702). gpt-5.5: toml (828), json drops to 430 (-39%)
 <!-- AUTO:findings-1:end -->
 
-- **json is the safest untested default** [VERIFIED]
+- **json is the safest untested default**
   - Avg rank 2.9/8, stdev 2.2 across 7 models. Worst case: 52% of best format. See section 3.5.
 
-- **Output tokens are format-independent** [VERIFIED]
+- **Output tokens are format-independent**
   - Input varies 2.3x (json 91K vs csv 40K). Output stable at 27-33K regardless of format.
 
-- **Failure mode is model-specific, not format-specific** [VERIFIED]
+- **Failure mode is model-specific, not format-specific**
   - 57/63 comprehension, 6/63 truncation. All truncation = opus-4.5 only. See section 3.6.
 
 ## 2. Hypothesis Verdicts
@@ -177,7 +177,7 @@ Which formats rank consistently vs chaotically across all 8 models? Rank stdev m
 - opus-4.5 truncates on: json (60.3% context), yaml (35.3%), xml (45.7%), toml (34.1%), kv_colon_space (30.1%), markdown_table (22.7%)
 - opus-4.5 does NOT truncate on: csv (21.5% context, comprehension), csv_quoted (15.0% context, comprehension)
 
-Format does NOT determine failure mode. The truncation pattern is model-specific: opus-4.5 uniquely pushes context utilization high enough to hit output limits on verbose formats, while compact formats (csv, csv_quoted) still fail from comprehension before reaching truncation. opus-4.8 (high effort) shows 0/7 truncation despite higher context utilization (12-33%), suggesting improved output generation. This extends Test 01's finding that opus models engage deeper context than other families. [VERIFIED]
+Format does NOT determine failure mode. The truncation pattern is model-specific: opus-4.5 uniquely pushes context utilization high enough to hit output limits on verbose formats, while compact formats (csv, csv_quoted) still fail from comprehension before reaching truncation. opus-4.8 (high effort) shows 0/7 truncation despite higher context utilization (12-33%), suggesting improved output generation. This extends Test 01's finding that opus models engage deeper context than other families.
 
 ### 3.7 Output Tokens Are Format-Independent
 
@@ -185,7 +185,7 @@ Input tokens vary 2.3x by format at scale limit (avg across models):
 - Verbose: json 91K, xml 90K, yaml 82K
 - Compact: csv 40K, csv_quoted 47K, markdown_table 41K
 
-Output tokens are stable: 27-33K regardless of input format. Because output is always JSON extraction, the model generates roughly the same output volume regardless of how input data was formatted. The cost difference between formats is driven entirely by input token count. [VERIFIED]
+Output tokens are stable: 27-33K regardless of input format. Because output is always JSON extraction, the model generates roughly the same output volume regardless of how input data was formatted. The cost difference between formats is driven entirely by input token count.
 
 ### 3.8 Context Utilization Does Not Predict Scale Limit
 
@@ -193,7 +193,7 @@ Average context utilization at scale limit by format:
 - json: 22.5%, xml: 20.3%, yaml: 17.1%, toml: 16.1%
 - kv_colon_space: 14.3%, markdown_table: 10.2%, csv: 10.0%, csv_quoted: 10.0%
 
-json and xml consume 2x more context than csv at their respective scale limits, yet json has the best average ranking (2.9/8). More context consumed does NOT mean worse performance. Models fail from comprehension, not from running out of context window. This further confirms Test 01's finding that context window is not the bottleneck. [VERIFIED]
+json and xml consume 2x more context than csv at their respective scale limits, yet json has the best average ranking (2.9/8). More context consumed does NOT mean worse performance. Models fail from comprehension, not from running out of context window. This further confirms Test 01's finding that context window is not the bottleneck.
 
 ### 3.9 Processing Speed by Format (Same Row Count)
 
@@ -217,7 +217,7 @@ Binary search iteration 1 tests all formats at the same row count per model. Thi
 - **Speed ranking differs from scale limit ranking.** A format can be fastest to process but fail at lower scale limits (e.g., kv_colon_space is fastest for opus-4.8 but rank 5/7 for scale).
 - **Verbose formats are NOT consistently slower.** xml (2.12x tokens) is fastest on none, but yaml (1.68x tokens) is fastest on 2 models.
 
-**Caveat**: Times are iter01 wall-clock (3 parallel workers). Includes data generation, API calls, and evaluation. API throttling or retries may inflate individual times. [VERIFIED]
+**Caveat**: Times are iter01 wall-clock (3 parallel workers). Includes data generation, API calls, and evaluation. API throttling or retries may inflate individual times.
 
 ## 4. Unexpected Findings
 
@@ -235,7 +235,7 @@ Binary search iteration 1 tests all formats at the same row count per model. Thi
    - kv_colon_space: BEST for gpt-5-mini. WORST for gpt-5.4.
    - csv_quoted: BEST for gpt-5.2. WORST for opus-4.5.
 
-4. **Format sensitivity inversely correlates with model capability** [VERIFIED]
+4. **Format sensitivity inversely correlates with model capability**
    - gpt-5.2: 5.8x (best=268)
    - gpt-5: 4.0x (best=333)
    - gpt-5-mini: 3.1x (best=500)
@@ -249,12 +249,12 @@ Binary search iteration 1 tests all formats at the same row count per model. Thi
    - gpt-5.5 avg TPKC: 12s. gpt-5.4 avg TPKC: 16s
 <!-- AUTO:findings-4:end -->
 
-6. **opus-4.5 is the only model that truncates (6/8 formats)** [VERIFIED]
+6. **opus-4.5 is the only model that truncates (6/8 formats)**
    - csv and csv_quoted avoid truncation (comprehension failure instead)
    - opus-4.5 hits 22-60% context utilization - other models stay below 16%
    - Consistent with Test 01: opus family uniquely engages deep context
 
-7. **Context utilization at failure is 2x higher for verbose formats** [VERIFIED]
+7. **Context utilization at failure is 2x higher for verbose formats**
    - json/xml: 20-22% avg context at scale limit. csv: 10%.
    - Yet json has BEST avg rank (2.9/8). More context consumed does not mean worse performance.
 
@@ -323,7 +323,7 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns.
   - Mechanism: Training data composition changes between versions affect format familiarity
   - Testable: Track format rankings across future model releases
 
-- **E3: Format sensitivity inversely correlates with model capability** [VERIFIED]
+- **E3: Format sensitivity inversely correlates with model capability**
   - Evidence: gpt-5.2 ratio 5.8x, gpt-5 4.0x, gpt-5-mini 3.1x, gpt-5.5 2.2x, gpt-5.4 2.0x, sonnet 1.9x, opus-4.5 1.5x, opus-4.8 1.3x
   - Mechanism: More capable models develop format-agnostic comprehension strategies
   - Caveat: May partly reflect floor effects - models with low absolute scale limits have less room for variance, mechanically producing higher ratios. The correlation is consistent but causality is not established.
@@ -400,6 +400,6 @@ Hypotheses not in the original H1-H6 set, derived from observed data patterns.
 - Added: Emergent hypotheses E2 (generational preference shift), E3 (sensitivity-capability correlation)
 - Added: Open Questions section (5 questions)
 - Added: Caveats and Limitations section (6 items)
-- Added: Verification labels throughout ([TESTED], [VERIFIED], [ASSUMED])
+- Added: Verification labels throughout ([TESTED],, [ASSUMED])
 - Added: Precision note to section 2
 - Follows 4-document methodology per `_INFO_LLM_TEST_METHODOLOGY.md [TBLF-IN04]`
