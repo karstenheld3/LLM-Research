@@ -25,13 +25,6 @@ Catalog of all research topics in this repository.
   - Findings: See `llm-data-benchmarks_May2026/benchmark-landscape.md`
   - Cross-refs: n/a
 
-- **model-performance-regression**
-  - Status: Planned
-  - Timespan: (not started)
-  - Question: How do model performance regressions manifest across versions in tabular data extraction tasks?
-  - Findings: n/a
-  - Cross-refs: CSV Scale Limits, Format Comparison
-
 ## Shared Documents
 
 - `_shared/llm-client-spec.md` - LLM client specification
