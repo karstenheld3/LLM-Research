@@ -1,12 +1,8 @@
-# Tools binaries moved to parent folder (../.tools/) - shared across workspaces
-# Kept as safety net in case .tools/ is accidentally created in workspace
-.tools/
+# Product repo gitignore - no sessions, no dev tooling, no secrets
 
-# Private sessions folder (contents ignored, folder tracked)
-# Pattern: ignore all contents (*) but negate (!) the .gitkeep file
-# Result: folder visible in git/Cascade, but session files stay private
-_PrivateSessions/*
-!_PrivateSessions/.gitkeep
+# Sessions (should not exist in product repo, prevent accidental inclusion)
+_Sessions/
+_sessions/
 
 # Temporary files
 .tmp_*
@@ -19,6 +15,9 @@ _PrivateSessions/*
 __pycache__/
 *.pyc
 
-# API keys
+# API keys and secrets
 .api-keys.txt
 .env
+
+# Dev tooling (should not exist in product repo)
+*.bat

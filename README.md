@@ -239,15 +239,31 @@ Hypotheses derive from three sources:
 | **Reasoning** | Both extraction and comprehension fail at the same bottleneck (attention degradation). Models with stronger attention should excel at both tasks proportionally. |
 | **Prediction** | Strong positive correlation (r > 0.7) between comprehension benchmark effective lengths and our scale limit breakpoints across models. |
 
+## Reproduction
+
+See [INDEX.md](INDEX.md) for a catalog of all research topics with links to materials.
+
+Each topic folder is self-contained with scripts, specs, test plans, results, and config:
+1. Copy the topic's `config/env-file-template.txt` to `.env` and fill in API keys
+2. Run scripts in the topic's `scripts/` folder (numbered sequentially)
+3. See the topic's `spec.md` and `test-plan.md` for full methodology
+
+Shared methodology: [_shared/test-methodology.md](_shared/test-methodology.md)
+
 ## Source Documents
 
 **Test 01 (CSV Scale Limits):**
-- [`_INFO_CSVScaleLimits.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/01_CSVScaleLimits/_INFO_CSVScaleLimits.md) - Full research documentation
-- [`_TEST_CSVScaleLimits.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/01_CSVScaleLimits/_TEST_CSVScaleLimits.md) - Test plan and detailed analysis
+- [`csv-scale-limits_Mar2026-May2026/results/`](csv-scale-limits_Mar2026-May2026/results/) - Full research documentation and findings
+- [`csv-scale-limits_Mar2026-May2026/spec.md`](csv-scale-limits_Mar2026-May2026/spec.md) - Test specification
+- [`csv-scale-limits_Mar2026-May2026/test-plan.md`](csv-scale-limits_Mar2026-May2026/test-plan.md) - Test plan and detailed analysis
 
 **Test 02 (Format Comparison):**
-- [`_INFO_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_INFO_FormatComparison.md) - 8 formats × 7 models findings
-- [`_TEST_FormatComparison.md`](_Sessions/_2026-03-05_TabularDataFormatsForLLMs/02_FormatComparison/_TEST_FormatComparison.md) - 56 test results with hypothesis evaluations
+- [`format-comparison_Mar2026-May2026/results/`](format-comparison_Mar2026-May2026/results/) - 8 formats x 7 models findings
+- [`format-comparison_Mar2026-May2026/spec.md`](format-comparison_Mar2026-May2026/spec.md) - Test specification
+- [`format-comparison_Mar2026-May2026/test-plan.md`](format-comparison_Mar2026-May2026/test-plan.md) - 56 test results with hypothesis evaluations
+
+**Benchmark Research:**
+- [`llm-data-benchmarks_May2026/`](llm-data-benchmarks_May2026/) - Benchmark landscape and survey
 
 **Prior Research:**
 - TK-001: Format benchmarking (March 2026)
