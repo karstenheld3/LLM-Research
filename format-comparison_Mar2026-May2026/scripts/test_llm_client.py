@@ -137,8 +137,8 @@ def main():
         test_configs.append(("claude-haiku-4-5-20251001", "low", "low", None))
         test_configs.append(("claude-haiku-4-5-20251001", "medium", "high", None))
         # Anthropic thinking method - test thinking budget variations
-        test_configs.append(("claude-sonnet-4-20250514", "low", "low", None))
-        test_configs.append(("claude-sonnet-4-20250514", "high", "high", None))
+        test_configs.append(("claude-sonnet-4-5-20250929", "low", "low", None))
+        test_configs.append(("claude-sonnet-4-5-20250929", "high", "high", None))
     
     if not test_configs:
         print("ERROR: No API keys found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY")

@@ -243,9 +243,9 @@ Hypotheses derive from three sources:
 
 See [INDEX.md](INDEX.md) for a catalog of all research topics with links to materials.
 
-Each topic folder is self-contained with scripts, specs, test plans, results, and config:
-1. Copy the topic's `config/env-file-template.txt` to `.env` and fill in API keys
-2. Run scripts in the topic's `scripts/` folder (numbered sequentially)
+Each topic folder is self-contained with scripts, specs, test plans, results, and config templates:
+1. Copy the topic's `env-file-template.txt` to `.env` and fill in API keys
+2. Run scripts in the topic's `scripts/` folder (numbered sequentially, use `--instance-path` to specify test instance)
 3. See the topic's `spec.md` and `test-plan.md` for full methodology
 
 Shared methodology: [_shared/test-methodology.md](_shared/test-methodology.md)
