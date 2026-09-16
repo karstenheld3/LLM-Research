@@ -18,13 +18,6 @@ Catalog of all research topics in this repository.
   - Findings: See `format-comparison_Mar2026-May2026/results/`
   - Cross-refs: CSV Scale Limits (same test methodology)
 
-- **llm-data-benchmarks_May2026**
-  - Status: Complete
-  - Timespan: May 2026
-  - Question: What benchmark landscapes exist for evaluating LLM data extraction capabilities?
-  - Findings: See `llm-data-benchmarks_May2026/benchmark-landscape.md`
-  - Cross-refs: n/a
-
 ## Shared Documents
 
 - `_shared/llm-client-spec.md` - LLM client specification
